@@ -36,7 +36,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Name = "MainForm";
-            Text = "Diet Sentry";
+            Text = "Diet Sentry Git Test";
             ResumeLayout(false);
         }
 
