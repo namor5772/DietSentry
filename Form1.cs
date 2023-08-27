@@ -1,8 +1,8 @@
 namespace DietSentry
 {
-    public partial class Form1 : Form
+    public partial class MainForm : System.Windows.Forms.Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
