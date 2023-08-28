@@ -14,7 +14,7 @@ public class FoodsContext : DbContext
             {
                 FoodId = 1,
                 FoodDescription = "Test 1",
-                Energy = 1.0F,
+                Energy = 1.01F,
                 Protein = 2.1F,
                 FatTotal = 3.0F,
                 SaturatedFat = 4.0F,
