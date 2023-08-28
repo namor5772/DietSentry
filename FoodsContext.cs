@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace DietSentryNew;
+namespace DietSentry;
 
 public class FoodsContext : DbContext
 {

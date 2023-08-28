@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace DietSentryNew;
+namespace DietSentry;
 
 public class Food
 {
