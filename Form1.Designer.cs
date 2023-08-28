@@ -31,11 +31,11 @@
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
-            tabControl2 = new TabControl();
+            tabControlMain = new TabControl();
             tabPageFood = new TabPage();
             tabPageEaten = new TabPage();
             tabControl1.SuspendLayout();
-            tabControl2.SuspendLayout();
+            tabControlMain.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -68,23 +68,23 @@
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tabControl2
+            // tabControlMain
             // 
-            tabControl2.Controls.Add(tabPageFood);
-            tabControl2.Controls.Add(tabPageEaten);
-            tabControl2.Dock = DockStyle.Fill;
-            tabControl2.Location = new Point(0, 0);
-            tabControl2.Name = "tabControl2";
-            tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new Size(1170, 636);
-            tabControl2.TabIndex = 1;
+            tabControlMain.Controls.Add(tabPageFood);
+            tabControlMain.Controls.Add(tabPageEaten);
+            tabControlMain.Dock = DockStyle.Fill;
+            tabControlMain.Location = new Point(0, 0);
+            tabControlMain.Name = "tabControlMain";
+            tabControlMain.SelectedIndex = 0;
+            tabControlMain.Size = new Size(1170, 636);
+            tabControlMain.TabIndex = 1;
             // 
             // tabPageFood
             // 
             tabPageFood.Location = new Point(4, 24);
             tabPageFood.Name = "tabPageFood";
             tabPageFood.Padding = new Padding(3);
-            tabPageFood.Size = new Size(1132, 608);
+            tabPageFood.Size = new Size(1162, 608);
             tabPageFood.TabIndex = 0;
             tabPageFood.Text = "Food";
             tabPageFood.UseVisualStyleBackColor = true;
@@ -104,12 +104,12 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1170, 636);
-            Controls.Add(tabControl2);
+            Controls.Add(tabControlMain);
             Controls.Add(tabControl1);
             Name = "MainForm";
             Text = "Diet Sentry";
             tabControl1.ResumeLayout(false);
-            tabControl2.ResumeLayout(false);
+            tabControlMain.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -118,7 +118,7 @@
         private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
-        private TabControl tabControl2;
+        private TabControl tabControlMain;
         private TabPage tabPageFood;
         private TabPage tabPageEaten;
     }
