@@ -33,9 +33,13 @@
             tabPage2 = new TabPage();
             tabControlMain = new TabControl();
             tabPageFood = new TabPage();
+            dataGridViewFoods = new DataGridView();
             tabPageEaten = new TabPage();
+            buttonSave = new Button();
             tabControl1.SuspendLayout();
             tabControlMain.SuspendLayout();
+            tabPageFood.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewFoods).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -76,40 +80,63 @@
             tabControlMain.Location = new Point(0, 0);
             tabControlMain.Name = "tabControlMain";
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new Size(1170, 636);
+            tabControlMain.Size = new Size(1123, 665);
             tabControlMain.TabIndex = 1;
             // 
             // tabPageFood
             // 
+            tabPageFood.Controls.Add(buttonSave);
+            tabPageFood.Controls.Add(dataGridViewFoods);
             tabPageFood.Location = new Point(4, 24);
             tabPageFood.Name = "tabPageFood";
             tabPageFood.Padding = new Padding(3);
-            tabPageFood.Size = new Size(1162, 608);
+            tabPageFood.Size = new Size(1115, 637);
             tabPageFood.TabIndex = 0;
             tabPageFood.Text = "Food";
             tabPageFood.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewFoods
+            // 
+            dataGridViewFoods.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewFoods.Dock = DockStyle.Top;
+            dataGridViewFoods.Location = new Point(3, 3);
+            dataGridViewFoods.Name = "dataGridViewFoods";
+            dataGridViewFoods.RowTemplate.Height = 25;
+            dataGridViewFoods.Size = new Size(1109, 540);
+            dataGridViewFoods.TabIndex = 0;
             // 
             // tabPageEaten
             // 
             tabPageEaten.Location = new Point(4, 24);
             tabPageEaten.Name = "tabPageEaten";
             tabPageEaten.Padding = new Padding(3);
-            tabPageEaten.Size = new Size(1162, 608);
+            tabPageEaten.Size = new Size(1115, 637);
             tabPageEaten.TabIndex = 1;
             tabPageEaten.Text = "Eaten";
             tabPageEaten.UseVisualStyleBackColor = true;
+            // 
+            // buttonSave
+            // 
+            buttonSave.Location = new Point(8, 549);
+            buttonSave.Name = "buttonSave";
+            buttonSave.Size = new Size(75, 23);
+            buttonSave.TabIndex = 1;
+            buttonSave.Text = "Save";
+            buttonSave.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1170, 636);
+            ClientSize = new Size(1123, 665);
             Controls.Add(tabControlMain);
             Controls.Add(tabControl1);
             Name = "MainForm";
             Text = "Diet Sentry";
             tabControl1.ResumeLayout(false);
             tabControlMain.ResumeLayout(false);
+            tabPageFood.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewFoods).EndInit();
             ResumeLayout(false);
         }
 
@@ -121,5 +148,7 @@
         private TabControl tabControlMain;
         private TabPage tabPageFood;
         private TabPage tabPageEaten;
+        private DataGridView dataGridViewFoods;
+        private Button buttonSave;
     }
 }
