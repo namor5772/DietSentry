@@ -62,6 +62,9 @@
             tabPage2 = new TabPage();
             tabControlMain = new TabControl();
             tabPageFood = new TabPage();
+            textBoxFilter = new TextBox();
+            buttonSetFilter = new Button();
+            buttonClearFilter = new Button();
             buttonSave = new Button();
             dataGridViewFoods = new DataGridView();
             foodIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -134,26 +137,59 @@
             tabControlMain.Controls.Add(tabPageEaten);
             tabControlMain.Dock = DockStyle.Fill;
             tabControlMain.Location = new Point(0, 0);
+            tabControlMain.Multiline = true;
             tabControlMain.Name = "tabControlMain";
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new Size(1164, 608);
+            tabControlMain.Size = new Size(1106, 813);
             tabControlMain.TabIndex = 1;
             // 
             // tabPageFood
             // 
+            tabPageFood.Controls.Add(textBoxFilter);
+            tabPageFood.Controls.Add(buttonSetFilter);
+            tabPageFood.Controls.Add(buttonClearFilter);
             tabPageFood.Controls.Add(buttonSave);
             tabPageFood.Controls.Add(dataGridViewFoods);
             tabPageFood.Location = new Point(4, 24);
             tabPageFood.Name = "tabPageFood";
             tabPageFood.Padding = new Padding(3);
-            tabPageFood.Size = new Size(1156, 580);
+            tabPageFood.Size = new Size(1098, 785);
             tabPageFood.TabIndex = 0;
             tabPageFood.Text = "Food";
             tabPageFood.UseVisualStyleBackColor = true;
             // 
+            // textBoxFilter
+            // 
+            textBoxFilter.Location = new Point(170, 6);
+            textBoxFilter.Name = "textBoxFilter";
+            textBoxFilter.Size = new Size(135, 23);
+            textBoxFilter.TabIndex = 4;
+            textBoxFilter.Enter += textBoxFilter_Enter;
+            textBoxFilter.KeyDown += textBoxFilter_KeyDown;
+            // 
+            // buttonSetFilter
+            // 
+            buttonSetFilter.Location = new Point(89, 6);
+            buttonSetFilter.Name = "buttonSetFilter";
+            buttonSetFilter.Size = new Size(75, 23);
+            buttonSetFilter.TabIndex = 3;
+            buttonSetFilter.Text = "Set filter";
+            buttonSetFilter.UseVisualStyleBackColor = true;
+            buttonSetFilter.Click += buttonSetFilter_Click;
+            // 
+            // buttonClearFilter
+            // 
+            buttonClearFilter.Location = new Point(8, 6);
+            buttonClearFilter.Name = "buttonClearFilter";
+            buttonClearFilter.Size = new Size(75, 23);
+            buttonClearFilter.TabIndex = 2;
+            buttonClearFilter.Text = "Clear filter";
+            buttonClearFilter.UseVisualStyleBackColor = true;
+            buttonClearFilter.Click += buttonClearFilter_Click;
+            // 
             // buttonSave
             // 
-            buttonSave.Location = new Point(8, 549);
+            buttonSave.Location = new Point(8, 581);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 1;
@@ -165,6 +201,7 @@
             // 
             dataGridViewFoods.AllowUserToResizeColumns = false;
             dataGridViewFoods.AllowUserToResizeRows = false;
+            dataGridViewFoods.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dataGridViewFoods.AutoGenerateColumns = false;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.Azure;
@@ -185,9 +222,8 @@
             dataGridViewCellStyle27.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle27.WrapMode = DataGridViewTriState.False;
             dataGridViewFoods.DefaultCellStyle = dataGridViewCellStyle27;
-            dataGridViewFoods.Dock = DockStyle.Top;
             dataGridViewFoods.EnableHeadersVisualStyles = false;
-            dataGridViewFoods.Location = new Point(3, 3);
+            dataGridViewFoods.Location = new Point(0, 35);
             dataGridViewFoods.Name = "dataGridViewFoods";
             dataGridViewCellStyle28.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle28.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -197,7 +233,7 @@
             dataGridViewCellStyle28.WrapMode = DataGridViewTriState.True;
             dataGridViewFoods.RowHeadersDefaultCellStyle = dataGridViewCellStyle28;
             dataGridViewFoods.RowTemplate.Height = 25;
-            dataGridViewFoods.Size = new Size(1150, 540);
+            dataGridViewFoods.Size = new Size(1098, 540);
             dataGridViewFoods.TabIndex = 0;
             // 
             // foodIdDataGridViewTextBoxColumn
@@ -532,7 +568,7 @@
             tabPageEaten.Location = new Point(4, 24);
             tabPageEaten.Name = "tabPageEaten";
             tabPageEaten.Padding = new Padding(3);
-            tabPageEaten.Size = new Size(1156, 580);
+            tabPageEaten.Size = new Size(1098, 785);
             tabPageEaten.TabIndex = 1;
             tabPageEaten.Text = "Eaten";
             tabPageEaten.UseVisualStyleBackColor = true;
@@ -541,7 +577,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1164, 608);
+            ClientSize = new Size(1106, 813);
             Controls.Add(tabControlMain);
             Controls.Add(tabControl1);
             Name = "MainForm";
@@ -550,6 +586,7 @@
             tabControl1.ResumeLayout(false);
             tabControlMain.ResumeLayout(false);
             tabPageFood.ResumeLayout(false);
+            tabPageFood.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewFoods).EndInit();
             ((System.ComponentModel.ISupportInitialize)foodBindingSource).EndInit();
             ResumeLayout(false);
@@ -591,5 +628,8 @@
         private DataGridViewTextBoxColumn caffeineDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn cholesterolDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn alcoholDataGridViewTextBoxColumn;
+        private Button buttonSetFilter;
+        private Button buttonClearFilter;
+        private TextBox textBoxFilter;
     }
 }
