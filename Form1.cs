@@ -45,5 +45,12 @@ namespace DietSentry
         {
 
         }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            this.dbContext!.SaveChanges();
+
+            this.dataGridViewFoods.Refresh();
+        }
     }
 }

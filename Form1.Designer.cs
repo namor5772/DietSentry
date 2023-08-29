@@ -159,6 +159,7 @@
             buttonSave.TabIndex = 1;
             buttonSave.Text = "Save";
             buttonSave.UseVisualStyleBackColor = true;
+            buttonSave.Click += buttonSave_Click;
             // 
             // dataGridViewFoods
             // 
@@ -531,7 +532,7 @@
             tabPageEaten.Location = new Point(4, 24);
             tabPageEaten.Name = "tabPageEaten";
             tabPageEaten.Padding = new Padding(3);
-            tabPageEaten.Size = new Size(1679, 637);
+            tabPageEaten.Size = new Size(1156, 580);
             tabPageEaten.TabIndex = 1;
             tabPageEaten.Text = "Eaten";
             tabPageEaten.UseVisualStyleBackColor = true;
