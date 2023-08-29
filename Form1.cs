@@ -72,23 +72,22 @@ namespace DietSentry
 
         private void textBoxFilter_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+           if (e.KeyCode == Keys.Enter)
             {
                 if (this.dbContext != null)
                 {
-/**                    if (String.Equals(textBoxFilter.Text,"")) // only accept a non-null string as a filter
+                    e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
+
+                    if (this.textBoxFilter.Text != "") // only accept a non-null string as a filter
                     {
-*/
-                        var filteredData = dbContext.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(this.textBoxFilter.Text));
-                        this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
-                        textBoxFilter.Text = "";
-/**
+                          var filteredData = dbContext.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(this.textBoxFilter.Text));
+                          this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
+                          textBoxFilter.Text = "";
                     }
                     else // just clear filter 
                     {
                         this.foodBindingSource.DataSource = dbContext.Foods.Local.ToBindingList();
                     }
-*/
                 }
             }
         }
