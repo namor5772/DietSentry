@@ -20,12 +20,14 @@ namespace DietSentry
             this.dbContext = new FoodsContext();
 
             // Uncomment the line below to start fresh with a new database.
-            // this.dbContext.Database.EnsureDeleted();
+            //this.dbContext.Database.EnsureDeleted();
             this.dbContext.Database.EnsureCreated();
 
             this.dbContext.Foods.Load();
+            //this.dbContext.Eaten.Load();
 
             this.foodBindingSource.DataSource = dbContext.Foods.Local.ToBindingList();
+            //this.eatenBindingSource.DataSource = dbContext.Eaten.Local.ToBindingList();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -51,6 +53,7 @@ namespace DietSentry
             this.dbContext!.SaveChanges();
 
             this.dataGridViewFoods.Refresh();
+            //            this.dataGridViewEaten.Refresh();
         }
 
         private void buttonSetFilter_Click(object sender, EventArgs e)
@@ -72,7 +75,7 @@ namespace DietSentry
 
         private void textBoxFilter_KeyDown(object sender, KeyEventArgs e)
         {
-           if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 if (this.dbContext != null)
                 {
@@ -80,13 +83,20 @@ namespace DietSentry
 
                     if (this.textBoxFilter.Text != "") // only accept a non-null string as a filter
                     {
-                          var filteredData = dbContext.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(this.textBoxFilter.Text));
-                          this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
-                          textBoxFilter.Text = "";
+                        // display filtered data in datagrid
+                        var filteredData = dbContext.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(this.textBoxFilter.Text));
+                        this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
+
+                        // display filter in label next to text box
+                        labelFilter.Text = textBoxFilter.Text;
+
+                        // clear filter text box (in readiness for next input) while retaining focus
+                        textBoxFilter.Text = "";
                     }
-                    else // just clear filter 
+                    else // just clear filter with focus retained 
                     {
                         this.foodBindingSource.DataSource = dbContext.Foods.Local.ToBindingList();
+                        labelFilter.Text = "unfiltered";
                     }
                 }
             }
@@ -95,6 +105,21 @@ namespace DietSentry
         private void textBoxFilter_Enter(object sender, EventArgs e)
         {
             textBoxFilter.Text = "";
+        }
+
+        private void textBoxFilter_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void eatenBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

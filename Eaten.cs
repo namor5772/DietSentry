@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DietSentry;
 
-public class Food
+public class Eaten
 {
     [Key]
-    public int FoodId { get; set; }
+    public int EatenId { get; set; }
     public string? FoodDescription { get; set; }
     public float Energy { get; set; }
     public float Protein { get; set; }
