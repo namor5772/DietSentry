@@ -24,10 +24,10 @@ namespace DietSentry
             this.dbContext.Database.EnsureCreated();
 
             this.dbContext.Foods.Load();
-            //this.dbContext.Eaten.Load();
+            this.dbContext.Eaten.Load();
 
             this.foodBindingSource.DataSource = dbContext.Foods.Local.ToBindingList();
-            //this.eatenBindingSource.DataSource = dbContext.Eaten.Local.ToBindingList();
+            this.eatenBindingSource.DataSource = dbContext.Eaten.Local.ToBindingList();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -83,7 +83,7 @@ namespace DietSentry
 
                     if (this.textBoxFilter.Text != "") // only accept a non-null string as a filter
                     {
-                        // display filtered data in datagrid
+                        // display filtered data in DataGrid
                         var filteredData = dbContext.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(this.textBoxFilter.Text));
                         this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
 

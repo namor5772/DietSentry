@@ -5,17 +5,17 @@ namespace DietSentry;
 public class FoodsContext : DbContext
 {
     public DbSet<Food> Foods { get; set; }
-//    public DbSet<Eaten> Eaten { get; set; }
+    public DbSet<Eaten> Eaten { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlite("Data Source=foods.db");
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-/**
-
         modelBuilder.Entity<Eaten>().HasData(
             new Eaten
             {
                 EatenId = 1,
+                DateTimeEaten = "29-Aug-2023 15:15",
+                AmountEaten = 100.0F,
                 FoodDescription = "Test 1",
                 Energy = 1.01F,
                 Protein = 2.11F,
@@ -43,7 +43,8 @@ public class FoodsContext : DbContext
             },
             new Eaten
             {
-                EatenId = 1,
+                EatenId = 2,
+                DateTimeEaten = "30-Aug-2023 16:20",
                 FoodDescription = "Test 2",
                 Energy = 2.0F,
                 Protein = 2.0F,
@@ -71,8 +72,38 @@ public class FoodsContext : DbContext
             },
             new Eaten
             {
-                EatenId = 1,
-                FoodDescription = "Test 2",
+                EatenId = 3,
+                DateTimeEaten = "31-Aug-2023 16:28",
+                FoodDescription = "Test 3",
+                Energy = 1.01F,
+                Protein = 2.11F,
+                FatTotal = 3.0F,
+                SaturatedFat = 4.0F,
+                TransFat = 5.0F,
+                PolyunsaturatedFat = 6.0F,
+                MonounsaturatedFat = 7.0F,
+                Carbohydrate = 8.0F,
+                Sugars = 9.0F,
+                DietaryFibre = 10.0F,
+                SodiumNa = 11.0F,
+                CalciumCa = 12.0F,
+                PotassiumK = 13.0F,
+                ThiaminB1 = 14.0F,
+                RiboflavinB2 = 15.0F,
+                NiacinB3 = 16.0F,
+                Folate = 17.0F,
+                IronFe = 18.0F,
+                MagnesiumMg = 19.0F,
+                VitaminC = 20.0F,
+                Caffeine = 21.0F,
+                Cholesterol = 22.0F,
+                Alcohol = 23.0F
+            },
+            new Eaten
+            {
+                EatenId = 4,
+                DateTimeEaten = "1-Sep-2023 09:16",
+                FoodDescription = "Test 4",
                 Energy = 1.0F,
                 Protein = 2.0F,
                 FatTotal = 3.0F,
@@ -98,7 +129,7 @@ public class FoodsContext : DbContext
                 Alcohol = 23.0F
             }
         );
-*/
+
         modelBuilder.Entity<Food>().HasData(
             new Food
             {

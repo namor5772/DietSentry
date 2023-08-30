@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="bin\Debug\net7.0-windows\foods - Copy.db" />
+    <None Include="bin\Debug\net7.0-windows\foods.db" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.10" />
   </ItemGroup>
 
