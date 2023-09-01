@@ -122,5 +122,20 @@ namespace DietSentry
         {
 
         }
+
+        private void buttonAddSolid_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonAddLiquid_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonAddRecipe_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
