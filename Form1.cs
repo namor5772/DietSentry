@@ -6,6 +6,7 @@ namespace DietSentry
 {
     public partial class MainForm : Form
     {
+
         private FoodsContext? dbContext;
 
         public MainForm()
@@ -138,11 +139,30 @@ namespace DietSentry
 
         }
 
-        private void dataGridViewFoods_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void label1_Click_1(object sender, EventArgs e)
         {
-            Input fmInput = new Input();
-            fmInput.ShowDialog();
-            label1.Text = "ggggggg";
+
         }
+
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
+/**
+            if (actOnInputFormClose)
+            {
+                this.label1.Text = sX;
+                actOnInputFormClose = false;
+            }
+*/
+        }
+
+        private void dataGridViewFoods_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            InputForm frm = new InputForm(this);
+            actOnInputFormClose = true;
+            frm.ShowDialog();
+            this.label1.Text = sX;
+//            this.label1.Text = "HO HO HO";
+        }
+
     }
 }

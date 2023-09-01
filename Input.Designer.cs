@@ -1,6 +1,6 @@
 ﻿namespace DietSentry
 {
-    partial class Input
+    partial class InputForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,33 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            buttonOK = new Button();
+            textBoxAmount = new TextBox();
             SuspendLayout();
             // 
-            // button1
+            // buttonOK
             // 
-            button1.Location = new Point(557, 384);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            buttonOK.Location = new Point(40, 32);
+            buttonOK.Name = "buttonOK";
+            buttonOK.Size = new Size(75, 23);
+            buttonOK.TabIndex = 0;
+            buttonOK.Text = "OK";
+            buttonOK.UseVisualStyleBackColor = true;
+            buttonOK.Click += button1_Click;
             // 
-            // Input
+            // textBoxAmount
+            // 
+            textBoxAmount.Location = new Point(145, 32);
+            textBoxAmount.Name = "textBoxAmount";
+            textBoxAmount.Size = new Size(118, 23);
+            textBoxAmount.TabIndex = 1;
+            // 
+            // InputForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(325, 90);
             ControlBox = false;
-            Controls.Add(button1);
-            Name = "Input";
+            Controls.Add(textBoxAmount);
+            Controls.Add(buttonOK);
+            Name = "InputForm";
             Text = "Input";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private Button button1;
+        private Button buttonOK;
+        private TextBox textBoxAmount;
     }
 }

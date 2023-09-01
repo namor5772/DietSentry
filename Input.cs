@@ -4,22 +4,26 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DietSentry
 {
-    public partial class Input : Form
+    public partial class InputForm : Form
     {
-        public Input()
+        private MainForm? mainForm = null;
+        public InputForm(Form callingform)
         {
+            mainForm = callingform as MainForm;
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            mainForm.sX = textBoxAmount.Text;
+            Close();
         }
     }
 }
