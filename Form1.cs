@@ -104,6 +104,7 @@ namespace DietSentry
 
         private void textBoxFilter_Enter(object sender, EventArgs e)
         {
+            // always clear filter when enter text box
             textBoxFilter.Text = "";
         }
 
