@@ -142,6 +142,7 @@ namespace DietSentry
         {
             Input fmInput = new Input();
             fmInput.ShowDialog();
+            label1.Text = "ggggggg";
         }
     }
 }
