@@ -137,5 +137,11 @@ namespace DietSentry
         {
 
         }
+
+        private void dataGridViewFoods_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Input fmInput = new Input();
+            fmInput.ShowDialog();
+        }
     }
 }
