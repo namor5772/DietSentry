@@ -54,7 +54,7 @@ namespace DietSentry
             this.dbContext!.SaveChanges();
 
             this.dataGridViewFoods.Refresh();
-            //            this.dataGridViewEaten.Refresh();
+            this.dataGridViewEaten.Refresh();
         }
 
         private void buttonSetFilter_Click(object sender, EventArgs e)
@@ -146,12 +146,12 @@ namespace DietSentry
 
         private void MainForm_Activated(object sender, EventArgs e)
         {
-/**
-            if (actOnInputFormClose)
-            {
-                this.label1.Text = sX;
-                actOnInputFormClose = false;
-            }
+            /**
+                        if (actOnInputFormClose)
+                        {
+                            this.label1.Text = sX;
+                            actOnInputFormClose = false;
+                        }
 */
         }
 
@@ -161,7 +161,7 @@ namespace DietSentry
             actOnInputFormClose = true;
             frm.ShowDialog();
             this.label1.Text = sX;
-//            this.label1.Text = "HO HO HO";
+            //            this.label1.Text = "HO HO HO";
         }
 
     }
