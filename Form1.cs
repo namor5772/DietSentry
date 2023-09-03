@@ -1,6 +1,7 @@
 using DietSentry;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
+using System.Data;
 
 namespace DietSentry
 {
@@ -118,12 +119,12 @@ namespace DietSentry
         {
 
         }
-
+/*
         private void eatenBindingSource_CurrentChanged(object sender, EventArgs e)
         {
 
         }
-
+*/
         private void buttonAddSolid_Click(object sender, EventArgs e)
         {
 
@@ -164,5 +165,8 @@ namespace DietSentry
             //            this.label1.Text = "HO HO HO";
         }
 
+        private void dataGridViewFoods_SelectionChanged(object sender, EventArgs e)
+        {
+        }
     }
 }
