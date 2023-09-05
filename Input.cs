@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,8 +23,10 @@ namespace DietSentry
 
         private void button1_Click(object sender, EventArgs e)
         {
-            mainForm.sX = textBoxAmount.Text;
+            // collects the input, processes it and assignes it to a variable accessible in the MainForm     
+            mainForm.amountOfFoodEaten = float.Parse(textBoxAmount.Text)/100.0F;
             Close();
         }
+ 
     }
 }

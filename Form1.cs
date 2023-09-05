@@ -2,6 +2,7 @@ using DietSentry;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.Data;
+using System.Windows.Forms;
 
 namespace DietSentry
 {
@@ -119,12 +120,12 @@ namespace DietSentry
         {
 
         }
-/*
-        private void eatenBindingSource_CurrentChanged(object sender, EventArgs e)
-        {
+        /*
+                private void eatenBindingSource_CurrentChanged(object sender, EventArgs e)
+                {
 
-        }
-*/
+                }
+        */
         private void buttonAddSolid_Click(object sender, EventArgs e)
         {
 
@@ -156,17 +157,103 @@ namespace DietSentry
 */
         }
 
+        // this is how you select an item in the food table from the Food data grid  
         private void dataGridViewFoods_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            InputForm frm = new InputForm(this);
-            actOnInputFormClose = true;
-            frm.ShowDialog();
-            this.label1.Text = sX;
-            //            this.label1.Text = "HO HO HO";
+            if (this.dbContext != null)
+            {
+                var foodItem = (Food)this.dataGridViewFoods.CurrentRow.DataBoundItem;
+
+                if (foodItem != null)
+                {
+                    using (var context = new FoodsContext())
+                    {
+                        // gain access to selected entry in food table
+                        var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
+
+                        // this opens dialog used to input the quantity of that food eaten
+                        InputForm frm = new InputForm(this);
+                        //actOnInputFormClose = true;
+                        frm.ShowDialog();
+
+                        // we can now add the appropriate entry to the Eaten table, sort it and refresh its Eaten data grid and give it focus
+                        var EatenFood = context.Eaten;
+                        EatenFood.Add(new Eaten {
+                                                    DateTimeEaten = DateTime.Now.ToString("d-MMM-yy hh:mm"),
+                                                      AmountEaten = amountOfFoodEaten * 100F,
+                                                  FoodDescription = FoodSelected.FoodDescription,
+                                                           Energy = (FoodSelected.Energy) * amountOfFoodEaten,
+                                                          Protein = (FoodSelected.Protein) * amountOfFoodEaten,
+                                                         FatTotal = (FoodSelected.FatTotal) * amountOfFoodEaten,
+                                                     SaturatedFat = (FoodSelected.SaturatedFat) * amountOfFoodEaten,
+                                                         TransFat = (FoodSelected.TransFat) * amountOfFoodEaten,
+                                               PolyunsaturatedFat = (FoodSelected.PolyunsaturatedFat) * amountOfFoodEaten,
+                                               MonounsaturatedFat = (FoodSelected.MonounsaturatedFat) * amountOfFoodEaten,
+                                                     Carbohydrate = (FoodSelected.Carbohydrate) * amountOfFoodEaten,
+                                                           Sugars = (FoodSelected.Sugars) * amountOfFoodEaten,
+                                                     DietaryFibre = (FoodSelected.DietaryFibre) * amountOfFoodEaten,
+                                                         SodiumNa = (FoodSelected.SodiumNa) * amountOfFoodEaten,
+                                                        CalciumCa = (FoodSelected.CalciumCa) * amountOfFoodEaten,
+                                                       PotassiumK = (FoodSelected.PotassiumK) * amountOfFoodEaten,
+                                                        ThiaminB1 = (FoodSelected.ThiaminB1) * amountOfFoodEaten,
+                                                     RiboflavinB2 = (FoodSelected.RiboflavinB2) * amountOfFoodEaten,
+                                                         NiacinB3 = (FoodSelected.NiacinB3) * amountOfFoodEaten,
+                                                           Folate = (FoodSelected.Folate) * amountOfFoodEaten,
+                                                           IronFe = (FoodSelected.IronFe) * amountOfFoodEaten,
+                                                      MagnesiumMg = (FoodSelected.MagnesiumMg) * amountOfFoodEaten,
+                                                         VitaminC = (FoodSelected.VitaminC) * amountOfFoodEaten,
+                                                         Caffeine = (FoodSelected.Caffeine) * amountOfFoodEaten,
+                                                      Cholesterol = (FoodSelected.Cholesterol) * amountOfFoodEaten,
+                                                          Alcohol = (FoodSelected.Alcohol) * amountOfFoodEaten,
+                        });
+                        context.SaveChanges();
+
+                        // this updates dataGridViewEaten - but why, and is there any memory leakage?
+                        EatenFood.Load();
+                        eatenBindingSource.DataSource = EatenFood.Local.ToBindingList();
+
+                    }
+                }
+            }
+
+            this.label1.Text = "HO HO HO";
         }
 
         private void dataGridViewFoods_SelectionChanged(object sender, EventArgs e)
         {
+            if (this.dbContext != null)
+            {
+                var foodItem = (Food)this.dataGridViewFoods.CurrentRow.DataBoundItem;
+
+                if (foodItem != null)
+                {
+                    using (var context = new FoodsContext())
+                    {
+                        var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
+                        this.textBox1.Text = FoodSelected.FoodId.ToString();
+                        this.textBox2.Text = FoodSelected.FoodDescription;
+                        this.textBox3.Text = FoodSelected.Energy.ToString();
+                    }
+                }
+            }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (this.dbContext != null)
+            {
+                using (var context = new FoodsContext())
+                {
+                    var EatenFood = context.Eaten;
+                    EatenFood.Add(new Eaten { FoodDescription = "TEST FOOD" });
+                    context.SaveChanges();
+
+                    // this updates dataGridViewEaten - but why, and is there any memory leakage?
+                    EatenFood.Load();
+                    eatenBindingSource.DataSource = EatenFood.Local.ToBindingList();
+                }
+            }
+        }
+
     }
 }
