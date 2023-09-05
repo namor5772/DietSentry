@@ -28,44 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            buttonOK = new Button();
             textBoxAmount = new TextBox();
             SuspendLayout();
             // 
-            // buttonOK
-            // 
-            buttonOK.Location = new Point(40, 32);
-            buttonOK.Name = "buttonOK";
-            buttonOK.Size = new Size(75, 23);
-            buttonOK.TabIndex = 0;
-            buttonOK.Text = "OK";
-            buttonOK.UseVisualStyleBackColor = true;
-            buttonOK.Click += button1_Click;
-            // 
             // textBoxAmount
             // 
-            textBoxAmount.Location = new Point(145, 32);
+            textBoxAmount.Location = new Point(12, -5);
             textBoxAmount.Name = "textBoxAmount";
-            textBoxAmount.Size = new Size(118, 23);
+            textBoxAmount.Size = new Size(89, 23);
             textBoxAmount.TabIndex = 1;
+            textBoxAmount.KeyDown += textBoxAmount_KeyDown;
             // 
             // InputForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(325, 90);
+            ClientSize = new Size(219, 24);
             ControlBox = false;
             Controls.Add(textBoxAmount);
-            Controls.Add(buttonOK);
+            MaximizeBox = false;
             Name = "InputForm";
-            Text = "Input";
+            Text = "Amount of selected food";
+            Shown += InputForm_Shown;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Button buttonOK;
         private TextBox textBoxAmount;
     }
 }
