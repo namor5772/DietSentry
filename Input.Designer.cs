@@ -29,26 +29,50 @@
         private void InitializeComponent()
         {
             textBoxAmount = new TextBox();
+            labelAmount = new Label();
+            labelDescription = new Label();
             SuspendLayout();
             // 
             // textBoxAmount
             // 
-            textBoxAmount.Location = new Point(12, -5);
+            textBoxAmount.Location = new Point(12, 31);
             textBoxAmount.Name = "textBoxAmount";
             textBoxAmount.Size = new Size(89, 23);
             textBoxAmount.TabIndex = 1;
             textBoxAmount.KeyDown += textBoxAmount_KeyDown;
             // 
+            // labelAmount
+            // 
+            labelAmount.AutoSize = true;
+            labelAmount.Location = new Point(107, 34);
+            labelAmount.Name = "labelAmount";
+            labelAmount.Size = new Size(33, 15);
+            labelAmount.TabIndex = 2;
+            labelAmount.Text = "units";
+            // 
+            // labelDescription
+            // 
+            labelDescription.AutoEllipsis = true;
+            labelDescription.Location = new Point(12, 9);
+            labelDescription.Name = "labelDescription";
+            labelDescription.Size = new Size(416, 15);
+            labelDescription.TabIndex = 3;
+            labelDescription.Text = "description";
+            // 
             // InputForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(219, 24);
+            ClientSize = new Size(440, 66);
             ControlBox = false;
+            Controls.Add(labelDescription);
+            Controls.Add(labelAmount);
             Controls.Add(textBoxAmount);
+            FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
             Name = "InputForm";
             Text = "Amount of selected food";
+            TopMost = true;
             Shown += InputForm_Shown;
             ResumeLayout(false);
             PerformLayout();
@@ -56,5 +80,7 @@
 
         #endregion
         private TextBox textBoxAmount;
+        private Label labelAmount;
+        private Label labelDescription;
     }
 }

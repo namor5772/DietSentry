@@ -16,6 +16,79 @@ namespace DietSentry
             InitializeComponent();
         }
 
+
+        // code that acts when a food item is selected from the Foods dataGridView.
+        // It prompts for amout of food eaten and appends a time stamed row to the Eaten foods table.
+        private void actWhenFoodSelected()
+        {
+            if (this.dbContext != null)
+            {
+                var foodItem = (Food)this.dataGridViewFoods.CurrentRow.DataBoundItem;
+
+                if (foodItem != null)
+                {
+                    using (var context = new FoodsContext())
+                    {
+                        // gain access to selected entry in food table
+                        var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
+                        eatenFoodDescription = FoodSelected.FoodDescription;
+
+                        // this opens dialog used to input the quantity of that food eaten
+                        InputForm frm = new InputForm(this);
+                        //frm.StartPosition = FormStartPosition.Manual;
+                        //frm.Location = new Point(100, 100);
+                        frm.ShowDialog();
+
+                        // only act on input if amout eaten >0, this includes the case when Enter is immediately pressed in the text box
+                        if (amountOfFoodEaten > 0.0)
+                        {
+
+                            // we can now add the appropriate entry to the Eaten table, sort it and refresh its Eaten data grid and give it focus
+                            var EatenFood = context.Eaten;
+                            EatenFood.Add(new Eaten
+                            {
+                                DateTimeEaten = DateTime.Now.ToString("d-MMM-yy hh:mm"),
+                                AmountEaten = amountOfFoodEaten * 100F,
+                                FoodDescription = FoodSelected.FoodDescription,
+                                Energy = (FoodSelected.Energy) * amountOfFoodEaten,
+                                Protein = (FoodSelected.Protein) * amountOfFoodEaten,
+                                FatTotal = (FoodSelected.FatTotal) * amountOfFoodEaten,
+                                SaturatedFat = (FoodSelected.SaturatedFat) * amountOfFoodEaten,
+                                TransFat = (FoodSelected.TransFat) * amountOfFoodEaten,
+                                PolyunsaturatedFat = (FoodSelected.PolyunsaturatedFat) * amountOfFoodEaten,
+                                MonounsaturatedFat = (FoodSelected.MonounsaturatedFat) * amountOfFoodEaten,
+                                Carbohydrate = (FoodSelected.Carbohydrate) * amountOfFoodEaten,
+                                Sugars = (FoodSelected.Sugars) * amountOfFoodEaten,
+                                DietaryFibre = (FoodSelected.DietaryFibre) * amountOfFoodEaten,
+                                SodiumNa = (FoodSelected.SodiumNa) * amountOfFoodEaten,
+                                CalciumCa = (FoodSelected.CalciumCa) * amountOfFoodEaten,
+                                PotassiumK = (FoodSelected.PotassiumK) * amountOfFoodEaten,
+                                ThiaminB1 = (FoodSelected.ThiaminB1) * amountOfFoodEaten,
+                                RiboflavinB2 = (FoodSelected.RiboflavinB2) * amountOfFoodEaten,
+                                NiacinB3 = (FoodSelected.NiacinB3) * amountOfFoodEaten,
+                                Folate = (FoodSelected.Folate) * amountOfFoodEaten,
+                                IronFe = (FoodSelected.IronFe) * amountOfFoodEaten,
+                                MagnesiumMg = (FoodSelected.MagnesiumMg) * amountOfFoodEaten,
+                                VitaminC = (FoodSelected.VitaminC) * amountOfFoodEaten,
+                                Caffeine = (FoodSelected.Caffeine) * amountOfFoodEaten,
+                                Cholesterol = (FoodSelected.Cholesterol) * amountOfFoodEaten,
+                                Alcohol = (FoodSelected.Alcohol) * amountOfFoodEaten,
+                            });
+                            context.SaveChanges();
+
+                            // this updates dataGridViewEaten - but why, and is there any memory leakage?
+                            EatenFood.Load();
+                            eatenBindingSource.DataSource = EatenFood.Local.ToBindingList();
+                            eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
+                            tabControlMain.SelectedTab = tabPageEaten; // and make the Eaten tab visible                            
+                        }
+                    }
+                }
+            }
+
+        }
+
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -46,10 +119,6 @@ namespace DietSentry
 
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
@@ -111,21 +180,6 @@ namespace DietSentry
             textBoxFilter.Text = "";
         }
 
-        private void textBoxFilter_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-        /*
-                private void eatenBindingSource_CurrentChanged(object sender, EventArgs e)
-                {
-
-                }
-        */
         private void buttonAddSolid_Click(object sender, EventArgs e)
         {
 
@@ -141,92 +195,21 @@ namespace DietSentry
 
         }
 
-        private void label1_Click_1(object sender, EventArgs e)
-        {
 
-        }
-
-        private void MainForm_Activated(object sender, EventArgs e)
-        {
-            /**
-                        if (actOnInputFormClose)
-                        {
-                            this.label1.Text = sX;
-                            actOnInputFormClose = false;
-                        }
-*/
-        }
-
-        // this is how you select an item in the food table from the Food data grid  
+        // this is one way you select an item in the food table from the Food data grid  
         private void dataGridViewFoods_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dbContext != null)
-            {
-                var foodItem = (Food)this.dataGridViewFoods.CurrentRow.DataBoundItem;
-
-                if (foodItem != null)
-                {
-                    using (var context = new FoodsContext())
-                    {
-                        // gain access to selected entry in food table
-                        var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
-
-                        this.textBox1.Text = FoodSelected.FoodId.ToString();
-                        this.textBox2.Text = FoodSelected.FoodDescription;
-
-                        // this opens dialog used to input the quantity of that food eaten
-                        InputForm frm = new InputForm(this);
-                        //actOnInputFormClose = true;
-                        frm.ShowDialog();
-
-                        // only act on input if amout eaten >0, this includes the case when Enter is immediately pressed in the text box
-                        if (amountOfFoodEaten > 0.0)
-                        {
-
-                            // we can now add the appropriate entry to the Eaten table, sort it and refresh its Eaten data grid and give it focus
-                            var EatenFood = context.Eaten;
-                            EatenFood.Add(new Eaten
-                            {
-                                DateTimeEaten = DateTime.Now.ToString("d-MMM-yy hh:mm"),
-                                AmountEaten = amountOfFoodEaten * 100F,
-                                FoodDescription = FoodSelected.FoodDescription,
-                                Energy = (FoodSelected.Energy) * amountOfFoodEaten,
-                                Protein = (FoodSelected.Protein) * amountOfFoodEaten,
-                                FatTotal = (FoodSelected.FatTotal) * amountOfFoodEaten,
-                                SaturatedFat = (FoodSelected.SaturatedFat) * amountOfFoodEaten,
-                                TransFat = (FoodSelected.TransFat) * amountOfFoodEaten,
-                                PolyunsaturatedFat = (FoodSelected.PolyunsaturatedFat) * amountOfFoodEaten,
-                                MonounsaturatedFat = (FoodSelected.MonounsaturatedFat) * amountOfFoodEaten,
-                                Carbohydrate = (FoodSelected.Carbohydrate) * amountOfFoodEaten,
-                                Sugars = (FoodSelected.Sugars) * amountOfFoodEaten,
-                                DietaryFibre = (FoodSelected.DietaryFibre) * amountOfFoodEaten,
-                                SodiumNa = (FoodSelected.SodiumNa) * amountOfFoodEaten,
-                                CalciumCa = (FoodSelected.CalciumCa) * amountOfFoodEaten,
-                                PotassiumK = (FoodSelected.PotassiumK) * amountOfFoodEaten,
-                                ThiaminB1 = (FoodSelected.ThiaminB1) * amountOfFoodEaten,
-                                RiboflavinB2 = (FoodSelected.RiboflavinB2) * amountOfFoodEaten,
-                                NiacinB3 = (FoodSelected.NiacinB3) * amountOfFoodEaten,
-                                Folate = (FoodSelected.Folate) * amountOfFoodEaten,
-                                IronFe = (FoodSelected.IronFe) * amountOfFoodEaten,
-                                MagnesiumMg = (FoodSelected.MagnesiumMg) * amountOfFoodEaten,
-                                VitaminC = (FoodSelected.VitaminC) * amountOfFoodEaten,
-                                Caffeine = (FoodSelected.Caffeine) * amountOfFoodEaten,
-                                Cholesterol = (FoodSelected.Cholesterol) * amountOfFoodEaten,
-                                Alcohol = (FoodSelected.Alcohol) * amountOfFoodEaten,
-                            });
-                            context.SaveChanges();
-
-                            // this updates dataGridViewEaten - but why, and is there any memory leakage?
-                            EatenFood.Load();
-                            eatenBindingSource.DataSource = EatenFood.Local.ToBindingList();
-                            eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
-                            tabControlMain.SelectedTab = tabPageEaten; // and make the Eaten tab visible                            
-                        }
-                    }
-                }
-            }
-
+            actWhenFoodSelected();
         }
 
+        // this is another way you select an item in the food table from the Food data grid  
+        private void dataGridViewFoods_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                actWhenFoodSelected();
+                e.Handled = true; // prevents Enter key press causing next lower cell getting focus 
+            }
+        }
     }
 }
