@@ -47,7 +47,8 @@ namespace DietSentry
                             var EatenFood = context.Eaten;
                             EatenFood.Add(new Eaten
                             {
-                                DateTimeEaten = DateTime.Now.ToString("d-MMM-yy hh:mm"),
+                                DateEaten = DateTime.Now.ToString("d-MMM-yy"),
+                                TimeEaten = DateTime.Now.ToString("hh:mm"),
                                 AmountEaten = amountOfFoodEaten * 100F,
                                 FoodDescription = FoodSelected.FoodDescription,
                                 Energy = (FoodSelected.Energy) * amountOfFoodEaten,
@@ -79,7 +80,6 @@ namespace DietSentry
                             // this updates dataGridViewEaten - but why, and is there any memory leakage?
                             EatenFood.Load();
                             eatenBindingSource.DataSource = EatenFood.Local.ToBindingList();
-                            // eatenBindingSource.DataSource = typeof(Eaten);
                             eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
                             tabControlMain.SelectedTab = tabPageEaten; // and make the Eaten tab visible                            
                         }
@@ -203,6 +203,7 @@ namespace DietSentry
             actWhenFoodSelected();
         }
 
+
         // this is another way you select an item in the food table from the Food data grid  
         private void dataGridViewFoods_KeyDown(object sender, KeyEventArgs e)
         {
@@ -213,10 +214,13 @@ namespace DietSentry
             }
         }
 
-        // manually implements the deletion of a table row. This was partly to overcome an exception raised when done automatically
+
+        // manually implements the deletion of a Eaten table row.
+        // This was partly to overcome an exception raised when done automatically.
+        // mult selection is disabled for convenience.
         private void dataGridViewEaten_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            e.Cancel = true;
+            e.Cancel = true; // cancels the automatic deletion process
             if (this.dbContext != null)
             {
                 // determine row to be deleted from Eaten table by accessing it in its dataGrid
@@ -235,9 +239,9 @@ namespace DietSentry
                         context.SaveChanges();
 
                         // update dataGridViewEaten - but why does this work and is there any memory leakage?
-                        var EatenFood = context.Eaten;
-                        EatenFood.Load();
-                        eatenBindingSource.DataSource = EatenFood.Local.ToBindingList();
+                 //       var EatenFood = context.Eaten;
+                        context.Eaten.Load();
+                        eatenBindingSource.DataSource = context.Eaten.Local.ToBindingList();
                         eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
                     }
                 }
@@ -254,8 +258,74 @@ namespace DietSentry
 
         }
 
+        private void buttonRunQuery_Click(object sender, EventArgs e)
+        {
+            this.label1.Text = DateTime.Now.ToString("d-MMM-yy   hh:mm:ss");
 
-        //e.Cancel = true;
-        //    this.label1.Text = "DELETING ROW";
+            try
+            {
+                using (var context = new FoodsContext())
+                {
+                    context.Eaten.Load();
+
+                    // display filtered data in DataGrid
+                    //               var filteredData = context.Eaten.Local.ToBindingList().Where(x => x.DateEaten.Contains("7-Sept-23"));
+                    var filteredData = context.Eaten.Local.ToBindingList().GroupBy(o => o.DateEaten).Select(g => new {
+                        DateEaten = g.Key,
+                        AmountEaten = g.Sum(i => i.AmountEaten),
+                        Energy = g.Sum(i => i.Energy),
+                        Protein = g.Sum(i => i.Protein),
+                        FatTotal = g.Sum(i => i.FatTotal),
+                        SaturatedFat = g.Sum(i => i.SaturatedFat),
+                        TransFat = g.Sum(i => i.TransFat),
+                        PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
+                        MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
+                        Carbohydrate = g.Sum(i => i.Carbohydrate),
+                        Sugars = g.Sum(i => i.Sugars),
+                        DietaryFibre = g.Sum(i => i.DietaryFibre),
+                        SodiumNa = g.Sum(i => i.SodiumNa),
+                        CalciumCa = g.Sum(i => i.CalciumCa),
+                        PotassiumK = g.Sum(i => i.PotassiumK),
+                        ThiaminB1 = g.Sum(i => i.ThiaminB1),
+                        RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
+                        NiacinB3 = g.Sum(i => i.NiacinB3),
+                        Folate = g.Sum(i => i.Folate),
+                        IronFe = g.Sum(i => i.IronFe),
+                        MagnesiumMg = g.Sum(i => i.MagnesiumMg),
+                        VitaminC = g.Sum(i => i.VitaminC),
+                        Caffeine = g.Sum(i => i.Caffeine),
+                        Cholesterol = g.Sum(i => i.Cholesterol),
+                        Alcohol = g.Sum(i => i.Alcohol)
+                    });
+                    this.eatenBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
+
+                    /*
+                                            // gain access to selected entries in food table
+                                            var TotalFoodsEaten = context.Eaten.Local.ToBindingList().Where(b => b.EatenId == foodItem.EatenId);
+                                            float X = TotalFoodsEaten.AmountEaten;
+                                            string S = X.ToString("N0");
+                                            labelAmountTotal.Text = S;
+                    */
+                }
+
+            }
+            catch // some sorting problem
+            {
+                labelAmountTotal.Text = "Caught exception";
+            }
+        }
+
+        private void buttonResetQuery_Click(object sender, EventArgs e)
+        {
+            using (var context = new FoodsContext())
+            {
+                    // update dataGridViewEaten - but why does this work and is there any memory leakage?
+                    context.Eaten.Load();
+                    eatenBindingSource.DataSource = context.Eaten.Local.ToBindingList();
+                    eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
+            }
+            labelAmountTotal.Text = "Reset";
+        }
     }
+
 }

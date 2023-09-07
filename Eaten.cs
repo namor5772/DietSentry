@@ -8,7 +8,8 @@ public class Eaten
 {
     [Key]
     public int EatenId { get; set; }
-    public string? DateTimeEaten { get; set; }
+    public string? DateEaten { get; set; }
+    public string? TimeEaten { get; set; }
     public float AmountEaten { get; set; }
     public string? FoodDescription { get; set; }
     public float Energy { get; set; }

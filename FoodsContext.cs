@@ -14,7 +14,8 @@ public class FoodsContext : DbContext
             new Eaten
             {
                 EatenId = 1,
-                DateTimeEaten = "29-Aug-2023 15:15",
+                DateEaten = "29-Aug-2023",
+                TimeEaten = "15:15",
                 AmountEaten = 100.0F,
                 FoodDescription = "Test 1",
                 Energy = 1.01F,
@@ -44,7 +45,8 @@ public class FoodsContext : DbContext
             new Eaten
             {
                 EatenId = 2,
-                DateTimeEaten = "30-Aug-2023 16:20",
+                DateEaten = "29-Aug-2023",
+                TimeEaten = "15:20",
                 FoodDescription = "Test 2",
                 Energy = 2.0F,
                 Protein = 2.0F,
@@ -73,7 +75,8 @@ public class FoodsContext : DbContext
             new Eaten
             {
                 EatenId = 3,
-                DateTimeEaten = "31-Aug-2023 16:28",
+                DateEaten = "31-Aug-2023",
+                TimeEaten = "16:20",
                 FoodDescription = "Test 3",
                 Energy = 1.01F,
                 Protein = 2.11F,
@@ -102,7 +105,8 @@ public class FoodsContext : DbContext
             new Eaten
             {
                 EatenId = 4,
-                DateTimeEaten = "1-Sep-2023 09:16",
+                DateEaten = "1-Sep-2023",
+                TimeEaten = "09:03",
                 FoodDescription = "Test 4",
                 Energy = 1.0F,
                 Protein = 2.0F,
