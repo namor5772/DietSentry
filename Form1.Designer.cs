@@ -81,6 +81,22 @@ namespace DietSentry
             DataGridViewCellStyle dataGridViewCellStyle36 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle37 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle38 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle39 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle40 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle41 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle42 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle43 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle44 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle45 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle46 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle47 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle48 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle49 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle50 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle51 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle52 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle53 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle54 = new DataGridViewCellStyle();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
@@ -120,8 +136,8 @@ namespace DietSentry
             alcoholDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             foodBindingSource = new BindingSource(components);
             tabPageEaten = new TabPage();
+            label1 = new Label();
             dataGridViewEaten = new DataGridView();
-            eatenBindingSource = new BindingSource(components);
             dateTimeEatenDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             amountEatenDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             foodDescriptionDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
@@ -148,6 +164,7 @@ namespace DietSentry
             caffeineDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             cholesterolDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             alcoholDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            eatenBindingSource = new BindingSource(components);
             tabControl1.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageFood.SuspendLayout();
@@ -310,6 +327,7 @@ namespace DietSentry
             dataGridViewFoods.EnableHeadersVisualStyles = false;
             dataGridViewFoods.Location = new Point(0, 35);
             dataGridViewFoods.Name = "dataGridViewFoods";
+            dataGridViewFoods.ReadOnly = true;
             dataGridViewCellStyle28.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle28.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             dataGridViewCellStyle28.ForeColor = SystemColors.WindowText;
@@ -347,6 +365,7 @@ namespace DietSentry
             foodDescriptionDataGridViewTextBoxColumn.HeaderText = "Food description";
             foodDescriptionDataGridViewTextBoxColumn.MinimumWidth = 6;
             foodDescriptionDataGridViewTextBoxColumn.Name = "foodDescriptionDataGridViewTextBoxColumn";
+            foodDescriptionDataGridViewTextBoxColumn.ReadOnly = true;
             foodDescriptionDataGridViewTextBoxColumn.Width = 111;
             // 
             // energyDataGridViewTextBoxColumn
@@ -360,6 +379,7 @@ namespace DietSentry
             energyDataGridViewTextBoxColumn.HeaderText = "Energy (kJ)";
             energyDataGridViewTextBoxColumn.MinimumWidth = 8;
             energyDataGridViewTextBoxColumn.Name = "energyDataGridViewTextBoxColumn";
+            energyDataGridViewTextBoxColumn.ReadOnly = true;
             energyDataGridViewTextBoxColumn.Width = 82;
             // 
             // proteinDataGridViewTextBoxColumn
@@ -373,6 +393,7 @@ namespace DietSentry
             proteinDataGridViewTextBoxColumn.HeaderText = "Protein (g)";
             proteinDataGridViewTextBoxColumn.MinimumWidth = 6;
             proteinDataGridViewTextBoxColumn.Name = "proteinDataGridViewTextBoxColumn";
+            proteinDataGridViewTextBoxColumn.ReadOnly = true;
             proteinDataGridViewTextBoxColumn.Width = 81;
             // 
             // fatTotalDataGridViewTextBoxColumn
@@ -386,6 +407,7 @@ namespace DietSentry
             fatTotalDataGridViewTextBoxColumn.HeaderText = "Fat Total (g)";
             fatTotalDataGridViewTextBoxColumn.MinimumWidth = 6;
             fatTotalDataGridViewTextBoxColumn.Name = "fatTotalDataGridViewTextBoxColumn";
+            fatTotalDataGridViewTextBoxColumn.ReadOnly = true;
             fatTotalDataGridViewTextBoxColumn.Width = 87;
             // 
             // saturatedFatDataGridViewTextBoxColumn
@@ -399,6 +421,7 @@ namespace DietSentry
             saturatedFatDataGridViewTextBoxColumn.HeaderText = "-Saturated Fat (g)";
             saturatedFatDataGridViewTextBoxColumn.MinimumWidth = 6;
             saturatedFatDataGridViewTextBoxColumn.Name = "saturatedFatDataGridViewTextBoxColumn";
+            saturatedFatDataGridViewTextBoxColumn.ReadOnly = true;
             saturatedFatDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             saturatedFatDataGridViewTextBoxColumn.Width = 81;
             // 
@@ -413,6 +436,7 @@ namespace DietSentry
             transFatDataGridViewTextBoxColumn.HeaderText = "-Trans Fat (mg)";
             transFatDataGridViewTextBoxColumn.MinimumWidth = 6;
             transFatDataGridViewTextBoxColumn.Name = "transFatDataGridViewTextBoxColumn";
+            transFatDataGridViewTextBoxColumn.ReadOnly = true;
             transFatDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             transFatDataGridViewTextBoxColumn.Width = 60;
             // 
@@ -427,6 +451,7 @@ namespace DietSentry
             polyunsaturatedFatDataGridViewTextBoxColumn.HeaderText = "-Polyunsaturated Fat (g)";
             polyunsaturatedFatDataGridViewTextBoxColumn.MinimumWidth = 6;
             polyunsaturatedFatDataGridViewTextBoxColumn.Name = "polyunsaturatedFatDataGridViewTextBoxColumn";
+            polyunsaturatedFatDataGridViewTextBoxColumn.ReadOnly = true;
             polyunsaturatedFatDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             polyunsaturatedFatDataGridViewTextBoxColumn.Width = 114;
             // 
@@ -441,6 +466,7 @@ namespace DietSentry
             monounsaturatedFatDataGridViewTextBoxColumn.HeaderText = "-Monounsaturated Fat (g)";
             monounsaturatedFatDataGridViewTextBoxColumn.MinimumWidth = 6;
             monounsaturatedFatDataGridViewTextBoxColumn.Name = "monounsaturatedFatDataGridViewTextBoxColumn";
+            monounsaturatedFatDataGridViewTextBoxColumn.ReadOnly = true;
             monounsaturatedFatDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             monounsaturatedFatDataGridViewTextBoxColumn.Width = 122;
             // 
@@ -455,6 +481,7 @@ namespace DietSentry
             carbohydrateDataGridViewTextBoxColumn.HeaderText = "Carbohydrate (g)";
             carbohydrateDataGridViewTextBoxColumn.MinimumWidth = 6;
             carbohydrateDataGridViewTextBoxColumn.Name = "carbohydrateDataGridViewTextBoxColumn";
+            carbohydrateDataGridViewTextBoxColumn.ReadOnly = true;
             carbohydrateDataGridViewTextBoxColumn.Width = 112;
             // 
             // sugarsDataGridViewTextBoxColumn
@@ -468,6 +495,7 @@ namespace DietSentry
             sugarsDataGridViewTextBoxColumn.HeaderText = "-Sugars (g)";
             sugarsDataGridViewTextBoxColumn.MinimumWidth = 6;
             sugarsDataGridViewTextBoxColumn.Name = "sugarsDataGridViewTextBoxColumn";
+            sugarsDataGridViewTextBoxColumn.ReadOnly = true;
             sugarsDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             sugarsDataGridViewTextBoxColumn.Width = 64;
             // 
@@ -482,6 +510,7 @@ namespace DietSentry
             dietaryFibreDataGridViewTextBoxColumn.HeaderText = "Dietary Fibre (g)";
             dietaryFibreDataGridViewTextBoxColumn.MinimumWidth = 6;
             dietaryFibreDataGridViewTextBoxColumn.Name = "dietaryFibreDataGridViewTextBoxColumn";
+            dietaryFibreDataGridViewTextBoxColumn.ReadOnly = true;
             dietaryFibreDataGridViewTextBoxColumn.Width = 93;
             // 
             // sodiumNaDataGridViewTextBoxColumn
@@ -495,6 +524,7 @@ namespace DietSentry
             sodiumNaDataGridViewTextBoxColumn.HeaderText = "Sodium Na (mg)";
             sodiumNaDataGridViewTextBoxColumn.MinimumWidth = 6;
             sodiumNaDataGridViewTextBoxColumn.Name = "sodiumNaDataGridViewTextBoxColumn";
+            sodiumNaDataGridViewTextBoxColumn.ReadOnly = true;
             sodiumNaDataGridViewTextBoxColumn.Width = 87;
             // 
             // calciumCaDataGridViewTextBoxColumn
@@ -508,6 +538,7 @@ namespace DietSentry
             calciumCaDataGridViewTextBoxColumn.HeaderText = "Calcium Ca (mg)";
             calciumCaDataGridViewTextBoxColumn.MinimumWidth = 6;
             calciumCaDataGridViewTextBoxColumn.Name = "calciumCaDataGridViewTextBoxColumn";
+            calciumCaDataGridViewTextBoxColumn.ReadOnly = true;
             calciumCaDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             calciumCaDataGridViewTextBoxColumn.Width = 69;
             // 
@@ -522,6 +553,7 @@ namespace DietSentry
             potassiumKDataGridViewTextBoxColumn.HeaderText = "Potassium K (mg)";
             potassiumKDataGridViewTextBoxColumn.MinimumWidth = 6;
             potassiumKDataGridViewTextBoxColumn.Name = "potassiumKDataGridViewTextBoxColumn";
+            potassiumKDataGridViewTextBoxColumn.ReadOnly = true;
             potassiumKDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             potassiumKDataGridViewTextBoxColumn.Width = 73;
             // 
@@ -536,6 +568,7 @@ namespace DietSentry
             thiaminB1DataGridViewTextBoxColumn.HeaderText = "Thiamin B1 (mg)";
             thiaminB1DataGridViewTextBoxColumn.MinimumWidth = 6;
             thiaminB1DataGridViewTextBoxColumn.Name = "thiaminB1DataGridViewTextBoxColumn";
+            thiaminB1DataGridViewTextBoxColumn.ReadOnly = true;
             thiaminB1DataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             thiaminB1DataGridViewTextBoxColumn.Width = 68;
             // 
@@ -550,6 +583,7 @@ namespace DietSentry
             riboflavinB2DataGridViewTextBoxColumn.HeaderText = "Riboflavin B2 (mg)";
             riboflavinB2DataGridViewTextBoxColumn.MinimumWidth = 6;
             riboflavinB2DataGridViewTextBoxColumn.Name = "riboflavinB2DataGridViewTextBoxColumn";
+            riboflavinB2DataGridViewTextBoxColumn.ReadOnly = true;
             riboflavinB2DataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             riboflavinB2DataGridViewTextBoxColumn.Width = 77;
             // 
@@ -564,6 +598,7 @@ namespace DietSentry
             niacinB3DataGridViewTextBoxColumn.HeaderText = "Niacin B3 (mg)";
             niacinB3DataGridViewTextBoxColumn.MinimumWidth = 6;
             niacinB3DataGridViewTextBoxColumn.Name = "niacinB3DataGridViewTextBoxColumn";
+            niacinB3DataGridViewTextBoxColumn.ReadOnly = true;
             niacinB3DataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             niacinB3DataGridViewTextBoxColumn.Width = 60;
             // 
@@ -578,6 +613,7 @@ namespace DietSentry
             folateDataGridViewTextBoxColumn.HeaderText = "Folate (ug)";
             folateDataGridViewTextBoxColumn.MinimumWidth = 6;
             folateDataGridViewTextBoxColumn.Name = "folateDataGridViewTextBoxColumn";
+            folateDataGridViewTextBoxColumn.ReadOnly = true;
             folateDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             folateDataGridViewTextBoxColumn.Width = 63;
             // 
@@ -592,6 +628,7 @@ namespace DietSentry
             ironFeDataGridViewTextBoxColumn.HeaderText = "Iron Fe (mg)";
             ironFeDataGridViewTextBoxColumn.MinimumWidth = 6;
             ironFeDataGridViewTextBoxColumn.Name = "ironFeDataGridViewTextBoxColumn";
+            ironFeDataGridViewTextBoxColumn.ReadOnly = true;
             ironFeDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             ironFeDataGridViewTextBoxColumn.Width = 70;
             // 
@@ -606,6 +643,7 @@ namespace DietSentry
             magnesiumMgDataGridViewTextBoxColumn.HeaderText = "Magnesium Mg (mg)";
             magnesiumMgDataGridViewTextBoxColumn.MinimumWidth = 6;
             magnesiumMgDataGridViewTextBoxColumn.Name = "magnesiumMgDataGridViewTextBoxColumn";
+            magnesiumMgDataGridViewTextBoxColumn.ReadOnly = true;
             magnesiumMgDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             magnesiumMgDataGridViewTextBoxColumn.Width = 90;
             // 
@@ -620,6 +658,7 @@ namespace DietSentry
             vitaminCDataGridViewTextBoxColumn.HeaderText = "Vitamin C (mg)";
             vitaminCDataGridViewTextBoxColumn.MinimumWidth = 6;
             vitaminCDataGridViewTextBoxColumn.Name = "vitaminCDataGridViewTextBoxColumn";
+            vitaminCDataGridViewTextBoxColumn.ReadOnly = true;
             vitaminCDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             vitaminCDataGridViewTextBoxColumn.Width = 61;
             // 
@@ -634,6 +673,7 @@ namespace DietSentry
             caffeineDataGridViewTextBoxColumn.HeaderText = "Caffeine (mg)";
             caffeineDataGridViewTextBoxColumn.MinimumWidth = 6;
             caffeineDataGridViewTextBoxColumn.Name = "caffeineDataGridViewTextBoxColumn";
+            caffeineDataGridViewTextBoxColumn.ReadOnly = true;
             caffeineDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             caffeineDataGridViewTextBoxColumn.Width = 78;
             // 
@@ -648,6 +688,7 @@ namespace DietSentry
             cholesterolDataGridViewTextBoxColumn.HeaderText = "Cholesterol (mg)";
             cholesterolDataGridViewTextBoxColumn.MinimumWidth = 6;
             cholesterolDataGridViewTextBoxColumn.Name = "cholesterolDataGridViewTextBoxColumn";
+            cholesterolDataGridViewTextBoxColumn.ReadOnly = true;
             cholesterolDataGridViewTextBoxColumn.Width = 111;
             // 
             // alcoholDataGridViewTextBoxColumn
@@ -661,6 +702,7 @@ namespace DietSentry
             alcoholDataGridViewTextBoxColumn.HeaderText = "Alcohol (g)";
             alcoholDataGridViewTextBoxColumn.MinimumWidth = 6;
             alcoholDataGridViewTextBoxColumn.Name = "alcoholDataGridViewTextBoxColumn";
+            alcoholDataGridViewTextBoxColumn.ReadOnly = true;
             alcoholDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             alcoholDataGridViewTextBoxColumn.Width = 65;
             // 
@@ -671,6 +713,7 @@ namespace DietSentry
             // 
             // tabPageEaten
             // 
+            tabPageEaten.Controls.Add(label1);
             tabPageEaten.Controls.Add(dataGridViewEaten);
             tabPageEaten.Location = new Point(4, 24);
             tabPageEaten.Name = "tabPageEaten";
@@ -679,6 +722,16 @@ namespace DietSentry
             tabPageEaten.TabIndex = 1;
             tabPageEaten.Text = "Eaten";
             tabPageEaten.UseVisualStyleBackColor = true;
+            tabPageEaten.Click += tabPageEaten_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(23, 10);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 1;
+            label1.Text = "label1";
             // 
             // dataGridViewEaten
             // 
@@ -688,15 +741,14 @@ namespace DietSentry
             dataGridViewEaten.Columns.AddRange(new DataGridViewColumn[] { dateTimeEatenDataGridViewTextBoxColumn, amountEatenDataGridViewTextBoxColumn, foodDescriptionDataGridViewTextBoxColumn1, energyDataGridViewTextBoxColumn1, proteinDataGridViewTextBoxColumn1, fatTotalDataGridViewTextBoxColumn1, saturatedFatDataGridViewTextBoxColumn1, transFatDataGridViewTextBoxColumn1, polyunsaturatedFatDataGridViewTextBoxColumn1, monounsaturatedFatDataGridViewTextBoxColumn1, carbohydrateDataGridViewTextBoxColumn1, sugarsDataGridViewTextBoxColumn1, dietaryFibreDataGridViewTextBoxColumn1, sodiumNaDataGridViewTextBoxColumn1, calciumCaDataGridViewTextBoxColumn1, potassiumKDataGridViewTextBoxColumn1, thiaminB1DataGridViewTextBoxColumn1, riboflavinB2DataGridViewTextBoxColumn1, niacinB3DataGridViewTextBoxColumn1, folateDataGridViewTextBoxColumn1, ironFeDataGridViewTextBoxColumn1, magnesiumMgDataGridViewTextBoxColumn1, vitaminCDataGridViewTextBoxColumn1, caffeineDataGridViewTextBoxColumn1, cholesterolDataGridViewTextBoxColumn1, alcoholDataGridViewTextBoxColumn1 });
             dataGridViewEaten.DataSource = eatenBindingSource;
             dataGridViewEaten.Location = new Point(0, 35);
+            dataGridViewEaten.MultiSelect = false;
             dataGridViewEaten.Name = "dataGridViewEaten";
             dataGridViewEaten.RowHeadersWidth = 49;
             dataGridViewEaten.RowTemplate.Height = 25;
             dataGridViewEaten.Size = new Size(1337, 574);
             dataGridViewEaten.TabIndex = 0;
-            // 
-            // eatenBindingSource
-            // 
-            eatenBindingSource.DataSource = typeof(Eaten);
+            dataGridViewEaten.CellContentClick += dataGridViewEaten_CellContentClick;
+            dataGridViewEaten.UserDeletingRow += dataGridViewEaten_UserDeletingRow;
             // 
             // dateTimeEatenDataGridViewTextBoxColumn
             // 
@@ -710,7 +762,7 @@ namespace DietSentry
             dateTimeEatenDataGridViewTextBoxColumn.Name = "dateTimeEatenDataGridViewTextBoxColumn";
             dateTimeEatenDataGridViewTextBoxColumn.ReadOnly = true;
             dateTimeEatenDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-            dateTimeEatenDataGridViewTextBoxColumn.Width = 75;
+            dateTimeEatenDataGridViewTextBoxColumn.Width = 68;
             // 
             // amountEatenDataGridViewTextBoxColumn
             // 
@@ -847,131 +899,247 @@ namespace DietSentry
             // 
             // carbohydrateDataGridViewTextBoxColumn1
             // 
+            carbohydrateDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             carbohydrateDataGridViewTextBoxColumn1.DataPropertyName = "Carbohydrate";
-            carbohydrateDataGridViewTextBoxColumn1.HeaderText = "Carbohydrate";
+            dataGridViewCellStyle39.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle39.Format = "N1";
+            dataGridViewCellStyle39.NullValue = "0";
+            carbohydrateDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle39;
+            carbohydrateDataGridViewTextBoxColumn1.HeaderText = "Carbohydrate (g)";
             carbohydrateDataGridViewTextBoxColumn1.MinimumWidth = 6;
             carbohydrateDataGridViewTextBoxColumn1.Name = "carbohydrateDataGridViewTextBoxColumn1";
-            carbohydrateDataGridViewTextBoxColumn1.Width = 120;
+            carbohydrateDataGridViewTextBoxColumn1.ReadOnly = true;
+            carbohydrateDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            carbohydrateDataGridViewTextBoxColumn1.Width = 93;
             // 
             // sugarsDataGridViewTextBoxColumn1
             // 
+            sugarsDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             sugarsDataGridViewTextBoxColumn1.DataPropertyName = "Sugars";
-            sugarsDataGridViewTextBoxColumn1.HeaderText = "Sugars";
+            dataGridViewCellStyle40.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle40.Format = "N1";
+            dataGridViewCellStyle40.NullValue = "0";
+            sugarsDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle40;
+            sugarsDataGridViewTextBoxColumn1.HeaderText = "-Sugars (g)";
             sugarsDataGridViewTextBoxColumn1.MinimumWidth = 6;
             sugarsDataGridViewTextBoxColumn1.Name = "sugarsDataGridViewTextBoxColumn1";
-            sugarsDataGridViewTextBoxColumn1.Width = 120;
+            sugarsDataGridViewTextBoxColumn1.ReadOnly = true;
+            sugarsDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            sugarsDataGridViewTextBoxColumn1.Width = 64;
             // 
             // dietaryFibreDataGridViewTextBoxColumn1
             // 
+            dietaryFibreDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dietaryFibreDataGridViewTextBoxColumn1.DataPropertyName = "DietaryFibre";
-            dietaryFibreDataGridViewTextBoxColumn1.HeaderText = "DietaryFibre";
+            dataGridViewCellStyle41.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle41.Format = "N1";
+            dataGridViewCellStyle41.NullValue = "0";
+            dietaryFibreDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle41;
+            dietaryFibreDataGridViewTextBoxColumn1.HeaderText = "Dietary Fibre (g)";
             dietaryFibreDataGridViewTextBoxColumn1.MinimumWidth = 6;
             dietaryFibreDataGridViewTextBoxColumn1.Name = "dietaryFibreDataGridViewTextBoxColumn1";
-            dietaryFibreDataGridViewTextBoxColumn1.Width = 120;
+            dietaryFibreDataGridViewTextBoxColumn1.ReadOnly = true;
+            dietaryFibreDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            dietaryFibreDataGridViewTextBoxColumn1.Width = 74;
             // 
             // sodiumNaDataGridViewTextBoxColumn1
             // 
+            sodiumNaDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             sodiumNaDataGridViewTextBoxColumn1.DataPropertyName = "SodiumNa";
-            sodiumNaDataGridViewTextBoxColumn1.HeaderText = "SodiumNa";
+            dataGridViewCellStyle42.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle42.Format = "N0";
+            dataGridViewCellStyle42.NullValue = "0";
+            sodiumNaDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle42;
+            sodiumNaDataGridViewTextBoxColumn1.HeaderText = "Sodium Na (mg)";
             sodiumNaDataGridViewTextBoxColumn1.MinimumWidth = 6;
             sodiumNaDataGridViewTextBoxColumn1.Name = "sodiumNaDataGridViewTextBoxColumn1";
-            sodiumNaDataGridViewTextBoxColumn1.Width = 120;
+            sodiumNaDataGridViewTextBoxColumn1.ReadOnly = true;
+            sodiumNaDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            sodiumNaDataGridViewTextBoxColumn1.Width = 68;
             // 
             // calciumCaDataGridViewTextBoxColumn1
             // 
+            calciumCaDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             calciumCaDataGridViewTextBoxColumn1.DataPropertyName = "CalciumCa";
-            calciumCaDataGridViewTextBoxColumn1.HeaderText = "CalciumCa";
+            dataGridViewCellStyle43.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle43.Format = "N0";
+            dataGridViewCellStyle43.NullValue = "0";
+            calciumCaDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle43;
+            calciumCaDataGridViewTextBoxColumn1.HeaderText = "Calcium Ca (mg)";
             calciumCaDataGridViewTextBoxColumn1.MinimumWidth = 6;
             calciumCaDataGridViewTextBoxColumn1.Name = "calciumCaDataGridViewTextBoxColumn1";
-            calciumCaDataGridViewTextBoxColumn1.Width = 120;
+            calciumCaDataGridViewTextBoxColumn1.ReadOnly = true;
+            calciumCaDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            calciumCaDataGridViewTextBoxColumn1.Width = 69;
             // 
             // potassiumKDataGridViewTextBoxColumn1
             // 
+            potassiumKDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             potassiumKDataGridViewTextBoxColumn1.DataPropertyName = "PotassiumK";
-            potassiumKDataGridViewTextBoxColumn1.HeaderText = "PotassiumK";
+            dataGridViewCellStyle44.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle44.Format = "N0";
+            dataGridViewCellStyle44.NullValue = "0";
+            potassiumKDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle44;
+            potassiumKDataGridViewTextBoxColumn1.HeaderText = "Potassium K (mg)";
             potassiumKDataGridViewTextBoxColumn1.MinimumWidth = 6;
             potassiumKDataGridViewTextBoxColumn1.Name = "potassiumKDataGridViewTextBoxColumn1";
-            potassiumKDataGridViewTextBoxColumn1.Width = 120;
+            potassiumKDataGridViewTextBoxColumn1.ReadOnly = true;
+            potassiumKDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            potassiumKDataGridViewTextBoxColumn1.Width = 73;
             // 
             // thiaminB1DataGridViewTextBoxColumn1
             // 
+            thiaminB1DataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             thiaminB1DataGridViewTextBoxColumn1.DataPropertyName = "ThiaminB1";
-            thiaminB1DataGridViewTextBoxColumn1.HeaderText = "ThiaminB1";
+            dataGridViewCellStyle45.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle45.Format = "N3";
+            dataGridViewCellStyle45.NullValue = "0";
+            thiaminB1DataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle45;
+            thiaminB1DataGridViewTextBoxColumn1.HeaderText = "Thiamin B1 (mg)";
             thiaminB1DataGridViewTextBoxColumn1.MinimumWidth = 6;
             thiaminB1DataGridViewTextBoxColumn1.Name = "thiaminB1DataGridViewTextBoxColumn1";
-            thiaminB1DataGridViewTextBoxColumn1.Width = 120;
+            thiaminB1DataGridViewTextBoxColumn1.ReadOnly = true;
+            thiaminB1DataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            thiaminB1DataGridViewTextBoxColumn1.Width = 68;
             // 
             // riboflavinB2DataGridViewTextBoxColumn1
             // 
+            riboflavinB2DataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             riboflavinB2DataGridViewTextBoxColumn1.DataPropertyName = "RiboflavinB2";
-            riboflavinB2DataGridViewTextBoxColumn1.HeaderText = "RiboflavinB2";
+            dataGridViewCellStyle46.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle46.Format = "N3";
+            dataGridViewCellStyle46.NullValue = "0";
+            riboflavinB2DataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle46;
+            riboflavinB2DataGridViewTextBoxColumn1.HeaderText = "Riboflavin B2 (mg)";
             riboflavinB2DataGridViewTextBoxColumn1.MinimumWidth = 6;
             riboflavinB2DataGridViewTextBoxColumn1.Name = "riboflavinB2DataGridViewTextBoxColumn1";
-            riboflavinB2DataGridViewTextBoxColumn1.Width = 120;
+            riboflavinB2DataGridViewTextBoxColumn1.ReadOnly = true;
+            riboflavinB2DataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            riboflavinB2DataGridViewTextBoxColumn1.Width = 77;
             // 
             // niacinB3DataGridViewTextBoxColumn1
             // 
+            niacinB3DataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             niacinB3DataGridViewTextBoxColumn1.DataPropertyName = "NiacinB3";
-            niacinB3DataGridViewTextBoxColumn1.HeaderText = "NiacinB3";
+            dataGridViewCellStyle47.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle47.Format = "N2";
+            dataGridViewCellStyle47.NullValue = "0";
+            niacinB3DataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle47;
+            niacinB3DataGridViewTextBoxColumn1.HeaderText = "Niacin B3 (mg)";
             niacinB3DataGridViewTextBoxColumn1.MinimumWidth = 6;
             niacinB3DataGridViewTextBoxColumn1.Name = "niacinB3DataGridViewTextBoxColumn1";
-            niacinB3DataGridViewTextBoxColumn1.Width = 120;
+            niacinB3DataGridViewTextBoxColumn1.ReadOnly = true;
+            niacinB3DataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            niacinB3DataGridViewTextBoxColumn1.Width = 60;
             // 
             // folateDataGridViewTextBoxColumn1
             // 
+            folateDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             folateDataGridViewTextBoxColumn1.DataPropertyName = "Folate";
-            folateDataGridViewTextBoxColumn1.HeaderText = "Folate";
+            dataGridViewCellStyle48.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle48.Format = "N0";
+            dataGridViewCellStyle48.NullValue = "0";
+            folateDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle48;
+            folateDataGridViewTextBoxColumn1.HeaderText = "Folate (ug)";
             folateDataGridViewTextBoxColumn1.MinimumWidth = 6;
             folateDataGridViewTextBoxColumn1.Name = "folateDataGridViewTextBoxColumn1";
-            folateDataGridViewTextBoxColumn1.Width = 120;
+            folateDataGridViewTextBoxColumn1.ReadOnly = true;
+            folateDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            folateDataGridViewTextBoxColumn1.Width = 63;
             // 
             // ironFeDataGridViewTextBoxColumn1
             // 
+            ironFeDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             ironFeDataGridViewTextBoxColumn1.DataPropertyName = "IronFe";
-            ironFeDataGridViewTextBoxColumn1.HeaderText = "IronFe";
+            dataGridViewCellStyle49.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle49.Format = "N2";
+            dataGridViewCellStyle49.NullValue = "0";
+            ironFeDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle49;
+            ironFeDataGridViewTextBoxColumn1.HeaderText = "Iron Fe (mg)";
             ironFeDataGridViewTextBoxColumn1.MinimumWidth = 6;
             ironFeDataGridViewTextBoxColumn1.Name = "ironFeDataGridViewTextBoxColumn1";
-            ironFeDataGridViewTextBoxColumn1.Width = 120;
+            ironFeDataGridViewTextBoxColumn1.ReadOnly = true;
+            ironFeDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            ironFeDataGridViewTextBoxColumn1.Width = 70;
             // 
             // magnesiumMgDataGridViewTextBoxColumn1
             // 
+            magnesiumMgDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             magnesiumMgDataGridViewTextBoxColumn1.DataPropertyName = "MagnesiumMg";
-            magnesiumMgDataGridViewTextBoxColumn1.HeaderText = "MagnesiumMg";
+            dataGridViewCellStyle50.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle50.Format = "N0";
+            dataGridViewCellStyle50.NullValue = "0";
+            magnesiumMgDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle50;
+            magnesiumMgDataGridViewTextBoxColumn1.HeaderText = "Magnesium Mg (mg)";
             magnesiumMgDataGridViewTextBoxColumn1.MinimumWidth = 6;
             magnesiumMgDataGridViewTextBoxColumn1.Name = "magnesiumMgDataGridViewTextBoxColumn1";
-            magnesiumMgDataGridViewTextBoxColumn1.Width = 120;
+            magnesiumMgDataGridViewTextBoxColumn1.ReadOnly = true;
+            magnesiumMgDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            magnesiumMgDataGridViewTextBoxColumn1.Width = 90;
             // 
             // vitaminCDataGridViewTextBoxColumn1
             // 
+            vitaminCDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             vitaminCDataGridViewTextBoxColumn1.DataPropertyName = "VitaminC";
-            vitaminCDataGridViewTextBoxColumn1.HeaderText = "VitaminC";
+            dataGridViewCellStyle51.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle51.Format = "N0";
+            dataGridViewCellStyle51.NullValue = "0";
+            vitaminCDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle51;
+            vitaminCDataGridViewTextBoxColumn1.HeaderText = "Vitamin C (mg)";
             vitaminCDataGridViewTextBoxColumn1.MinimumWidth = 6;
             vitaminCDataGridViewTextBoxColumn1.Name = "vitaminCDataGridViewTextBoxColumn1";
-            vitaminCDataGridViewTextBoxColumn1.Width = 120;
+            vitaminCDataGridViewTextBoxColumn1.ReadOnly = true;
+            vitaminCDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            vitaminCDataGridViewTextBoxColumn1.Width = 61;
             // 
             // caffeineDataGridViewTextBoxColumn1
             // 
+            caffeineDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             caffeineDataGridViewTextBoxColumn1.DataPropertyName = "Caffeine";
-            caffeineDataGridViewTextBoxColumn1.HeaderText = "Caffeine";
+            dataGridViewCellStyle52.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle52.Format = "N0";
+            dataGridViewCellStyle52.NullValue = "0";
+            caffeineDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle52;
+            caffeineDataGridViewTextBoxColumn1.HeaderText = "Caffeine (mg)";
             caffeineDataGridViewTextBoxColumn1.MinimumWidth = 6;
             caffeineDataGridViewTextBoxColumn1.Name = "caffeineDataGridViewTextBoxColumn1";
-            caffeineDataGridViewTextBoxColumn1.Width = 120;
+            caffeineDataGridViewTextBoxColumn1.ReadOnly = true;
+            caffeineDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            caffeineDataGridViewTextBoxColumn1.Width = 78;
             // 
             // cholesterolDataGridViewTextBoxColumn1
             // 
+            cholesterolDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             cholesterolDataGridViewTextBoxColumn1.DataPropertyName = "Cholesterol";
-            cholesterolDataGridViewTextBoxColumn1.HeaderText = "Cholesterol";
+            dataGridViewCellStyle53.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle53.Format = "N0";
+            dataGridViewCellStyle53.NullValue = "0";
+            cholesterolDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle53;
+            cholesterolDataGridViewTextBoxColumn1.HeaderText = "Cholesterol (mg)";
             cholesterolDataGridViewTextBoxColumn1.MinimumWidth = 6;
             cholesterolDataGridViewTextBoxColumn1.Name = "cholesterolDataGridViewTextBoxColumn1";
-            cholesterolDataGridViewTextBoxColumn1.Width = 120;
+            cholesterolDataGridViewTextBoxColumn1.ReadOnly = true;
+            cholesterolDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            cholesterolDataGridViewTextBoxColumn1.Width = 92;
             // 
             // alcoholDataGridViewTextBoxColumn1
             // 
+            alcoholDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             alcoholDataGridViewTextBoxColumn1.DataPropertyName = "Alcohol";
-            alcoholDataGridViewTextBoxColumn1.HeaderText = "Alcohol";
+            dataGridViewCellStyle54.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle54.Format = "N1";
+            dataGridViewCellStyle54.NullValue = "0";
+            alcoholDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle54;
+            alcoholDataGridViewTextBoxColumn1.HeaderText = "Alcohol (g)";
             alcoholDataGridViewTextBoxColumn1.MinimumWidth = 6;
             alcoholDataGridViewTextBoxColumn1.Name = "alcoholDataGridViewTextBoxColumn1";
-            alcoholDataGridViewTextBoxColumn1.Width = 120;
+            alcoholDataGridViewTextBoxColumn1.ReadOnly = true;
+            alcoholDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            alcoholDataGridViewTextBoxColumn1.Width = 65;
+            // 
+            // eatenBindingSource
+            // 
+            eatenBindingSource.DataSource = typeof(Eaten);
             // 
             // MainForm
             // 
@@ -989,6 +1157,7 @@ namespace DietSentry
             ((System.ComponentModel.ISupportInitialize)dataGridViewFoods).EndInit();
             ((System.ComponentModel.ISupportInitialize)foodBindingSource).EndInit();
             tabPageEaten.ResumeLayout(false);
+            tabPageEaten.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewEaten).EndInit();
             ((System.ComponentModel.ISupportInitialize)eatenBindingSource).EndInit();
             ResumeLayout(false);
@@ -1063,5 +1232,6 @@ namespace DietSentry
         private DataGridViewTextBoxColumn caffeineDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn cholesterolDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn alcoholDataGridViewTextBoxColumn1;
+        private Label label1;
     }
 }

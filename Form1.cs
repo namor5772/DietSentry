@@ -79,6 +79,7 @@ namespace DietSentry
                             // this updates dataGridViewEaten - but why, and is there any memory leakage?
                             EatenFood.Load();
                             eatenBindingSource.DataSource = EatenFood.Local.ToBindingList();
+                            // eatenBindingSource.DataSource = typeof(Eaten);
                             eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
                             tabControlMain.SelectedTab = tabPageEaten; // and make the Eaten tab visible                            
                         }
@@ -211,5 +212,50 @@ namespace DietSentry
                 e.Handled = true; // prevents Enter key press causing next lower cell getting focus 
             }
         }
+
+        // manually implements the deletion of a table row. This was partly to overcome an exception raised when done automatically
+        private void dataGridViewEaten_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            e.Cancel = true;
+            if (this.dbContext != null)
+            {
+                // determine row to be deleted from Eaten table by accessing it in its dataGrid
+                var foodItem = (Eaten)this.dataGridViewEaten.CurrentRow.DataBoundItem;
+
+                if (foodItem != null)
+                {
+                    using (var context = new FoodsContext())
+                    {
+                        // gain direct access to selected entry in Eaten table
+                        var FoodSelected = context.Eaten.Single(b => b.EatenId == foodItem.EatenId);
+                        this.label1.Text = FoodSelected.FoodDescription;
+
+                        // delete this row from Eaten table
+                        context.Eaten.Remove(FoodSelected);
+                        context.SaveChanges();
+
+                        // update dataGridViewEaten - but why does this work and is there any memory leakage?
+                        var EatenFood = context.Eaten;
+                        EatenFood.Load();
+                        eatenBindingSource.DataSource = EatenFood.Local.ToBindingList();
+                        eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
+                    }
+                }
+            }
+        }
+
+        private void dataGridViewEaten_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void tabPageEaten_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        //e.Cancel = true;
+        //    this.label1.Text = "DELETING ROW";
     }
 }
