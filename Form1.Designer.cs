@@ -23,6 +23,7 @@ namespace DietSentry
             base.Dispose(disposing);
         }
 
+// MY "GLOBAL" VARIABLES ******************
 
         // variable which is set to true so that something specific can be done when MainForm is reactivated after InputForm is closed
         public Boolean actOnInputFormClose = false;
@@ -32,6 +33,8 @@ namespace DietSentry
 
         // A string describing the eaten food selected
         public string eatenFoodDescription;
+
+// ****************************************
 
 
         #region Windows Form Designer generated code

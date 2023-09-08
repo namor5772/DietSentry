@@ -2,6 +2,7 @@ using DietSentry;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DietSentry
@@ -18,12 +19,12 @@ namespace DietSentry
 
 
         // code that acts when a food item is selected from the Foods dataGridView.
-        // It prompts for amout of food eaten and appends a time stamed row to the Eaten foods table.
+        // It prompts for amout of food eaten and appends a time stamped row to the Eaten foods table.
         private void actWhenFoodSelected()
         {
-            if (this.dbContext != null)
+            if (dbContext != null)
             {
-                var foodItem = (Food)this.dataGridViewFoods.CurrentRow.DataBoundItem;
+                var foodItem = (Food)dataGridViewFoods.CurrentRow.DataBoundItem;
 
                 if (foodItem != null)
                 {
@@ -35,8 +36,6 @@ namespace DietSentry
 
                         // this opens dialog used to input the quantity of that food eaten
                         InputForm frm = new InputForm(this);
-                        //frm.StartPosition = FormStartPosition.Manual;
-                        //frm.Location = new Point(100, 100);
                         frm.ShowDialog();
 
                         // only act on input if amout eaten >0, this includes the case when Enter is immediately pressed in the text box
@@ -260,7 +259,9 @@ namespace DietSentry
 
         private void buttonRunQuery_Click(object sender, EventArgs e)
         {
-            this.label1.Text = DateTime.Now.ToString("d-MMM-yy   hh:mm:ss");
+            string sDate = DateTime.Now.ToString("d-MMM-yy");
+            string sDateTime = DateTime.Now.ToString("d-MMM-yy   hh:mm:ss");
+            this.label1.Text = sDateTime;
 
             try
             {
@@ -268,9 +269,8 @@ namespace DietSentry
                 {
                     context.Eaten.Load();
 
-                    // display filtered data in DataGrid
-                    //               var filteredData = context.Eaten.Local.ToBindingList().Where(x => x.DateEaten.Contains("7-Sept-23"));
-                    var filteredData = context.Eaten.Local.ToBindingList().GroupBy(o => o.DateEaten).Select(g => new {
+                    // display queried data in DataGrid (in particular aggregated by date and summed)
+                    var queriedData = context.Eaten.Local.ToBindingList().GroupBy(o => o.DateEaten).Select(g => new {
                         DateEaten = g.Key,
                         AmountEaten = g.Sum(i => i.AmountEaten),
                         Energy = g.Sum(i => i.Energy),
@@ -296,18 +296,21 @@ namespace DietSentry
                         Caffeine = g.Sum(i => i.Caffeine),
                         Cholesterol = g.Sum(i => i.Cholesterol),
                         Alcohol = g.Sum(i => i.Alcohol)
-                    });
-                    this.eatenBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
+                    }).Where(x => x.DateEaten.Contains(sDate));
 
-                    /*
-                                            // gain access to selected entries in food table
-                                            var TotalFoodsEaten = context.Eaten.Local.ToBindingList().Where(b => b.EatenId == foodItem.EatenId);
-                                            float X = TotalFoodsEaten.AmountEaten;
-                                            string S = X.ToString("N0");
-                                            labelAmountTotal.Text = S;
-                    */
+                    // hide columns not necessary for display of aggregated data
+                    dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
+                    dataGridViewEaten.Columns[2].Visible = false; // hide TimeEaten column
+                    dataGridViewEaten.Columns[4].Visible = false; // hide FoodDescription column
+
+                    // the queried data table result should only contain one record/row.
+                    labelAmountTotal.Text = queriedData.Last().AmountEaten.ToString("N0");
+
+                    // this is where exception occurs.
+                    // this binds the data so that it is displayed in the data grid.
+                    eatenBindingSource.DataSource = queriedData.Count() > 0 ? queriedData : queriedData.ToArray();
+
                 }
-
             }
             catch // some sorting problem
             {
@@ -325,6 +328,12 @@ namespace DietSentry
                     eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
             }
             labelAmountTotal.Text = "Reset";
+
+            // restore view of previously hidden columns 
+            dataGridViewEaten.Columns[0].Visible = true; // show EatenId column
+            dataGridViewEaten.Columns[2].Visible = true; // show TimeEaten column
+            dataGridViewEaten.Columns[4].Visible = true; // show FoodDescription column
+
         }
     }
 
