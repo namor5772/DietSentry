@@ -268,12 +268,6 @@ namespace DietSentry
         }
 
 
-        private void foodBindingSource_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
         private void buttonSave_Click(object sender, EventArgs e)
         {
             this.dbContext!.SaveChanges();
@@ -282,25 +276,7 @@ namespace DietSentry
             this.dataGridViewEaten.Refresh();
         }
 
-/*
-        private void buttonSetFilter_Click(object sender, EventArgs e)
-        {
-            if (this.dbContext != null)
-            {
-                var filteredData = dbContext.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(this.textBoxFilter.Text));
-                this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
-            }
-        }
 
-
-        private void buttonClearFilter_Click(object sender, EventArgs e)
-        {
-            if (this.dbContext != null)
-            {
-                this.foodBindingSource.DataSource = dbContext.Foods.Local.ToBindingList();
-            }
-        }
-*/
         private void textBoxFilter_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -405,23 +381,16 @@ namespace DietSentry
             else // prevent row deletion and inform user of this by displaying Message Box
             {
                 // Initializes the variables to pass to the MessageBox.Show method.
-                string message = "Only possible when both check boxes unchecked";
+                string message = "Only possible when table view unchanged";
                 string caption = "CANNOT DELETE ROW";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
 
                 // Displays the MessageBox.
                 MessageBox.Show(message, caption, buttons);
+
+                checkBoxDateFilter.Checked = false;
+                checkBoxDailyTotals.Checked = false;
             }
-        }
-
-        private void dataGridViewEaten_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void tabPageEaten_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void checkBoxDateFilter_CheckedChanged(object sender, EventArgs e)
@@ -432,6 +401,48 @@ namespace DietSentry
         private void checkBoxDailyTotals_CheckedChanged(object sender, EventArgs e)
         {
             actOnEatenFoodFilteringStates();
+        }
+
+        private void checkBoxMainCols_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxMainCols.Checked)
+            {
+                // hide non-main columns 
+                dataGridViewEaten.Columns[9].Visible = false; // hide TransFat column
+                dataGridViewEaten.Columns[10].Visible = false; // hide PolyunsaturatedFat column
+                dataGridViewEaten.Columns[11].Visible = false; // hide MonounsaturatedFat column
+                dataGridViewEaten.Columns[16].Visible = false; // hide CalciumCa column
+                dataGridViewEaten.Columns[17].Visible = false; // hide PotassiumK column
+                dataGridViewEaten.Columns[18].Visible = false; // hide ThiaminB1 column
+                dataGridViewEaten.Columns[19].Visible = false; // hide RiboflavinB2 column
+                dataGridViewEaten.Columns[20].Visible = false; // hide NiacinB3 column
+                dataGridViewEaten.Columns[21].Visible = false; // hide Folate column
+                dataGridViewEaten.Columns[22].Visible = false; // hide IronFe column
+                dataGridViewEaten.Columns[23].Visible = false; // hide MagnesiumMg column
+                dataGridViewEaten.Columns[24].Visible = false; // hide VitaminC column
+                dataGridViewEaten.Columns[25].Visible = false; // hide Caffeine column
+                dataGridViewEaten.Columns[26].Visible = false; // hide Cholesterol column
+                dataGridViewEaten.Columns[27].Visible = false; // hide Alcohol column
+            }
+            else // if (!checkBoxMainCols.Checked)
+            {
+                // restore view of previously hidden non-main columns 
+                dataGridViewEaten.Columns[9].Visible = true; // show TransFat column
+                dataGridViewEaten.Columns[10].Visible = true; // show PolyunsaturatedFat column
+                dataGridViewEaten.Columns[11].Visible = true; // show MonounsaturatedFat column
+                dataGridViewEaten.Columns[16].Visible = true; // show CalciumCa column
+                dataGridViewEaten.Columns[17].Visible = true; // show PotassiumK column
+                dataGridViewEaten.Columns[18].Visible = true; // show ThiaminB1 column
+                dataGridViewEaten.Columns[19].Visible = true; // show RiboflavinB2 column
+                dataGridViewEaten.Columns[20].Visible = true; // show NiacinB3 column
+                dataGridViewEaten.Columns[21].Visible = true; // show Folate column
+                dataGridViewEaten.Columns[22].Visible = true; // show IronFe column
+                dataGridViewEaten.Columns[23].Visible = true; // show MagnesiumMg column
+                dataGridViewEaten.Columns[24].Visible = true; // show VitaminC column
+                dataGridViewEaten.Columns[25].Visible = true; // show Caffeine column
+                dataGridViewEaten.Columns[26].Visible = true; // show Cholesterol column
+                dataGridViewEaten.Columns[27].Visible = true; // show Alcohol column
+            }
         }
     }
 

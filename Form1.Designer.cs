@@ -141,6 +141,7 @@ namespace DietSentry
             alcoholDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             foodBindingSource = new BindingSource(components);
             tabPageEaten = new TabPage();
+            checkBoxMainCols = new CheckBox();
             checkBoxDailyTotals = new CheckBox();
             checkBoxDateFilter = new CheckBox();
             dataGridViewEaten = new DataGridView();
@@ -246,7 +247,7 @@ namespace DietSentry
             // buttonAddRecipe
             // 
             buttonAddRecipe.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonAddRecipe.Location = new Point(1256, 6);
+            buttonAddRecipe.Location = new Point(1240, 20);
             buttonAddRecipe.Name = "buttonAddRecipe";
             buttonAddRecipe.Size = new Size(75, 23);
             buttonAddRecipe.TabIndex = 7;
@@ -257,7 +258,7 @@ namespace DietSentry
             // buttonAddLiquid
             // 
             buttonAddLiquid.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonAddLiquid.Location = new Point(1175, 6);
+            buttonAddLiquid.Location = new Point(1150, 20);
             buttonAddLiquid.Name = "buttonAddLiquid";
             buttonAddLiquid.Size = new Size(75, 23);
             buttonAddLiquid.TabIndex = 6;
@@ -268,7 +269,7 @@ namespace DietSentry
             // buttonAddSolid
             // 
             buttonAddSolid.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonAddSolid.Location = new Point(1094, 6);
+            buttonAddSolid.Location = new Point(1059, 20);
             buttonAddSolid.Name = "buttonAddSolid";
             buttonAddSolid.Size = new Size(75, 23);
             buttonAddSolid.TabIndex = 5;
@@ -279,7 +280,7 @@ namespace DietSentry
             // labelFilter
             // 
             labelFilter.AutoSize = true;
-            labelFilter.Location = new Point(149, 8);
+            labelFilter.Location = new Point(158, 24);
             labelFilter.Name = "labelFilter";
             labelFilter.Size = new Size(58, 15);
             labelFilter.TabIndex = 3;
@@ -289,7 +290,7 @@ namespace DietSentry
             // 
             textBoxFilter.AutoCompleteMode = AutoCompleteMode.Suggest;
             textBoxFilter.AutoCompleteSource = AutoCompleteSource.HistoryList;
-            textBoxFilter.Location = new Point(8, 6);
+            textBoxFilter.Location = new Point(17, 20);
             textBoxFilter.Name = "textBoxFilter";
             textBoxFilter.PlaceholderText = "Enter food filter text";
             textBoxFilter.Size = new Size(135, 23);
@@ -300,7 +301,7 @@ namespace DietSentry
             // 
             // buttonSave
             // 
-            buttonSave.Location = new Point(270, 6);
+            buttonSave.Location = new Point(267, 20);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 4;
@@ -334,7 +335,7 @@ namespace DietSentry
             dataGridViewCellStyle27.WrapMode = DataGridViewTriState.False;
             dataGridViewFoods.DefaultCellStyle = dataGridViewCellStyle27;
             dataGridViewFoods.EnableHeadersVisualStyles = false;
-            dataGridViewFoods.Location = new Point(0, 35);
+            dataGridViewFoods.Location = new Point(0, 67);
             dataGridViewFoods.MultiSelect = false;
             dataGridViewFoods.Name = "dataGridViewFoods";
             dataGridViewCellStyle28.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -347,7 +348,7 @@ namespace DietSentry
             dataGridViewFoods.RowHeadersWidth = 49;
             dataGridViewFoods.RowTemplate.Height = 25;
             dataGridViewFoods.ShowCellToolTips = false;
-            dataGridViewFoods.Size = new Size(1337, 574);
+            dataGridViewFoods.Size = new Size(1337, 542);
             dataGridViewFoods.TabIndex = 4;
             dataGridViewFoods.CellDoubleClick += dataGridViewFoods_CellDoubleClick;
             dataGridViewFoods.KeyDown += dataGridViewFoods_KeyDown;
@@ -693,10 +694,10 @@ namespace DietSentry
             // foodBindingSource
             // 
             foodBindingSource.DataSource = typeof(Food);
-            foodBindingSource.CurrentChanged += foodBindingSource_CurrentChanged;
             // 
             // tabPageEaten
             // 
+            tabPageEaten.Controls.Add(checkBoxMainCols);
             tabPageEaten.Controls.Add(checkBoxDailyTotals);
             tabPageEaten.Controls.Add(checkBoxDateFilter);
             tabPageEaten.Controls.Add(dataGridViewEaten);
@@ -707,12 +708,22 @@ namespace DietSentry
             tabPageEaten.TabIndex = 1;
             tabPageEaten.Text = "Eaten";
             tabPageEaten.UseVisualStyleBackColor = true;
-            tabPageEaten.Click += tabPageEaten_Click;
+            // 
+            // checkBoxMainCols
+            // 
+            checkBoxMainCols.AutoSize = true;
+            checkBoxMainCols.Location = new Point(23, 68);
+            checkBoxMainCols.Name = "checkBoxMainCols";
+            checkBoxMainCols.Size = new Size(161, 19);
+            checkBoxMainCols.TabIndex = 7;
+            checkBoxMainCols.Text = "Only show main columns";
+            checkBoxMainCols.UseVisualStyleBackColor = true;
+            checkBoxMainCols.CheckedChanged += checkBoxMainCols_CheckedChanged;
             // 
             // checkBoxDailyTotals
             // 
             checkBoxDailyTotals.AutoSize = true;
-            checkBoxDailyTotals.Location = new Point(23, 69);
+            checkBoxDailyTotals.Location = new Point(23, 43);
             checkBoxDailyTotals.Name = "checkBoxDailyTotals";
             checkBoxDailyTotals.Size = new Size(124, 19);
             checkBoxDailyTotals.TabIndex = 6;
@@ -723,7 +734,7 @@ namespace DietSentry
             // checkBoxDateFilter
             // 
             checkBoxDateFilter.AutoSize = true;
-            checkBoxDateFilter.Location = new Point(23, 44);
+            checkBoxDateFilter.Location = new Point(23, 18);
             checkBoxDateFilter.Name = "checkBoxDateFilter";
             checkBoxDateFilter.Size = new Size(135, 19);
             checkBoxDateFilter.TabIndex = 5;
@@ -738,14 +749,13 @@ namespace DietSentry
             dataGridViewEaten.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewEaten.Columns.AddRange(new DataGridViewColumn[] { EatenId, DateEaten, TimeEaten, amountEatenDataGridViewTextBoxColumn, foodDescriptionDataGridViewTextBoxColumn1, energyDataGridViewTextBoxColumn1, proteinDataGridViewTextBoxColumn1, fatTotalDataGridViewTextBoxColumn1, saturatedFatDataGridViewTextBoxColumn1, transFatDataGridViewTextBoxColumn1, polyunsaturatedFatDataGridViewTextBoxColumn1, monounsaturatedFatDataGridViewTextBoxColumn1, carbohydrateDataGridViewTextBoxColumn1, sugarsDataGridViewTextBoxColumn1, dietaryFibreDataGridViewTextBoxColumn1, sodiumNaDataGridViewTextBoxColumn1, calciumCaDataGridViewTextBoxColumn1, potassiumKDataGridViewTextBoxColumn1, thiaminB1DataGridViewTextBoxColumn1, riboflavinB2DataGridViewTextBoxColumn1, niacinB3DataGridViewTextBoxColumn1, folateDataGridViewTextBoxColumn1, ironFeDataGridViewTextBoxColumn1, magnesiumMgDataGridViewTextBoxColumn1, vitaminCDataGridViewTextBoxColumn1, caffeineDataGridViewTextBoxColumn1, cholesterolDataGridViewTextBoxColumn1, alcoholDataGridViewTextBoxColumn1 });
             dataGridViewEaten.DataSource = eatenBindingSource;
-            dataGridViewEaten.Location = new Point(0, 120);
+            dataGridViewEaten.Location = new Point(0, 105);
             dataGridViewEaten.MultiSelect = false;
             dataGridViewEaten.Name = "dataGridViewEaten";
             dataGridViewEaten.RowHeadersWidth = 49;
             dataGridViewEaten.RowTemplate.Height = 25;
-            dataGridViewEaten.Size = new Size(1337, 489);
+            dataGridViewEaten.Size = new Size(1337, 504);
             dataGridViewEaten.TabIndex = 0;
-            dataGridViewEaten.CellContentClick += dataGridViewEaten_CellContentClick;
             dataGridViewEaten.UserDeletingRow += dataGridViewEaten_UserDeletingRow;
             // 
             // EatenId
@@ -1258,5 +1268,6 @@ namespace DietSentry
         private DataGridViewTextBoxColumn alcoholDataGridViewTextBoxColumn1;
         private CheckBox checkBoxDateFilter;
         private CheckBox checkBoxDailyTotals;
+        private CheckBox checkBoxMainCols;
     }
 }
