@@ -23,7 +23,7 @@ namespace DietSentry
             base.Dispose(disposing);
         }
 
-// MY "GLOBAL" VARIABLES ******************
+        // MY "GLOBAL" VARIABLES ******************
 
         // variable which is set to true so that something specific can be done when MainForm is reactivated after InputForm is closed
         public Boolean actOnInputFormClose = false;
@@ -34,7 +34,7 @@ namespace DietSentry
         // A string describing the eaten food selected
         public string eatenFoodDescription;
 
-// ****************************************
+        // ****************************************
 
 
         #region Windows Form Designer generated code
@@ -141,9 +141,8 @@ namespace DietSentry
             alcoholDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             foodBindingSource = new BindingSource(components);
             tabPageEaten = new TabPage();
-            labelAmountTotal = new Label();
-            buttonRunQuery = new Button();
-            label1 = new Label();
+            checkBoxDailyTotals = new CheckBox();
+            checkBoxDateFilter = new CheckBox();
             dataGridViewEaten = new DataGridView();
             EatenId = new DataGridViewTextBoxColumn();
             DateEaten = new DataGridViewTextBoxColumn();
@@ -174,7 +173,6 @@ namespace DietSentry
             cholesterolDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             alcoholDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             eatenBindingSource = new BindingSource(components);
-            buttonResetQuery = new Button();
             tabControl1.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageFood.SuspendLayout();
@@ -699,10 +697,8 @@ namespace DietSentry
             // 
             // tabPageEaten
             // 
-            tabPageEaten.Controls.Add(buttonResetQuery);
-            tabPageEaten.Controls.Add(labelAmountTotal);
-            tabPageEaten.Controls.Add(buttonRunQuery);
-            tabPageEaten.Controls.Add(label1);
+            tabPageEaten.Controls.Add(checkBoxDailyTotals);
+            tabPageEaten.Controls.Add(checkBoxDateFilter);
             tabPageEaten.Controls.Add(dataGridViewEaten);
             tabPageEaten.Location = new Point(4, 24);
             tabPageEaten.Name = "tabPageEaten";
@@ -713,33 +709,27 @@ namespace DietSentry
             tabPageEaten.UseVisualStyleBackColor = true;
             tabPageEaten.Click += tabPageEaten_Click;
             // 
-            // labelAmountTotal
+            // checkBoxDailyTotals
             // 
-            labelAmountTotal.AutoSize = true;
-            labelAmountTotal.Location = new Point(195, 44);
-            labelAmountTotal.Name = "labelAmountTotal";
-            labelAmountTotal.Size = new Size(79, 15);
-            labelAmountTotal.TabIndex = 3;
-            labelAmountTotal.Text = "Total Amount";
+            checkBoxDailyTotals.AutoSize = true;
+            checkBoxDailyTotals.Location = new Point(23, 69);
+            checkBoxDailyTotals.Name = "checkBoxDailyTotals";
+            checkBoxDailyTotals.Size = new Size(124, 19);
+            checkBoxDailyTotals.TabIndex = 6;
+            checkBoxDailyTotals.Text = "Display daily totals";
+            checkBoxDailyTotals.UseVisualStyleBackColor = true;
+            checkBoxDailyTotals.CheckedChanged += checkBoxDailyTotals_CheckedChanged;
             // 
-            // buttonRunQuery
+            // checkBoxDateFilter
             // 
-            buttonRunQuery.Location = new Point(26, 40);
-            buttonRunQuery.Name = "buttonRunQuery";
-            buttonRunQuery.Size = new Size(90, 23);
-            buttonRunQuery.TabIndex = 2;
-            buttonRunQuery.Text = "Run Query";
-            buttonRunQuery.UseVisualStyleBackColor = true;
-            buttonRunQuery.Click += buttonRunQuery_Click;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(23, 10);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 1;
-            label1.Text = "label1";
+            checkBoxDateFilter.AutoSize = true;
+            checkBoxDateFilter.Location = new Point(23, 44);
+            checkBoxDateFilter.Name = "checkBoxDateFilter";
+            checkBoxDateFilter.Size = new Size(135, 19);
+            checkBoxDateFilter.TabIndex = 5;
+            checkBoxDateFilter.Text = "Filter by today's date";
+            checkBoxDateFilter.UseVisualStyleBackColor = true;
+            checkBoxDateFilter.CheckedChanged += checkBoxDateFilter_CheckedChanged;
             // 
             // dataGridViewEaten
             // 
@@ -1173,16 +1163,6 @@ namespace DietSentry
             // 
             eatenBindingSource.DataSource = typeof(Eaten);
             // 
-            // buttonResetQuery
-            // 
-            buttonResetQuery.Location = new Point(26, 69);
-            buttonResetQuery.Name = "buttonResetQuery";
-            buttonResetQuery.Size = new Size(90, 23);
-            buttonResetQuery.TabIndex = 4;
-            buttonResetQuery.Text = "Reset Query";
-            buttonResetQuery.UseVisualStyleBackColor = true;
-            buttonResetQuery.Click += buttonResetQuery_Click;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1248,8 +1228,6 @@ namespace DietSentry
         private DataGridViewTextBoxColumn caffeineDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn cholesterolDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn alcoholDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn dateTimeEatenDataGridViewTextBoxColumn;
-        private Label label1;
         private DataGridViewTextBoxColumn EatenId;
         private DataGridViewTextBoxColumn DateEaten;
         private DataGridViewTextBoxColumn TimeEaten;
@@ -1278,8 +1256,7 @@ namespace DietSentry
         private DataGridViewTextBoxColumn caffeineDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn cholesterolDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn alcoholDataGridViewTextBoxColumn1;
-        private Button buttonRunQuery;
-        private Label labelAmountTotal;
-        private Button buttonResetQuery;
+        private CheckBox checkBoxDateFilter;
+        private CheckBox checkBoxDailyTotals;
     }
 }

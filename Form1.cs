@@ -17,9 +17,8 @@ namespace DietSentry
             InitializeComponent();
         }
 
-
         // code that acts when a food item is selected from the Foods dataGridView.
-        // It prompts for amout of food eaten and appends a time stamped row to the Eaten foods table.
+        // It prompts for amount of food eaten and appends a time stamped row to the Eaten foods table.
         private void actWhenFoodSelected()
         {
             if (dbContext != null)
@@ -80,12 +79,165 @@ namespace DietSentry
                             EatenFood.Load();
                             eatenBindingSource.DataSource = EatenFood.Local.ToBindingList();
                             eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
-                            tabControlMain.SelectedTab = tabPageEaten; // and make the Eaten tab visible                            
+                            tabControlMain.SelectedTab = tabPageEaten; // and make the Eaten tab visible
+
+                            actOnEatenFoodFilteringStates();
+
+                            // 
                         }
                     }
                 }
             }
+        }
 
+        // act on Eaten food filtering states
+        private void actOnEatenFoodFilteringStates()
+        {
+            string sDate = DateTime.Now.ToString("d-MMM-yy");
+
+            if ((checkBoxDailyTotals.Checked) & (!(checkBoxDateFilter.Checked)))
+            {
+                try
+                {
+                    using (var context = new FoodsContext())
+                    {
+                        context.Eaten.Load();
+
+                        // display queried data in DataGrid (in particular aggregated by date and summed)
+                        var queriedData = context.Eaten.Local.ToBindingList().GroupBy(o => o.DateEaten).Select(g => new
+                        {
+                            DateEaten = g.Key,
+                            AmountEaten = g.Sum(i => i.AmountEaten),
+                            Energy = g.Sum(i => i.Energy),
+                            Protein = g.Sum(i => i.Protein),
+                            FatTotal = g.Sum(i => i.FatTotal),
+                            SaturatedFat = g.Sum(i => i.SaturatedFat),
+                            TransFat = g.Sum(i => i.TransFat),
+                            PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
+                            MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
+                            Carbohydrate = g.Sum(i => i.Carbohydrate),
+                            Sugars = g.Sum(i => i.Sugars),
+                            DietaryFibre = g.Sum(i => i.DietaryFibre),
+                            SodiumNa = g.Sum(i => i.SodiumNa),
+                            CalciumCa = g.Sum(i => i.CalciumCa),
+                            PotassiumK = g.Sum(i => i.PotassiumK),
+                            ThiaminB1 = g.Sum(i => i.ThiaminB1),
+                            RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
+                            NiacinB3 = g.Sum(i => i.NiacinB3),
+                            Folate = g.Sum(i => i.Folate),
+                            IronFe = g.Sum(i => i.IronFe),
+                            MagnesiumMg = g.Sum(i => i.MagnesiumMg),
+                            VitaminC = g.Sum(i => i.VitaminC),
+                            Caffeine = g.Sum(i => i.Caffeine),
+                            Cholesterol = g.Sum(i => i.Cholesterol),
+                            Alcohol = g.Sum(i => i.Alcohol)
+                        });//.Where(x => x.DateEaten.Contains(sDate));
+
+                        // hide columns not necessary for display of aggregated data
+                        dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
+                        dataGridViewEaten.Columns[2].Visible = false; // hide TimeEaten column
+                        dataGridViewEaten.Columns[4].Visible = false; // hide FoodDescription column
+
+                        // the queried data table result should only contain one record/row.
+
+                        // this is where exception occurs.
+                        // this binds the data so that it is displayed in the data grid.
+                        eatenBindingSource.DataSource = queriedData.Count() > 0 ? queriedData : queriedData.ToArray();
+                    }
+                }
+                catch // some sorting problem
+                {
+                    ;
+                }
+            }
+            else if ((checkBoxDailyTotals.Checked) & (checkBoxDateFilter.Checked))
+            {
+                try
+                {
+                    using (var context = new FoodsContext())
+                    {
+                        context.Eaten.Load();
+
+                        // display queried data in DataGrid (in particular aggregated by date and summed)
+                        var queriedData = context.Eaten.Local.ToBindingList().GroupBy(o => o.DateEaten).Select(g => new
+                        {
+                            DateEaten = g.Key,
+                            AmountEaten = g.Sum(i => i.AmountEaten),
+                            Energy = g.Sum(i => i.Energy),
+                            Protein = g.Sum(i => i.Protein),
+                            FatTotal = g.Sum(i => i.FatTotal),
+                            SaturatedFat = g.Sum(i => i.SaturatedFat),
+                            TransFat = g.Sum(i => i.TransFat),
+                            PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
+                            MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
+                            Carbohydrate = g.Sum(i => i.Carbohydrate),
+                            Sugars = g.Sum(i => i.Sugars),
+                            DietaryFibre = g.Sum(i => i.DietaryFibre),
+                            SodiumNa = g.Sum(i => i.SodiumNa),
+                            CalciumCa = g.Sum(i => i.CalciumCa),
+                            PotassiumK = g.Sum(i => i.PotassiumK),
+                            ThiaminB1 = g.Sum(i => i.ThiaminB1),
+                            RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
+                            NiacinB3 = g.Sum(i => i.NiacinB3),
+                            Folate = g.Sum(i => i.Folate),
+                            IronFe = g.Sum(i => i.IronFe),
+                            MagnesiumMg = g.Sum(i => i.MagnesiumMg),
+                            VitaminC = g.Sum(i => i.VitaminC),
+                            Caffeine = g.Sum(i => i.Caffeine),
+                            Cholesterol = g.Sum(i => i.Cholesterol),
+                            Alcohol = g.Sum(i => i.Alcohol)
+                        }).Where(x => x.DateEaten.Contains(sDate));
+
+                        // hide columns not necessary for display of aggregated data
+                        dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
+                        dataGridViewEaten.Columns[2].Visible = false; // hide TimeEaten column
+                        dataGridViewEaten.Columns[4].Visible = false; // hide FoodDescription column
+
+                        // the queried data table result should only contain one record/row.
+
+                        // this is where exception occurs.
+                        // this binds the data so that it is displayed in the data grid.
+                        eatenBindingSource.DataSource = queriedData.Count() > 0 ? queriedData : queriedData.ToArray();
+                    }
+                }
+                catch // some sorting problem
+                {
+                    ;
+                }
+            }
+            else if ((!checkBoxDailyTotals.Checked) & (checkBoxDateFilter.Checked))
+            {
+
+                using (var context = new FoodsContext())
+                {
+                    // update dataGridViewEaten with todays date as filter
+                    context.Eaten.Load();
+                    eatenBindingSource.DataSource = context.Eaten.Local.ToBindingList();
+                    eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
+                    var filteredData = context.Eaten.Local.ToBindingList().Where(x => x.DateEaten.Contains(sDate));
+                    this.eatenBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
+                }
+
+                // restore view of previously hidden columns 
+                dataGridViewEaten.Columns[0].Visible = true; // show EatenId column
+                dataGridViewEaten.Columns[2].Visible = true; // show TimeEaten column
+                dataGridViewEaten.Columns[4].Visible = true; // show FoodDescription column
+            }
+            else // ((!checkBoxDailyTotals.Checked)&(!checkBoxDateFilter.Checked))
+            {
+                using (var context = new FoodsContext())
+                {
+                    // update dataGridViewEaten with no filters
+                    context.Eaten.Load();
+                    eatenBindingSource.DataSource = context.Eaten.Local.ToBindingList();
+                    eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
+                }
+
+                // restore view of previously hidden columns 
+                dataGridViewEaten.Columns[0].Visible = true; // show EatenId column
+                dataGridViewEaten.Columns[2].Visible = true; // show TimeEaten column
+                dataGridViewEaten.Columns[4].Visible = true; // show FoodDescription column
+            }
         }
 
 
@@ -106,6 +258,7 @@ namespace DietSentry
             this.eatenBindingSource.DataSource = dbContext.Eaten.Local.ToBindingList();
         }
 
+
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
@@ -113,6 +266,7 @@ namespace DietSentry
             this.dbContext?.Dispose();
             this.dbContext = null;
         }
+
 
         private void foodBindingSource_CurrentChanged(object sender, EventArgs e)
         {
@@ -128,6 +282,7 @@ namespace DietSentry
             this.dataGridViewEaten.Refresh();
         }
 
+/*
         private void buttonSetFilter_Click(object sender, EventArgs e)
         {
             if (this.dbContext != null)
@@ -137,6 +292,7 @@ namespace DietSentry
             }
         }
 
+
         private void buttonClearFilter_Click(object sender, EventArgs e)
         {
             if (this.dbContext != null)
@@ -144,7 +300,7 @@ namespace DietSentry
                 this.foodBindingSource.DataSource = dbContext.Foods.Local.ToBindingList();
             }
         }
-
+*/
         private void textBoxFilter_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -214,13 +370,16 @@ namespace DietSentry
         }
 
 
-        // manually implements the deletion of a Eaten table row.
+        // manually implements the deletion of an Eaten table row.
         // This was partly to overcome an exception raised when done automatically.
         // mult selection is disabled for convenience.
         private void dataGridViewEaten_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            e.Cancel = true; // cancels the automatic deletion process
-            if (this.dbContext != null)
+            // cancel the automatic deletion process (to avoid raising exceptions)
+            e.Cancel = true;
+
+            // can delete row only if both the totals and date filter check boxed are unchecked
+            if ((!checkBoxDailyTotals.Checked) & (!checkBoxDateFilter.Checked))
             {
                 // determine row to be deleted from Eaten table by accessing it in its dataGrid
                 var foodItem = (Eaten)this.dataGridViewEaten.CurrentRow.DataBoundItem;
@@ -231,19 +390,27 @@ namespace DietSentry
                     {
                         // gain direct access to selected entry in Eaten table
                         var FoodSelected = context.Eaten.Single(b => b.EatenId == foodItem.EatenId);
-                        this.label1.Text = FoodSelected.FoodDescription;
 
                         // delete this row from Eaten table
                         context.Eaten.Remove(FoodSelected);
                         context.SaveChanges();
 
                         // update dataGridViewEaten - but why does this work and is there any memory leakage?
-                 //       var EatenFood = context.Eaten;
                         context.Eaten.Load();
                         eatenBindingSource.DataSource = context.Eaten.Local.ToBindingList();
                         eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
                     }
                 }
+            }
+            else // prevent row deletion and inform user of this by displaying Message Box
+            {
+                // Initializes the variables to pass to the MessageBox.Show method.
+                string message = "Only possible when both check boxes unchecked";
+                string caption = "CANNOT DELETE ROW";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+
+                // Displays the MessageBox.
+                MessageBox.Show(message, caption, buttons);
             }
         }
 
@@ -257,83 +424,14 @@ namespace DietSentry
 
         }
 
-        private void buttonRunQuery_Click(object sender, EventArgs e)
+        private void checkBoxDateFilter_CheckedChanged(object sender, EventArgs e)
         {
-            string sDate = DateTime.Now.ToString("d-MMM-yy");
-            string sDateTime = DateTime.Now.ToString("d-MMM-yy   hh:mm:ss");
-            this.label1.Text = sDateTime;
-
-            try
-            {
-                using (var context = new FoodsContext())
-                {
-                    context.Eaten.Load();
-
-                    // display queried data in DataGrid (in particular aggregated by date and summed)
-                    var queriedData = context.Eaten.Local.ToBindingList().GroupBy(o => o.DateEaten).Select(g => new {
-                        DateEaten = g.Key,
-                        AmountEaten = g.Sum(i => i.AmountEaten),
-                        Energy = g.Sum(i => i.Energy),
-                        Protein = g.Sum(i => i.Protein),
-                        FatTotal = g.Sum(i => i.FatTotal),
-                        SaturatedFat = g.Sum(i => i.SaturatedFat),
-                        TransFat = g.Sum(i => i.TransFat),
-                        PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
-                        MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
-                        Carbohydrate = g.Sum(i => i.Carbohydrate),
-                        Sugars = g.Sum(i => i.Sugars),
-                        DietaryFibre = g.Sum(i => i.DietaryFibre),
-                        SodiumNa = g.Sum(i => i.SodiumNa),
-                        CalciumCa = g.Sum(i => i.CalciumCa),
-                        PotassiumK = g.Sum(i => i.PotassiumK),
-                        ThiaminB1 = g.Sum(i => i.ThiaminB1),
-                        RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
-                        NiacinB3 = g.Sum(i => i.NiacinB3),
-                        Folate = g.Sum(i => i.Folate),
-                        IronFe = g.Sum(i => i.IronFe),
-                        MagnesiumMg = g.Sum(i => i.MagnesiumMg),
-                        VitaminC = g.Sum(i => i.VitaminC),
-                        Caffeine = g.Sum(i => i.Caffeine),
-                        Cholesterol = g.Sum(i => i.Cholesterol),
-                        Alcohol = g.Sum(i => i.Alcohol)
-                    }).Where(x => x.DateEaten.Contains(sDate));
-
-                    // hide columns not necessary for display of aggregated data
-                    dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
-                    dataGridViewEaten.Columns[2].Visible = false; // hide TimeEaten column
-                    dataGridViewEaten.Columns[4].Visible = false; // hide FoodDescription column
-
-                    // the queried data table result should only contain one record/row.
-                    labelAmountTotal.Text = queriedData.Last().AmountEaten.ToString("N0");
-
-                    // this is where exception occurs.
-                    // this binds the data so that it is displayed in the data grid.
-                    eatenBindingSource.DataSource = queriedData.Count() > 0 ? queriedData : queriedData.ToArray();
-
-                }
-            }
-            catch // some sorting problem
-            {
-                labelAmountTotal.Text = "Caught exception";
-            }
+            actOnEatenFoodFilteringStates();
         }
 
-        private void buttonResetQuery_Click(object sender, EventArgs e)
+        private void checkBoxDailyTotals_CheckedChanged(object sender, EventArgs e)
         {
-            using (var context = new FoodsContext())
-            {
-                    // update dataGridViewEaten - but why does this work and is there any memory leakage?
-                    context.Eaten.Load();
-                    eatenBindingSource.DataSource = context.Eaten.Local.ToBindingList();
-                    eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
-            }
-            labelAmountTotal.Text = "Reset";
-
-            // restore view of previously hidden columns 
-            dataGridViewEaten.Columns[0].Visible = true; // show EatenId column
-            dataGridViewEaten.Columns[2].Visible = true; // show TimeEaten column
-            dataGridViewEaten.Columns[4].Visible = true; // show FoodDescription column
-
+            actOnEatenFoodFilteringStates();
         }
     }
 
