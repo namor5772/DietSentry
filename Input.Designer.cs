@@ -44,6 +44,7 @@
             // labelAmount
             // 
             labelAmount.AutoSize = true;
+            labelAmount.ForeColor = SystemColors.HighlightText;
             labelAmount.Location = new Point(107, 34);
             labelAmount.Name = "labelAmount";
             labelAmount.Size = new Size(33, 15);
@@ -53,6 +54,7 @@
             // labelDescription
             // 
             labelDescription.AutoEllipsis = true;
+            labelDescription.ForeColor = SystemColors.HighlightText;
             labelDescription.Location = new Point(12, 9);
             labelDescription.Name = "labelDescription";
             labelDescription.Size = new Size(416, 15);
@@ -63,6 +65,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Highlight;
             ClientSize = new Size(440, 66);
             ControlBox = false;
             Controls.Add(labelDescription);

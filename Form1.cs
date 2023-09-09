@@ -21,70 +21,67 @@ namespace DietSentry
         // It prompts for amount of food eaten and appends a time stamped row to the Eaten foods table.
         private void actWhenFoodSelected()
         {
-            if (dbContext != null)
+            var foodItem = (Food)dataGridViewFoods.CurrentRow.DataBoundItem;
+
+            if (foodItem != null)
             {
-                var foodItem = (Food)dataGridViewFoods.CurrentRow.DataBoundItem;
-
-                if (foodItem != null)
+                using (var context = new FoodsContext())
                 {
-                    using (var context = new FoodsContext())
+                    // gain access to selected entry in food table
+                    var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
+                    eatenFoodDescription = FoodSelected.FoodDescription;
+
+                    // this opens dialog used to input the quantity of that food eaten
+                    InputForm frm = new(this);
+                    frm.ShowDialog();
+
+                    // only act on input if amout eaten >0, this includes the case when Enter is immediately pressed in the text box
+                    if (amountOfFoodEaten > 0.0)
                     {
-                        // gain access to selected entry in food table
-                        var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
-                        eatenFoodDescription = FoodSelected.FoodDescription;
 
-                        // this opens dialog used to input the quantity of that food eaten
-                        InputForm frm = new InputForm(this);
-                        frm.ShowDialog();
-
-                        // only act on input if amout eaten >0, this includes the case when Enter is immediately pressed in the text box
-                        if (amountOfFoodEaten > 0.0)
+                        // we can now add the appropriate entry to the Eaten table, sort it and refresh its Eaten data grid and give it focus
+                        var EatenFood = context.Eaten;
+                        EatenFood.Add(new Eaten
                         {
+                            DateEaten = DateTime.Now.ToString("d-MMM-yy"),
+                            TimeEaten = DateTime.Now.ToString("hh:mm"),
+                            AmountEaten = amountOfFoodEaten * 100F,
+                            FoodDescription = FoodSelected.FoodDescription,
+                            Energy = (FoodSelected.Energy) * amountOfFoodEaten,
+                            Protein = (FoodSelected.Protein) * amountOfFoodEaten,
+                            FatTotal = (FoodSelected.FatTotal) * amountOfFoodEaten,
+                            SaturatedFat = (FoodSelected.SaturatedFat) * amountOfFoodEaten,
+                            TransFat = (FoodSelected.TransFat) * amountOfFoodEaten,
+                            PolyunsaturatedFat = (FoodSelected.PolyunsaturatedFat) * amountOfFoodEaten,
+                            MonounsaturatedFat = (FoodSelected.MonounsaturatedFat) * amountOfFoodEaten,
+                            Carbohydrate = (FoodSelected.Carbohydrate) * amountOfFoodEaten,
+                            Sugars = (FoodSelected.Sugars) * amountOfFoodEaten,
+                            DietaryFibre = (FoodSelected.DietaryFibre) * amountOfFoodEaten,
+                            SodiumNa = (FoodSelected.SodiumNa) * amountOfFoodEaten,
+                            CalciumCa = (FoodSelected.CalciumCa) * amountOfFoodEaten,
+                            PotassiumK = (FoodSelected.PotassiumK) * amountOfFoodEaten,
+                            ThiaminB1 = (FoodSelected.ThiaminB1) * amountOfFoodEaten,
+                            RiboflavinB2 = (FoodSelected.RiboflavinB2) * amountOfFoodEaten,
+                            NiacinB3 = (FoodSelected.NiacinB3) * amountOfFoodEaten,
+                            Folate = (FoodSelected.Folate) * amountOfFoodEaten,
+                            IronFe = (FoodSelected.IronFe) * amountOfFoodEaten,
+                            MagnesiumMg = (FoodSelected.MagnesiumMg) * amountOfFoodEaten,
+                            VitaminC = (FoodSelected.VitaminC) * amountOfFoodEaten,
+                            Caffeine = (FoodSelected.Caffeine) * amountOfFoodEaten,
+                            Cholesterol = (FoodSelected.Cholesterol) * amountOfFoodEaten,
+                            Alcohol = (FoodSelected.Alcohol) * amountOfFoodEaten,
+                        });
+                        context.SaveChanges();
 
-                            // we can now add the appropriate entry to the Eaten table, sort it and refresh its Eaten data grid and give it focus
-                            var EatenFood = context.Eaten;
-                            EatenFood.Add(new Eaten
-                            {
-                                DateEaten = DateTime.Now.ToString("d-MMM-yy"),
-                                TimeEaten = DateTime.Now.ToString("hh:mm"),
-                                AmountEaten = amountOfFoodEaten * 100F,
-                                FoodDescription = FoodSelected.FoodDescription,
-                                Energy = (FoodSelected.Energy) * amountOfFoodEaten,
-                                Protein = (FoodSelected.Protein) * amountOfFoodEaten,
-                                FatTotal = (FoodSelected.FatTotal) * amountOfFoodEaten,
-                                SaturatedFat = (FoodSelected.SaturatedFat) * amountOfFoodEaten,
-                                TransFat = (FoodSelected.TransFat) * amountOfFoodEaten,
-                                PolyunsaturatedFat = (FoodSelected.PolyunsaturatedFat) * amountOfFoodEaten,
-                                MonounsaturatedFat = (FoodSelected.MonounsaturatedFat) * amountOfFoodEaten,
-                                Carbohydrate = (FoodSelected.Carbohydrate) * amountOfFoodEaten,
-                                Sugars = (FoodSelected.Sugars) * amountOfFoodEaten,
-                                DietaryFibre = (FoodSelected.DietaryFibre) * amountOfFoodEaten,
-                                SodiumNa = (FoodSelected.SodiumNa) * amountOfFoodEaten,
-                                CalciumCa = (FoodSelected.CalciumCa) * amountOfFoodEaten,
-                                PotassiumK = (FoodSelected.PotassiumK) * amountOfFoodEaten,
-                                ThiaminB1 = (FoodSelected.ThiaminB1) * amountOfFoodEaten,
-                                RiboflavinB2 = (FoodSelected.RiboflavinB2) * amountOfFoodEaten,
-                                NiacinB3 = (FoodSelected.NiacinB3) * amountOfFoodEaten,
-                                Folate = (FoodSelected.Folate) * amountOfFoodEaten,
-                                IronFe = (FoodSelected.IronFe) * amountOfFoodEaten,
-                                MagnesiumMg = (FoodSelected.MagnesiumMg) * amountOfFoodEaten,
-                                VitaminC = (FoodSelected.VitaminC) * amountOfFoodEaten,
-                                Caffeine = (FoodSelected.Caffeine) * amountOfFoodEaten,
-                                Cholesterol = (FoodSelected.Cholesterol) * amountOfFoodEaten,
-                                Alcohol = (FoodSelected.Alcohol) * amountOfFoodEaten,
-                            });
-                            context.SaveChanges();
+                        // this updates dataGridViewEaten - but why, and is there any memory leakage?
+                        EatenFood.Load();
+                        eatenBindingSource.DataSource = EatenFood.Local.ToBindingList();
+                        eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
+                        tabControlMain.SelectedTab = tabPageEaten; // and make the Eaten tab visible
 
-                            // this updates dataGridViewEaten - but why, and is there any memory leakage?
-                            EatenFood.Load();
-                            eatenBindingSource.DataSource = EatenFood.Local.ToBindingList();
-                            eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
-                            tabControlMain.SelectedTab = tabPageEaten; // and make the Eaten tab visible
+                        actOnEatenFoodFilteringStates();
 
-                            actOnEatenFoodFilteringStates();
-
-                            // 
-                        }
+                        // 
                     }
                 }
             }
@@ -207,7 +204,6 @@ namespace DietSentry
             }
             else if ((!checkBoxDailyTotals.Checked) & (checkBoxDateFilter.Checked))
             {
-
                 using (var context = new FoodsContext())
                 {
                     // update dataGridViewEaten with todays date as filter
@@ -281,27 +277,36 @@ namespace DietSentry
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (this.dbContext != null)
+                e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
+
+                if (this.textBoxFilter.Text != "") // only accept a non-null string as a filter
                 {
-                    e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
-
-                    if (this.textBoxFilter.Text != "") // only accept a non-null string as a filter
+                    using (var context = new FoodsContext())
                     {
-                        // display filtered data in DataGrid
-                        var filteredData = dbContext.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(this.textBoxFilter.Text));
+                        // update dataGridViewFood with filter
+                        context.Foods.Load();
+                        foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
+                        foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
+                        var filteredData = context.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(this.textBoxFilter.Text));
                         this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
-
-                        // display filter in label next to text box
-                        labelFilter.Text = textBoxFilter.Text;
-
-                        // clear filter text box (in readiness for next input) while retaining focus
-                        textBoxFilter.Text = "";
                     }
-                    else // just clear filter with focus retained 
+
+                    // display filter in label next to text box
+                    labelFilter.Text = textBoxFilter.Text;
+
+                    // clear filter text box (in readiness for next input) while retaining focus
+                    textBoxFilter.Text = "";
+                }
+                else // just clear filter with focus retained 
+                {
+                    using (var context = new FoodsContext())
                     {
-                        this.foodBindingSource.DataSource = dbContext.Foods.Local.ToBindingList();
-                        labelFilter.Text = "unfiltered";
+                        // update dataGridViewFood with no filters
+                        context.Foods.Load();
+                        foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
+                        foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
                     }
+                    labelFilter.Text = "unfiltered";
                 }
             }
         }
@@ -328,14 +333,14 @@ namespace DietSentry
         }
 
 
-        // this is one way you select an item in the food table from the Food data grid  
+        // this is one way you select an item in the food table from the Food data grid  (double click selected item with mouse)
         private void dataGridViewFoods_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             actWhenFoodSelected();
         }
 
 
-        // this is another way you select an item in the food table from the Food data grid  
+        // this is another way you select an item in the food table from the Food data grid (press Enter key on selected item) 
         private void dataGridViewFoods_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -354,8 +359,8 @@ namespace DietSentry
             // cancel the automatic deletion process (to avoid raising exceptions)
             e.Cancel = true;
 
-            // can delete row only if both the totals and date filter check boxed are unchecked
-            if ((!checkBoxDailyTotals.Checked) & (!checkBoxDateFilter.Checked))
+            // can delete row only if the totals filter check boxed is unchecked
+            if ((!checkBoxDailyTotals.Checked))
             {
                 // determine row to be deleted from Eaten table by accessing it in its dataGrid
                 var foodItem = (Eaten)this.dataGridViewEaten.CurrentRow.DataBoundItem;
@@ -371,24 +376,24 @@ namespace DietSentry
                         context.Eaten.Remove(FoodSelected);
                         context.SaveChanges();
 
-                        // update dataGridViewEaten - but why does this work and is there any memory leakage?
-                        context.Eaten.Load();
-                        eatenBindingSource.DataSource = context.Eaten.Local.ToBindingList();
-                        eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
+                        // refresh Eaten data grid view while maintaining filter status
+                        actOnEatenFoodFilteringStates();
+//                        context.Eaten.Load();
+//                        eatenBindingSource.DataSource = context.Eaten.Local.ToBindingList();
+//                        eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
                     }
                 }
             }
             else // prevent row deletion and inform user of this by displaying Message Box
             {
                 // Initializes the variables to pass to the MessageBox.Show method.
-                string message = "Only possible when table view unchanged";
+                string message = "Only possible when not showing totalled data";
                 string caption = "CANNOT DELETE ROW";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
 
                 // Displays the MessageBox.
                 MessageBox.Show(message, caption, buttons);
 
-                checkBoxDateFilter.Checked = false;
                 checkBoxDailyTotals.Checked = false;
             }
         }
@@ -442,6 +447,61 @@ namespace DietSentry
                 dataGridViewEaten.Columns[25].Visible = true; // show Caffeine column
                 dataGridViewEaten.Columns[26].Visible = true; // show Cholesterol column
                 dataGridViewEaten.Columns[27].Visible = true; // show Alcohol column
+            }
+        }
+
+        // refreshes the Foods DataGrid View while maintaining filter state
+        private void updateFoodsDataGridView()
+        {
+            if (labelFilter.Text != "unfiltered") 
+            {
+                using (var context = new FoodsContext())
+                {
+                    // update dataGridViewFood with filter
+                    context.Foods.Load();
+                    foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
+                    foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
+                    var filteredData = context.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(labelFilter.Text));
+                    this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
+                }
+            }
+            else // filter is clear
+            {
+                using (var context = new FoodsContext())
+                {
+                    // update dataGridViewFood with no filters
+                    context.Foods.Load();
+                    foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
+                    foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
+                }
+            }
+        }
+
+        // manually implements the deletion of a Food table row.
+        // This is to control the process and fully delete recipe foods.
+        // mult selection is disabled for convenience.
+        private void dataGridViewFoods_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            // cancel the automatic deletion process (to avoid raising exceptions and for manual enhancements)
+            e.Cancel = true;
+
+            // determine row to be deleted from Food table by accessing it in its dataGrid
+            var foodItem = (Food)this.dataGridViewFoods.CurrentRow.DataBoundItem;
+
+            if (foodItem != null)
+            {
+                using (var context = new FoodsContext())
+                {
+                    // gain direct access to selected entry in Food table
+                    var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
+
+                    // delete this row from Eaten table
+                    context.Foods.Remove(FoodSelected);
+                    context.SaveChanges();
+                    
+                    // refresh Foods data grid view while maintaining filter state
+                    updateFoodsDataGridView();
+                }
             }
         }
     }

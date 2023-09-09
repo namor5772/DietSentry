@@ -351,6 +351,7 @@ namespace DietSentry
             dataGridViewFoods.Size = new Size(1337, 542);
             dataGridViewFoods.TabIndex = 4;
             dataGridViewFoods.CellDoubleClick += dataGridViewFoods_CellDoubleClick;
+            dataGridViewFoods.UserDeletingRow += dataGridViewFoods_UserDeletingRow;
             dataGridViewFoods.KeyDown += dataGridViewFoods_KeyDown;
             // 
             // FoodIdDataGridViewTextBoxColumn
