@@ -266,10 +266,23 @@ namespace DietSentry
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
+/*
+            using (var context = new FoodsContext())
+            {
+                context.SaveChanges();
+
+                // update dataGridViewFood with no filters
+                context.Foods.Load();
+                foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
+                foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
+            }
+*/            
+
+            labelFilter.Text = "unfiltered";
             this.dbContext!.SaveChanges();
 
             this.dataGridViewFoods.Refresh();
-            this.dataGridViewEaten.Refresh();
+//            this.dataGridViewEaten.Refresh();
         }
 
 
@@ -311,11 +324,13 @@ namespace DietSentry
             }
         }
 
+
         private void textBoxFilter_Enter(object sender, EventArgs e)
         {
             // always clear filter when enter text box
             textBoxFilter.Text = "";
         }
+
 
         private void buttonAddSolid_Click(object sender, EventArgs e)
         {
@@ -333,14 +348,14 @@ namespace DietSentry
         }
 
 
-        // this is one way you select an item in the food table from the Food data grid  (double click selected item with mouse)
+        // this is way ONE you select an item in the food table from the Food data grid (double click selected item with mouse)
         private void dataGridViewFoods_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             actWhenFoodSelected();
         }
 
 
-        // this is another way you select an item in the food table from the Food data grid (press Enter key on selected item) 
+        // this is way TWO you select an item in the food table from the Food data grid (press Enter key on selected item) 
         private void dataGridViewFoods_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -378,9 +393,6 @@ namespace DietSentry
 
                         // refresh Eaten data grid view while maintaining filter status
                         actOnEatenFoodFilteringStates();
-//                        context.Eaten.Load();
-//                        eatenBindingSource.DataSource = context.Eaten.Local.ToBindingList();
-//                        eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
                     }
                 }
             }
@@ -398,6 +410,7 @@ namespace DietSentry
             }
         }
 
+
         private void checkBoxDateFilter_CheckedChanged(object sender, EventArgs e)
         {
             actOnEatenFoodFilteringStates();
@@ -407,6 +420,7 @@ namespace DietSentry
         {
             actOnEatenFoodFilteringStates();
         }
+
 
         private void checkBoxMainCols_CheckedChanged(object sender, EventArgs e)
         {
@@ -450,10 +464,11 @@ namespace DietSentry
             }
         }
 
+
         // refreshes the Foods DataGrid View while maintaining filter state
         private void updateFoodsDataGridView()
         {
-            if (labelFilter.Text != "unfiltered") 
+            if (labelFilter.Text != "unfiltered")
             {
                 using (var context = new FoodsContext())
                 {
@@ -477,6 +492,7 @@ namespace DietSentry
             }
         }
 
+
         // manually implements the deletion of a Food table row.
         // This is to control the process and fully delete recipe foods.
         // mult selection is disabled for convenience.
@@ -498,11 +514,16 @@ namespace DietSentry
                     // delete this row from Eaten table
                     context.Foods.Remove(FoodSelected);
                     context.SaveChanges();
-                    
-                    // refresh Foods data grid view while maintaining filter state
+
+                    // refresh Foods data grid view while maintaining any filter states
                     updateFoodsDataGridView();
                 }
             }
+        }
+
+        private void checkBoxMainFoodCols_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 
