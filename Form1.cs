@@ -266,23 +266,23 @@ namespace DietSentry
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-/*
-            using (var context = new FoodsContext())
-            {
-                context.SaveChanges();
+            /*
+                        using (var context = new FoodsContext())
+                        {
+                            context.SaveChanges();
 
-                // update dataGridViewFood with no filters
-                context.Foods.Load();
-                foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
-                foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
-            }
-*/            
+                            // update dataGridViewFood with no filters
+                            context.Foods.Load();
+                            foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
+                            foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
+                        }
+            */
 
             labelFilter.Text = "unfiltered";
             this.dbContext!.SaveChanges();
 
             this.dataGridViewFoods.Refresh();
-//            this.dataGridViewEaten.Refresh();
+            //            this.dataGridViewEaten.Refresh();
         }
 
 

@@ -224,7 +224,7 @@ namespace DietSentry
             tabControlMain.Multiline = true;
             tabControlMain.Name = "tabControlMain";
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new Size(1347, 629);
+            tabControlMain.Size = new Size(1347, 635);
             tabControlMain.TabIndex = 1;
             tabControlMain.TabStop = false;
             // 
@@ -241,7 +241,7 @@ namespace DietSentry
             tabPageFood.Location = new Point(4, 24);
             tabPageFood.Name = "tabPageFood";
             tabPageFood.Padding = new Padding(3);
-            tabPageFood.Size = new Size(1339, 601);
+            tabPageFood.Size = new Size(1339, 607);
             tabPageFood.TabIndex = 0;
             tabPageFood.Text = "Food";
             tabPageFood.UseVisualStyleBackColor = true;
@@ -348,7 +348,7 @@ namespace DietSentry
             dataGridViewCellStyle27.WrapMode = DataGridViewTriState.False;
             dataGridViewFoods.DefaultCellStyle = dataGridViewCellStyle27;
             dataGridViewFoods.EnableHeadersVisualStyles = false;
-            dataGridViewFoods.Location = new Point(0, 93);
+            dataGridViewFoods.Location = new Point(3, 93);
             dataGridViewFoods.MultiSelect = false;
             dataGridViewFoods.Name = "dataGridViewFoods";
             dataGridViewCellStyle28.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -360,7 +360,7 @@ namespace DietSentry
             dataGridViewFoods.RowHeadersDefaultCellStyle = dataGridViewCellStyle28;
             dataGridViewFoods.RowHeadersWidth = 49;
             dataGridViewFoods.RowTemplate.Height = 25;
-            dataGridViewFoods.Size = new Size(1336, 507);
+            dataGridViewFoods.Size = new Size(1333, 511);
             dataGridViewFoods.TabIndex = 4;
             dataGridViewFoods.CellDoubleClick += dataGridViewFoods_CellDoubleClick;
             dataGridViewFoods.UserDeletingRow += dataGridViewFoods_UserDeletingRow;
@@ -718,7 +718,7 @@ namespace DietSentry
             tabPageEaten.Location = new Point(4, 24);
             tabPageEaten.Name = "tabPageEaten";
             tabPageEaten.Padding = new Padding(3);
-            tabPageEaten.Size = new Size(1339, 601);
+            tabPageEaten.Size = new Size(1339, 607);
             tabPageEaten.TabIndex = 1;
             tabPageEaten.Text = "Eaten";
             tabPageEaten.UseVisualStyleBackColor = true;
@@ -763,12 +763,12 @@ namespace DietSentry
             dataGridViewEaten.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewEaten.Columns.AddRange(new DataGridViewColumn[] { EatenId, DateEaten, TimeEaten, amountEatenDataGridViewTextBoxColumn, foodDescriptionDataGridViewTextBoxColumn1, energyDataGridViewTextBoxColumn1, proteinDataGridViewTextBoxColumn1, fatTotalDataGridViewTextBoxColumn1, saturatedFatDataGridViewTextBoxColumn1, transFatDataGridViewTextBoxColumn1, polyunsaturatedFatDataGridViewTextBoxColumn1, monounsaturatedFatDataGridViewTextBoxColumn1, carbohydrateDataGridViewTextBoxColumn1, sugarsDataGridViewTextBoxColumn1, dietaryFibreDataGridViewTextBoxColumn1, sodiumNaDataGridViewTextBoxColumn1, calciumCaDataGridViewTextBoxColumn1, potassiumKDataGridViewTextBoxColumn1, thiaminB1DataGridViewTextBoxColumn1, riboflavinB2DataGridViewTextBoxColumn1, niacinB3DataGridViewTextBoxColumn1, folateDataGridViewTextBoxColumn1, ironFeDataGridViewTextBoxColumn1, magnesiumMgDataGridViewTextBoxColumn1, vitaminCDataGridViewTextBoxColumn1, caffeineDataGridViewTextBoxColumn1, cholesterolDataGridViewTextBoxColumn1, alcoholDataGridViewTextBoxColumn1 });
             dataGridViewEaten.DataSource = eatenBindingSource;
-            dataGridViewEaten.Location = new Point(6, 99);
+            dataGridViewEaten.Location = new Point(3, 99);
             dataGridViewEaten.MultiSelect = false;
             dataGridViewEaten.Name = "dataGridViewEaten";
             dataGridViewEaten.RowHeadersWidth = 49;
             dataGridViewEaten.RowTemplate.Height = 25;
-            dataGridViewEaten.Size = new Size(1329, 501);
+            dataGridViewEaten.Size = new Size(1333, 505);
             dataGridViewEaten.TabIndex = 0;
             dataGridViewEaten.UserDeletingRow += dataGridViewEaten_UserDeletingRow;
             // 
