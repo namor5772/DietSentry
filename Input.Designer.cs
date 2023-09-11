@@ -35,7 +35,7 @@
             // 
             // textBoxAmount
             // 
-            textBoxAmount.Location = new Point(12, 31);
+            textBoxAmount.Location = new Point(23, 37);
             textBoxAmount.Name = "textBoxAmount";
             textBoxAmount.Size = new Size(89, 23);
             textBoxAmount.TabIndex = 1;
@@ -45,7 +45,7 @@
             // 
             labelAmount.AutoSize = true;
             labelAmount.ForeColor = SystemColors.HighlightText;
-            labelAmount.Location = new Point(107, 34);
+            labelAmount.Location = new Point(135, 40);
             labelAmount.Name = "labelAmount";
             labelAmount.Size = new Size(33, 15);
             labelAmount.TabIndex = 2;
@@ -57,7 +57,7 @@
             labelDescription.ForeColor = SystemColors.HighlightText;
             labelDescription.Location = new Point(12, 9);
             labelDescription.Name = "labelDescription";
-            labelDescription.Size = new Size(416, 15);
+            labelDescription.Size = new Size(358, 15);
             labelDescription.TabIndex = 3;
             labelDescription.Text = "description";
             // 
@@ -66,7 +66,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Highlight;
-            ClientSize = new Size(440, 66);
+            ClientSize = new Size(382, 81);
             ControlBox = false;
             Controls.Add(labelDescription);
             Controls.Add(labelAmount);

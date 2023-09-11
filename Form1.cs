@@ -268,23 +268,9 @@ namespace DietSentry
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            /*
-                        using (var context = new FoodsContext())
-                        {
-                            context.SaveChanges();
-
-                            // update dataGridViewFood with no filters
-                            context.Foods.Load();
-                            foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
-                            foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
-                        }
-            */
-
             labelFilter.Text = "unfiltered";
             this.dbContext!.SaveChanges();
-
             this.dataGridViewFoods.Refresh();
-            //            this.dataGridViewEaten.Refresh();
         }
 
 
@@ -304,6 +290,12 @@ namespace DietSentry
                         foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
                         var filteredData = context.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(this.textBoxFilter.Text));
                         this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
+                        if (filteredData.Count() > 0)
+                        {
+                            // shifts focus to fist displayed cell, as long as there is something to display
+                            dataGridViewFoods.Focus();
+                            dataGridViewFoods.CurrentCell = dataGridViewFoods.FirstDisplayedCell;
+                        }
                     }
 
                     // display filter in label next to text box
@@ -322,6 +314,11 @@ namespace DietSentry
                         foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
                     }
                     labelFilter.Text = "unfiltered";
+
+                    // shifts focus to fist displayed cell
+                    dataGridViewFoods.Focus();
+                    dataGridViewFoods.CurrentCell = dataGridViewFoods.FirstDisplayedCell;
+
                 }
             }
         }
@@ -336,7 +333,11 @@ namespace DietSentry
 
         private void buttonAddSolid_Click(object sender, EventArgs e)
         {
-
+            // opens dialog used to input a record to the food table
+            foodInputForm frm = new(this);
+            frm.StartPosition = FormStartPosition.Manual;
+            frm.Location = this.PointToScreen(tabPageFood.Location);
+            frm.ShowDialog();
         }
 
         private void buttonAddLiquid_Click(object sender, EventArgs e)
@@ -417,6 +418,7 @@ namespace DietSentry
         {
             actOnEatenFoodFilteringStates();
         }
+
 
         private void checkBoxDailyTotals_CheckedChanged(object sender, EventArgs e)
         {
@@ -523,8 +525,47 @@ namespace DietSentry
             }
         }
 
+
         private void checkBoxMainFoodCols_CheckedChanged(object sender, EventArgs e)
         {
+            if (checkBoxMainFoodCols.Checked)
+            {
+                // hide non-main columns 
+                dataGridViewFoods.Columns[6].Visible = false; // hide TransFat column
+                dataGridViewFoods.Columns[7].Visible = false; // hide PolyunsaturatedFat column
+                dataGridViewFoods.Columns[8].Visible = false; // hide MonounsaturatedFat column
+                dataGridViewFoods.Columns[13].Visible = false; // hide CalciumCa column
+                dataGridViewFoods.Columns[14].Visible = false; // hide PotassiumK column
+                dataGridViewFoods.Columns[15].Visible = false; // hide ThiaminB1 column
+                dataGridViewFoods.Columns[16].Visible = false; // hide RiboflavinB2 column
+                dataGridViewFoods.Columns[17].Visible = false; // hide NiacinB3 column
+                dataGridViewFoods.Columns[18].Visible = false; // hide Folate column
+                dataGridViewFoods.Columns[19].Visible = false; // hide IronFe column
+                dataGridViewFoods.Columns[20].Visible = false; // hide MagnesiumMg column
+                dataGridViewFoods.Columns[21].Visible = false; // hide VitaminC column
+                dataGridViewFoods.Columns[22].Visible = false; // hide Caffeine column
+                dataGridViewFoods.Columns[23].Visible = false; // hide Cholesterol column
+                dataGridViewFoods.Columns[24].Visible = false; // hide Alcohol column
+            }
+            else // if (!checkBoxMainFoodCols.Checked)
+            {
+                // restore view of previously hidden non-main columns 
+                dataGridViewFoods.Columns[6].Visible = true; // show TransFat column
+                dataGridViewFoods.Columns[7].Visible = true; // show PolyunsaturatedFat column
+                dataGridViewFoods.Columns[8].Visible = true; // show MonounsaturatedFat column
+                dataGridViewFoods.Columns[13].Visible = true; // show CalciumCa column
+                dataGridViewFoods.Columns[14].Visible = true; // show PotassiumK column
+                dataGridViewFoods.Columns[15].Visible = true; // show ThiaminB1 column
+                dataGridViewFoods.Columns[16].Visible = true; // show RiboflavinB2 column
+                dataGridViewFoods.Columns[17].Visible = true; // show NiacinB3 column
+                dataGridViewFoods.Columns[18].Visible = true; // show Folate column
+                dataGridViewFoods.Columns[19].Visible = true; // show IronFe column
+                dataGridViewFoods.Columns[20].Visible = true; // show MagnesiumMg column
+                dataGridViewFoods.Columns[21].Visible = true; // show VitaminC column
+                dataGridViewFoods.Columns[22].Visible = true; // show Caffeine column
+                dataGridViewFoods.Columns[23].Visible = true; // show Cholesterol column
+                dataGridViewFoods.Columns[24].Visible = true; // show Alcohol column
+            }
 
         }
     }

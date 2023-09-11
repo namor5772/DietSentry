@@ -34,6 +34,8 @@ namespace DietSentry
         // A string describing the eaten food selected
         public string eatenFoodDescription;
 
+        public Food addedFooditem;
+
         // ****************************************
 
 
@@ -249,7 +251,7 @@ namespace DietSentry
             // checkBoxMainFoodCols
             // 
             checkBoxMainFoodCols.AutoSize = true;
-            checkBoxMainFoodCols.Location = new Point(968, 39);
+            checkBoxMainFoodCols.Location = new Point(23, 18);
             checkBoxMainFoodCols.Name = "checkBoxMainFoodCols";
             checkBoxMainFoodCols.Size = new Size(161, 19);
             checkBoxMainFoodCols.TabIndex = 8;
@@ -293,7 +295,7 @@ namespace DietSentry
             // labelFilter
             // 
             labelFilter.AutoSize = true;
-            labelFilter.Location = new Point(158, 38);
+            labelFilter.Location = new Point(177, 58);
             labelFilter.Name = "labelFilter";
             labelFilter.Size = new Size(58, 15);
             labelFilter.TabIndex = 3;
@@ -303,7 +305,7 @@ namespace DietSentry
             // 
             textBoxFilter.AutoCompleteMode = AutoCompleteMode.Suggest;
             textBoxFilter.AutoCompleteSource = AutoCompleteSource.HistoryList;
-            textBoxFilter.Location = new Point(17, 35);
+            textBoxFilter.Location = new Point(23, 55);
             textBoxFilter.Name = "textBoxFilter";
             textBoxFilter.PlaceholderText = "Enter food filter text";
             textBoxFilter.Size = new Size(135, 23);
@@ -348,7 +350,7 @@ namespace DietSentry
             dataGridViewCellStyle27.WrapMode = DataGridViewTriState.False;
             dataGridViewFoods.DefaultCellStyle = dataGridViewCellStyle27;
             dataGridViewFoods.EnableHeadersVisualStyles = false;
-            dataGridViewFoods.Location = new Point(3, 93);
+            dataGridViewFoods.Location = new Point(3, 99);
             dataGridViewFoods.MultiSelect = false;
             dataGridViewFoods.Name = "dataGridViewFoods";
             dataGridViewCellStyle28.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -726,7 +728,7 @@ namespace DietSentry
             // checkBoxMainCols
             // 
             checkBoxMainCols.AutoSize = true;
-            checkBoxMainCols.Location = new Point(23, 68);
+            checkBoxMainCols.Location = new Point(23, 18);
             checkBoxMainCols.Name = "checkBoxMainCols";
             checkBoxMainCols.Size = new Size(161, 19);
             checkBoxMainCols.TabIndex = 7;
@@ -748,7 +750,7 @@ namespace DietSentry
             // checkBoxDateFilter
             // 
             checkBoxDateFilter.AutoSize = true;
-            checkBoxDateFilter.Location = new Point(23, 18);
+            checkBoxDateFilter.Location = new Point(23, 68);
             checkBoxDateFilter.Name = "checkBoxDateFilter";
             checkBoxDateFilter.Size = new Size(135, 19);
             checkBoxDateFilter.TabIndex = 5;
