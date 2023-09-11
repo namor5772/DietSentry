@@ -32,6 +32,8 @@
             radioButtonRecipie = new RadioButton();
             radioButtonLiquid = new RadioButton();
             radioButtonSolid = new RadioButton();
+            panelNonRecipie = new Panel();
+            panel1 = new Panel();
             groupBoxFoodTypes.SuspendLayout();
             SuspendLayout();
             // 
@@ -80,17 +82,40 @@
             radioButtonSolid.Text = "SOLID";
             radioButtonSolid.UseVisualStyleBackColor = true;
             // 
+            // panelNonRecipie
+            // 
+            panelNonRecipie.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelNonRecipie.AutoSize = true;
+            panelNonRecipie.BackColor = SystemColors.ActiveCaption;
+            panelNonRecipie.Location = new Point(0, 64);
+            panelNonRecipie.Name = "panelNonRecipie";
+            panelNonRecipie.Size = new Size(673, 944);
+            panelNonRecipie.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Location = new Point(0, 64);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(673, 300);
+            panel1.TabIndex = 0;
+            // 
             // foodInputForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(667, 848);
+            AutoSize = true;
+            ClientSize = new Size(667, 1086);
+            Controls.Add(panel1);
+            Controls.Add(panelNonRecipie);
             Controls.Add(groupBoxFoodTypes);
             Name = "foodInputForm";
             Text = "Form for adding a food to the database";
+            Load += foodInputForm_Load;
             groupBoxFoodTypes.ResumeLayout(false);
             groupBoxFoodTypes.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -99,5 +124,7 @@
         private RadioButton radioButtonLiquid;
         private RadioButton radioButtonSolid;
         private RadioButton radioButtonRecipie;
+        private Panel panelNonRecipie;
+        private Panel panel1;
     }
 }

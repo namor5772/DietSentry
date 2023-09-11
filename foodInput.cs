@@ -19,5 +19,10 @@ namespace DietSentry
             mainForm = callingform as MainForm;
             InitializeComponent();
         }
+
+        private void foodInputForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

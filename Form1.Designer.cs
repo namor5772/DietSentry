@@ -362,7 +362,7 @@ namespace DietSentry
             dataGridViewFoods.RowHeadersDefaultCellStyle = dataGridViewCellStyle28;
             dataGridViewFoods.RowHeadersWidth = 49;
             dataGridViewFoods.RowTemplate.Height = 25;
-            dataGridViewFoods.Size = new Size(1333, 511);
+            dataGridViewFoods.Size = new Size(1333, 505);
             dataGridViewFoods.TabIndex = 4;
             dataGridViewFoods.CellDoubleClick += dataGridViewFoods_CellDoubleClick;
             dataGridViewFoods.UserDeletingRow += dataGridViewFoods_UserDeletingRow;
