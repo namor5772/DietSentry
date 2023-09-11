@@ -31,8 +31,13 @@ namespace DietSentry
                     var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
                     eatenFoodDescription = FoodSelected.FoodDescription;
 
-                    // this opens dialog used to input the quantity of that food eaten
+                    // opens dialog used to input the quantity of that food eaten, position is "locked" to the food tabPage
                     InputForm frm = new(this);
+                    Point startPoint = tabPageFood.PointToScreen(new Point(0,0));
+                    //tabPageFood.Location.PointToScreen();
+                    frm.StartPosition = FormStartPosition.Manual;
+//                    frm.Location = startPoint;
+                    frm.Location = this.PointToScreen(tabPageFood.Location);
                     frm.ShowDialog();
 
                     // only act on input if amout eaten >0, this includes the case when Enter is immediately pressed in the text box
