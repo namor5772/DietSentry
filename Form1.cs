@@ -33,10 +33,7 @@ namespace DietSentry
 
                     // opens dialog used to input the quantity of that food eaten, position is "locked" to the food tabPage
                     InputForm frm = new(this);
-                    Point startPoint = tabPageFood.PointToScreen(new Point(0,0));
-                    //tabPageFood.Location.PointToScreen();
                     frm.StartPosition = FormStartPosition.Manual;
-//                    frm.Location = startPoint;
                     frm.Location = this.PointToScreen(tabPageFood.Location);
                     frm.ShowDialog();
 
