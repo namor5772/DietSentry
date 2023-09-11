@@ -359,12 +359,22 @@ namespace DietSentry
 
 
         // this is way TWO you select an item in the food table from the Food data grid (press Enter key on selected item) 
+        // ALSO picks up when Insert key is pressed (Used to insert/Add food to the database - selection row is clearly not relevant,
+        // just a way of enabling this action)
         private void dataGridViewFoods_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter) // Selecting eaten food item
             {
                 actWhenFoodSelected();
                 e.Handled = true; // prevents Enter key press causing next lower cell getting focus 
+            }
+            else if (e.KeyCode == Keys.Insert) // Adding/Inserting new food item into database
+            {
+                // opens dialog used to input a record to the food table
+                foodInputForm frm = new(this);
+                frm.StartPosition = FormStartPosition.Manual;
+                frm.Location = this.PointToScreen(tabPageFood.Location);
+                frm.ShowDialog();
             }
         }
 
@@ -505,24 +515,26 @@ namespace DietSentry
             // cancel the automatic deletion process (to avoid raising exceptions and for manual enhancements)
             e.Cancel = true;
 
-            // determine row to be deleted from Food table by accessing it in its dataGrid
-            var foodItem = (Food)this.dataGridViewFoods.CurrentRow.DataBoundItem;
+            /*
+                        // determine row to be deleted from Food table by accessing it in its dataGrid
+                        var foodItem = (Food)this.dataGridViewFoods.CurrentRow.DataBoundItem;
 
-            if (foodItem != null)
-            {
-                using (var context = new FoodsContext())
-                {
-                    // gain direct access to selected entry in Food table
-                    var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
+                        if (foodItem != null)
+                        {
+                            using (var context = new FoodsContext())
+                            {
+                                // gain direct access to selected entry in Food table
+                                var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
 
-                    // delete this row from Eaten table
-                    context.Foods.Remove(FoodSelected);
-                    context.SaveChanges();
+                                // delete this row from Eaten table
+                                context.Foods.Remove(FoodSelected);
+                                context.SaveChanges();
 
-                    // refresh Foods data grid view while maintaining any filter states
-                    updateFoodsDataGridView();
-                }
-            }
+                                // refresh Foods data grid view while maintaining any filter states
+                                updateFoodsDataGridView();
+                            }
+                        }
+            */
         }
 
 

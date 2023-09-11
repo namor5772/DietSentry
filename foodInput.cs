@@ -24,5 +24,15 @@ namespace DietSentry
         {
 
         }
+
+        private void buttonAddFood_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void buttonCancelAddFood_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

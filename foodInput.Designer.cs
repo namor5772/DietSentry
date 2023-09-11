@@ -34,6 +34,8 @@
             radioButtonSolid = new RadioButton();
             panelNonRecipie = new Panel();
             panel1 = new Panel();
+            buttonAddFood = new Button();
+            buttonCancelAddFood = new Button();
             groupBoxFoodTypes.SuspendLayout();
             SuspendLayout();
             // 
@@ -89,7 +91,7 @@
             panelNonRecipie.BackColor = SystemColors.ActiveCaption;
             panelNonRecipie.Location = new Point(0, 64);
             panelNonRecipie.Name = "panelNonRecipie";
-            panelNonRecipie.Size = new Size(673, 944);
+            panelNonRecipie.Size = new Size(861, 879);
             panelNonRecipie.TabIndex = 1;
             // 
             // panel1
@@ -97,18 +99,41 @@
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.Location = new Point(0, 64);
             panel1.Name = "panel1";
-            panel1.Size = new Size(673, 300);
+            panel1.Size = new Size(861, 772);
             panel1.TabIndex = 0;
+            // 
+            // buttonAddFood
+            // 
+            buttonAddFood.Location = new Point(302, 968);
+            buttonAddFood.Name = "buttonAddFood";
+            buttonAddFood.Size = new Size(75, 23);
+            buttonAddFood.TabIndex = 2;
+            buttonAddFood.Text = "Add food";
+            buttonAddFood.UseVisualStyleBackColor = true;
+            buttonAddFood.Click += buttonAddFood_Click;
+            // 
+            // buttonCancelAddFood
+            // 
+            buttonCancelAddFood.Location = new Point(429, 968);
+            buttonCancelAddFood.Name = "buttonCancelAddFood";
+            buttonCancelAddFood.Size = new Size(75, 23);
+            buttonCancelAddFood.TabIndex = 3;
+            buttonCancelAddFood.Text = "Cancel";
+            buttonCancelAddFood.UseVisualStyleBackColor = true;
+            buttonCancelAddFood.Click += buttonCancelAddFood_Click;
             // 
             // foodInputForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(667, 1086);
+            ClientSize = new Size(861, 1021);
+            Controls.Add(buttonCancelAddFood);
+            Controls.Add(buttonAddFood);
             Controls.Add(panel1);
             Controls.Add(panelNonRecipie);
             Controls.Add(groupBoxFoodTypes);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "foodInputForm";
             Text = "Form for adding a food to the database";
             Load += foodInputForm_Load;
@@ -126,5 +151,7 @@
         private RadioButton radioButtonRecipie;
         private Panel panelNonRecipie;
         private Panel panel1;
+        private Button buttonAddFood;
+        private Button buttonCancelAddFood;
     }
 }
