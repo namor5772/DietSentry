@@ -177,6 +177,7 @@ namespace DietSentry
             cholesterolDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             alcoholDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             eatenBindingSource = new BindingSource(components);
+            label1 = new Label();
             tabControl1.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageFood.SuspendLayout();
@@ -232,6 +233,7 @@ namespace DietSentry
             // 
             // tabPageFood
             // 
+            tabPageFood.Controls.Add(label1);
             tabPageFood.Controls.Add(checkBoxMainFoodCols);
             tabPageFood.Controls.Add(buttonAddRecipe);
             tabPageFood.Controls.Add(buttonAddLiquid);
@@ -327,7 +329,6 @@ namespace DietSentry
             // dataGridViewFoods
             // 
             dataGridViewFoods.AllowUserToAddRows = false;
-            dataGridViewFoods.AllowUserToDeleteRows = false;
             dataGridViewFoods.AllowUserToOrderColumns = true;
             dataGridViewFoods.AllowUserToResizeColumns = false;
             dataGridViewFoods.AllowUserToResizeRows = false;
@@ -366,6 +367,8 @@ namespace DietSentry
             dataGridViewFoods.RowHeadersDefaultCellStyle = dataGridViewCellStyle28;
             dataGridViewFoods.RowHeadersWidth = 49;
             dataGridViewFoods.RowTemplate.Height = 25;
+            dataGridViewFoods.ShowCellToolTips = false;
+            dataGridViewFoods.ShowEditingIcon = false;
             dataGridViewFoods.Size = new Size(1333, 505);
             dataGridViewFoods.TabIndex = 4;
             dataGridViewFoods.CellDoubleClick += dataGridViewFoods_CellDoubleClick;
@@ -1224,6 +1227,15 @@ namespace DietSentry
             // 
             eatenBindingSource.DataSource = typeof(Eaten);
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(322, 36);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 9;
+            label1.Text = "label1";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1321,5 +1333,6 @@ namespace DietSentry
         private CheckBox checkBoxDailyTotals;
         private CheckBox checkBoxMainCols;
         private CheckBox checkBoxMainFoodCols;
+        private Label label1;
     }
 }

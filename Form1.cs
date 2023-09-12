@@ -376,6 +376,16 @@ namespace DietSentry
                 frm.Location = this.PointToScreen(tabPageFood.Location);
                 frm.ShowDialog();
             }
+            /*
+                        else if (e.KeyCode == Keys.Delete) // Adding/Inserting new food item into database
+                        {
+                            // opens dialog used to input a record to the food table
+                            foodInputForm frm = new(this);
+                            frm.StartPosition = FormStartPosition.Manual;
+                            frm.Location = this.PointToScreen(tabPageFood.Location);
+                            frm.ShowDialog();
+                        }
+            */
         }
 
 
@@ -514,6 +524,25 @@ namespace DietSentry
         {
             // cancel the automatic deletion process (to avoid raising exceptions and for manual enhancements)
             e.Cancel = true;
+
+            // Initializes the variables to pass to the MessageBox.Show method.
+            string message = "Are you sure you wish to delete the selected food item?";
+            string caption = "DELETE CONFIRMATION";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            MessageBoxDefaultButton defaultButton = MessageBoxDefaultButton.Button2; 
+                 
+            DialogResult result;
+
+            // Displays the MessageBox.
+            result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.None, MessageBoxDefaultButton.Button2);
+            if (result == DialogResult.Yes)
+            {
+                label1.Text = "Deleted selected food item!";
+            }
+            else
+            {
+                label1.Text = "Did NOT delete selected food item!";
+            }
 
             /*
                         // determine row to be deleted from Food table by accessing it in its dataGrid
