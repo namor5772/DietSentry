@@ -528,13 +528,10 @@ namespace DietSentry
             // Initializes the variables to pass to the MessageBox.Show method.
             string message = "Are you sure you wish to delete the selected food item?";
             string caption = "DELETE CONFIRMATION";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            MessageBoxDefaultButton defaultButton = MessageBoxDefaultButton.Button2; 
-                 
-            DialogResult result;
+            //            DialogResult result;
 
             // Displays the MessageBox.
-            result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.None, MessageBoxDefaultButton.Button2);
+            DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button2);
             if (result == DialogResult.Yes)
             {
                 label1.Text = "Deleted selected food item!";
