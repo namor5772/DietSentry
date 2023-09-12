@@ -34,7 +34,8 @@ namespace DietSentry
         // A string describing the eaten food selected
         public string eatenFoodDescription;
 
-        public Food addedFooditem;
+        // Declaring a Food item class instance
+        public Food addedFoodItem = new Food();
 
         // ****************************************
 
@@ -111,7 +112,7 @@ namespace DietSentry
             tabPage2 = new TabPage();
             tabControlMain = new TabControl();
             tabPageFood = new TabPage();
-            label1 = new Label();
+            labelTest = new Label();
             checkBoxMainFoodCols = new CheckBox();
             buttonAddRecipe = new Button();
             buttonAddLiquid = new Button();
@@ -237,7 +238,7 @@ namespace DietSentry
             // 
             // tabPageFood
             // 
-            tabPageFood.Controls.Add(label1);
+            tabPageFood.Controls.Add(labelTest);
             tabPageFood.Controls.Add(checkBoxMainFoodCols);
             tabPageFood.Controls.Add(buttonAddRecipe);
             tabPageFood.Controls.Add(buttonAddLiquid);
@@ -254,14 +255,15 @@ namespace DietSentry
             tabPageFood.Text = "Food";
             tabPageFood.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // labelTest
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(322, 36);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 9;
-            label1.Text = "label1";
+            labelTest.AutoSize = true;
+            labelTest.Location = new Point(341, 19);
+            labelTest.Name = "labelTest";
+            labelTest.Size = new Size(54, 15);
+            labelTest.TabIndex = 9;
+            labelTest.Text = "test label";
+            labelTest.Click += labelTest_Click;
             // 
             // checkBoxMainFoodCols
             // 
@@ -331,7 +333,7 @@ namespace DietSentry
             // 
             // buttonSave
             // 
-            buttonSave.Location = new Point(590, 36);
+            buttonSave.Location = new Point(1122, 35);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 4;
@@ -1353,6 +1355,6 @@ namespace DietSentry
         private CheckBox checkBoxDailyTotals;
         private CheckBox checkBoxMainCols;
         private CheckBox checkBoxMainFoodCols;
-        private Label label1;
+        private Label labelTest;
     }
 }

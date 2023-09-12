@@ -22,7 +22,12 @@ namespace DietSentry
 
         private void buttonAddFood_Click(object sender, EventArgs e)
         {
-            this.Close();
+            // collects the input, processes it and assignes it to a variable accessible in the MainForm     
+            mainForm.addedFoodItem.FoodDescription = textBoxFoodDescription.Text;
+            labelState.Text = mainForm.addedFoodItem.FoodDescription;
+            mainForm.SetTextForLabel(mainForm.addedFoodItem.FoodDescription);
+
+            //this.Close();
         }
 
         private void buttonCancelAddFood_Click(object sender, EventArgs e)
@@ -35,7 +40,7 @@ namespace DietSentry
             if (radioButtonSolid.Checked)
             {
                 tabControlAddType.SelectedTab = tabPageNonRecipie;
-                labelState.Text = "Adding a SOLID food ***";
+                labelState.Text = "Measured in grams (g)";
             }
         }
 
@@ -44,7 +49,7 @@ namespace DietSentry
             if (radioButtonLiquid.Checked)
             {
                 tabControlAddType.SelectedTab = tabPageNonRecipie;
-                labelState.Text = "Adding a LIQUID food ***";
+                labelState.Text = "Measured in millilitres (mL)";
             }
         }
 
@@ -53,7 +58,7 @@ namespace DietSentry
             if (radioButtonRecipie.Checked)
             {
                 tabControlAddType.SelectedTab = tabPageRecipie;
-                labelState.Text = "Adding a RECIPIE ***";
+                labelState.Text = "Measured in grams (g) and all components must also be in grams";
             }
         }
     }

@@ -17,6 +17,11 @@ namespace DietSentry
             InitializeComponent();
         }
 
+        public void SetTextForLabel(string myText)
+        {
+            this.labelTest.Text = myText;
+        }
+
         // code that acts when a food item is selected from the Foods dataGridView.
         // It prompts for amount of food eaten and appends a time stamped row to the Eaten foods table.
         private void actWhenFoodSelected()
@@ -534,11 +539,11 @@ namespace DietSentry
             DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button2);
             if (result == DialogResult.Yes)
             {
-                label1.Text = "Deleted selected food item!";
+                labelTest.Text = "Deleted selected food item!";
             }
             else
             {
-                label1.Text = "Did NOT delete selected food item!";
+                labelTest.Text = "Did NOT delete selected food item!";
             }
 
             /*
@@ -604,6 +609,11 @@ namespace DietSentry
                 dataGridViewFoods.Columns[23].Visible = true; // show Cholesterol column
                 dataGridViewFoods.Columns[24].Visible = true; // show Alcohol column
             }
+
+        }
+
+        private void labelTest_Click(object sender, EventArgs e)
+        {
 
         }
     }
