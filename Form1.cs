@@ -140,6 +140,7 @@ namespace DietSentry
                         // hide columns not necessary for display of aggregated data
                         dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
                         dataGridViewEaten.Columns[2].Visible = false; // hide TimeEaten column
+                        dataGridViewEaten.Columns[3].Visible = false; // hide AmountEaten column
                         dataGridViewEaten.Columns[4].Visible = false; // hide FoodDescription column
 
                         // the queried data table result should only contain one record/row.
@@ -195,6 +196,7 @@ namespace DietSentry
                         // hide columns not necessary for display of aggregated data
                         dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
                         dataGridViewEaten.Columns[2].Visible = false; // hide TimeEaten column
+                        dataGridViewEaten.Columns[3].Visible = false; // hide AmountEaten column
                         dataGridViewEaten.Columns[4].Visible = false; // hide FoodDescription column
 
                         // the queried data table result should only contain one record/row.
@@ -224,6 +226,7 @@ namespace DietSentry
                 // restore view of previously hidden columns 
                 dataGridViewEaten.Columns[0].Visible = true; // show EatenId column
                 dataGridViewEaten.Columns[2].Visible = true; // show TimeEaten column
+                dataGridViewEaten.Columns[3].Visible = true; // show AmountEaten column
                 dataGridViewEaten.Columns[4].Visible = true; // show FoodDescription column
             }
             else // ((!checkBoxDailyTotals.Checked)&(!checkBoxDateFilter.Checked))
@@ -239,6 +242,7 @@ namespace DietSentry
                 // restore view of previously hidden columns 
                 dataGridViewEaten.Columns[0].Visible = true; // show EatenId column
                 dataGridViewEaten.Columns[2].Visible = true; // show TimeEaten column
+                dataGridViewEaten.Columns[3].Visible = true; // show AmountEaten column
                 dataGridViewEaten.Columns[4].Visible = true; // show FoodDescription column
             }
         }
@@ -456,6 +460,7 @@ namespace DietSentry
             if (checkBoxMainCols.Checked)
             {
                 // hide non-main columns 
+                dataGridViewEaten.Columns[3].Visible = false; // hide AmountEaten column
                 dataGridViewEaten.Columns[9].Visible = false; // hide TransFat column
                 dataGridViewEaten.Columns[10].Visible = false; // hide PolyunsaturatedFat column
                 dataGridViewEaten.Columns[11].Visible = false; // hide MonounsaturatedFat column
