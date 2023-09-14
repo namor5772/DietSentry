@@ -23,7 +23,7 @@ namespace DietSentry
             base.Dispose(disposing);
         }
 
-        // MY "GLOBAL" VARIABLES ******************
+        // MY "GLOBAL" VARIABLES ********* bad coding lol **********
 
         // variable which is set to true so that something specific can be done when MainForm is reactivated after InputForm is closed
         public Boolean actOnInputFormClose = false;
@@ -37,7 +37,12 @@ namespace DietSentry
         // Declaring a Food item class instance
         public Food addedFoodItem = new Food();
 
-        // ****************************************
+        /* variable which is set to true when new food item detailed in the foodinputForm is actually to be added to the database
+         * after foodinputForm is closed, ignored otherwise. ie this "transmits" code behaviour of pressing the [Add] or [Cancel] buttons when
+         * foodinput Form is closed */
+        public Boolean actOnFoodAdded;
+
+        // *********************************************************
 
 
         #region Windows Form Designer generated code

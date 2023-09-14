@@ -26,14 +26,19 @@ namespace DietSentry
         {
             // Buy this stage it is assumed that all mainForm.addedFoodItem values are assigned even if just to 0F
             mainForm.SetTextForLabel(mainForm.addedFoodItem.FoodDescription);
-            this.Close();
 
-            // actual addition of new food to database occurs in MainForm
+            // this tells the code in the MainForm to actually add the recorded Food item to the Foods table
+            mainForm.actOnFoodAdded = true;
+
+            this.Close();
         }
 
         // Does nothing (as intended) but close this form
         private void buttonCancelAddFood_Click(object sender, EventArgs e)
         {
+            mainForm.actOnFoodAdded = false;
+
+            // this tells the code in the MainForm to CANCEL the addition of a food item to the Foods table 
             this.Close();
         }
 
@@ -115,9 +120,10 @@ namespace DietSentry
         {
             if (textBoxFoodDescription.Text == "")
             {
-                textBoxFoodDescription.Text = "Food Description cannot be an empty string !";
+                textBoxFoodDescription.Text = " #";
             }
-            mainForm.addedFoodItem.FoodDescription = textBoxFoodDescription.Text;
+            // " #" added to end of description string to indicate a manually entered solid food
+            mainForm.addedFoodItem.FoodDescription = textBoxFoodDescription.Text+" #";
             labelState.Text = textBoxFoodDescription.Text;
         }
 

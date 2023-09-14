@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace DietSentry
 {
@@ -280,7 +281,7 @@ namespace DietSentry
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            labelFilter.Text = "unfiltered";
+            labelFilter.Text = "Unfiltered";
             this.dbContext!.SaveChanges();
             this.dataGridViewFoods.Refresh();
         }
@@ -343,18 +344,8 @@ namespace DietSentry
             textBoxFilter.Text = "";
         }
 
-        /*
-                private void buttonAddSolid_Click(object sender, EventArgs e)
-                {
-                    // opens dialog used to input a record to the food table
-                    foodInputForm frm = new(this);
-                    frm.StartPosition = FormStartPosition.Manual;
-                    frm.Location = this.PointToScreen(tabPageFood.Location);
-                    frm.ShowDialog();
-                }
-        */
 
-        /* This is way ONE you select an item (for recording as eaten) in the Food table
+        /* This is way ONE you select an item (for recording as eaten) from the Food table
          * from the Food data grid Double Click selected item with mouse */
         private void dataGridViewFoods_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -362,7 +353,7 @@ namespace DietSentry
         }
 
 
-        /* This is way TWO you select an item (for recording as eaten) in the food table
+        /* This is way TWO you select an item (for recording as eaten) from the food table
          * from the Food data grid Press Enter key on selected item
          * ALSO picks up when Insert key is pressed. Used to insert/Add food to the database
          * - selection row is then clearly not relevant but just a way of enabling this action) */
@@ -528,7 +519,7 @@ namespace DietSentry
         }
 
 
-        /* Manually implements the deletion of a Food selcted in its data grid
+        /* Manually implements the deletion of a Food selected in its data grid
          * This is to control the process and fully delete recipe foods. Multi selection is disabled for convenience
          * This is run when a row is selected and any Delete key pressed (Delete or Del on the number pad) */
         private void dataGridViewFoods_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
@@ -539,43 +530,68 @@ namespace DietSentry
             // Initializes the variables to pass to the MessageBox.Show method.
             string message = "Are you sure you wish to delete the selected food item?";
             string caption = "DELETE CONFIRMATION";
-            //            DialogResult result;
-
-            // Displays the MessageBox.
             DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button2);
             if (result == DialogResult.Yes)
             {
-                labelTest.Text = "Deleted selected food item!";
+                // determine row to be deleted from Foods table by accessing it in its dataGrid
+                var foodItem = (Food)this.dataGridViewFoods.CurrentRow.DataBoundItem;
+
+                if (foodItem != null)
+                {
+                    using (var context = new FoodsContext())
+                    {
+                        // gain direct access to selected record in the Foods table
+                        var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
+                        string FoodSelectedId = FoodSelected.FoodId.ToString(); // get Id for later display
+
+                        // delete this record from Foods table
+                        context.Foods.Remove(FoodSelected);
+                        context.SaveChanges();
+
+                        // determine current filter from labelFilter label.
+                        string strFilter;
+                        if (labelFilter.Text == "Unfiltered")
+                        {
+                            strFilter = "";
+                        }
+                        else
+                        {
+                            strFilter = labelFilter.Text;
+                        }
+
+                        // refresh Food data grid view while maintaining current filter status (if any)
+                        context.Foods.Load();
+                        foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
+                        foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
+                        var filteredData = context.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(strFilter));
+                        this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
+                        if (filteredData.Count() > 0)
+                        {
+                            // shifts focus to fist displayed cell, as long as there is something to display
+                            dataGridViewFoods.Focus();
+                            dataGridViewFoods.CurrentCell = dataGridViewFoods.FirstDisplayedCell;
+                        }
+                        labelTest.Text = "Deleted food item: " + FoodSelectedId;
+
+
+                        // refresh Food data grid view while maintaining filter status
+                        // this updates dataGridViewFood - but why, and is there any memory leakage?
+                        /*
+                        context.Foods.Load();
+                        foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
+                        foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
+                        */
+                    }
+                }
             }
             else
             {
                 labelTest.Text = "Did NOT delete selected food item!";
             }
-
-            /*
-                        // determine row to be deleted from Food table by accessing it in its dataGrid
-                        var foodItem = (Food)this.dataGridViewFoods.CurrentRow.DataBoundItem;
-
-                        if (foodItem != null)
-                        {
-                            using (var context = new FoodsContext())
-                            {
-                                // gain direct access to selected entry in Food table
-                                var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
-
-                                // delete this row from Eaten table
-                                context.Foods.Remove(FoodSelected);
-                                context.SaveChanges();
-
-                                // refresh Foods data grid view while maintaining any filter states
-                                updateFoodsDataGridView();
-                            }
-                        }
-            */
         }
 
         /* Changes visibility of columns in the Foods data grid in response to the controlling check box */
-        private void checkBoxMainFoodCols_CheckedChanged(object sender, EventArgs e)
+                        private void checkBoxMainFoodCols_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxMainFoodCols.Checked)
             {
