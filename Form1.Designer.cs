@@ -275,9 +275,9 @@ namespace DietSentry
             labelFilter.BackColor = Color.LightCyan;
             labelFilter.Location = new Point(164, 58);
             labelFilter.Name = "labelFilter";
-            labelFilter.Size = new Size(58, 15);
+            labelFilter.Size = new Size(59, 15);
             labelFilter.TabIndex = 3;
-            labelFilter.Text = "unfiltered";
+            labelFilter.Text = "Unfiltered";
             // 
             // textBoxFilter
             // 

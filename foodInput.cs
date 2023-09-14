@@ -24,11 +24,11 @@ namespace DietSentry
 
         private void buttonAddFood_Click(object sender, EventArgs e)
         {
-            // Buy this stage it is assumed that all mainForm.addedFoodItem values are assigned
-            // even if just to 0F
+            // Buy this stage it is assumed that all mainForm.addedFoodItem values are assigned even if just to 0F
             mainForm.SetTextForLabel(mainForm.addedFoodItem.FoodDescription);
-
             this.Close();
+
+            // actual addition of new food to database occurs in MainForm
         }
 
         // Does nothing (as intended) but close this form
@@ -113,8 +113,12 @@ namespace DietSentry
          * {Shift}{Tab} or just the {Tab} key, or using the Mouse. */
         private void textBoxFoodDescription_Leave(object sender, EventArgs e)
         {
+            if (textBoxFoodDescription.Text == "")
+            {
+                textBoxFoodDescription.Text = "Food Description cannot be an empty string !";
+            }
             mainForm.addedFoodItem.FoodDescription = textBoxFoodDescription.Text;
-            labelState.Text = mainForm.addedFoodItem.FoodDescription;
+            labelState.Text = textBoxFoodDescription.Text;
         }
 
 

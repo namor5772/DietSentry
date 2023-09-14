@@ -51,7 +51,6 @@ namespace DietSentry
         {
             if (e.KeyCode == Keys.Enter)
             {
-
                 e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
 
                 // if any problems with parsing return 0 and just ignore attempt at adding food to Eaten table
@@ -70,5 +69,6 @@ namespace DietSentry
                 Close();
             }
         }
+
     }
 }

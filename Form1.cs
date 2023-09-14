@@ -77,7 +77,7 @@ namespace DietSentry
                             VitaminC = (FoodSelected.VitaminC) * amountOfFoodEaten,
                             Caffeine = (FoodSelected.Caffeine) * amountOfFoodEaten,
                             Cholesterol = (FoodSelected.Cholesterol) * amountOfFoodEaten,
-                            Alcohol = (FoodSelected.Alcohol) * amountOfFoodEaten,
+                            Alcohol = (FoodSelected.Alcohol) * amountOfFoodEaten
                         });
                         context.SaveChanges();
 
@@ -325,7 +325,7 @@ namespace DietSentry
                         foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
                         foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
                     }
-                    labelFilter.Text = "unfiltered";
+                    labelFilter.Text = "Unfiltered";
 
                     // shifts focus to fist displayed cell
                     dataGridViewFoods.Focus();
@@ -336,23 +336,23 @@ namespace DietSentry
         }
 
 
-        /* When the Food filter text box is entered just clears the text */   
+        /* When the Food filter text box is entered just clears the text */
         private void textBoxFilter_Enter(object sender, EventArgs e)
         {
             // always clear filter when enter text box
             textBoxFilter.Text = "";
         }
 
-
-        private void buttonAddSolid_Click(object sender, EventArgs e)
-        {
-            // opens dialog used to input a record to the food table
-            foodInputForm frm = new(this);
-            frm.StartPosition = FormStartPosition.Manual;
-            frm.Location = this.PointToScreen(tabPageFood.Location);
-            frm.ShowDialog();
-        }
-
+        /*
+                private void buttonAddSolid_Click(object sender, EventArgs e)
+                {
+                    // opens dialog used to input a record to the food table
+                    foodInputForm frm = new(this);
+                    frm.StartPosition = FormStartPosition.Manual;
+                    frm.Location = this.PointToScreen(tabPageFood.Location);
+                    frm.ShowDialog();
+                }
+        */
 
         /* This is way ONE you select an item (for recording as eaten) in the Food table
          * from the Food data grid Double Click selected item with mouse */
@@ -375,13 +375,51 @@ namespace DietSentry
             }
             else if (e.KeyCode == Keys.Insert) // Adding/Inserting new food item into database
             {
-                // opens a dialog form used to input a record to the food table
-                // positions this form at same location (ie. top left hand corner) as this MainForm
-                foodInputForm frm = new(this);
-                frm.StartPosition = FormStartPosition.Manual;
-                // frm.Location = this.PointToScreen(tabPageFood.Location);
-                frm.Location = this.Location;
-                frm.ShowDialog();
+                using (var context = new FoodsContext())
+                {
+                    // opens a dialog form used to input a record to the food table
+                    // positions this form at same location (ie. top left hand corner) as this MainForm
+                    foodInputForm frm = new(this);
+                    frm.StartPosition = FormStartPosition.Manual;
+                    frm.Location = this.Location;
+                    frm.ShowDialog();
+
+                    // we can now add the appropriate entry to the Food table, sort it and refresh its Food data grid and give it focus
+                    var NewFood = context.Foods;
+                    NewFood.Add(new Food
+                    {
+                        FoodDescription = addedFoodItem.FoodDescription,
+                        Energy = addedFoodItem.Energy,
+                        FatTotal = addedFoodItem.FatTotal,
+                        SaturatedFat = addedFoodItem.SaturatedFat,
+                        TransFat = addedFoodItem.TransFat,
+                        PolyunsaturatedFat = addedFoodItem.PolyunsaturatedFat,
+                        MonounsaturatedFat = addedFoodItem.MonounsaturatedFat,
+                        Carbohydrate = addedFoodItem.Carbohydrate,
+                        Sugars = addedFoodItem.Sugars,
+                        DietaryFibre = addedFoodItem.DietaryFibre,
+                        SodiumNa = addedFoodItem.SodiumNa,
+                        CalciumCa = addedFoodItem.CalciumCa,
+                        PotassiumK = addedFoodItem.PotassiumK,
+                        ThiaminB1 = addedFoodItem.ThiaminB1,
+                        RiboflavinB2 = addedFoodItem.RiboflavinB2,
+                        NiacinB3 = addedFoodItem.NiacinB3,
+                        Folate = addedFoodItem.Folate,
+                        IronFe = addedFoodItem.IronFe,
+                        MagnesiumMg = addedFoodItem.MagnesiumMg,
+                        VitaminC = addedFoodItem.VitaminC,
+                        Caffeine = addedFoodItem.Caffeine,
+                        Cholesterol = addedFoodItem.Cholesterol,
+                        Alcohol = addedFoodItem.Alcohol
+                    });
+                    context.SaveChanges();
+
+                    // this updates dataGridViewFood - but why, and is there any memory leakage?
+                    NewFood.Load();
+                    foodBindingSource.DataSource = NewFood.Local.ToBindingList();
+                    foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
+                    tabControlMain.SelectedTab = tabPageFood; // and make the Food tab visible
+                }
             }
         }
 
@@ -534,7 +572,7 @@ namespace DietSentry
                             }
                         }
             */
-    }
+        }
 
         /* Changes visibility of columns in the Foods data grid in response to the controlling check box */
         private void checkBoxMainFoodCols_CheckedChanged(object sender, EventArgs e)
