@@ -252,6 +252,7 @@
             textBoxAlcohol.TabIndex = 47;
             textBoxAlcohol.TextAlign = HorizontalAlignment.Right;
             textBoxAlcohol.KeyDown += textBoxAlcohol_KeyDown;
+            textBoxAlcohol.Leave += textBoxAlcohol_Leave;
             // 
             // labelAlcohol
             // 
@@ -270,6 +271,7 @@
             textBoxCholesterol.TabIndex = 45;
             textBoxCholesterol.TextAlign = HorizontalAlignment.Right;
             textBoxCholesterol.KeyDown += textBoxCholesterol_KeyDown;
+            textBoxCholesterol.Leave += textBoxCholesterol_Leave;
             // 
             // labelCholesterol
             // 
@@ -288,6 +290,7 @@
             textBoxCaffeine.TabIndex = 43;
             textBoxCaffeine.TextAlign = HorizontalAlignment.Right;
             textBoxCaffeine.KeyDown += textBoxCaffeine_KeyDown;
+            textBoxCaffeine.Leave += textBoxCaffeine_Leave;
             // 
             // labelCaffeine
             // 
@@ -306,6 +309,7 @@
             textBoxVitaminC.TabIndex = 41;
             textBoxVitaminC.TextAlign = HorizontalAlignment.Right;
             textBoxVitaminC.KeyDown += textBoxVitaminC_KeyDown;
+            textBoxVitaminC.Leave += textBoxVitaminC_Leave;
             // 
             // labelVitaminC
             // 
@@ -324,6 +328,7 @@
             textBoxMagnesiumMg.TabIndex = 39;
             textBoxMagnesiumMg.TextAlign = HorizontalAlignment.Right;
             textBoxMagnesiumMg.KeyDown += textBoxMagnesiumMg_KeyDown;
+            textBoxMagnesiumMg.Leave += textBoxMagnesiumMg_Leave;
             // 
             // labelMagnesiumMg
             // 
@@ -342,6 +347,7 @@
             textBoxIronFe.TabIndex = 37;
             textBoxIronFe.TextAlign = HorizontalAlignment.Right;
             textBoxIronFe.KeyDown += textBoxIronFe_KeyDown;
+            textBoxIronFe.Leave += textBoxIronFe_Leave;
             // 
             // labelIronFe
             // 
@@ -360,6 +366,7 @@
             textBoxFolate.TabIndex = 35;
             textBoxFolate.TextAlign = HorizontalAlignment.Right;
             textBoxFolate.KeyDown += textBoxFolate_KeyDown;
+            textBoxFolate.Leave += textBoxFolate_Leave;
             // 
             // labelFolate
             // 
@@ -378,6 +385,7 @@
             textBoxNiacinB3.TabIndex = 33;
             textBoxNiacinB3.TextAlign = HorizontalAlignment.Right;
             textBoxNiacinB3.KeyDown += textBoxNiacinB3_KeyDown;
+            textBoxNiacinB3.Leave += textBoxNiacinB3_Leave;
             // 
             // labelNiacinB3
             // 
@@ -396,6 +404,7 @@
             textBoxRiboflavinB2.TabIndex = 31;
             textBoxRiboflavinB2.TextAlign = HorizontalAlignment.Right;
             textBoxRiboflavinB2.KeyDown += textBoxRiboflavinB2_KeyDown;
+            textBoxRiboflavinB2.Leave += textBoxRiboflavinB2_Leave;
             // 
             // labelRiboflavinB2
             // 
@@ -414,6 +423,7 @@
             textBoxThiaminB1.TabIndex = 29;
             textBoxThiaminB1.TextAlign = HorizontalAlignment.Right;
             textBoxThiaminB1.KeyDown += textBoxThiaminB1_KeyDown;
+            textBoxThiaminB1.Leave += textBoxThiaminB1_Leave;
             // 
             // labelThiaminB1
             // 
@@ -432,6 +442,7 @@
             textBoxPotassiumK.TabIndex = 27;
             textBoxPotassiumK.TextAlign = HorizontalAlignment.Right;
             textBoxPotassiumK.KeyDown += textBoxPotassiumK_KeyDown;
+            textBoxPotassiumK.Leave += textBoxPotassiumK_Leave;
             // 
             // labelPotassiumK
             // 
@@ -450,6 +461,7 @@
             textBoxCalciumCa.TabIndex = 25;
             textBoxCalciumCa.TextAlign = HorizontalAlignment.Right;
             textBoxCalciumCa.KeyDown += textBoxCalciumCa_KeyDown;
+            textBoxCalciumCa.Leave += textBoxCalciumCa_Leave;
             // 
             // labelCalciumCa
             // 
@@ -468,6 +480,7 @@
             textBoxSodiumNa.TabIndex = 23;
             textBoxSodiumNa.TextAlign = HorizontalAlignment.Right;
             textBoxSodiumNa.KeyDown += textBoxSodiumNa_KeyDown;
+            textBoxSodiumNa.Leave += textBoxSodiumNa_Leave;
             // 
             // labelSodiumNa
             // 
@@ -486,6 +499,7 @@
             textBoxDietaryFibre.TabIndex = 21;
             textBoxDietaryFibre.TextAlign = HorizontalAlignment.Right;
             textBoxDietaryFibre.KeyDown += textBoxDietaryFibre_KeyDown;
+            textBoxDietaryFibre.Leave += textBoxDietaryFibre_Leave;
             // 
             // labelDietaryFibre
             // 
@@ -504,6 +518,7 @@
             textBoxSugars.TabIndex = 19;
             textBoxSugars.TextAlign = HorizontalAlignment.Right;
             textBoxSugars.KeyDown += textBoxSugars_KeyDown;
+            textBoxSugars.Leave += textBoxSugars_Leave;
             // 
             // labelSugars
             // 
@@ -522,6 +537,7 @@
             textBoxCarbohydrate.TabIndex = 17;
             textBoxCarbohydrate.TextAlign = HorizontalAlignment.Right;
             textBoxCarbohydrate.KeyDown += textBoxCarbohydrate_KeyDown;
+            textBoxCarbohydrate.Leave += textBoxCarbohydrate_Leave;
             // 
             // labelCarbohydrate
             // 
@@ -540,6 +556,7 @@
             textBoxMonounsaturatedFat.TabIndex = 15;
             textBoxMonounsaturatedFat.TextAlign = HorizontalAlignment.Right;
             textBoxMonounsaturatedFat.KeyDown += textBoxMonounsaturatedFat_KeyDown;
+            textBoxMonounsaturatedFat.Leave += textBoxMonounsaturatedFat_Leave;
             // 
             // labelMonounsaturatedFat
             // 
@@ -558,6 +575,7 @@
             textBoxPolyunsaturatedFat.TabIndex = 13;
             textBoxPolyunsaturatedFat.TextAlign = HorizontalAlignment.Right;
             textBoxPolyunsaturatedFat.KeyDown += textBoxPolyunsaturatedFat_KeyDown;
+            textBoxPolyunsaturatedFat.Leave += textBoxPolyunsaturatedFat_Leave;
             // 
             // labelPolyunsaturatedFat
             // 
@@ -576,6 +594,7 @@
             textBoxTransFat.TabIndex = 11;
             textBoxTransFat.TextAlign = HorizontalAlignment.Right;
             textBoxTransFat.KeyDown += textBoxTransFat_KeyDown;
+            textBoxTransFat.Leave += textBoxTransFat_Leave;
             // 
             // labelTransFat
             // 
@@ -594,6 +613,7 @@
             textBoxSaturatedFat.TabIndex = 9;
             textBoxSaturatedFat.TextAlign = HorizontalAlignment.Right;
             textBoxSaturatedFat.KeyDown += textBoxSaturatedFat_KeyDown;
+            textBoxSaturatedFat.Leave += textBoxSaturatedFat_Leave;
             // 
             // labelSaturatedFat
             // 
@@ -612,6 +632,7 @@
             textBoxFatTotal.TabIndex = 7;
             textBoxFatTotal.TextAlign = HorizontalAlignment.Right;
             textBoxFatTotal.KeyDown += textBoxFatTotal_KeyDown;
+            textBoxFatTotal.Leave += textBoxFatTotal_Leave;
             // 
             // labelFatTotal
             // 
@@ -630,6 +651,7 @@
             textBoxProtein.TabIndex = 5;
             textBoxProtein.TextAlign = HorizontalAlignment.Right;
             textBoxProtein.KeyDown += textBoxProtein_KeyDown;
+            textBoxProtein.Leave += textBoxProtein_Leave;
             // 
             // textBoxEnergy
             // 
@@ -639,6 +661,7 @@
             textBoxEnergy.TabIndex = 4;
             textBoxEnergy.TextAlign = HorizontalAlignment.Right;
             textBoxEnergy.KeyDown += textBoxEnergy_KeyDown;
+            textBoxEnergy.Leave += textBoxEnergy_Leave;
             // 
             // textBoxFoodDescription
             // 
@@ -647,6 +670,7 @@
             textBoxFoodDescription.Size = new Size(536, 23);
             textBoxFoodDescription.TabIndex = 3;
             textBoxFoodDescription.KeyDown += textBoxFoodDescription_KeyDown;
+            textBoxFoodDescription.Leave += textBoxFoodDescription_Leave;
             // 
             // labelProtein
             // 
