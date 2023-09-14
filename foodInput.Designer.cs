@@ -47,9 +47,9 @@
             labelVitaminC = new Label();
             textBoxMagnesiumMg = new TextBox();
             labelMagnesiumMg = new Label();
-            textBox3 = new TextBox();
+            textBoxIronFe = new TextBox();
             labelIronFe = new Label();
-            textBox2 = new TextBox();
+            textBoxFolate = new TextBox();
             labelFolate = new Label();
             textBoxNiacinB3 = new TextBox();
             labelNiacinB3 = new Label();
@@ -142,9 +142,9 @@
             // buttonAddFood
             // 
             buttonAddFood.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            buttonAddFood.Location = new Point(203, 745);
+            buttonAddFood.Location = new Point(208, 745);
             buttonAddFood.Name = "buttonAddFood";
-            buttonAddFood.Size = new Size(80, 23);
+            buttonAddFood.Size = new Size(75, 23);
             buttonAddFood.TabIndex = 5;
             buttonAddFood.Text = "Add food";
             buttonAddFood.UseVisualStyleBackColor = true;
@@ -153,9 +153,9 @@
             // buttonCancelAddFood
             // 
             buttonCancelAddFood.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            buttonCancelAddFood.Location = new Point(289, 745);
+            buttonCancelAddFood.Location = new Point(306, 745);
             buttonCancelAddFood.Name = "buttonCancelAddFood";
-            buttonCancelAddFood.Size = new Size(80, 23);
+            buttonCancelAddFood.Size = new Size(75, 23);
             buttonCancelAddFood.TabIndex = 6;
             buttonCancelAddFood.Text = "Cancel";
             buttonCancelAddFood.UseVisualStyleBackColor = true;
@@ -198,9 +198,9 @@
             tabPageNonRecipie.Controls.Add(labelVitaminC);
             tabPageNonRecipie.Controls.Add(textBoxMagnesiumMg);
             tabPageNonRecipie.Controls.Add(labelMagnesiumMg);
-            tabPageNonRecipie.Controls.Add(textBox3);
+            tabPageNonRecipie.Controls.Add(textBoxIronFe);
             tabPageNonRecipie.Controls.Add(labelIronFe);
-            tabPageNonRecipie.Controls.Add(textBox2);
+            tabPageNonRecipie.Controls.Add(textBoxFolate);
             tabPageNonRecipie.Controls.Add(labelFolate);
             tabPageNonRecipie.Controls.Add(textBoxNiacinB3);
             tabPageNonRecipie.Controls.Add(labelNiacinB3);
@@ -242,6 +242,7 @@
             tabPageNonRecipie.Size = new Size(757, 670);
             tabPageNonRecipie.TabIndex = 0;
             tabPageNonRecipie.Text = "Add Non Recipie";
+            tabPageNonRecipie.Enter += tabPageNonRecipie_Enter;
             // 
             // textBoxAlcohol
             // 
@@ -250,6 +251,7 @@
             textBoxAlcohol.Size = new Size(78, 23);
             textBoxAlcohol.TabIndex = 47;
             textBoxAlcohol.TextAlign = HorizontalAlignment.Right;
+            textBoxAlcohol.KeyDown += textBoxAlcohol_KeyDown;
             // 
             // labelAlcohol
             // 
@@ -267,6 +269,7 @@
             textBoxCholesterol.Size = new Size(78, 23);
             textBoxCholesterol.TabIndex = 45;
             textBoxCholesterol.TextAlign = HorizontalAlignment.Right;
+            textBoxCholesterol.KeyDown += textBoxCholesterol_KeyDown;
             // 
             // labelCholesterol
             // 
@@ -284,6 +287,7 @@
             textBoxCaffeine.Size = new Size(78, 23);
             textBoxCaffeine.TabIndex = 43;
             textBoxCaffeine.TextAlign = HorizontalAlignment.Right;
+            textBoxCaffeine.KeyDown += textBoxCaffeine_KeyDown;
             // 
             // labelCaffeine
             // 
@@ -301,6 +305,7 @@
             textBoxVitaminC.Size = new Size(78, 23);
             textBoxVitaminC.TabIndex = 41;
             textBoxVitaminC.TextAlign = HorizontalAlignment.Right;
+            textBoxVitaminC.KeyDown += textBoxVitaminC_KeyDown;
             // 
             // labelVitaminC
             // 
@@ -318,6 +323,7 @@
             textBoxMagnesiumMg.Size = new Size(78, 23);
             textBoxMagnesiumMg.TabIndex = 39;
             textBoxMagnesiumMg.TextAlign = HorizontalAlignment.Right;
+            textBoxMagnesiumMg.KeyDown += textBoxMagnesiumMg_KeyDown;
             // 
             // labelMagnesiumMg
             // 
@@ -328,13 +334,14 @@
             labelMagnesiumMg.TabIndex = 38;
             labelMagnesiumMg.Text = "Magnesium Mg (mg)";
             // 
-            // textBox3
+            // textBoxIronFe
             // 
-            textBox3.Location = new Point(201, 503);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(78, 23);
-            textBox3.TabIndex = 37;
-            textBox3.TextAlign = HorizontalAlignment.Right;
+            textBoxIronFe.Location = new Point(201, 503);
+            textBoxIronFe.Name = "textBoxIronFe";
+            textBoxIronFe.Size = new Size(78, 23);
+            textBoxIronFe.TabIndex = 37;
+            textBoxIronFe.TextAlign = HorizontalAlignment.Right;
+            textBoxIronFe.KeyDown += textBoxIronFe_KeyDown;
             // 
             // labelIronFe
             // 
@@ -345,13 +352,14 @@
             labelIronFe.TabIndex = 36;
             labelIronFe.Text = "Iron Fe (mg)";
             // 
-            // textBox2
+            // textBoxFolate
             // 
-            textBox2.Location = new Point(201, 476);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(78, 23);
-            textBox2.TabIndex = 35;
-            textBox2.TextAlign = HorizontalAlignment.Right;
+            textBoxFolate.Location = new Point(201, 476);
+            textBoxFolate.Name = "textBoxFolate";
+            textBoxFolate.Size = new Size(78, 23);
+            textBoxFolate.TabIndex = 35;
+            textBoxFolate.TextAlign = HorizontalAlignment.Right;
+            textBoxFolate.KeyDown += textBoxFolate_KeyDown;
             // 
             // labelFolate
             // 
@@ -369,6 +377,7 @@
             textBoxNiacinB3.Size = new Size(78, 23);
             textBoxNiacinB3.TabIndex = 33;
             textBoxNiacinB3.TextAlign = HorizontalAlignment.Right;
+            textBoxNiacinB3.KeyDown += textBoxNiacinB3_KeyDown;
             // 
             // labelNiacinB3
             // 
@@ -386,6 +395,7 @@
             textBoxRiboflavinB2.Size = new Size(78, 23);
             textBoxRiboflavinB2.TabIndex = 31;
             textBoxRiboflavinB2.TextAlign = HorizontalAlignment.Right;
+            textBoxRiboflavinB2.KeyDown += textBoxRiboflavinB2_KeyDown;
             // 
             // labelRiboflavinB2
             // 
@@ -403,6 +413,7 @@
             textBoxThiaminB1.Size = new Size(78, 23);
             textBoxThiaminB1.TabIndex = 29;
             textBoxThiaminB1.TextAlign = HorizontalAlignment.Right;
+            textBoxThiaminB1.KeyDown += textBoxThiaminB1_KeyDown;
             // 
             // labelThiaminB1
             // 
@@ -420,6 +431,7 @@
             textBoxPotassiumK.Size = new Size(78, 23);
             textBoxPotassiumK.TabIndex = 27;
             textBoxPotassiumK.TextAlign = HorizontalAlignment.Right;
+            textBoxPotassiumK.KeyDown += textBoxPotassiumK_KeyDown;
             // 
             // labelPotassiumK
             // 
@@ -437,6 +449,7 @@
             textBoxCalciumCa.Size = new Size(78, 23);
             textBoxCalciumCa.TabIndex = 25;
             textBoxCalciumCa.TextAlign = HorizontalAlignment.Right;
+            textBoxCalciumCa.KeyDown += textBoxCalciumCa_KeyDown;
             // 
             // labelCalciumCa
             // 
@@ -454,6 +467,7 @@
             textBoxSodiumNa.Size = new Size(78, 23);
             textBoxSodiumNa.TabIndex = 23;
             textBoxSodiumNa.TextAlign = HorizontalAlignment.Right;
+            textBoxSodiumNa.KeyDown += textBoxSodiumNa_KeyDown;
             // 
             // labelSodiumNa
             // 
@@ -471,6 +485,7 @@
             textBoxDietaryFibre.Size = new Size(78, 23);
             textBoxDietaryFibre.TabIndex = 21;
             textBoxDietaryFibre.TextAlign = HorizontalAlignment.Right;
+            textBoxDietaryFibre.KeyDown += textBoxDietaryFibre_KeyDown;
             // 
             // labelDietaryFibre
             // 
@@ -488,6 +503,7 @@
             textBoxSugars.Size = new Size(78, 23);
             textBoxSugars.TabIndex = 19;
             textBoxSugars.TextAlign = HorizontalAlignment.Right;
+            textBoxSugars.KeyDown += textBoxSugars_KeyDown;
             // 
             // labelSugars
             // 
@@ -505,6 +521,7 @@
             textBoxCarbohydrate.Size = new Size(78, 23);
             textBoxCarbohydrate.TabIndex = 17;
             textBoxCarbohydrate.TextAlign = HorizontalAlignment.Right;
+            textBoxCarbohydrate.KeyDown += textBoxCarbohydrate_KeyDown;
             // 
             // labelCarbohydrate
             // 
@@ -522,6 +539,7 @@
             textBoxMonounsaturatedFat.Size = new Size(78, 23);
             textBoxMonounsaturatedFat.TabIndex = 15;
             textBoxMonounsaturatedFat.TextAlign = HorizontalAlignment.Right;
+            textBoxMonounsaturatedFat.KeyDown += textBoxMonounsaturatedFat_KeyDown;
             // 
             // labelMonounsaturatedFat
             // 
@@ -539,6 +557,7 @@
             textBoxPolyunsaturatedFat.Size = new Size(78, 23);
             textBoxPolyunsaturatedFat.TabIndex = 13;
             textBoxPolyunsaturatedFat.TextAlign = HorizontalAlignment.Right;
+            textBoxPolyunsaturatedFat.KeyDown += textBoxPolyunsaturatedFat_KeyDown;
             // 
             // labelPolyunsaturatedFat
             // 
@@ -556,6 +575,7 @@
             textBoxTransFat.Size = new Size(78, 23);
             textBoxTransFat.TabIndex = 11;
             textBoxTransFat.TextAlign = HorizontalAlignment.Right;
+            textBoxTransFat.KeyDown += textBoxTransFat_KeyDown;
             // 
             // labelTransFat
             // 
@@ -573,6 +593,7 @@
             textBoxSaturatedFat.Size = new Size(78, 23);
             textBoxSaturatedFat.TabIndex = 9;
             textBoxSaturatedFat.TextAlign = HorizontalAlignment.Right;
+            textBoxSaturatedFat.KeyDown += textBoxSaturatedFat_KeyDown;
             // 
             // labelSaturatedFat
             // 
@@ -590,6 +611,7 @@
             textBoxFatTotal.Size = new Size(78, 23);
             textBoxFatTotal.TabIndex = 7;
             textBoxFatTotal.TextAlign = HorizontalAlignment.Right;
+            textBoxFatTotal.KeyDown += textBoxFatTotal_KeyDown;
             // 
             // labelFatTotal
             // 
@@ -607,6 +629,7 @@
             textBoxProtein.Size = new Size(78, 23);
             textBoxProtein.TabIndex = 5;
             textBoxProtein.TextAlign = HorizontalAlignment.Right;
+            textBoxProtein.KeyDown += textBoxProtein_KeyDown;
             // 
             // textBoxEnergy
             // 
@@ -615,6 +638,7 @@
             textBoxEnergy.Size = new Size(78, 23);
             textBoxEnergy.TabIndex = 4;
             textBoxEnergy.TextAlign = HorizontalAlignment.Right;
+            textBoxEnergy.KeyDown += textBoxEnergy_KeyDown;
             // 
             // textBoxFoodDescription
             // 
@@ -622,6 +646,7 @@
             textBoxFoodDescription.Name = "textBoxFoodDescription";
             textBoxFoodDescription.Size = new Size(536, 23);
             textBoxFoodDescription.TabIndex = 3;
+            textBoxFoodDescription.KeyDown += textBoxFoodDescription_KeyDown;
             // 
             // labelProtein
             // 
@@ -671,7 +696,7 @@
             Controls.Add(buttonCancelAddFood);
             Controls.Add(buttonAddFood);
             Controls.Add(groupBoxFoodTypes);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "foodInputForm";
             Text = "Form for adding a food to the database";
             groupBoxFoodTypes.ResumeLayout(false);
@@ -733,9 +758,9 @@
         private Label labelVitaminC;
         private TextBox textBoxMagnesiumMg;
         private Label labelMagnesiumMg;
-        private TextBox textBox3;
+        private TextBox textBoxIronFe;
         private Label labelIronFe;
-        private TextBox textBox2;
+        private TextBox textBoxFolate;
         private Label labelFolate;
         private TextBox textBoxNiacinB3;
         private Label labelNiacinB3;

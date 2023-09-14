@@ -22,8 +22,9 @@ namespace DietSentry
             this.labelTest.Text = myText;
         }
 
-        // code that acts when a food item is selected from the Foods dataGridView.
-        // It prompts for amount of food eaten and appends a time stamped row to the Eaten foods table.
+
+        /* Code that acts when a food item is selected (in whatever way) from the Foods dataGridView.
+         * It prompts for amount of food eaten and appends a time stamped row to the Eaten foods table */
         private void actWhenFoodSelected()
         {
             var foodItem = (Food)dataGridViewFoods.CurrentRow.DataBoundItem;
@@ -94,7 +95,9 @@ namespace DietSentry
             }
         }
 
-        // act on Eaten food filtering states
+
+        /* Code that acts on Eaten foods filtering states, only showing the current days data and/or aggregating by days
+         * There are 4 states and this makes sure the Eaten foods datagrid always correctly displays the data */
         private void actOnEatenFoodFilteringStates()
         {
             string sDate = DateTime.Now.ToString("d-MMM-yy");
@@ -282,7 +285,7 @@ namespace DietSentry
             this.dataGridViewFoods.Refresh();
         }
 
-
+        /* Only reacts to the Enter key being pressed in the Food filter text box, by processing the filter request */
         private void textBoxFilter_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -333,6 +336,7 @@ namespace DietSentry
         }
 
 
+        /* When the Food filter text box is entered just clears the text */   
         private void textBoxFilter_Enter(object sender, EventArgs e)
         {
             // always clear filter when enter text box
@@ -349,27 +353,19 @@ namespace DietSentry
             frm.ShowDialog();
         }
 
-        private void buttonAddLiquid_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void buttonAddRecipe_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-        // this is way ONE you select an item in the food table from the Food data grid (double click selected item with mouse)
+        /* This is way ONE you select an item (for recording as eaten) in the Food table
+         * from the Food data grid Double Click selected item with mouse */
         private void dataGridViewFoods_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             actWhenFoodSelected();
         }
 
 
-        // this is way TWO you select an item in the food table from the Food data grid (press Enter key on selected item) 
-        // ALSO picks up when Insert key is pressed (Used to insert/Add food to the database - selection row is clearly not relevant,
-        // just a way of enabling this action)
+        /* This is way TWO you select an item (for recording as eaten) in the food table
+         * from the Food data grid Press Enter key on selected item
+         * ALSO picks up when Insert key is pressed. Used to insert/Add food to the database
+         * - selection row is then clearly not relevant but just a way of enabling this action) */
         private void dataGridViewFoods_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) // Selecting eaten food item
@@ -379,28 +375,20 @@ namespace DietSentry
             }
             else if (e.KeyCode == Keys.Insert) // Adding/Inserting new food item into database
             {
-                // opens dialog used to input a record to the food table
+                // opens a dialog form used to input a record to the food table
+                // positions this form at same location (ie. top left hand corner) as this MainForm
                 foodInputForm frm = new(this);
                 frm.StartPosition = FormStartPosition.Manual;
-                frm.Location = this.PointToScreen(tabPageFood.Location);
+                // frm.Location = this.PointToScreen(tabPageFood.Location);
+                frm.Location = this.Location;
                 frm.ShowDialog();
             }
-            /*
-                        else if (e.KeyCode == Keys.Delete) // Adding/Inserting new food item into database
-                        {
-                            // opens dialog used to input a record to the food table
-                            foodInputForm frm = new(this);
-                            frm.StartPosition = FormStartPosition.Manual;
-                            frm.Location = this.PointToScreen(tabPageFood.Location);
-                            frm.ShowDialog();
-                        }
-            */
         }
 
 
-        // manually implements the deletion of an Eaten table row.
-        // This was partly to overcome an exception raised when done automatically.
-        // mult selection is disabled for convenience.
+        /* Manually implements the deletion of an Eaten table row
+         * This was partly to overcome an exception raised when done automatically
+         * mult selection is disabled for convenience */
         private void dataGridViewEaten_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
             // cancel the automatic deletion process (to avoid raising exceptions)
@@ -443,18 +431,21 @@ namespace DietSentry
         }
 
 
+        /* Wrapper for actOnEatenFoodFilteringStates() when Date filter check box state changed */
         private void checkBoxDateFilter_CheckedChanged(object sender, EventArgs e)
         {
             actOnEatenFoodFilteringStates();
         }
 
 
+        /* Wrapper for actOnEatenFoodFilteringStates() when Totals filter check box state changed */
         private void checkBoxDailyTotals_CheckedChanged(object sender, EventArgs e)
         {
             actOnEatenFoodFilteringStates();
         }
 
 
+        /* Changes visibility of columns in the Eaten Foods data grid in response to the controlling check box */
         private void checkBoxMainCols_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxMainCols.Checked)
@@ -499,37 +490,9 @@ namespace DietSentry
         }
 
 
-        // refreshes the Foods DataGrid View while maintaining filter state
-        private void updateFoodsDataGridView()
-        {
-            if (labelFilter.Text != "unfiltered")
-            {
-                using (var context = new FoodsContext())
-                {
-                    // update dataGridViewFood with filter
-                    context.Foods.Load();
-                    foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
-                    foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
-                    var filteredData = context.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(labelFilter.Text));
-                    this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
-                }
-            }
-            else // filter is clear
-            {
-                using (var context = new FoodsContext())
-                {
-                    // update dataGridViewFood with no filters
-                    context.Foods.Load();
-                    foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
-                    foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
-                }
-            }
-        }
-
-
-        // manually implements the deletion of a Food table row.
-        // This is to control the process and fully delete recipe foods.
-        // mult selection is disabled for convenience.
+        /* Manually implements the deletion of a Food selcted in its data grid
+         * This is to control the process and fully delete recipe foods. Multi selection is disabled for convenience
+         * This is run when a row is selected and any Delete key pressed (Delete or Del on the number pad) */
         private void dataGridViewFoods_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
             // cancel the automatic deletion process (to avoid raising exceptions and for manual enhancements)
@@ -571,9 +534,9 @@ namespace DietSentry
                             }
                         }
             */
-        }
+    }
 
-
+        /* Changes visibility of columns in the Foods data grid in response to the controlling check box */
         private void checkBoxMainFoodCols_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxMainFoodCols.Checked)
@@ -617,10 +580,6 @@ namespace DietSentry
 
         }
 
-        private void labelTest_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 
 }

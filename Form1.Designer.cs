@@ -114,9 +114,6 @@ namespace DietSentry
             tabPageFood = new TabPage();
             labelTest = new Label();
             checkBoxMainFoodCols = new CheckBox();
-            buttonAddRecipe = new Button();
-            buttonAddLiquid = new Button();
-            buttonAddSolid = new Button();
             labelFilter = new Label();
             textBoxFilter = new TextBox();
             buttonSave = new Button();
@@ -240,9 +237,6 @@ namespace DietSentry
             // 
             tabPageFood.Controls.Add(labelTest);
             tabPageFood.Controls.Add(checkBoxMainFoodCols);
-            tabPageFood.Controls.Add(buttonAddRecipe);
-            tabPageFood.Controls.Add(buttonAddLiquid);
-            tabPageFood.Controls.Add(buttonAddSolid);
             tabPageFood.Controls.Add(labelFilter);
             tabPageFood.Controls.Add(textBoxFilter);
             tabPageFood.Controls.Add(buttonSave);
@@ -263,7 +257,6 @@ namespace DietSentry
             labelTest.Size = new Size(54, 15);
             labelTest.TabIndex = 9;
             labelTest.Text = "test label";
-            labelTest.Click += labelTest_Click;
             // 
             // checkBoxMainFoodCols
             // 
@@ -276,43 +269,11 @@ namespace DietSentry
             checkBoxMainFoodCols.UseVisualStyleBackColor = true;
             checkBoxMainFoodCols.CheckedChanged += checkBoxMainFoodCols_CheckedChanged;
             // 
-            // buttonAddRecipe
-            // 
-            buttonAddRecipe.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonAddRecipe.Location = new Point(1223, 64);
-            buttonAddRecipe.Name = "buttonAddRecipe";
-            buttonAddRecipe.Size = new Size(75, 23);
-            buttonAddRecipe.TabIndex = 7;
-            buttonAddRecipe.Text = "Add recipe";
-            buttonAddRecipe.UseVisualStyleBackColor = true;
-            buttonAddRecipe.Click += buttonAddRecipe_Click;
-            // 
-            // buttonAddLiquid
-            // 
-            buttonAddLiquid.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonAddLiquid.Location = new Point(1223, 35);
-            buttonAddLiquid.Name = "buttonAddLiquid";
-            buttonAddLiquid.Size = new Size(75, 23);
-            buttonAddLiquid.TabIndex = 6;
-            buttonAddLiquid.Text = "Add liquid";
-            buttonAddLiquid.UseVisualStyleBackColor = true;
-            buttonAddLiquid.Click += buttonAddLiquid_Click;
-            // 
-            // buttonAddSolid
-            // 
-            buttonAddSolid.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonAddSolid.Location = new Point(1223, 6);
-            buttonAddSolid.Name = "buttonAddSolid";
-            buttonAddSolid.Size = new Size(75, 23);
-            buttonAddSolid.TabIndex = 5;
-            buttonAddSolid.Text = "Add solid";
-            buttonAddSolid.UseVisualStyleBackColor = true;
-            buttonAddSolid.Click += buttonAddSolid_Click;
-            // 
             // labelFilter
             // 
             labelFilter.AutoSize = true;
-            labelFilter.Location = new Point(177, 58);
+            labelFilter.BackColor = Color.LightCyan;
+            labelFilter.Location = new Point(164, 58);
             labelFilter.Name = "labelFilter";
             labelFilter.Size = new Size(58, 15);
             labelFilter.TabIndex = 3;
@@ -1295,9 +1256,6 @@ namespace DietSentry
         private Label labelFilter;
         private DataGridView dataGridViewEaten;
         private BindingSource eatenBindingSource;
-        private Button buttonAddRecipe;
-        private Button buttonAddLiquid;
-        private Button buttonAddSolid;
         private DataGridViewTextBoxColumn FoodIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn foodDescriptionDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn energyDataGridViewTextBoxColumn;
