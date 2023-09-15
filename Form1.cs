@@ -82,15 +82,9 @@ namespace DietSentry
                         });
                         context.SaveChanges();
 
-                        // this updates dataGridViewEaten - but why, and is there any memory leakage?
-                        EatenFood.Load();
-                        eatenBindingSource.DataSource = EatenFood.Local.ToBindingList();
-                        eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
-                        tabControlMain.SelectedTab = tabPageEaten; // and make the Eaten tab visible
-
+                        // Updates the dataGridViewEaten while maintaining filtering states and making the Eaten tab visible
                         actOnEatenFoodFilteringStates();
-
-                        // 
+                        tabControlMain.SelectedTab = tabPageEaten;
                     }
                 }
             }
@@ -252,6 +246,38 @@ namespace DietSentry
         }
 
 
+        /* Code that acts on Food filtering states
+         * There are 2 states and this makes sure the foods datagrid always correctly displays the data */
+        private void actOnFoodFilteringStates()
+        {
+            using (var context = new FoodsContext())
+            {
+                // determine current filter from labelFilter label.
+                string strFilter;
+                if (labelFilter.Text == "Unfiltered")
+                {
+                    strFilter = "";
+                }
+                else
+                {
+                    strFilter = labelFilter.Text;
+                }
+
+                // refresh Food data grid view while maintaining current filter status (if any)
+                context.Foods.Load();
+                foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
+                foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
+                var filteredData = context.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(strFilter));
+                this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
+                if (filteredData.Count() > 0)
+                {
+                    // shifts focus to first displayed cell, as long as there is something to display
+                    dataGridViewFoods.Focus();
+                    dataGridViewFoods.CurrentCell = dataGridViewFoods.FirstDisplayedCell;
+                }
+            }
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -305,7 +331,7 @@ namespace DietSentry
                         this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
                         if (filteredData.Count() > 0)
                         {
-                            // shifts focus to fist displayed cell, as long as there is something to display
+                            // shifts focus to first displayed cell, as long as there is something to display
                             dataGridViewFoods.Focus();
                             dataGridViewFoods.CurrentCell = dataGridViewFoods.FirstDisplayedCell;
                         }
@@ -331,7 +357,6 @@ namespace DietSentry
                     // shifts focus to fist displayed cell
                     dataGridViewFoods.Focus();
                     dataGridViewFoods.CurrentCell = dataGridViewFoods.FirstDisplayedCell;
-
                 }
             }
         }
@@ -354,7 +379,7 @@ namespace DietSentry
 
 
         /* This is way TWO you select an item (for recording as eaten) from the food table
-         * from the Food data grid Press Enter key on selected item
+         * from the Food data grid Press Enter key on selected item.
          * ALSO picks up when Insert key is pressed. Used to insert/Add food to the database
          * - selection row is then clearly not relevant but just a way of enabling this action) */
         private void dataGridViewFoods_KeyDown(object sender, KeyEventArgs e)
@@ -405,11 +430,8 @@ namespace DietSentry
                     });
                     context.SaveChanges();
 
-                    // this updates dataGridViewFood - but why, and is there any memory leakage?
-                    NewFood.Load();
-                    foodBindingSource.DataSource = NewFood.Local.ToBindingList();
-                    foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
-                    tabControlMain.SelectedTab = tabPageFood; // and make the Food tab visible
+                    // refresh Foods data grid view while maintaining filter status
+                    actOnFoodFilteringStates();
                 }
             }
         }
@@ -547,40 +569,10 @@ namespace DietSentry
                         // delete this record from Foods table
                         context.Foods.Remove(FoodSelected);
                         context.SaveChanges();
-
-                        // determine current filter from labelFilter label.
-                        string strFilter;
-                        if (labelFilter.Text == "Unfiltered")
-                        {
-                            strFilter = "";
-                        }
-                        else
-                        {
-                            strFilter = labelFilter.Text;
-                        }
-
-                        // refresh Food data grid view while maintaining current filter status (if any)
-                        context.Foods.Load();
-                        foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
-                        foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
-                        var filteredData = context.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(strFilter));
-                        this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
-                        if (filteredData.Count() > 0)
-                        {
-                            // shifts focus to fist displayed cell, as long as there is something to display
-                            dataGridViewFoods.Focus();
-                            dataGridViewFoods.CurrentCell = dataGridViewFoods.FirstDisplayedCell;
-                        }
                         labelTest.Text = "Deleted food item: " + FoodSelectedId;
 
-
-                        // refresh Food data grid view while maintaining filter status
-                        // this updates dataGridViewFood - but why, and is there any memory leakage?
-                        /*
-                        context.Foods.Load();
-                        foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
-                        foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
-                        */
+                        // refresh Foods data grid view while maintaining filter status
+                        actOnFoodFilteringStates();
                     }
                 }
             }
@@ -591,7 +583,7 @@ namespace DietSentry
         }
 
         /* Changes visibility of columns in the Foods data grid in response to the controlling check box */
-                        private void checkBoxMainFoodCols_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxMainFoodCols_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxMainFoodCols.Checked)
             {
