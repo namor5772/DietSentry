@@ -266,15 +266,18 @@ namespace DietSentry
                 // refresh Food data grid view while maintaining current filter status (if any)
                 context.Foods.Load();
                 foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
-                foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
+//                foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
                 var filteredData = context.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(strFilter));
                 this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
+                foodBindingSource.Sort = "FoodId Asc"; // also sort in Ascending order by Id
+                /*
                 if (filteredData.Count() > 0)
                 {
                     // shifts focus to first displayed cell, as long as there is something to display
                     dataGridViewFoods.Focus();
                     dataGridViewFoods.CurrentCell = dataGridViewFoods.FirstDisplayedCell;
                 }
+                */
             }
         }
 
@@ -400,38 +403,66 @@ namespace DietSentry
                     frm.Location = this.Location;
                     frm.ShowDialog();
 
-                    // we can now add the appropriate entry to the Food table, sort it and refresh its Food data grid and give it focus
-                    var NewFood = context.Foods;
-                    NewFood.Add(new Food
+                    if (actOnFoodAdded) // then actually add food item to database otherwise ignore (if {Cancel} button pressed)
                     {
-                        FoodDescription = addedFoodItem.FoodDescription,
-                        Energy = addedFoodItem.Energy,
-                        FatTotal = addedFoodItem.FatTotal,
-                        SaturatedFat = addedFoodItem.SaturatedFat,
-                        TransFat = addedFoodItem.TransFat,
-                        PolyunsaturatedFat = addedFoodItem.PolyunsaturatedFat,
-                        MonounsaturatedFat = addedFoodItem.MonounsaturatedFat,
-                        Carbohydrate = addedFoodItem.Carbohydrate,
-                        Sugars = addedFoodItem.Sugars,
-                        DietaryFibre = addedFoodItem.DietaryFibre,
-                        SodiumNa = addedFoodItem.SodiumNa,
-                        CalciumCa = addedFoodItem.CalciumCa,
-                        PotassiumK = addedFoodItem.PotassiumK,
-                        ThiaminB1 = addedFoodItem.ThiaminB1,
-                        RiboflavinB2 = addedFoodItem.RiboflavinB2,
-                        NiacinB3 = addedFoodItem.NiacinB3,
-                        Folate = addedFoodItem.Folate,
-                        IronFe = addedFoodItem.IronFe,
-                        MagnesiumMg = addedFoodItem.MagnesiumMg,
-                        VitaminC = addedFoodItem.VitaminC,
-                        Caffeine = addedFoodItem.Caffeine,
-                        Cholesterol = addedFoodItem.Cholesterol,
-                        Alcohol = addedFoodItem.Alcohol
-                    });
-                    context.SaveChanges();
+                        // what happens now depends on what foodType you originally wanted to add. 
+                        string sFD;
+                        if (foodType == 0)
+                        {
+                            // manually added Solid food item description ends in " #"
+                            sFD = addedFoodItem.FoodDescription + " #";
+                        }
+                        else if (foodType == 1)
+                        {
+                            // manually added Liquid food item description ends in " mL#"
+                            sFD = addedFoodItem.FoodDescription + " mL#";
+                        }
+                        else // if (foodType == 2)
+                        {
+                            // manually added Recipe food item description ends in " *"
+                            sFD = addedFoodItem.FoodDescription + " *";
+                        }
 
-                    // refresh Foods data grid view while maintaining filter status
-                    actOnFoodFilteringStates();
+                        if ((foodType == 0)|(foodType == 1))
+                        {
+                            // we can now add the appropriate entry to the Food table
+                            var NewFood = context.Foods;
+                            NewFood.Add(new Food
+                            {
+                                FoodDescription = sFD,
+                                Energy = addedFoodItem.Energy,
+                                FatTotal = addedFoodItem.FatTotal,
+                                SaturatedFat = addedFoodItem.SaturatedFat,
+                                TransFat = addedFoodItem.TransFat,
+                                PolyunsaturatedFat = addedFoodItem.PolyunsaturatedFat,
+                                MonounsaturatedFat = addedFoodItem.MonounsaturatedFat,
+                                Carbohydrate = addedFoodItem.Carbohydrate,
+                                Sugars = addedFoodItem.Sugars,
+                                DietaryFibre = addedFoodItem.DietaryFibre,
+                                SodiumNa = addedFoodItem.SodiumNa,
+                                CalciumCa = addedFoodItem.CalciumCa,
+                                PotassiumK = addedFoodItem.PotassiumK,
+                                ThiaminB1 = addedFoodItem.ThiaminB1,
+                                RiboflavinB2 = addedFoodItem.RiboflavinB2,
+                                NiacinB3 = addedFoodItem.NiacinB3,
+                                Folate = addedFoodItem.Folate,
+                                IronFe = addedFoodItem.IronFe,
+                                MagnesiumMg = addedFoodItem.MagnesiumMg,
+                                VitaminC = addedFoodItem.VitaminC,
+                                Caffeine = addedFoodItem.Caffeine,
+                                Cholesterol = addedFoodItem.Cholesterol,
+                                Alcohol = addedFoodItem.Alcohol
+                            });
+                            context.SaveChanges();
+                        }
+                        else // if (foodType == 2)
+                        {
+                            ; // DO RECIPIE STUFF HERE
+                        }
+
+                        // refresh Foods data grid view while maintaining filter status
+                        actOnFoodFilteringStates();
+                    }
                 }
             }
         }

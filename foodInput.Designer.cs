@@ -142,7 +142,7 @@
             // buttonAddFood
             // 
             buttonAddFood.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            buttonAddFood.Location = new Point(208, 745);
+            buttonAddFood.Location = new Point(208, 773);
             buttonAddFood.Name = "buttonAddFood";
             buttonAddFood.Size = new Size(75, 23);
             buttonAddFood.TabIndex = 5;
@@ -153,7 +153,7 @@
             // buttonCancelAddFood
             // 
             buttonCancelAddFood.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            buttonCancelAddFood.Location = new Point(306, 745);
+            buttonCancelAddFood.Location = new Point(306, 773);
             buttonCancelAddFood.Name = "buttonCancelAddFood";
             buttonCancelAddFood.Size = new Size(75, 23);
             buttonCancelAddFood.TabIndex = 6;
@@ -164,7 +164,7 @@
             // labelState
             // 
             labelState.AutoSize = true;
-            labelState.Location = new Point(272, 28);
+            labelState.Location = new Point(222, 28);
             labelState.Name = "labelState";
             labelState.Size = new Size(109, 15);
             labelState.TabIndex = 4;
@@ -174,13 +174,13 @@
             // 
             tabControlAddType.Controls.Add(tabPageNonRecipie);
             tabControlAddType.Controls.Add(tabPageRecipie);
-            tabControlAddType.ItemSize = new Size(100, 10);
+            tabControlAddType.ItemSize = new Size(100, 30);
             tabControlAddType.Location = new Point(0, 50);
             tabControlAddType.Margin = new Padding(0);
             tabControlAddType.Name = "tabControlAddType";
             tabControlAddType.Padding = new Point(0, 0);
             tabControlAddType.SelectedIndex = 0;
-            tabControlAddType.Size = new Size(765, 688);
+            tabControlAddType.Size = new Size(765, 711);
             tabControlAddType.SizeMode = TabSizeMode.Fixed;
             tabControlAddType.TabIndex = 5;
             tabControlAddType.TabStop = false;
@@ -236,10 +236,10 @@
             tabPageNonRecipie.Controls.Add(labelProtein);
             tabPageNonRecipie.Controls.Add(labelEnergy);
             tabPageNonRecipie.Controls.Add(labelFoodDescription);
-            tabPageNonRecipie.Location = new Point(4, 14);
+            tabPageNonRecipie.Location = new Point(4, 34);
             tabPageNonRecipie.Margin = new Padding(0);
             tabPageNonRecipie.Name = "tabPageNonRecipie";
-            tabPageNonRecipie.Size = new Size(757, 670);
+            tabPageNonRecipie.Size = new Size(757, 673);
             tabPageNonRecipie.TabIndex = 0;
             tabPageNonRecipie.Text = "Add Non Recipie";
             tabPageNonRecipie.Enter += tabPageNonRecipie_Enter;
@@ -702,10 +702,10 @@
             // tabPageRecipie
             // 
             tabPageRecipie.BackColor = Color.LightSalmon;
-            tabPageRecipie.Location = new Point(4, 14);
+            tabPageRecipie.Location = new Point(4, 34);
             tabPageRecipie.Margin = new Padding(0);
             tabPageRecipie.Name = "tabPageRecipie";
-            tabPageRecipie.Size = new Size(757, 670);
+            tabPageRecipie.Size = new Size(757, 673);
             tabPageRecipie.TabIndex = 1;
             tabPageRecipie.Text = "Add Recipie";
             // 
@@ -714,7 +714,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(765, 780);
+            ClientSize = new Size(765, 808);
             Controls.Add(tabControlAddType);
             Controls.Add(labelState);
             Controls.Add(buttonCancelAddFood);

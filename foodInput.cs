@@ -24,12 +24,24 @@ namespace DietSentry
 
         private void buttonAddFood_Click(object sender, EventArgs e)
         {
-            // Buy this stage it is assumed that all mainForm.addedFoodItem values are assigned even if just to 0F
+            // By this stage it is assumed that all mainForm.addedFoodItem values are assigned even if just to "" or 0F
             mainForm.SetTextForLabel(mainForm.addedFoodItem.FoodDescription);
 
             // this tells the code in the MainForm to actually add the recorded Food item to the Foods table
+            // and what food type is being added. Sold, Liquid or Recipie
             mainForm.actOnFoodAdded = true;
-
+            if (radioButtonSolid.Checked)
+            {
+                mainForm.foodType = 0;
+            }
+            else if (radioButtonLiquid.Checked)
+            {
+                mainForm.foodType = 1;
+            }
+            else // if (radioButtonRecipie.Checked)
+            {
+                mainForm.foodType = 2;
+            }
             this.Close();
         }
 
@@ -118,12 +130,7 @@ namespace DietSentry
          * {Shift}{Tab} or just the {Tab} key, or using the Mouse. */
         private void textBoxFoodDescription_Leave(object sender, EventArgs e)
         {
-            if (textBoxFoodDescription.Text == "")
-            {
-                textBoxFoodDescription.Text = " #";
-            }
-            // " #" added to end of description string to indicate a manually entered solid food
-            mainForm.addedFoodItem.FoodDescription = textBoxFoodDescription.Text+" #";
+            mainForm.addedFoodItem.FoodDescription = textBoxFoodDescription.Text;
             labelState.Text = textBoxFoodDescription.Text;
         }
 
@@ -168,7 +175,7 @@ namespace DietSentry
                 mainForm.addedFoodItem.Energy = 0F;
                 textBoxEnergy.Text = "";
             }
-            labelState.Text = (textBoxEnergy.Text);
+            labelState.Text = textBoxEnergy.Text;
         }
 
         private void textBoxProtein_KeyDown(object sender, KeyEventArgs e)
@@ -200,7 +207,7 @@ namespace DietSentry
                 mainForm.addedFoodItem.Protein = 0F;
                 textBoxProtein.Text = "";
             }
-            labelState.Text = (textBoxProtein.Text);
+            labelState.Text = textBoxProtein.Text;
         }
 
         private void textBoxFatTotal_KeyDown(object sender, KeyEventArgs e)
