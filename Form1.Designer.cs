@@ -34,8 +34,9 @@ namespace DietSentry
         // A string describing the eaten food selected
         public string eatenFoodDescription;
 
-        // Declaring a Food item class instance
+        // Declaring some Food item class instances
         public Food addedFoodItem = new Food();
+        public Food editedFoodItem = new Food();
 
         /* variable which is set to true when new food item detailed in the foodinputForm is actually to be added to the database
          * after foodinputForm is closed, ignored otherwise. ie this "transmits" code behaviour of pressing the [Add] or [Cancel] buttons when
@@ -124,7 +125,6 @@ namespace DietSentry
             checkBoxMainFoodCols = new CheckBox();
             labelFilter = new Label();
             textBoxFilter = new TextBox();
-            buttonSave = new Button();
             dataGridViewFoods = new DataGridView();
             FoodIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             foodDescriptionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -237,7 +237,7 @@ namespace DietSentry
             tabControlMain.Multiline = true;
             tabControlMain.Name = "tabControlMain";
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new Size(1397, 723);
+            tabControlMain.Size = new Size(1395, 723);
             tabControlMain.TabIndex = 1;
             tabControlMain.TabStop = false;
             // 
@@ -247,12 +247,11 @@ namespace DietSentry
             tabPageFood.Controls.Add(checkBoxMainFoodCols);
             tabPageFood.Controls.Add(labelFilter);
             tabPageFood.Controls.Add(textBoxFilter);
-            tabPageFood.Controls.Add(buttonSave);
             tabPageFood.Controls.Add(dataGridViewFoods);
             tabPageFood.Location = new Point(4, 27);
             tabPageFood.Name = "tabPageFood";
             tabPageFood.Padding = new Padding(3);
-            tabPageFood.Size = new Size(1389, 692);
+            tabPageFood.Size = new Size(1387, 692);
             tabPageFood.TabIndex = 0;
             tabPageFood.Text = "Food";
             tabPageFood.UseVisualStyleBackColor = true;
@@ -260,11 +259,10 @@ namespace DietSentry
             // labelTest
             // 
             labelTest.AutoSize = true;
-            labelTest.Location = new Point(341, 19);
+            labelTest.Location = new Point(288, 19);
             labelTest.Name = "labelTest";
-            labelTest.Size = new Size(54, 15);
+            labelTest.Size = new Size(0, 15);
             labelTest.TabIndex = 9;
-            labelTest.Text = "test label";
             // 
             // checkBoxMainFoodCols
             // 
@@ -302,16 +300,6 @@ namespace DietSentry
             textBoxFilter.Enter += textBoxFilter_Enter;
             textBoxFilter.KeyDown += textBoxFilter_KeyDown;
             // 
-            // buttonSave
-            // 
-            buttonSave.Location = new Point(479, 19);
-            buttonSave.Name = "buttonSave";
-            buttonSave.Size = new Size(75, 23);
-            buttonSave.TabIndex = 4;
-            buttonSave.Text = "Save";
-            buttonSave.UseVisualStyleBackColor = true;
-            buttonSave.Click += buttonSave_Click;
-            // 
             // dataGridViewFoods
             // 
             dataGridViewFoods.AllowUserToAddRows = false;
@@ -339,6 +327,7 @@ namespace DietSentry
             dataGridViewCellStyle27.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle27.WrapMode = DataGridViewTriState.False;
             dataGridViewFoods.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewFoods.EditMode = DataGridViewEditMode.EditOnF2;
             dataGridViewFoods.EnableHeadersVisualStyles = false;
             dataGridViewFoods.Location = new Point(3, 99);
             dataGridViewFoods.MultiSelect = false;
@@ -355,7 +344,7 @@ namespace DietSentry
             dataGridViewFoods.RowTemplate.Height = 25;
             dataGridViewFoods.ShowCellToolTips = false;
             dataGridViewFoods.ShowEditingIcon = false;
-            dataGridViewFoods.Size = new Size(1383, 590);
+            dataGridViewFoods.Size = new Size(1381, 590);
             dataGridViewFoods.TabIndex = 4;
             dataGridViewFoods.CellDoubleClick += dataGridViewFoods_CellDoubleClick;
             dataGridViewFoods.UserDeletingRow += dataGridViewFoods_UserDeletingRow;
@@ -738,7 +727,7 @@ namespace DietSentry
             tabPageEaten.Location = new Point(4, 27);
             tabPageEaten.Name = "tabPageEaten";
             tabPageEaten.Padding = new Padding(3);
-            tabPageEaten.Size = new Size(1400, 692);
+            tabPageEaten.Size = new Size(1387, 692);
             tabPageEaten.TabIndex = 1;
             tabPageEaten.Text = "Eaten";
             tabPageEaten.UseVisualStyleBackColor = true;
@@ -811,7 +800,7 @@ namespace DietSentry
             dataGridViewEaten.Name = "dataGridViewEaten";
             dataGridViewEaten.RowHeadersWidth = 49;
             dataGridViewEaten.RowTemplate.Height = 25;
-            dataGridViewEaten.Size = new Size(1336, 502);
+            dataGridViewEaten.Size = new Size(1381, 590);
             dataGridViewEaten.TabIndex = 0;
             dataGridViewEaten.UserDeletingRow += dataGridViewEaten_UserDeletingRow;
             // 
@@ -1264,7 +1253,6 @@ namespace DietSentry
         private TabPage tabPageFood;
         private TabPage tabPageEaten;
         private DataGridView dataGridViewFoods;
-        private Button buttonSave;
         private BindingSource foodBindingSource;
         private TextBox textBoxFilter;
         private Label labelFilter;

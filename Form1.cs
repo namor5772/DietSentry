@@ -92,42 +92,34 @@ namespace DietSentry
 
 
         /* Code that acts on Food filtering states
-         * There are 2 states and this makes sure the foods datagrid always correctly displays the data */
+         * There are 2 states and this makes sure the foods datagrid always correctly displays the data
+         * there is an argument which determines the sort order via the Id: 0=Asc, 1=Desc */
         private void actOnFoodFilteringStates(int sortingType)
         {
             using (var context = new FoodsContext())
             {
                 context.Foods.Load();
+
+                // start updating dataGridViewFood
+                foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
+                if (sortingType == 0)
+                {
+                    foodBindingSource.Sort = "FoodId Asc"; // sort in Ascending order by Id
+                }
+                else // if (sortingType == 1)
+                {
+                    foodBindingSource.Sort = "FoodId Desc"; // sort in Descending order by Id
+                }
+
                 // determine current filter from labelFilter label.
                 if (labelFilter.Text == "Unfiltered")
                 {
-                    // update dataGridViewFood with no filters
-                    foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
-                    if (sortingType == 0)
-                    {
-                        foodBindingSource.Sort = "FoodId Asc"; // sort in Ascending order by Id
-
-                    }
-                    else // if (sortingType == 1)
-                    {
-                        foodBindingSource.Sort = "FoodId Desc"; // sort in Descending order by Id
-                    }
+                    ;
                 }
-                else
+                else // if have filer
                 {
-                    // refresh Food data grid view while maintaining current filter status (if any)
-                    foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
                     var filteredData = context.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(labelFilter.Text));
                     this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
-                    if (sortingType == 0)
-                    {
-                        foodBindingSource.Sort = "FoodId Asc"; // sort in Ascending order by Id
-
-                    }
-                    else // if (sortingType == 1)
-                    {
-                        foodBindingSource.Sort = "FoodId Desc"; // sort in Descending order by Id
-                    }
                 }
                 dataGridViewFoods.CurrentCell = dataGridViewFoods.FirstDisplayedCell;
             }
@@ -163,13 +155,6 @@ namespace DietSentry
             this.dbContext = null;
         }
 
-
-        private void buttonSave_Click(object sender, EventArgs e)
-        {
-            labelFilter.Text = "Unfiltered";
-            this.dbContext!.SaveChanges();
-            this.dataGridViewFoods.Refresh();
-        }
 
         /* Only reacts to the Enter key being pressed in the Food filter text box, by processing the filter request */
         private void textBoxFilter_KeyDown(object sender, KeyEventArgs e)
@@ -233,7 +218,7 @@ namespace DietSentry
 
                     if (actOnFoodAdded) // then actually add food item to database otherwise ignore (if {Cancel} button pressed)
                     {
-                         if ((foodType == 0) | (foodType == 1))
+                        if ((foodType == 0) | (foodType == 1))
                         {
                             // we can now add the appropriate entry to the Food table
                             var NewFood = context.Foods;
@@ -241,6 +226,7 @@ namespace DietSentry
                             {
                                 FoodDescription = addedFoodItem.FoodDescription,
                                 Energy = addedFoodItem.Energy,
+                                Protein = addedFoodItem.Protein,
                                 FatTotal = addedFoodItem.FatTotal,
                                 SaturatedFat = addedFoodItem.SaturatedFat,
                                 TransFat = addedFoodItem.TransFat,
@@ -275,6 +261,61 @@ namespace DietSentry
                     }
                 }
             }
+            else if (e.KeyCode == Keys.F2) // Editing selected food item
+            {
+                var foodItem = (Food)dataGridViewFoods.CurrentRow.DataBoundItem;
+
+                if (foodItem != null)
+                {
+                    using (var context = new FoodsContext())
+                    {
+                        // gain access to selected entry in food table
+                        var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
+
+                        // copy its fields to the public editedFooditem class instance
+                        editedFoodItem.FoodDescription = FoodSelected.FoodDescription;
+                        editedFoodItem.Energy = FoodSelected.Energy;
+                        editedFoodItem.Protein = FoodSelected.Protein;
+                        editedFoodItem.FatTotal = FoodSelected.FatTotal;
+                        editedFoodItem.SaturatedFat = FoodSelected.SaturatedFat;
+                        editedFoodItem.TransFat = FoodSelected.TransFat;
+                        editedFoodItem.PolyunsaturatedFat = FoodSelected.PolyunsaturatedFat;
+                        /*
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        editedFoodItem. = FoodSelected.;
+                        */
+                        context.SaveChanges();
+
+                        /*
+                            // opens dialog used to input the quantity of that food eaten, position is "locked" to the food tabPage
+                            InputForm frm = new(this);
+                            frm.StartPosition = FormStartPosition.Manual;
+                            frm.Location = this.PointToScreen(tabPageFood.Location);
+                            frm.ShowDialog();
+                        */
+                        actOnFoodFilteringStates(0);
+                    }
+                }
+            }
+
         }
 
 
