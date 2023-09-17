@@ -33,14 +33,18 @@ namespace DietSentry
             if (radioButtonSolid.Checked)
             {
                 mainForm.foodType = 0;
+                mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription)+" #";
+
             }
             else if (radioButtonLiquid.Checked)
             {
                 mainForm.foodType = 1;
+                mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " mL#";
             }
             else // if (radioButtonRecipie.Checked)
             {
                 mainForm.foodType = 2;
+                mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " *";
             }
             this.Close();
         }
