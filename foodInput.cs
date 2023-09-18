@@ -21,6 +21,14 @@ namespace DietSentry
         {
             mainForm = callingform as MainForm;
             InitializeComponent();
+            if (mainForm.inputType == 0)
+            {
+                this.Text = "Form for ADDING new food item";
+            }
+            else // if (mainForm.inputType == 1)
+            {
+                this.Text = "Form for EDITING selected food item";
+            }
         }
 
         private void buttonAddFood_Click(object sender, EventArgs e)
@@ -30,8 +38,6 @@ namespace DietSentry
                 // cleaning up form if ADDING foood item
 
                 // By this stage it is assumed that all mainForm.addedFoodItem values are assigned even if just to "" or 0F
-                mainForm.SetTextForLabel(mainForm.addedFoodItem.FoodDescription);
-
                 // this tells the code in the MainForm to actually add the recorded Food item to the Foods table
                 // and what food type is being added. Sold, Liquid or Recipie
                 mainForm.actOnFoodAdded = true;
@@ -39,7 +45,6 @@ namespace DietSentry
                 {
                     mainForm.foodType = 3; // solid-private
                     mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " #";
-
                 }
                 else if (radioButtonLiquid.Checked)
                 {
@@ -51,13 +56,11 @@ namespace DietSentry
                     mainForm.foodType = 2; // recipe
                     mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " *";
                 }
-
             }
             if (mainForm.inputType == 1)
             {
                 // cleaning up form if EDITING foood item
                 // By this stage it is assumed that all mainForm.addedFoodItem values are assigned even if just to "" or 0F
-                mainForm.SetTextForLabel(mainForm.addedFoodItem.FoodDescription);
 
                 // this tells the code in the MainForm to actually add the recorded Food item to the Foods table
                 // and what food type is being added. Sold, Liquid or Recipie
@@ -83,10 +86,10 @@ namespace DietSentry
                         // unattainable
                         break;
                 }
-
             }
             this.Close();
         }
+
 
         // Does nothing (as intended) but close this form
         private void buttonCancelAddFood_Click(object sender, EventArgs e)
@@ -97,6 +100,7 @@ namespace DietSentry
             this.Close();
         }
 
+
         private void radioButtonSolid_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonSolid.Checked)
@@ -105,6 +109,7 @@ namespace DietSentry
                 labelState.Text = "Nutrition information per 100 grams (g)";
             }
         }
+
 
         private void radioButtonLiquid_CheckedChanged(object sender, EventArgs e)
         {
@@ -115,6 +120,7 @@ namespace DietSentry
             }
         }
 
+
         private void radioButtonRecipie_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonRecipie.Checked)
@@ -123,41 +129,6 @@ namespace DietSentry
                 labelState.Text = "Nutrition information per 100 grams and all ingredients must also be in grams";
             }
         }
-
-
-        /* Initialises to default values the fields of a non-recipie food item that is going to be
-           added to the Foods table, This is enacted when the tab panel is entered (via tabbing into first text box?)
-           it simply guarantees that any fields that are not explicitly filled are set as 0F */
-        private void tabPageNonRecipie_Enter(object sender, EventArgs e)
-        {
-            /*
-                        mainForm.addedFoodItem.FoodDescription = "";
-                        mainForm.addedFoodItem.Energy = 0F;
-                        mainForm.addedFoodItem.Protein = 0F;
-                        mainForm.addedFoodItem.FatTotal = 0F;
-                        mainForm.addedFoodItem.SaturatedFat = 0F;
-                        mainForm.addedFoodItem.TransFat = 0F;
-                        mainForm.addedFoodItem.PolyunsaturatedFat = 0F;
-                        mainForm.addedFoodItem.MonounsaturatedFat = 0F;
-                        mainForm.addedFoodItem.Carbohydrate = 0F;
-                        mainForm.addedFoodItem.Sugars = 0F;
-                        mainForm.addedFoodItem.DietaryFibre = 0F;
-                        mainForm.addedFoodItem.SodiumNa = 0F;
-                        mainForm.addedFoodItem.CalciumCa = 0F;
-                        mainForm.addedFoodItem.PotassiumK = 0F;
-                        mainForm.addedFoodItem.ThiaminB1 = 0F;
-                        mainForm.addedFoodItem.RiboflavinB2 = 0F;
-                        mainForm.addedFoodItem.NiacinB3 = 0F;
-                        mainForm.addedFoodItem.Folate = 0F;
-                        mainForm.addedFoodItem.IronFe = 0F;
-                        mainForm.addedFoodItem.MagnesiumMg = 0F;
-                        mainForm.addedFoodItem.VitaminC = 0F;
-                        mainForm.addedFoodItem.Caffeine = 0F;
-                        mainForm.addedFoodItem.Cholesterol = 0F;
-                        mainForm.addedFoodItem.Alcohol = 0F;
-            */
-        }
-
 
 
         /* Enables the completion of inputing a FoodDescription value by pressing the Enter key
@@ -170,6 +141,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
 
         /* Enables the completion of inputting a field value by having the text box loose focus, be it by pressing
          * {Shift}{Tab} or just the {Tab} key, or using the Mouse. */
@@ -933,9 +905,10 @@ namespace DietSentry
             if (mainForm.inputType == 0)
             {
                 // setting up form for ADDING foood item
+                buttonAddFood.Text = "Add food";
 
                 // reset in case changed by edit state
-                buttonAddFood.Text = "Add food";
+                tabControlAddType.SelectedTab = tabPageNonRecipie;
                 groupBoxFoodTypes.Enabled = true;
                 radioButtonSolid.Checked = true;
 

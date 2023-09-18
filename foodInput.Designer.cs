@@ -86,9 +86,12 @@
             labelEnergy = new Label();
             labelFoodDescription = new Label();
             tabPageRecipie = new TabPage();
+            textBoxRecipeFoodDescription = new TextBox();
+            labelRecipeFoodDescription = new Label();
             groupBoxFoodTypes.SuspendLayout();
             tabControlAddType.SuspendLayout();
             tabPageNonRecipie.SuspendLayout();
+            tabPageRecipie.SuspendLayout();
             SuspendLayout();
             // 
             // groupBoxFoodTypes
@@ -174,7 +177,7 @@
             // 
             tabControlAddType.Controls.Add(tabPageNonRecipie);
             tabControlAddType.Controls.Add(tabPageRecipie);
-            tabControlAddType.ItemSize = new Size(100, 30);
+            tabControlAddType.ItemSize = new Size(50, 10);
             tabControlAddType.Location = new Point(0, 50);
             tabControlAddType.Margin = new Padding(0);
             tabControlAddType.Name = "tabControlAddType";
@@ -236,13 +239,12 @@
             tabPageNonRecipie.Controls.Add(labelProtein);
             tabPageNonRecipie.Controls.Add(labelEnergy);
             tabPageNonRecipie.Controls.Add(labelFoodDescription);
-            tabPageNonRecipie.Location = new Point(4, 34);
+            tabPageNonRecipie.Location = new Point(4, 14);
             tabPageNonRecipie.Margin = new Padding(0);
             tabPageNonRecipie.Name = "tabPageNonRecipie";
-            tabPageNonRecipie.Size = new Size(757, 673);
+            tabPageNonRecipie.Size = new Size(757, 693);
             tabPageNonRecipie.TabIndex = 0;
             tabPageNonRecipie.Text = "Add Non Recipie";
-            tabPageNonRecipie.Enter += tabPageNonRecipie_Enter;
             // 
             // textBoxAlcohol
             // 
@@ -667,7 +669,7 @@
             // 
             textBoxFoodDescription.Location = new Point(201, 17);
             textBoxFoodDescription.Name = "textBoxFoodDescription";
-            textBoxFoodDescription.Size = new Size(536, 23);
+            textBoxFoodDescription.Size = new Size(538, 23);
             textBoxFoodDescription.TabIndex = 3;
             textBoxFoodDescription.KeyDown += textBoxFoodDescription_KeyDown;
             textBoxFoodDescription.Leave += textBoxFoodDescription_Leave;
@@ -702,12 +704,30 @@
             // tabPageRecipie
             // 
             tabPageRecipie.BackColor = Color.LightSalmon;
-            tabPageRecipie.Location = new Point(4, 34);
+            tabPageRecipie.Controls.Add(textBoxRecipeFoodDescription);
+            tabPageRecipie.Controls.Add(labelRecipeFoodDescription);
+            tabPageRecipie.Location = new Point(4, 14);
             tabPageRecipie.Margin = new Padding(0);
             tabPageRecipie.Name = "tabPageRecipie";
-            tabPageRecipie.Size = new Size(757, 673);
+            tabPageRecipie.Size = new Size(757, 693);
             tabPageRecipie.TabIndex = 1;
             tabPageRecipie.Text = "Add Recipie";
+            // 
+            // textBoxRecipeFoodDescription
+            // 
+            textBoxRecipeFoodDescription.Location = new Point(138, 22);
+            textBoxRecipeFoodDescription.Name = "textBoxRecipeFoodDescription";
+            textBoxRecipeFoodDescription.Size = new Size(538, 23);
+            textBoxRecipeFoodDescription.TabIndex = 5;
+            // 
+            // labelRecipeFoodDescription
+            // 
+            labelRecipeFoodDescription.AutoSize = true;
+            labelRecipeFoodDescription.Location = new Point(23, 25);
+            labelRecipeFoodDescription.Name = "labelRecipeFoodDescription";
+            labelRecipeFoodDescription.Size = new Size(96, 15);
+            labelRecipeFoodDescription.TabIndex = 4;
+            labelRecipeFoodDescription.Text = "Food description";
             // 
             // foodInputForm
             // 
@@ -729,6 +749,8 @@
             tabControlAddType.ResumeLayout(false);
             tabPageNonRecipie.ResumeLayout(false);
             tabPageNonRecipie.PerformLayout();
+            tabPageRecipie.ResumeLayout(false);
+            tabPageRecipie.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -793,5 +815,7 @@
         private Label labelAlcohol;
         private TextBox textBoxCholesterol;
         private Label labelCholesterol;
+        private TextBox textBoxRecipeFoodDescription;
+        private Label labelRecipeFoodDescription;
     }
 }

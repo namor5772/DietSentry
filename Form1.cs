@@ -18,12 +18,6 @@ namespace DietSentry
             InitializeComponent();
         }
 
-        public void SetTextForLabel(string myText)
-        {
-            this.labelTest.Text = myText;
-        }
-
-
         /* Code that acts when a food item is selected (in whatever way) from the Foods dataGridView.
          * It prompts for amount of food eaten and appends a time stamped row to the Eaten foods table */
         private void actWhenFoodSelected()
@@ -47,7 +41,6 @@ namespace DietSentry
                     // only act on input if amout eaten >0, this includes the case when Enter is immediately pressed in the text box
                     if (amountOfFoodEaten > 0.0)
                     {
-
                         // we can now add the appropriate entry to the Eaten table, sort it and refresh its Eaten data grid and give it focus
                         var EatenFood = context.Eaten;
                         EatenFood.Add(new Eaten
@@ -207,21 +200,22 @@ namespace DietSentry
             }
             else if (e.KeyCode == Keys.Insert) // Adding/Inserting new food item into database
             {
-                using (var context = new FoodsContext())
-                {
-                    // opens a dialog form used to input a record to the food table
-                    // positions this form at same location (ie. top left hand corner) as this MainForm
-                    inputType = 0; // tells foodinput form that we are adding food item
-                    foodInputForm frm = new(this);
-                    frm.StartPosition = FormStartPosition.Manual;
-                    frm.Location = this.Location;
-                    frm.ShowDialog();
+                // opens a dialog form used to input a record to the food table
+                // positions this form at same location (ie. top left hand corner) as this MainForm
+                inputType = 0; // tells foodInput form that we are adding food item
+                foodInputForm frm = new(this);
+                frm.StartPosition = FormStartPosition.Manual;
+                frm.Location = this.Location;
+                frm.ShowDialog();
 
-                    if (actOnFoodAdded) // then actually add food item to database otherwise ignore (if {Cancel} button pressed)
+                if (actOnFoodAdded) // then actually add food item to database otherwise ignore (if {Cancel} button pressed)
+                {
+                    if ((foodType == 0) | (foodType == 1) | (foodType == 3) | (foodType == 4))
                     {
-                        if ((foodType == 0) | (foodType == 1) | (foodType == 3) | (foodType == 4))
+                        using (var context = new FoodsContext())
                         {
-                            // we can now add the appropriate entry to the Food table
+                            // we can now add the appropriate entry to the Food table, this is done in the mainForm but could have been
+                            // done more logically in the foodInput form.
                             var NewFood = context.Foods;
                             NewFood.Add(new Food
                             {
@@ -251,15 +245,21 @@ namespace DietSentry
                                 Alcohol = addedFoodItem.Alcohol
                             });
                             context.SaveChanges();
-                        }
-                        else // if (foodType == 2)
-                        {
-                            ; // DO RECIPIE STUFF HERE
-                        }
 
-                        // refresh Foods data grid view while maintaining filter status
-                        actOnFoodFilteringStates(1);
+                            labelInfo.Text = "Added new food item: " + addedFoodItem.FoodDescription;
+                        }
                     }
+                    else // if (foodType == 2)
+                    {
+                        ; // DO RECIPE STUFF HERE
+                    }
+
+                    // refresh Foods data grid view while maintaining filter status
+                    actOnFoodFilteringStates(1);
+                }
+                else // addition of food item cancelled
+                {
+                    labelInfo.Text = "Addition of food item cancelled";
                 }
             }
             else if (e.KeyCode == Keys.F2) // Editing selected food item
@@ -301,11 +301,12 @@ namespace DietSentry
                         editedFoodItem.Alcohol = FoodSelected.Alcohol;
 
                         // determine the food type by examining the FoodDescription string
+                        string editedFoodId = (editedFoodItem.FoodId).ToString(); // for later use
                         string sFD = editedFoodItem.FoodDescription;
                         int ln = sFD.Length;
-                        string sL1 = sFD.Substring(ln-1); // get last character of sFD
-                        string sL2 = sFD.Substring(ln-2); // get last 2 characters of SFD
-                        string sL3 = sFD.Substring(ln-3); // get last 3 characters of SFD
+                        string sL1 = sFD.Substring(ln - 1); // get last character of sFD
+                        string sL2 = sFD.Substring(ln - 2); // get last 2 characters of SFD
+                        string sL3 = sFD.Substring(ln - 3); // get last 3 characters of SFD
 
                         if (sL1 == "*")
                         {
@@ -369,6 +370,12 @@ namespace DietSentry
 
                             context.SaveChanges();
                             actOnFoodFilteringStates(0);
+
+                            labelInfo.Text = "Edited food item: " + editedFoodId;
+                        }
+                        else // editing of food item cancelled
+                        {
+                            labelInfo.Text = "Editing of food item: " + editedFoodId + " cancelled";
                         }
 
                     }
@@ -672,7 +679,7 @@ namespace DietSentry
                         // delete this record from Foods table
                         context.Foods.Remove(FoodSelected);
                         context.SaveChanges();
-                        labelTest.Text = "Deleted food item: " + FoodSelectedId;
+                        labelInfo.Text = "Deleted food item: " + FoodSelectedId;
 
                         // refresh Foods data grid view while maintaining filter status - it is done in this complicated way
                         // because it crashes under some patricular circumstances !
@@ -687,7 +694,7 @@ namespace DietSentry
             }
             else
             {
-                labelTest.Text = "Did NOT delete selected food item!";
+                labelInfo.Text = "Deletion of selected food item cancelled";
             }
         }
 
