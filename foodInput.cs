@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,27 +25,65 @@ namespace DietSentry
 
         private void buttonAddFood_Click(object sender, EventArgs e)
         {
-            // By this stage it is assumed that all mainForm.addedFoodItem values are assigned even if just to "" or 0F
-            mainForm.SetTextForLabel(mainForm.addedFoodItem.FoodDescription);
-
-            // this tells the code in the MainForm to actually add the recorded Food item to the Foods table
-            // and what food type is being added. Sold, Liquid or Recipie
-            mainForm.actOnFoodAdded = true;
-            if (radioButtonSolid.Checked)
+            if (mainForm.inputType == 0)
             {
-                mainForm.foodType = 0;
-                mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription)+" #";
+                // cleaning up form if ADDING foood item
+
+                // By this stage it is assumed that all mainForm.addedFoodItem values are assigned even if just to "" or 0F
+                mainForm.SetTextForLabel(mainForm.addedFoodItem.FoodDescription);
+
+                // this tells the code in the MainForm to actually add the recorded Food item to the Foods table
+                // and what food type is being added. Sold, Liquid or Recipie
+                mainForm.actOnFoodAdded = true;
+                if (radioButtonSolid.Checked)
+                {
+                    mainForm.foodType = 3; // solid-private
+                    mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " #";
+
+                }
+                else if (radioButtonLiquid.Checked)
+                {
+                    mainForm.foodType = 4; // liquid-private
+                    mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " mL#";
+                }
+                else // if (radioButtonRecipie.Checked)
+                {
+                    mainForm.foodType = 2; // recipe
+                    mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " *";
+                }
 
             }
-            else if (radioButtonLiquid.Checked)
+            if (mainForm.inputType == 1)
             {
-                mainForm.foodType = 1;
-                mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " mL#";
-            }
-            else // if (radioButtonRecipie.Checked)
-            {
-                mainForm.foodType = 2;
-                mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " *";
+                // cleaning up form if EDITING foood item
+                // By this stage it is assumed that all mainForm.addedFoodItem values are assigned even if just to "" or 0F
+                mainForm.SetTextForLabel(mainForm.addedFoodItem.FoodDescription);
+
+                // this tells the code in the MainForm to actually add the recorded Food item to the Foods table
+                // and what food type is being added. Sold, Liquid or Recipie
+                mainForm.actOnFoodAdded = true;
+                switch (mainForm.foodType)
+                {
+                    case 0: // solid-public
+                        // unchanged
+                        break;
+                    case 1: // liquid-public
+                        mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " mL";
+                        break;
+                    case 2: // recipe
+                        mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " *";
+                        break;
+                    case 3: // solid-private
+                        mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " #";
+                        break;
+                    case 4: // liquid-private
+                        mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " mL#";
+                        break;
+                    default:
+                        // unattainable
+                        break;
+                }
+
             }
             this.Close();
         }
@@ -91,30 +130,32 @@ namespace DietSentry
            it simply guarantees that any fields that are not explicitly filled are set as 0F */
         private void tabPageNonRecipie_Enter(object sender, EventArgs e)
         {
-            mainForm.addedFoodItem.FoodDescription = "";
-            mainForm.addedFoodItem.Energy = 0F;
-            mainForm.addedFoodItem.Protein = 0F;
-            mainForm.addedFoodItem.FatTotal = 0F;
-            mainForm.addedFoodItem.SaturatedFat = 0F;
-            mainForm.addedFoodItem.TransFat = 0F;
-            mainForm.addedFoodItem.PolyunsaturatedFat = 0F;
-            mainForm.addedFoodItem.MonounsaturatedFat = 0F;
-            mainForm.addedFoodItem.Carbohydrate = 0F;
-            mainForm.addedFoodItem.Sugars = 0F;
-            mainForm.addedFoodItem.DietaryFibre = 0F;
-            mainForm.addedFoodItem.SodiumNa = 0F;
-            mainForm.addedFoodItem.CalciumCa = 0F;
-            mainForm.addedFoodItem.PotassiumK = 0F;
-            mainForm.addedFoodItem.ThiaminB1 = 0F;
-            mainForm.addedFoodItem.RiboflavinB2 = 0F;
-            mainForm.addedFoodItem.NiacinB3 = 0F;
-            mainForm.addedFoodItem.Folate = 0F;
-            mainForm.addedFoodItem.IronFe = 0F;
-            mainForm.addedFoodItem.MagnesiumMg = 0F;
-            mainForm.addedFoodItem.VitaminC = 0F;
-            mainForm.addedFoodItem.Caffeine = 0F;
-            mainForm.addedFoodItem.Cholesterol = 0F;
-            mainForm.addedFoodItem.Alcohol = 0F;
+            /*
+                        mainForm.addedFoodItem.FoodDescription = "";
+                        mainForm.addedFoodItem.Energy = 0F;
+                        mainForm.addedFoodItem.Protein = 0F;
+                        mainForm.addedFoodItem.FatTotal = 0F;
+                        mainForm.addedFoodItem.SaturatedFat = 0F;
+                        mainForm.addedFoodItem.TransFat = 0F;
+                        mainForm.addedFoodItem.PolyunsaturatedFat = 0F;
+                        mainForm.addedFoodItem.MonounsaturatedFat = 0F;
+                        mainForm.addedFoodItem.Carbohydrate = 0F;
+                        mainForm.addedFoodItem.Sugars = 0F;
+                        mainForm.addedFoodItem.DietaryFibre = 0F;
+                        mainForm.addedFoodItem.SodiumNa = 0F;
+                        mainForm.addedFoodItem.CalciumCa = 0F;
+                        mainForm.addedFoodItem.PotassiumK = 0F;
+                        mainForm.addedFoodItem.ThiaminB1 = 0F;
+                        mainForm.addedFoodItem.RiboflavinB2 = 0F;
+                        mainForm.addedFoodItem.NiacinB3 = 0F;
+                        mainForm.addedFoodItem.Folate = 0F;
+                        mainForm.addedFoodItem.IronFe = 0F;
+                        mainForm.addedFoodItem.MagnesiumMg = 0F;
+                        mainForm.addedFoodItem.VitaminC = 0F;
+                        mainForm.addedFoodItem.Caffeine = 0F;
+                        mainForm.addedFoodItem.Cholesterol = 0F;
+                        mainForm.addedFoodItem.Alcohol = 0F;
+            */
         }
 
 
@@ -887,8 +928,129 @@ namespace DietSentry
         }
 
 
-        /***** END BLOCK OF EVENT FUNCTIONS *****
-         * The above EVENT FUNCTIONS are related to accepting & error managing all numeric accepting text boxed for Food table fields */
+        private void foodInputForm_Shown(object sender, EventArgs e)
+        {
+            if (mainForm.inputType == 0)
+            {
+                // setting up form for ADDING foood item
+
+                // reset in case changed by edit state
+                buttonAddFood.Text = "Add food";
+                groupBoxFoodTypes.Enabled = true;
+                radioButtonSolid.Checked = true;
+
+                // Initialises to default values the fields of a non-recipie food item that is going to be
+                // added to the Foods table
+                mainForm.addedFoodItem.FoodDescription = "";
+                mainForm.addedFoodItem.Energy = 0F;
+                mainForm.addedFoodItem.Protein = 0F;
+                mainForm.addedFoodItem.FatTotal = 0F;
+                mainForm.addedFoodItem.SaturatedFat = 0F;
+                mainForm.addedFoodItem.TransFat = 0F;
+                mainForm.addedFoodItem.PolyunsaturatedFat = 0F;
+                mainForm.addedFoodItem.MonounsaturatedFat = 0F;
+                mainForm.addedFoodItem.Carbohydrate = 0F;
+                mainForm.addedFoodItem.Sugars = 0F;
+                mainForm.addedFoodItem.DietaryFibre = 0F;
+                mainForm.addedFoodItem.SodiumNa = 0F;
+                mainForm.addedFoodItem.CalciumCa = 0F;
+                mainForm.addedFoodItem.PotassiumK = 0F;
+                mainForm.addedFoodItem.ThiaminB1 = 0F;
+                mainForm.addedFoodItem.RiboflavinB2 = 0F;
+                mainForm.addedFoodItem.NiacinB3 = 0F;
+                mainForm.addedFoodItem.Folate = 0F;
+                mainForm.addedFoodItem.IronFe = 0F;
+                mainForm.addedFoodItem.MagnesiumMg = 0F;
+                mainForm.addedFoodItem.VitaminC = 0F;
+                mainForm.addedFoodItem.Caffeine = 0F;
+                mainForm.addedFoodItem.Cholesterol = 0F;
+                mainForm.addedFoodItem.Alcohol = 0F;
+            }
+            else if (mainForm.inputType == 1)
+            {
+                // setting up form for EDITING foood item
+                buttonAddFood.Text = "Edit food";
+
+                // Set the radio button indicating the food type and then disable the ability to change it.
+                int foodType = mainForm.foodType;
+                if ((foodType == 0) | (foodType == 3))
+                {
+                    radioButtonSolid.Checked = true;
+                    tabControlAddType.SelectedTab = tabPageNonRecipie;
+                    labelState.Text = "Nutrition information per 100 grams (g)";
+                }
+                else if ((foodType == 1) | (foodType == 4))
+                {
+                    radioButtonLiquid.Checked = true;
+                    tabControlAddType.SelectedTab = tabPageNonRecipie;
+                    labelState.Text = "Nutrition information per 100 millilitres (mL)";
+                }
+                else // if (foodType == 2)
+                {
+                    radioButtonRecipie.Checked = true;
+                    tabControlAddType.SelectedTab = tabPageRecipie;
+                    labelState.Text = "Nutrition information per 100 grams and all ingredients must also be in grams";
+                }
+                groupBoxFoodTypes.Enabled = false;
+
+                // populate form with food details
+                textBoxFoodDescription.Text = mainForm.editedFoodItem.FoodDescription;
+                textBoxEnergy.Text = string.Format("{0:N0}", mainForm.editedFoodItem.Energy);
+                textBoxProtein.Text = string.Format("{0:N1}", mainForm.editedFoodItem.Protein);
+                textBoxFatTotal.Text = string.Format("{0:N1}", mainForm.editedFoodItem.FatTotal);
+                textBoxSaturatedFat.Text = string.Format("{0:N2}", mainForm.editedFoodItem.SaturatedFat);
+                textBoxTransFat.Text = string.Format("{0:N2}", mainForm.editedFoodItem.TransFat);
+                textBoxPolyunsaturatedFat.Text = string.Format("{0:N2}", mainForm.editedFoodItem.PolyunsaturatedFat);
+                textBoxMonounsaturatedFat.Text = string.Format("{0:N2}", mainForm.editedFoodItem.MonounsaturatedFat);
+                textBoxCarbohydrate.Text = string.Format("{0:N1}", mainForm.editedFoodItem.Carbohydrate);
+                textBoxSugars.Text = string.Format("{0:N1}", mainForm.editedFoodItem.Sugars);
+                textBoxDietaryFibre.Text = string.Format("{0:N1}", mainForm.editedFoodItem.DietaryFibre);
+                textBoxSodiumNa.Text = string.Format("{0:N0}", mainForm.editedFoodItem.SodiumNa);
+                textBoxCalciumCa.Text = string.Format("{0:N0}", mainForm.editedFoodItem.CalciumCa);
+                textBoxPotassiumK.Text = string.Format("{0:N0}", mainForm.editedFoodItem.PotassiumK);
+                textBoxThiaminB1.Text = string.Format("{0:N3}", mainForm.editedFoodItem.ThiaminB1);
+                textBoxRiboflavinB2.Text = string.Format("{0:N3}", mainForm.editedFoodItem.RiboflavinB2);
+                textBoxNiacinB3.Text = string.Format("{0:N2}", mainForm.editedFoodItem.NiacinB3);
+                textBoxFolate.Text = string.Format("{0:N0}", mainForm.editedFoodItem.Folate);
+                textBoxIronFe.Text = string.Format("{0:N2}", mainForm.editedFoodItem.IronFe);
+                textBoxMagnesiumMg.Text = string.Format("{0:N0}", mainForm.editedFoodItem.MagnesiumMg);
+                textBoxVitaminC.Text = string.Format("{0:N0}", mainForm.editedFoodItem.VitaminC);
+                textBoxCaffeine.Text = string.Format("{0:N0}", mainForm.editedFoodItem.Caffeine);
+                textBoxCholesterol.Text = string.Format("{0:N0}", mainForm.editedFoodItem.Cholesterol);
+                textBoxAlcohol.Text = string.Format("{0:N1}", mainForm.editedFoodItem.Alcohol);
+
+                // populate addedFoodItem fields with the editeFoodItem fields
+                mainForm.addedFoodItem.FoodDescription = mainForm.editedFoodItem.FoodDescription;
+                mainForm.addedFoodItem.Energy = mainForm.editedFoodItem.Energy;
+                mainForm.addedFoodItem.Protein = mainForm.editedFoodItem.Protein;
+                mainForm.addedFoodItem.FatTotal = mainForm.editedFoodItem.FatTotal;
+                mainForm.addedFoodItem.SaturatedFat = mainForm.editedFoodItem.SaturatedFat;
+                mainForm.addedFoodItem.TransFat = mainForm.editedFoodItem.TransFat;
+                mainForm.addedFoodItem.PolyunsaturatedFat = mainForm.editedFoodItem.PolyunsaturatedFat;
+                mainForm.addedFoodItem.MonounsaturatedFat = mainForm.editedFoodItem.MonounsaturatedFat;
+                mainForm.addedFoodItem.Carbohydrate = mainForm.editedFoodItem.Carbohydrate;
+                mainForm.addedFoodItem.Sugars = mainForm.editedFoodItem.Sugars;
+                mainForm.addedFoodItem.DietaryFibre = mainForm.editedFoodItem.DietaryFibre;
+                mainForm.addedFoodItem.SodiumNa = mainForm.editedFoodItem.SodiumNa;
+                mainForm.addedFoodItem.CalciumCa = mainForm.editedFoodItem.CalciumCa;
+                mainForm.addedFoodItem.PotassiumK = mainForm.editedFoodItem.PotassiumK;
+                mainForm.addedFoodItem.ThiaminB1 = mainForm.editedFoodItem.ThiaminB1;
+                mainForm.addedFoodItem.RiboflavinB2 = mainForm.editedFoodItem.RiboflavinB2;
+                mainForm.addedFoodItem.NiacinB3 = mainForm.editedFoodItem.NiacinB3;
+                mainForm.addedFoodItem.Folate = mainForm.editedFoodItem.Folate;
+                mainForm.addedFoodItem.IronFe = mainForm.editedFoodItem.IronFe;
+                mainForm.addedFoodItem.MagnesiumMg = mainForm.editedFoodItem.MagnesiumMg;
+                mainForm.addedFoodItem.VitaminC = mainForm.editedFoodItem.VitaminC;
+                mainForm.addedFoodItem.Caffeine = mainForm.editedFoodItem.Caffeine;
+                mainForm.addedFoodItem.Cholesterol = mainForm.editedFoodItem.Cholesterol;
+                mainForm.addedFoodItem.Alcohol = mainForm.editedFoodItem.Alcohol;
+            }
+        }
 
     }
+
+    /***** END BLOCK OF EVENT FUNCTIONS *****
+     * The above EVENT FUNCTIONS are related to accepting & error managing all numeric accepting text boxed for Food table fields */
+
 }
+

@@ -43,8 +43,11 @@ namespace DietSentry
          * foodinput Form is closed */
         public Boolean actOnFoodAdded;
 
-        // 0=Solid, 1=Liquid, 2=Recipe
+        // 0=Solid-Public, 1=Liquid-Public, 2=Recipe, 3=Solid-Private, 4=Liquid-Private
         public int foodType;
+
+        // 0=Add, 1=Insert. Specifies behaviour in foodinput form depending on whether adding or editing a food item.
+        public int inputType;
 
         // *********************************************************
 

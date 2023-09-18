@@ -723,6 +723,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "foodInputForm";
             Text = "Form for adding a food to the database";
+            Shown += foodInputForm_Shown;
             groupBoxFoodTypes.ResumeLayout(false);
             groupBoxFoodTypes.PerformLayout();
             tabControlAddType.ResumeLayout(false);

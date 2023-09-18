@@ -211,6 +211,7 @@ namespace DietSentry
                 {
                     // opens a dialog form used to input a record to the food table
                     // positions this form at same location (ie. top left hand corner) as this MainForm
+                    inputType = 0; // tells foodinput form that we are adding food item
                     foodInputForm frm = new(this);
                     frm.StartPosition = FormStartPosition.Manual;
                     frm.Location = this.Location;
@@ -218,7 +219,7 @@ namespace DietSentry
 
                     if (actOnFoodAdded) // then actually add food item to database otherwise ignore (if {Cancel} button pressed)
                     {
-                        if ((foodType == 0) | (foodType == 1))
+                        if ((foodType == 0) | (foodType == 1) | (foodType == 3) | (foodType == 4))
                         {
                             // we can now add the appropriate entry to the Food table
                             var NewFood = context.Foods;
@@ -273,6 +274,7 @@ namespace DietSentry
                         var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
 
                         // copy its fields to the public editedFooditem class instance
+                        editedFoodItem.FoodId = FoodSelected.FoodId;
                         editedFoodItem.FoodDescription = FoodSelected.FoodDescription;
                         editedFoodItem.Energy = FoodSelected.Energy;
                         editedFoodItem.Protein = FoodSelected.Protein;
@@ -280,38 +282,95 @@ namespace DietSentry
                         editedFoodItem.SaturatedFat = FoodSelected.SaturatedFat;
                         editedFoodItem.TransFat = FoodSelected.TransFat;
                         editedFoodItem.PolyunsaturatedFat = FoodSelected.PolyunsaturatedFat;
-                        /*
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        editedFoodItem. = FoodSelected.;
-                        */
-                        context.SaveChanges();
+                        editedFoodItem.MonounsaturatedFat = FoodSelected.MonounsaturatedFat;
+                        editedFoodItem.Carbohydrate = FoodSelected.Carbohydrate;
+                        editedFoodItem.Sugars = FoodSelected.Sugars;
+                        editedFoodItem.DietaryFibre = FoodSelected.DietaryFibre;
+                        editedFoodItem.SodiumNa = FoodSelected.SodiumNa;
+                        editedFoodItem.CalciumCa = FoodSelected.CalciumCa;
+                        editedFoodItem.PotassiumK = FoodSelected.PotassiumK;
+                        editedFoodItem.ThiaminB1 = FoodSelected.ThiaminB1;
+                        editedFoodItem.RiboflavinB2 = FoodSelected.RiboflavinB2;
+                        editedFoodItem.NiacinB3 = FoodSelected.NiacinB3;
+                        editedFoodItem.Folate = FoodSelected.Folate;
+                        editedFoodItem.IronFe = FoodSelected.IronFe;
+                        editedFoodItem.MagnesiumMg = FoodSelected.MagnesiumMg;
+                        editedFoodItem.VitaminC = FoodSelected.VitaminC;
+                        editedFoodItem.Caffeine = FoodSelected.Caffeine;
+                        editedFoodItem.Cholesterol = FoodSelected.Cholesterol;
+                        editedFoodItem.Alcohol = FoodSelected.Alcohol;
 
-                        /*
-                            // opens dialog used to input the quantity of that food eaten, position is "locked" to the food tabPage
-                            InputForm frm = new(this);
-                            frm.StartPosition = FormStartPosition.Manual;
-                            frm.Location = this.PointToScreen(tabPageFood.Location);
-                            frm.ShowDialog();
-                        */
-                        actOnFoodFilteringStates(0);
+                        // determine the food type by examining the FoodDescription string
+                        string sFD = editedFoodItem.FoodDescription;
+                        int ln = sFD.Length;
+                        string sL1 = sFD.Substring(ln-1); // get last character of sFD
+                        string sL2 = sFD.Substring(ln-2); // get last 2 characters of SFD
+                        string sL3 = sFD.Substring(ln-3); // get last 3 characters of SFD
+
+                        if (sL1 == "*")
+                        {
+                            foodType = 2; // recipe
+                            editedFoodItem.FoodDescription = (editedFoodItem.FoodDescription).Substring(0, ln - 2);
+                        }
+                        else if (sL2 == "mL")
+                        {
+                            foodType = 1; // liquid - public
+                            editedFoodItem.FoodDescription = (editedFoodItem.FoodDescription).Substring(0, ln - 3);
+                        }
+                        else if (sL3 == "mL#")
+                        {
+                            foodType = 4; // liquid - private
+                            editedFoodItem.FoodDescription = (editedFoodItem.FoodDescription).Substring(0, ln - 4);
+                        }
+                        else if (sL1 == "#")
+                        {
+                            foodType = 3; // solid - private
+                            editedFoodItem.FoodDescription = (editedFoodItem.FoodDescription).Substring(0, ln - 2);
+                        }
+                        else
+                        {
+                            foodType = 0; // solid - public
+                        }
+
+                        // opens a dialog form used to input a record to the food table
+                        // positions this form at same location (ie. top left hand corner) as this MainForm
+                        inputType = 1; // tells foodinput form that we are editing food item
+                        foodInputForm frm = new(this);
+                        frm.StartPosition = FormStartPosition.Manual;
+                        frm.Location = this.Location;
+                        frm.ShowDialog();
+
+                        if (actOnFoodAdded) // then actually modify/edit food item in database otherwise ignore (if {Cancel} button pressed)
+                        {
+                            FoodSelected.FoodDescription = addedFoodItem.FoodDescription;
+                            FoodSelected.Energy = addedFoodItem.Energy;
+                            FoodSelected.Protein = addedFoodItem.Protein;
+                            FoodSelected.FatTotal = addedFoodItem.FatTotal;
+                            FoodSelected.SaturatedFat = addedFoodItem.SaturatedFat;
+                            FoodSelected.TransFat = addedFoodItem.TransFat;
+                            FoodSelected.PolyunsaturatedFat = addedFoodItem.PolyunsaturatedFat;
+                            FoodSelected.MonounsaturatedFat = addedFoodItem.MonounsaturatedFat;
+                            FoodSelected.Carbohydrate = addedFoodItem.Carbohydrate;
+                            FoodSelected.Sugars = addedFoodItem.Sugars;
+                            FoodSelected.DietaryFibre = addedFoodItem.DietaryFibre;
+                            FoodSelected.SodiumNa = addedFoodItem.SodiumNa;
+                            FoodSelected.CalciumCa = addedFoodItem.CalciumCa;
+                            FoodSelected.PotassiumK = addedFoodItem.PotassiumK;
+                            FoodSelected.ThiaminB1 = addedFoodItem.ThiaminB1;
+                            FoodSelected.RiboflavinB2 = addedFoodItem.RiboflavinB2;
+                            FoodSelected.NiacinB3 = addedFoodItem.NiacinB3;
+                            FoodSelected.Folate = addedFoodItem.Folate;
+                            FoodSelected.IronFe = addedFoodItem.IronFe;
+                            FoodSelected.MagnesiumMg = addedFoodItem.MagnesiumMg;
+                            FoodSelected.VitaminC = addedFoodItem.VitaminC;
+                            FoodSelected.Caffeine = addedFoodItem.Caffeine;
+                            FoodSelected.Cholesterol = addedFoodItem.Cholesterol;
+                            FoodSelected.Alcohol = addedFoodItem.Alcohol;
+
+                            context.SaveChanges();
+                            actOnFoodFilteringStates(0);
+                        }
+
                     }
                 }
             }
