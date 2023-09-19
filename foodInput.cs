@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -31,30 +32,74 @@ namespace DietSentry
             }
         }
 
+
+        // 0= when dealing with non-recipe foods, 1= when dealing with recipe food
+        public void ChangeFormSize(int sizeType)
+        {
+            if (sizeType == 0)
+            {
+                this.Size = new Size(783, 847);
+            }
+            else // if (sizeType ==1)
+            {
+                this.Size = new Size(1175, 847);
+            }
+        }
+
+
+        // delete any provisionally created bits of a recipe
+        private void cancelAdditionOfRecipe()
+        {
+            if (recordID != 0) // a recipe record has been created
+            {
+                using (var context = new FoodsContext())
+                {
+                    // gain direct access to recipe record in the Foods table
+                    var recipeFood = context.Foods.Single(b => b.FoodId == recordID);
+
+                    // delete this record from Foods table
+                    context.Foods.Remove(recipeFood);
+                    context.SaveChanges();
+                }
+            }
+        }
+
         private void buttonAddFood_Click(object sender, EventArgs e)
         {
             if (mainForm.inputType == 0)
             {
                 // cleaning up form if ADDING foood item
+                mainForm.actOnFoodAdded = true;
 
                 // By this stage it is assumed that all mainForm.addedFoodItem values are assigned even if just to "" or 0F
                 // this tells the code in the MainForm to actually add the recorded Food item to the Foods table
-                // and what food type is being added. Sold, Liquid or Recipie
-                mainForm.actOnFoodAdded = true;
+                // and what food type is being added. Sold, Liquid or Recipe
                 if (radioButtonSolid.Checked)
                 {
                     mainForm.foodType = 3; // solid-private
                     mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " #";
+                    cancelAdditionOfRecipe();
                 }
                 else if (radioButtonLiquid.Checked)
                 {
                     mainForm.foodType = 4; // liquid-private
                     mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " mL#";
+                    cancelAdditionOfRecipe();
                 }
                 else // if (radioButtonRecipie.Checked)
                 {
                     mainForm.foodType = 2; // recipe
-                    mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " *";
+
+                    if (recordID != 0)  // have created a recipe 
+                    {
+                        // finally adding Recipe indicator to FoodDescription
+                        using (var context = new FoodsContext())
+                        {
+                            var editFood = context.Foods.Single(b => b.FoodId == recordID);
+                            editFood.FoodDescription = editFood.FoodDescription + " *";
+                            context.SaveChanges();
+                        }
+                    }
                 }
             }
             if (mainForm.inputType == 1)
@@ -74,7 +119,13 @@ namespace DietSentry
                         mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " mL";
                         break;
                     case 2: // recipe
-                        mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " *";
+                        // finally adding Recipe indicator to FoodDescription
+                        using (var context = new FoodsContext())
+                        {
+                            var editFood = context.Foods.Single(b => b.FoodId == recordID);
+                            editFood.FoodDescription = editFood.FoodDescription + " *";
+                            context.SaveChanges();
+                        }
                         break;
                     case 3: // solid-private
                         mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " #";
@@ -96,6 +147,9 @@ namespace DietSentry
         {
             mainForm.actOnFoodAdded = false;
 
+            // delete any provisionally created bits of a recipe if they exist
+            cancelAdditionOfRecipe();
+
             // this tells the code in the MainForm to CANCEL the addition of a food item to the Foods table 
             this.Close();
         }
@@ -105,8 +159,10 @@ namespace DietSentry
         {
             if (radioButtonSolid.Checked)
             {
+                ChangeFormSize(0);
                 tabControlAddType.SelectedTab = tabPageNonRecipie;
                 labelState.Text = "Nutrition information per 100 grams (g)";
+                textBoxFoodDescription.Focus();
             }
         }
 
@@ -115,8 +171,10 @@ namespace DietSentry
         {
             if (radioButtonLiquid.Checked)
             {
+                ChangeFormSize(0);
                 tabControlAddType.SelectedTab = tabPageNonRecipie;
                 labelState.Text = "Nutrition information per 100 millilitres (mL)";
+                textBoxFoodDescription.Focus();
             }
         }
 
@@ -125,8 +183,10 @@ namespace DietSentry
         {
             if (radioButtonRecipie.Checked)
             {
+                ChangeFormSize(1);
                 tabControlAddType.SelectedTab = tabPageRecipie;
                 labelState.Text = "Nutrition information per 100 grams and all ingredients must also be in grams";
+                textBoxRecipeFoodDescription.Focus();
             }
         }
 
@@ -899,9 +959,14 @@ namespace DietSentry
             labelState.Text = (textBoxAlcohol.Text);
         }
 
+        /***** END BLOCK OF EVENT FUNCTIONS *****
+         * The above EVENT FUNCTIONS are related to accepting & error managing all numeric accepting text boxed for Food table fields */
+
+
 
         private void foodInputForm_Shown(object sender, EventArgs e)
         {
+            ChangeFormSize(0);
             if (mainForm.inputType == 0)
             {
                 // setting up form for ADDING foood item
@@ -1020,10 +1085,77 @@ namespace DietSentry
             }
         }
 
+
+        private void textBoxRecipeFoodDescription_Leave(object sender, EventArgs e)
+        {
+            if (!recordExists)
+            {
+                using (var context = new FoodsContext())
+                {
+                    // this creates the initial main food item record for a recipe. It will be edited (or deleted) later.
+                    // It is needed now so we can identify it by its unique FoodId Key.
+                    var newFood = new Food()
+                    {
+                        FoodDescription = textBoxRecipeFoodDescription.Text,
+                        Energy = 0F,
+                        Protein = 0F,
+                        FatTotal = 0F,
+                        SaturatedFat = 0F,
+                        TransFat = 0F,
+                        PolyunsaturatedFat = 0F,
+                        MonounsaturatedFat = 0F,
+                        Carbohydrate = 0F,
+                        Sugars = 0F,
+                        DietaryFibre = 0F,
+                        SodiumNa = 0F,
+                        CalciumCa = 0F,
+                        PotassiumK = 0F,
+                        ThiaminB1 = 0F,
+                        RiboflavinB2 = 0F,
+                        NiacinB3 = 0F,
+                        Folate = 0F,
+                        IronFe = 0F,
+                        MagnesiumMg = 0F,
+                        VitaminC = 0F,
+                        Caffeine = 0F,
+                        Cholesterol = 0F,
+                        Alcohol = 0F
+                    };
+                    context.Foods.Add(newFood);
+                    context.SaveChanges();
+                    recordID = newFood.FoodId;
+                    labelState.Text = string.Format("{0:N0}", recordID);
+
+                    // on first leaving of this textbox create
+                    labelState.Text = textBoxRecipeFoodDescription.Text;
+
+                    // gain access for editing to food item via its known Key
+                    var editFood = context.Foods.Single(b => b.FoodId == recordID);
+                    //                    editFood.Energy = 999.0F;
+                    context.SaveChanges();
+                }
+
+                // so we don't recreate record next time we leave this textBox
+                recordExists = true;
+            }
+            else // if (recordExists)
+            {
+                using (var context = new FoodsContext())
+                {
+                    var editFood = context.Foods.Single(b => b.FoodId == recordID);
+                    editFood.FoodDescription = textBoxRecipeFoodDescription.Text;
+                    context.SaveChanges();
+                }
+            }
+
+            // for debugging
+            labelState.Text = textBoxRecipeFoodDescription.Text;
+        }
+
+        private void textBoxFoodDescription_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
-
-    /***** END BLOCK OF EVENT FUNCTIONS *****
-     * The above EVENT FUNCTIONS are related to accepting & error managing all numeric accepting text boxed for Food table fields */
-
 }
 

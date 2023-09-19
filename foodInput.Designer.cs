@@ -20,6 +20,15 @@
             base.Dispose(disposing);
         }
 
+
+        // MY "GLOBAL" VARIABLES ********* bad coding lol **********
+
+        public Boolean recordExists = false; // flag to prevent recreation of recipe record
+        public int recordID = 0; // Id of created recipe record 
+
+        // *********************************************************
+
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -86,6 +95,8 @@
             labelEnergy = new Label();
             labelFoodDescription = new Label();
             tabPageRecipie = new TabPage();
+            textBox2 = new TextBox();
+            textBox1 = new TextBox();
             textBoxRecipeFoodDescription = new TextBox();
             labelRecipeFoodDescription = new Label();
             groupBoxFoodTypes.SuspendLayout();
@@ -113,7 +124,6 @@
             radioButtonRecipie.Name = "radioButtonRecipie";
             radioButtonRecipie.Size = new Size(65, 19);
             radioButtonRecipie.TabIndex = 3;
-            radioButtonRecipie.TabStop = true;
             radioButtonRecipie.Text = "RECIPIE";
             radioButtonRecipie.UseVisualStyleBackColor = true;
             radioButtonRecipie.CheckedChanged += radioButtonRecipie_CheckedChanged;
@@ -125,7 +135,6 @@
             radioButtonLiquid.Name = "radioButtonLiquid";
             radioButtonLiquid.Size = new Size(62, 19);
             radioButtonLiquid.TabIndex = 2;
-            radioButtonLiquid.TabStop = true;
             radioButtonLiquid.Text = "LIQUID";
             radioButtonLiquid.UseVisualStyleBackColor = true;
             radioButtonLiquid.CheckedChanged += radioButtonLiquid_CheckedChanged;
@@ -133,6 +142,7 @@
             // radioButtonSolid
             // 
             radioButtonSolid.AutoSize = true;
+            radioButtonSolid.Checked = true;
             radioButtonSolid.Location = new Point(10, 23);
             radioButtonSolid.Name = "radioButtonSolid";
             radioButtonSolid.Size = new Size(57, 19);
@@ -175,6 +185,7 @@
             // 
             // tabControlAddType
             // 
+            tabControlAddType.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tabControlAddType.Controls.Add(tabPageNonRecipie);
             tabControlAddType.Controls.Add(tabPageRecipie);
             tabControlAddType.ItemSize = new Size(50, 10);
@@ -183,7 +194,7 @@
             tabControlAddType.Name = "tabControlAddType";
             tabControlAddType.Padding = new Point(0, 0);
             tabControlAddType.SelectedIndex = 0;
-            tabControlAddType.Size = new Size(765, 711);
+            tabControlAddType.Size = new Size(1159, 711);
             tabControlAddType.SizeMode = TabSizeMode.Fixed;
             tabControlAddType.TabIndex = 5;
             tabControlAddType.TabStop = false;
@@ -242,7 +253,7 @@
             tabPageNonRecipie.Location = new Point(4, 14);
             tabPageNonRecipie.Margin = new Padding(0);
             tabPageNonRecipie.Name = "tabPageNonRecipie";
-            tabPageNonRecipie.Size = new Size(757, 693);
+            tabPageNonRecipie.Size = new Size(1151, 693);
             tabPageNonRecipie.TabIndex = 0;
             tabPageNonRecipie.Text = "Add Non Recipie";
             // 
@@ -671,6 +682,7 @@
             textBoxFoodDescription.Name = "textBoxFoodDescription";
             textBoxFoodDescription.Size = new Size(538, 23);
             textBoxFoodDescription.TabIndex = 3;
+            textBoxFoodDescription.TextChanged += textBoxFoodDescription_TextChanged;
             textBoxFoodDescription.KeyDown += textBoxFoodDescription_KeyDown;
             textBoxFoodDescription.Leave += textBoxFoodDescription_Leave;
             // 
@@ -704,14 +716,30 @@
             // tabPageRecipie
             // 
             tabPageRecipie.BackColor = Color.LightSalmon;
+            tabPageRecipie.Controls.Add(textBox2);
+            tabPageRecipie.Controls.Add(textBox1);
             tabPageRecipie.Controls.Add(textBoxRecipeFoodDescription);
             tabPageRecipie.Controls.Add(labelRecipeFoodDescription);
             tabPageRecipie.Location = new Point(4, 14);
             tabPageRecipie.Margin = new Padding(0);
             tabPageRecipie.Name = "tabPageRecipie";
-            tabPageRecipie.Size = new Size(757, 693);
+            tabPageRecipie.Size = new Size(1151, 693);
             tabPageRecipie.TabIndex = 1;
             tabPageRecipie.Text = "Add Recipie";
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(854, 22);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(99, 23);
+            textBox2.TabIndex = 7;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(749, 22);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(99, 23);
+            textBox1.TabIndex = 6;
             // 
             // textBoxRecipeFoodDescription
             // 
@@ -719,6 +747,7 @@
             textBoxRecipeFoodDescription.Name = "textBoxRecipeFoodDescription";
             textBoxRecipeFoodDescription.Size = new Size(538, 23);
             textBoxRecipeFoodDescription.TabIndex = 5;
+            textBoxRecipeFoodDescription.Leave += textBoxRecipeFoodDescription_Leave;
             // 
             // labelRecipeFoodDescription
             // 
@@ -733,8 +762,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoSize = true;
-            ClientSize = new Size(765, 808);
+            ClientSize = new Size(1159, 808);
             Controls.Add(tabControlAddType);
             Controls.Add(labelState);
             Controls.Add(buttonCancelAddFood);
@@ -817,5 +845,7 @@
         private Label labelCholesterol;
         private TextBox textBoxRecipeFoodDescription;
         private Label labelRecipeFoodDescription;
+        private TextBox textBox2;
+        private TextBox textBox1;
     }
 }

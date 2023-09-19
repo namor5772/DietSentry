@@ -249,9 +249,13 @@ namespace DietSentry
                             labelInfo.Text = "Added new food item: " + addedFoodItem.FoodDescription;
                         }
                     }
-                    else // if (foodType == 2)
+                    else if (foodType == 2)
                     {
                         ; // DO RECIPE STUFF HERE
+                    }
+                    else
+                    {
+                        ;
                     }
 
                     // refresh Foods data grid view while maintaining filter status
