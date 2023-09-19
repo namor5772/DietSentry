@@ -49,6 +49,7 @@
             textBoxAmount.Name = "textBoxAmount";
             textBoxAmount.Size = new Size(89, 23);
             textBoxAmount.TabIndex = 5;
+            textBoxAmount.KeyDown += textBoxAmount_KeyDown;
             // 
             // labelAmount
             // 
@@ -75,6 +76,7 @@
             Name = "InputRecipeComponent";
             Text = "Amount of selected food";
             TopMost = true;
+            Shown += InputRecipeComponent_Shown;
             ResumeLayout(false);
             PerformLayout();
         }

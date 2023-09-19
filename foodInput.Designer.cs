@@ -26,6 +26,12 @@
         public Boolean recordExists = false; // flag to prevent recreation of recipe record
         public int recordID = 0; // Id of created recipe record 
 
+        // A variable  which stores data collected from the foodInputForm
+        public float amountOfFoodInRecipe = 0.0F; // in "units" of 100 g or mL
+
+        // A string describing the eaten food selected
+        public string FoodDescriptionRecipe = "BLANK";
+
         // *********************************************************
 
 
@@ -693,7 +699,6 @@
             textBoxFoodDescription.Name = "textBoxFoodDescription";
             textBoxFoodDescription.Size = new Size(538, 23);
             textBoxFoodDescription.TabIndex = 3;
-            textBoxFoodDescription.TextChanged += textBoxFoodDescription_TextChanged;
             textBoxFoodDescription.KeyDown += textBoxFoodDescription_KeyDown;
             textBoxFoodDescription.Leave += textBoxFoodDescription_Leave;
             // 
@@ -830,14 +835,14 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(725, 51);
+            textBox2.Location = new Point(725, 46);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(377, 23);
             textBox2.TabIndex = 7;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(725, 22);
+            textBox1.Location = new Point(725, 17);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(377, 23);
             textBox1.TabIndex = 6;
@@ -875,7 +880,6 @@
             MinimizeBox = false;
             Name = "foodInputForm";
             Text = "Form for adding a food to the database";
-            Load += foodInputForm_Load;
             Shown += foodInputForm_Shown;
             groupBoxFoodTypes.ResumeLayout(false);
             groupBoxFoodTypes.PerformLayout();

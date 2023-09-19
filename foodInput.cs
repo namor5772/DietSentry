@@ -21,7 +21,6 @@ namespace DietSentry
         // this works but why
         private FoodsContext? dbContext;
 
-
         private MainForm? mainForm = null;
         public foodInputForm(Form callingform)
         {
@@ -1158,7 +1157,6 @@ namespace DietSentry
 
                     // gain access for editing to food item via its known Key
                     var editFood = context.Foods.Single(b => b.FoodId == recordID);
-                    //                    editFood.Energy = 999.0F;
                     context.SaveChanges();
                 }
 
@@ -1179,20 +1177,6 @@ namespace DietSentry
             labelState.Text = textBoxRecipeFoodDescription.Text;
         }
 
-        private void textBoxFoodDescription_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void foodBindingSource_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void foodInputForm_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void actWhenRecipeFoodSelected()
         {
@@ -1204,56 +1188,18 @@ namespace DietSentry
                 {
                     // gain access to selected entry in food table
                     var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
-                    textBox1.Text = FoodSelected.FoodDescription;
+                    FoodDescriptionRecipe = FoodSelected.FoodDescription;
 
                     // opens dialog used to input the quantity of that food eaten, position is "locked" to the food tabPage
-                    InputForm frm = new(this);
+                    InputRecipeComponent frm = new(this);
                     frm.StartPosition = FormStartPosition.Manual;
                     frm.Location = this.PointToScreen(tabPageRecipie.Location);
                     frm.ShowDialog();
-/*
-                                        // only act on input if amout eaten >0, this includes the case when Enter is immediately pressed in the text box
-                                        if (amountOfFoodEaten > 0.0)
-                                        {
-                                            // we can now add the appropriate entry to the Eaten table, sort it and refresh its Eaten data grid and give it focus
-                                            var EatenFood = context.Eaten;
-                                            EatenFood.Add(new Eaten
-                                            {
-                                                DateEaten = DateTime.Now.ToString("d-MMM-yy"),
-                                                TimeEaten = DateTime.Now.ToString("hh:mm"),
-                                                AmountEaten = amountOfFoodEaten * 100F,
-                                                FoodDescription = FoodSelected.FoodDescription,
-                                                Energy = (FoodSelected.Energy) * amountOfFoodEaten,
-                                                Protein = (FoodSelected.Protein) * amountOfFoodEaten,
-                                                FatTotal = (FoodSelected.FatTotal) * amountOfFoodEaten,
-                                                SaturatedFat = (FoodSelected.SaturatedFat) * amountOfFoodEaten,
-                                                TransFat = (FoodSelected.TransFat) * amountOfFoodEaten,
-                                                PolyunsaturatedFat = (FoodSelected.PolyunsaturatedFat) * amountOfFoodEaten,
-                                                MonounsaturatedFat = (FoodSelected.MonounsaturatedFat) * amountOfFoodEaten,
-                                                Carbohydrate = (FoodSelected.Carbohydrate) * amountOfFoodEaten,
-                                                Sugars = (FoodSelected.Sugars) * amountOfFoodEaten,
-                                                DietaryFibre = (FoodSelected.DietaryFibre) * amountOfFoodEaten,
-                                                SodiumNa = (FoodSelected.SodiumNa) * amountOfFoodEaten,
-                                                CalciumCa = (FoodSelected.CalciumCa) * amountOfFoodEaten,
-                                                PotassiumK = (FoodSelected.PotassiumK) * amountOfFoodEaten,
-                                                ThiaminB1 = (FoodSelected.ThiaminB1) * amountOfFoodEaten,
-                                                RiboflavinB2 = (FoodSelected.RiboflavinB2) * amountOfFoodEaten,
-                                                NiacinB3 = (FoodSelected.NiacinB3) * amountOfFoodEaten,
-                                                Folate = (FoodSelected.Folate) * amountOfFoodEaten,
-                                                IronFe = (FoodSelected.IronFe) * amountOfFoodEaten,
-                                                MagnesiumMg = (FoodSelected.MagnesiumMg) * amountOfFoodEaten,
-                                                VitaminC = (FoodSelected.VitaminC) * amountOfFoodEaten,
-                                                Caffeine = (FoodSelected.Caffeine) * amountOfFoodEaten,
-                                                Cholesterol = (FoodSelected.Cholesterol) * amountOfFoodEaten,
-                                                Alcohol = (FoodSelected.Alcohol) * amountOfFoodEaten
-                                            });
-                                            context.SaveChanges();
 
-                                            // Updates the dataGridViewEaten while maintaining filtering states and making the Eaten tab visible
-                                            actOnEatenFoodFilteringStates();
-                                            tabControlMain.SelectedTab = tabPageEaten;
-                                        }
-                    */
+                    if (amountOfFoodInRecipe > 0.0)
+                    {
+                        textBox1.Text = string.Format("{0:N2}", amountOfFoodInRecipe);
+                    }
                 }
             }
         }
