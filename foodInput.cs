@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,10 @@ namespace DietSentry
     public partial class foodInputForm : Form
     {
 
+        // this works but why
+        private FoodsContext? dbContext;
+
+
         private MainForm? mainForm = null;
         public foodInputForm(Form callingform)
         {
@@ -30,6 +35,28 @@ namespace DietSentry
             {
                 this.Text = "Form for EDITING selected food item";
             }
+        }
+
+        // this works but why?
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            this.dbContext = new FoodsContext();
+
+            // Uncomment the line below to start fresh with a new database.
+            this.dbContext.Database.EnsureCreated();
+
+            this.dbContext.Foods.Load();
+            //            this.dbContext.Eaten.Load();
+
+            this.foodBindingSource.DataSource = dbContext.Foods.Local.ToBindingList();
+            //            this.eatenBindingSource.DataSource = dbContext.Eaten.Local.ToBindingList();
+            /*
+                        actOnFoodColumnStates();
+                        actOnEatenFoodColumnStates();
+                        actOnEatenFoodFilteringStates();
+            */
         }
 
 
@@ -1156,6 +1183,159 @@ namespace DietSentry
         {
 
         }
+
+        private void foodBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void foodInputForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void actWhenRecipeFoodSelected()
+        {
+            var foodItem = (Food)dataGridViewAddToRecipe.CurrentRow.DataBoundItem;
+
+            if (foodItem != null)
+            {
+                using (var context = new FoodsContext())
+                {
+                    // gain access to selected entry in food table
+                    var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
+                    textBox1.Text = FoodSelected.FoodDescription;
+
+                    // opens dialog used to input the quantity of that food eaten, position is "locked" to the food tabPage
+                    InputForm frm = new(this);
+                    frm.StartPosition = FormStartPosition.Manual;
+                    frm.Location = this.PointToScreen(tabPageRecipie.Location);
+                    frm.ShowDialog();
+/*
+                                        // only act on input if amout eaten >0, this includes the case when Enter is immediately pressed in the text box
+                                        if (amountOfFoodEaten > 0.0)
+                                        {
+                                            // we can now add the appropriate entry to the Eaten table, sort it and refresh its Eaten data grid and give it focus
+                                            var EatenFood = context.Eaten;
+                                            EatenFood.Add(new Eaten
+                                            {
+                                                DateEaten = DateTime.Now.ToString("d-MMM-yy"),
+                                                TimeEaten = DateTime.Now.ToString("hh:mm"),
+                                                AmountEaten = amountOfFoodEaten * 100F,
+                                                FoodDescription = FoodSelected.FoodDescription,
+                                                Energy = (FoodSelected.Energy) * amountOfFoodEaten,
+                                                Protein = (FoodSelected.Protein) * amountOfFoodEaten,
+                                                FatTotal = (FoodSelected.FatTotal) * amountOfFoodEaten,
+                                                SaturatedFat = (FoodSelected.SaturatedFat) * amountOfFoodEaten,
+                                                TransFat = (FoodSelected.TransFat) * amountOfFoodEaten,
+                                                PolyunsaturatedFat = (FoodSelected.PolyunsaturatedFat) * amountOfFoodEaten,
+                                                MonounsaturatedFat = (FoodSelected.MonounsaturatedFat) * amountOfFoodEaten,
+                                                Carbohydrate = (FoodSelected.Carbohydrate) * amountOfFoodEaten,
+                                                Sugars = (FoodSelected.Sugars) * amountOfFoodEaten,
+                                                DietaryFibre = (FoodSelected.DietaryFibre) * amountOfFoodEaten,
+                                                SodiumNa = (FoodSelected.SodiumNa) * amountOfFoodEaten,
+                                                CalciumCa = (FoodSelected.CalciumCa) * amountOfFoodEaten,
+                                                PotassiumK = (FoodSelected.PotassiumK) * amountOfFoodEaten,
+                                                ThiaminB1 = (FoodSelected.ThiaminB1) * amountOfFoodEaten,
+                                                RiboflavinB2 = (FoodSelected.RiboflavinB2) * amountOfFoodEaten,
+                                                NiacinB3 = (FoodSelected.NiacinB3) * amountOfFoodEaten,
+                                                Folate = (FoodSelected.Folate) * amountOfFoodEaten,
+                                                IronFe = (FoodSelected.IronFe) * amountOfFoodEaten,
+                                                MagnesiumMg = (FoodSelected.MagnesiumMg) * amountOfFoodEaten,
+                                                VitaminC = (FoodSelected.VitaminC) * amountOfFoodEaten,
+                                                Caffeine = (FoodSelected.Caffeine) * amountOfFoodEaten,
+                                                Cholesterol = (FoodSelected.Cholesterol) * amountOfFoodEaten,
+                                                Alcohol = (FoodSelected.Alcohol) * amountOfFoodEaten
+                                            });
+                                            context.SaveChanges();
+
+                                            // Updates the dataGridViewEaten while maintaining filtering states and making the Eaten tab visible
+                                            actOnEatenFoodFilteringStates();
+                                            tabControlMain.SelectedTab = tabPageEaten;
+                                        }
+                    */
+                }
+            }
+        }
+
+
+        /* This is way ONE you select a food (for adding to a recipe) from the Food table.
+         * - From the Food data grid Double Click selected item with mouse */
+        private void dataGridViewAddToRecipe_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            actWhenRecipeFoodSelected();
+        }
+
+
+        /* This is way TWO you select an item (for adding to a recipe) from the Food table.
+         * - From the Food data grid Press the Enter key on selected item. */
+        private void dataGridViewAddToRecipe_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) // Selecting food item
+            {
+                actWhenRecipeFoodSelected();
+                e.Handled = true; // prevents Enter key press causing next lower cell getting focus 
+            }
+        }
+
+
+        /* Code that acts on Food filtering states
+         * There are 2 states and this makes sure the foods datagrid always correctly displays the data
+         * there is an argument which determines the sort order via the Id: 0=Asc, 1=Desc */
+        private void actOnFoodRecipeFilteringStates(int sortingType)
+        {
+            using (var context = new FoodsContext())
+            {
+                context.Foods.Load();
+
+                // start updating dataGridViewFood
+                foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
+                if (sortingType == 0)
+                {
+                    foodBindingSource.Sort = "FoodId Asc"; // sort in Ascending order by Id
+                }
+                else // if (sortingType == 1)
+                {
+                    foodBindingSource.Sort = "FoodId Desc"; // sort in Descending order by Id
+                }
+
+                // determine current filter from labelFilter label.
+                if (labelFilterRecipe.Text == "Unfiltered")
+                {
+                    ;
+                }
+                else // if have filer
+                {
+                    var filteredData = context.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(labelFilterRecipe.Text));
+                    this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
+                }
+                dataGridViewAddToRecipe.CurrentCell = dataGridViewAddToRecipe.FirstDisplayedCell;
+            }
+        }
+
+
+        /* Only reacts to the Enter key being pressed in the Food filter text box, by processing the filter request */
+        private void textBoxFilterRecipe_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
+
+                if (textBoxFilterRecipe.Text == "")
+                {
+                    labelFilterRecipe.Text = "Unfiltered";
+                }
+                else
+                {
+                    labelFilterRecipe.Text = textBoxFilterRecipe.Text;
+                }
+                textBoxFilterRecipe.Text = "";
+
+                actOnFoodRecipeFilteringStates(0);
+            }
+
+        }
+
     }
 }
 

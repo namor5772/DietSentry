@@ -37,6 +37,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             groupBoxFoodTypes = new GroupBox();
             radioButtonRecipie = new RadioButton();
             radioButtonLiquid = new RadioButton();
@@ -95,6 +99,11 @@
             labelEnergy = new Label();
             labelFoodDescription = new Label();
             tabPageRecipie = new TabPage();
+            labelFilterRecipe = new Label();
+            textBoxFilterRecipe = new TextBox();
+            dataGridViewAddToRecipe = new DataGridView();
+            foodDescriptionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            foodBindingSource = new BindingSource(components);
             textBox2 = new TextBox();
             textBox1 = new TextBox();
             textBoxRecipeFoodDescription = new TextBox();
@@ -103,6 +112,8 @@
             tabControlAddType.SuspendLayout();
             tabPageNonRecipie.SuspendLayout();
             tabPageRecipie.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewAddToRecipe).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)foodBindingSource).BeginInit();
             SuspendLayout();
             // 
             // groupBoxFoodTypes
@@ -122,9 +133,9 @@
             radioButtonRecipie.AutoSize = true;
             radioButtonRecipie.Location = new Point(141, 23);
             radioButtonRecipie.Name = "radioButtonRecipie";
-            radioButtonRecipie.Size = new Size(65, 19);
+            radioButtonRecipie.Size = new Size(60, 19);
             radioButtonRecipie.TabIndex = 3;
-            radioButtonRecipie.Text = "RECIPIE";
+            radioButtonRecipie.Text = "Recipe";
             radioButtonRecipie.UseVisualStyleBackColor = true;
             radioButtonRecipie.CheckedChanged += radioButtonRecipie_CheckedChanged;
             // 
@@ -133,9 +144,9 @@
             radioButtonLiquid.AutoSize = true;
             radioButtonLiquid.Location = new Point(73, 23);
             radioButtonLiquid.Name = "radioButtonLiquid";
-            radioButtonLiquid.Size = new Size(62, 19);
+            radioButtonLiquid.Size = new Size(58, 19);
             radioButtonLiquid.TabIndex = 2;
-            radioButtonLiquid.Text = "LIQUID";
+            radioButtonLiquid.Text = "Liquid";
             radioButtonLiquid.UseVisualStyleBackColor = true;
             radioButtonLiquid.CheckedChanged += radioButtonLiquid_CheckedChanged;
             // 
@@ -145,10 +156,10 @@
             radioButtonSolid.Checked = true;
             radioButtonSolid.Location = new Point(10, 23);
             radioButtonSolid.Name = "radioButtonSolid";
-            radioButtonSolid.Size = new Size(57, 19);
+            radioButtonSolid.Size = new Size(51, 19);
             radioButtonSolid.TabIndex = 1;
             radioButtonSolid.TabStop = true;
-            radioButtonSolid.Text = "SOLID";
+            radioButtonSolid.Text = "Solid";
             radioButtonSolid.UseVisualStyleBackColor = true;
             radioButtonSolid.CheckedChanged += radioButtonSolid_CheckedChanged;
             // 
@@ -179,9 +190,9 @@
             labelState.AutoSize = true;
             labelState.Location = new Point(222, 28);
             labelState.Name = "labelState";
-            labelState.Size = new Size(109, 15);
+            labelState.Size = new Size(216, 15);
             labelState.TabIndex = 4;
-            labelState.Text = "Adding SOLID food";
+            labelState.Text = "Nutrition information per 100 grams (g)";
             // 
             // tabControlAddType
             // 
@@ -715,7 +726,10 @@
             // 
             // tabPageRecipie
             // 
-            tabPageRecipie.BackColor = Color.LightSalmon;
+            tabPageRecipie.BackColor = Color.Silver;
+            tabPageRecipie.Controls.Add(labelFilterRecipe);
+            tabPageRecipie.Controls.Add(textBoxFilterRecipe);
+            tabPageRecipie.Controls.Add(dataGridViewAddToRecipe);
             tabPageRecipie.Controls.Add(textBox2);
             tabPageRecipie.Controls.Add(textBox1);
             tabPageRecipie.Controls.Add(textBoxRecipeFoodDescription);
@@ -727,23 +741,110 @@
             tabPageRecipie.TabIndex = 1;
             tabPageRecipie.Text = "Add Recipie";
             // 
+            // labelFilterRecipe
+            // 
+            labelFilterRecipe.AutoSize = true;
+            labelFilterRecipe.BackColor = Color.LightCyan;
+            labelFilterRecipe.Location = new Point(149, 102);
+            labelFilterRecipe.Name = "labelFilterRecipe";
+            labelFilterRecipe.Size = new Size(59, 15);
+            labelFilterRecipe.TabIndex = 10;
+            labelFilterRecipe.Text = "Unfiltered";
+            // 
+            // textBoxFilterRecipe
+            // 
+            textBoxFilterRecipe.AutoCompleteMode = AutoCompleteMode.Suggest;
+            textBoxFilterRecipe.AutoCompleteSource = AutoCompleteSource.HistoryList;
+            textBoxFilterRecipe.Location = new Point(8, 99);
+            textBoxFilterRecipe.Name = "textBoxFilterRecipe";
+            textBoxFilterRecipe.PlaceholderText = "Enter food filter text";
+            textBoxFilterRecipe.Size = new Size(135, 23);
+            textBoxFilterRecipe.TabIndex = 9;
+            textBoxFilterRecipe.WordWrap = false;
+            textBoxFilterRecipe.KeyDown += textBoxFilterRecipe_KeyDown;
+            // 
+            // dataGridViewAddToRecipe
+            // 
+            dataGridViewAddToRecipe.AllowUserToAddRows = false;
+            dataGridViewAddToRecipe.AllowUserToDeleteRows = false;
+            dataGridViewAddToRecipe.AllowUserToResizeColumns = false;
+            dataGridViewAddToRecipe.AllowUserToResizeRows = false;
+            dataGridViewAddToRecipe.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            dataGridViewAddToRecipe.AutoGenerateColumns = false;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.Azure;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridViewAddToRecipe.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewAddToRecipe.ColumnHeadersHeight = 30;
+            dataGridViewAddToRecipe.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewAddToRecipe.Columns.AddRange(new DataGridViewColumn[] { foodDescriptionDataGridViewTextBoxColumn });
+            dataGridViewAddToRecipe.DataSource = foodBindingSource;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Info;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridViewAddToRecipe.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewAddToRecipe.EnableHeadersVisualStyles = false;
+            dataGridViewAddToRecipe.Location = new Point(8, 139);
+            dataGridViewAddToRecipe.Margin = new Padding(0);
+            dataGridViewAddToRecipe.MultiSelect = false;
+            dataGridViewAddToRecipe.Name = "dataGridViewAddToRecipe";
+            dataGridViewAddToRecipe.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = Color.White;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridViewAddToRecipe.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewAddToRecipe.RowHeadersVisible = false;
+            dataGridViewAddToRecipe.RowTemplate.Height = 25;
+            dataGridViewAddToRecipe.ScrollBars = ScrollBars.Vertical;
+            dataGridViewAddToRecipe.ShowCellErrors = false;
+            dataGridViewAddToRecipe.ShowEditingIcon = false;
+            dataGridViewAddToRecipe.ShowRowErrors = false;
+            dataGridViewAddToRecipe.Size = new Size(453, 554);
+            dataGridViewAddToRecipe.TabIndex = 8;
+            dataGridViewAddToRecipe.CellDoubleClick += dataGridViewAddToRecipe_CellDoubleClick;
+            dataGridViewAddToRecipe.KeyDown += dataGridViewAddToRecipe_KeyDown;
+            // 
+            // foodDescriptionDataGridViewTextBoxColumn
+            // 
+            foodDescriptionDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            foodDescriptionDataGridViewTextBoxColumn.DataPropertyName = "FoodDescription";
+            foodDescriptionDataGridViewTextBoxColumn.HeaderText = "Select food for recipe";
+            foodDescriptionDataGridViewTextBoxColumn.Name = "foodDescriptionDataGridViewTextBoxColumn";
+            foodDescriptionDataGridViewTextBoxColumn.ReadOnly = true;
+            foodDescriptionDataGridViewTextBoxColumn.Resizable = DataGridViewTriState.True;
+            // 
+            // foodBindingSource
+            // 
+            foodBindingSource.DataSource = typeof(Food);
+            // 
             // textBox2
             // 
-            textBox2.Location = new Point(854, 22);
+            textBox2.Location = new Point(725, 51);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(99, 23);
+            textBox2.Size = new Size(377, 23);
             textBox2.TabIndex = 7;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(749, 22);
+            textBox1.Location = new Point(725, 22);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(99, 23);
+            textBox1.Size = new Size(377, 23);
             textBox1.TabIndex = 6;
             // 
             // textBoxRecipeFoodDescription
             // 
-            textBoxRecipeFoodDescription.Location = new Point(138, 22);
+            textBoxRecipeFoodDescription.Location = new Point(138, 17);
             textBoxRecipeFoodDescription.Name = "textBoxRecipeFoodDescription";
             textBoxRecipeFoodDescription.Size = new Size(538, 23);
             textBoxRecipeFoodDescription.TabIndex = 5;
@@ -752,7 +853,7 @@
             // labelRecipeFoodDescription
             // 
             labelRecipeFoodDescription.AutoSize = true;
-            labelRecipeFoodDescription.Location = new Point(23, 25);
+            labelRecipeFoodDescription.Location = new Point(26, 20);
             labelRecipeFoodDescription.Name = "labelRecipeFoodDescription";
             labelRecipeFoodDescription.Size = new Size(96, 15);
             labelRecipeFoodDescription.TabIndex = 4;
@@ -763,14 +864,18 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1159, 808);
+            ControlBox = false;
             Controls.Add(tabControlAddType);
             Controls.Add(labelState);
             Controls.Add(buttonCancelAddFood);
             Controls.Add(buttonAddFood);
             Controls.Add(groupBoxFoodTypes);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "foodInputForm";
             Text = "Form for adding a food to the database";
+            Load += foodInputForm_Load;
             Shown += foodInputForm_Shown;
             groupBoxFoodTypes.ResumeLayout(false);
             groupBoxFoodTypes.PerformLayout();
@@ -779,6 +884,8 @@
             tabPageNonRecipie.PerformLayout();
             tabPageRecipie.ResumeLayout(false);
             tabPageRecipie.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewAddToRecipe).EndInit();
+            ((System.ComponentModel.ISupportInitialize)foodBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -847,5 +954,10 @@
         private Label labelRecipeFoodDescription;
         private TextBox textBox2;
         private TextBox textBox1;
+        private DataGridView dataGridViewAddToRecipe;
+        private BindingSource foodBindingSource;
+        private DataGridViewTextBoxColumn foodDescriptionDataGridViewTextBoxColumn;
+        private TextBox textBoxFilterRecipe;
+        private Label labelFilterRecipe;
     }
 }
