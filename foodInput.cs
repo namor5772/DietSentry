@@ -1190,11 +1190,16 @@ namespace DietSentry
                     var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
                     FoodDescriptionRecipe = FoodSelected.FoodDescription;
 
-                    // opens dialog used to input the quantity of that food eaten, position is "locked" to the food tabPage
+                    // opens dialog used to input the quantity of that food in recipe, position is "locked" in relation to this form
                     InputRecipeComponent frm = new(this);
                     frm.StartPosition = FormStartPosition.Manual;
-                    frm.Location = this.PointToScreen(tabPageRecipie.Location);
+                    Point pf = new Point(14, 113);
+                    frm.Location = this.PointToScreen(pf);
                     frm.ShowDialog();
+
+                    // set focus back to food selected
+                    //                    dataGridViewAddToRecipe.CurrentCell = dataGridViewAddToRecipe.FirstDisplayedCell;
+                    dataGridViewAddToRecipe.CurrentCell.Selected = true;
 
                     if (amountOfFoodInRecipe > 0.0)
                     {
@@ -1255,7 +1260,18 @@ namespace DietSentry
                     var filteredData = context.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(labelFilterRecipe.Text));
                     this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
                 }
-                dataGridViewAddToRecipe.CurrentCell = dataGridViewAddToRecipe.FirstDisplayedCell;
+
+                // setting focus to first displayed cell in data grid. Ignore (via exception) if nothing display in data grid 
+                try
+                {
+                    dataGridViewAddToRecipe.CurrentCell = dataGridViewAddToRecipe.FirstDisplayedCell;
+                    dataGridViewAddToRecipe.CurrentCell.Selected = true;
+                    dataGridViewAddToRecipe.Focus();
+                }
+                catch
+                {
+                    ; // do nothing!
+                }
             }
         }
 

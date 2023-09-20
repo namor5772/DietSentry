@@ -114,7 +114,18 @@ namespace DietSentry
                     var filteredData = context.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(labelFilter.Text));
                     this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
                 }
-                dataGridViewFoods.CurrentCell = dataGridViewFoods.FirstDisplayedCell;
+
+                // setting focus to first displayed cell in data grid. Ignore (via exception) if nothing display in data grid 
+                try
+                {
+                    dataGridViewFoods.CurrentCell = dataGridViewFoods.FirstDisplayedCell;
+                    dataGridViewFoods.CurrentCell.Selected = true;
+                    dataGridViewFoods.Focus();
+                }
+                catch
+                {
+                    ; // do nothing!
+                }
             }
         }
 

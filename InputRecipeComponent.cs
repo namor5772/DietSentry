@@ -9,6 +9,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DietSentry.UtilitiesRMG; // so can use the UnitsString function
 
 namespace DietSentry
 {
@@ -24,23 +25,6 @@ namespace DietSentry
         }
 
 
-        // function that specifies the units used for the eaten foods amount
-        // either grams (g) or millilitres (mL)
-        private static string UnitsString(string sDesc)
-        {
-            string sT1 = sDesc.Substring(sDesc.Length - 3, 2);
-            string sT2 = sDesc.Substring(sDesc.Length - 2, 2);
-            if ((sT1.Equals("mL")) | (sT2.Equals("mL")))
-            {
-                return "mL";
-            }
-            else
-            {
-                return "g";
-            }
-        }
-
-
         private void InputRecipeComponent_Shown(object sender, EventArgs e)
         {
             // Call textbox's focus method and make sure initial value is ""
@@ -49,6 +33,7 @@ namespace DietSentry
             this.labelAmount.Text = UnitsString(foodInputFormX.FoodDescriptionRecipe);
             this.labelDescription.Text = foodInputFormX.FoodDescriptionRecipe;
         }
+
 
         private void textBoxAmount_KeyDown(object sender, KeyEventArgs e)
         {
