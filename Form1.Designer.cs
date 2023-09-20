@@ -52,6 +52,7 @@ namespace DietSentry
         // *********************************************************
 
 
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -189,6 +190,7 @@ namespace DietSentry
             cholesterolDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             alcoholDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             eatenBindingSource = new BindingSource(components);
+            recipeBindingSource = new BindingSource(components);
             tabControl1.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageFood.SuspendLayout();
@@ -197,6 +199,7 @@ namespace DietSentry
             tabPageEaten.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewEaten).BeginInit();
             ((System.ComponentModel.ISupportInitialize)eatenBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)recipeBindingSource).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -1224,6 +1227,10 @@ namespace DietSentry
             // 
             eatenBindingSource.DataSource = typeof(Eaten);
             // 
+            // recipeBindingSource
+            // 
+            recipeBindingSource.DataSource = typeof(Recipe);
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1243,6 +1250,7 @@ namespace DietSentry
             tabPageEaten.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewEaten).EndInit();
             ((System.ComponentModel.ISupportInitialize)eatenBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)recipeBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -1318,5 +1326,6 @@ namespace DietSentry
         private CheckBox checkBoxMainFoodCols;
         private Label labelInfo;
         public BindingSource foodBindingSource;
+        private BindingSource recipeBindingSource;
     }
 }

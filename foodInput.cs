@@ -12,6 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static DietSentry.UtilitiesRMG; // so can use the UnitsString function
+
 
 namespace DietSentry
 {
@@ -43,19 +45,13 @@ namespace DietSentry
 
             this.dbContext = new FoodsContext();
 
-            // Uncomment the line below to start fresh with a new database.
             this.dbContext.Database.EnsureCreated();
 
             this.dbContext.Foods.Load();
-            //            this.dbContext.Eaten.Load();
+            this.dbContext.Recipe.Load();
 
             this.foodBindingSource.DataSource = dbContext.Foods.Local.ToBindingList();
-            //            this.eatenBindingSource.DataSource = dbContext.Eaten.Local.ToBindingList();
-            /*
-                        actOnFoodColumnStates();
-                        actOnEatenFoodColumnStates();
-                        actOnEatenFoodFilteringStates();
-            */
+            this.recipeBindingSource.DataSource = dbContext.Recipe.Local.ToBindingList();
         }
 
 
@@ -1190,20 +1186,34 @@ namespace DietSentry
                     var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
                     FoodDescriptionRecipe = FoodSelected.FoodDescription;
 
-                    // opens dialog used to input the quantity of that food in recipe, position is "locked" in relation to this form
-                    InputRecipeComponent frm = new(this);
-                    frm.StartPosition = FormStartPosition.Manual;
-                    Point pf = new Point(14, 113);
-                    frm.Location = this.PointToScreen(pf);
-                    frm.ShowDialog();
-
-                    // set focus back to food selected
-                    //                    dataGridViewAddToRecipe.CurrentCell = dataGridViewAddToRecipe.FirstDisplayedCell;
-                    dataGridViewAddToRecipe.CurrentCell.Selected = true;
-
-                    if (amountOfFoodInRecipe > 0.0)
+                    // if selected food is a liquid (ie. measured in mL) then cannot add it to recipe
+                    if (UnitsString(FoodDescriptionRecipe) == "mL")
                     {
-                        textBox1.Text = string.Format("{0:N2}", amountOfFoodInRecipe);
+                        // Initializes the variables to pass to the MessageBox.Show method.
+                        string message = "Only foods measured in grams can be added to a recipe";
+                        string caption = "CANNOT ADD THIS FOOD";
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+
+                        // Displays the MessageBox.
+                        MessageBox.Show(message, caption, buttons);
+                    }
+                    else // selected food is a solid or recipe (ie. measured in g)
+                    {
+                        // opens dialog used to input the quantity of that food in recipe, position is "locked" in relation to this form
+                        InputRecipeComponent frm = new(this);
+                        frm.StartPosition = FormStartPosition.Manual;
+                        Point pf = new Point(14, 113);
+                        frm.Location = this.PointToScreen(pf);
+                        frm.ShowDialog();
+
+                        // set focus back to food selected
+                        //                    dataGridViewAddToRecipe.CurrentCell = dataGridViewAddToRecipe.FirstDisplayedCell;
+                        dataGridViewAddToRecipe.CurrentCell.Selected = true;
+
+                        if (amountOfFoodInRecipe > 0.0)
+                        {
+                            textBox1.Text = string.Format("{0:N2}", amountOfFoodInRecipe);
+                        }
                     }
                 }
             }

@@ -137,14 +137,16 @@ namespace DietSentry
             this.dbContext = new FoodsContext();
 
             // Uncomment the line below to start fresh with a new database.
-            //this.dbContext.Database.EnsureDeleted();
+            // this.dbContext.Database.EnsureDeleted();
             this.dbContext.Database.EnsureCreated();
 
             this.dbContext.Foods.Load();
             this.dbContext.Eaten.Load();
+            this.dbContext.Recipe.Load();
 
             this.foodBindingSource.DataSource = dbContext.Foods.Local.ToBindingList();
             this.eatenBindingSource.DataSource = dbContext.Eaten.Local.ToBindingList();
+            this.recipeBindingSource.DataSource = dbContext.Recipe.Local.ToBindingList();
 
             actOnFoodColumnStates();
             actOnEatenFoodColumnStates();
@@ -440,7 +442,6 @@ namespace DietSentry
 
                 // Displays the MessageBox.
                 MessageBox.Show(message, caption, buttons);
-
                 checkBoxDailyTotals.Checked = false;
             }
         }
@@ -765,7 +766,5 @@ namespace DietSentry
             actOnFoodColumnStates();
         }
 
-
     }
-
 }

@@ -44,9 +44,9 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             groupBoxFoodTypes = new GroupBox();
             radioButtonRecipie = new RadioButton();
             radioButtonLiquid = new RadioButton();
@@ -114,12 +114,43 @@
             textBox1 = new TextBox();
             textBoxRecipeFoodDescription = new TextBox();
             labelRecipeFoodDescription = new Label();
+            dataGridViewRecipe = new DataGridView();
+            recipeBindingSource = new BindingSource(components);
+            recipeIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            foodIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            amountDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            foodDescriptionDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            energyDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            proteinDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            fatTotalDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            saturatedFatDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            transFatDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            polyunsaturatedFatDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            monounsaturatedFatDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            carbohydrateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            sugarsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dietaryFibreDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            sodiumNaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            calciumCaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            potassiumKDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            thiaminB1DataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            riboflavinB2DataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            niacinB3DataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            folateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            ironFeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            magnesiumMgDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            vitaminCDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            caffeineDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            cholesterolDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            alcoholDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             groupBoxFoodTypes.SuspendLayout();
             tabControlAddType.SuspendLayout();
             tabPageNonRecipie.SuspendLayout();
             tabPageRecipie.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAddToRecipe).BeginInit();
             ((System.ComponentModel.ISupportInitialize)foodBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewRecipe).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)recipeBindingSource).BeginInit();
             SuspendLayout();
             // 
             // groupBoxFoodTypes
@@ -732,6 +763,7 @@
             // tabPageRecipie
             // 
             tabPageRecipie.BackColor = Color.Silver;
+            tabPageRecipie.Controls.Add(dataGridViewRecipe);
             tabPageRecipie.Controls.Add(labelFilterRecipe);
             tabPageRecipie.Controls.Add(textBoxFilterRecipe);
             tabPageRecipie.Controls.Add(dataGridViewAddToRecipe);
@@ -777,39 +809,39 @@
             dataGridViewAddToRecipe.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             dataGridViewAddToRecipe.AutoGenerateColumns = false;
             dataGridViewAddToRecipe.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.Azure;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dataGridViewAddToRecipe.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.Azure;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridViewAddToRecipe.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewAddToRecipe.ColumnHeadersHeight = 30;
             dataGridViewAddToRecipe.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewAddToRecipe.Columns.AddRange(new DataGridViewColumn[] { foodDescriptionDataGridViewTextBoxColumn });
             dataGridViewAddToRecipe.DataSource = foodBindingSource;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = SystemColors.Info;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
-            dataGridViewAddToRecipe.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Info;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridViewAddToRecipe.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridViewAddToRecipe.EnableHeadersVisualStyles = false;
             dataGridViewAddToRecipe.Location = new Point(8, 139);
             dataGridViewAddToRecipe.Margin = new Padding(0);
             dataGridViewAddToRecipe.MultiSelect = false;
             dataGridViewAddToRecipe.Name = "dataGridViewAddToRecipe";
             dataGridViewAddToRecipe.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = Color.White;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
-            dataGridViewAddToRecipe.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = Color.White;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridViewAddToRecipe.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridViewAddToRecipe.RowHeadersVisible = false;
             dataGridViewAddToRecipe.RowTemplate.Height = 25;
             dataGridViewAddToRecipe.ScrollBars = ScrollBars.Vertical;
@@ -865,6 +897,184 @@
             labelRecipeFoodDescription.TabIndex = 4;
             labelRecipeFoodDescription.Text = "Food description";
             // 
+            // dataGridViewRecipe
+            // 
+            dataGridViewRecipe.AutoGenerateColumns = false;
+            dataGridViewRecipe.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewRecipe.Columns.AddRange(new DataGridViewColumn[] { recipeIdDataGridViewTextBoxColumn, foodIdDataGridViewTextBoxColumn, amountDataGridViewTextBoxColumn, foodDescriptionDataGridViewTextBoxColumn1, energyDataGridViewTextBoxColumn, proteinDataGridViewTextBoxColumn, fatTotalDataGridViewTextBoxColumn, saturatedFatDataGridViewTextBoxColumn, transFatDataGridViewTextBoxColumn, polyunsaturatedFatDataGridViewTextBoxColumn, monounsaturatedFatDataGridViewTextBoxColumn, carbohydrateDataGridViewTextBoxColumn, sugarsDataGridViewTextBoxColumn, dietaryFibreDataGridViewTextBoxColumn, sodiumNaDataGridViewTextBoxColumn, calciumCaDataGridViewTextBoxColumn, potassiumKDataGridViewTextBoxColumn, thiaminB1DataGridViewTextBoxColumn, riboflavinB2DataGridViewTextBoxColumn, niacinB3DataGridViewTextBoxColumn, folateDataGridViewTextBoxColumn, ironFeDataGridViewTextBoxColumn, magnesiumMgDataGridViewTextBoxColumn, vitaminCDataGridViewTextBoxColumn, caffeineDataGridViewTextBoxColumn, cholesterolDataGridViewTextBoxColumn, alcoholDataGridViewTextBoxColumn });
+            dataGridViewRecipe.DataSource = recipeBindingSource;
+            dataGridViewRecipe.Location = new Point(655, 142);
+            dataGridViewRecipe.Name = "dataGridViewRecipe";
+            dataGridViewRecipe.RowTemplate.Height = 25;
+            dataGridViewRecipe.Size = new Size(421, 421);
+            dataGridViewRecipe.TabIndex = 11;
+            // 
+            // recipeBindingSource
+            // 
+            recipeBindingSource.DataSource = typeof(Recipe);
+            // 
+            // recipeIdDataGridViewTextBoxColumn
+            // 
+            recipeIdDataGridViewTextBoxColumn.DataPropertyName = "RecipeId";
+            recipeIdDataGridViewTextBoxColumn.HeaderText = "RecipeId";
+            recipeIdDataGridViewTextBoxColumn.Name = "recipeIdDataGridViewTextBoxColumn";
+            // 
+            // foodIdDataGridViewTextBoxColumn
+            // 
+            foodIdDataGridViewTextBoxColumn.DataPropertyName = "FoodId";
+            foodIdDataGridViewTextBoxColumn.HeaderText = "FoodId";
+            foodIdDataGridViewTextBoxColumn.Name = "foodIdDataGridViewTextBoxColumn";
+            // 
+            // amountDataGridViewTextBoxColumn
+            // 
+            amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
+            amountDataGridViewTextBoxColumn.HeaderText = "Amount";
+            amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
+            // 
+            // foodDescriptionDataGridViewTextBoxColumn1
+            // 
+            foodDescriptionDataGridViewTextBoxColumn1.DataPropertyName = "FoodDescription";
+            foodDescriptionDataGridViewTextBoxColumn1.HeaderText = "FoodDescription";
+            foodDescriptionDataGridViewTextBoxColumn1.Name = "foodDescriptionDataGridViewTextBoxColumn1";
+            // 
+            // energyDataGridViewTextBoxColumn
+            // 
+            energyDataGridViewTextBoxColumn.DataPropertyName = "Energy";
+            energyDataGridViewTextBoxColumn.HeaderText = "Energy";
+            energyDataGridViewTextBoxColumn.Name = "energyDataGridViewTextBoxColumn";
+            // 
+            // proteinDataGridViewTextBoxColumn
+            // 
+            proteinDataGridViewTextBoxColumn.DataPropertyName = "Protein";
+            proteinDataGridViewTextBoxColumn.HeaderText = "Protein";
+            proteinDataGridViewTextBoxColumn.Name = "proteinDataGridViewTextBoxColumn";
+            // 
+            // fatTotalDataGridViewTextBoxColumn
+            // 
+            fatTotalDataGridViewTextBoxColumn.DataPropertyName = "FatTotal";
+            fatTotalDataGridViewTextBoxColumn.HeaderText = "FatTotal";
+            fatTotalDataGridViewTextBoxColumn.Name = "fatTotalDataGridViewTextBoxColumn";
+            // 
+            // saturatedFatDataGridViewTextBoxColumn
+            // 
+            saturatedFatDataGridViewTextBoxColumn.DataPropertyName = "SaturatedFat";
+            saturatedFatDataGridViewTextBoxColumn.HeaderText = "SaturatedFat";
+            saturatedFatDataGridViewTextBoxColumn.Name = "saturatedFatDataGridViewTextBoxColumn";
+            // 
+            // transFatDataGridViewTextBoxColumn
+            // 
+            transFatDataGridViewTextBoxColumn.DataPropertyName = "TransFat";
+            transFatDataGridViewTextBoxColumn.HeaderText = "TransFat";
+            transFatDataGridViewTextBoxColumn.Name = "transFatDataGridViewTextBoxColumn";
+            // 
+            // polyunsaturatedFatDataGridViewTextBoxColumn
+            // 
+            polyunsaturatedFatDataGridViewTextBoxColumn.DataPropertyName = "PolyunsaturatedFat";
+            polyunsaturatedFatDataGridViewTextBoxColumn.HeaderText = "PolyunsaturatedFat";
+            polyunsaturatedFatDataGridViewTextBoxColumn.Name = "polyunsaturatedFatDataGridViewTextBoxColumn";
+            // 
+            // monounsaturatedFatDataGridViewTextBoxColumn
+            // 
+            monounsaturatedFatDataGridViewTextBoxColumn.DataPropertyName = "MonounsaturatedFat";
+            monounsaturatedFatDataGridViewTextBoxColumn.HeaderText = "MonounsaturatedFat";
+            monounsaturatedFatDataGridViewTextBoxColumn.Name = "monounsaturatedFatDataGridViewTextBoxColumn";
+            // 
+            // carbohydrateDataGridViewTextBoxColumn
+            // 
+            carbohydrateDataGridViewTextBoxColumn.DataPropertyName = "Carbohydrate";
+            carbohydrateDataGridViewTextBoxColumn.HeaderText = "Carbohydrate";
+            carbohydrateDataGridViewTextBoxColumn.Name = "carbohydrateDataGridViewTextBoxColumn";
+            // 
+            // sugarsDataGridViewTextBoxColumn
+            // 
+            sugarsDataGridViewTextBoxColumn.DataPropertyName = "Sugars";
+            sugarsDataGridViewTextBoxColumn.HeaderText = "Sugars";
+            sugarsDataGridViewTextBoxColumn.Name = "sugarsDataGridViewTextBoxColumn";
+            // 
+            // dietaryFibreDataGridViewTextBoxColumn
+            // 
+            dietaryFibreDataGridViewTextBoxColumn.DataPropertyName = "DietaryFibre";
+            dietaryFibreDataGridViewTextBoxColumn.HeaderText = "DietaryFibre";
+            dietaryFibreDataGridViewTextBoxColumn.Name = "dietaryFibreDataGridViewTextBoxColumn";
+            // 
+            // sodiumNaDataGridViewTextBoxColumn
+            // 
+            sodiumNaDataGridViewTextBoxColumn.DataPropertyName = "SodiumNa";
+            sodiumNaDataGridViewTextBoxColumn.HeaderText = "SodiumNa";
+            sodiumNaDataGridViewTextBoxColumn.Name = "sodiumNaDataGridViewTextBoxColumn";
+            // 
+            // calciumCaDataGridViewTextBoxColumn
+            // 
+            calciumCaDataGridViewTextBoxColumn.DataPropertyName = "CalciumCa";
+            calciumCaDataGridViewTextBoxColumn.HeaderText = "CalciumCa";
+            calciumCaDataGridViewTextBoxColumn.Name = "calciumCaDataGridViewTextBoxColumn";
+            // 
+            // potassiumKDataGridViewTextBoxColumn
+            // 
+            potassiumKDataGridViewTextBoxColumn.DataPropertyName = "PotassiumK";
+            potassiumKDataGridViewTextBoxColumn.HeaderText = "PotassiumK";
+            potassiumKDataGridViewTextBoxColumn.Name = "potassiumKDataGridViewTextBoxColumn";
+            // 
+            // thiaminB1DataGridViewTextBoxColumn
+            // 
+            thiaminB1DataGridViewTextBoxColumn.DataPropertyName = "ThiaminB1";
+            thiaminB1DataGridViewTextBoxColumn.HeaderText = "ThiaminB1";
+            thiaminB1DataGridViewTextBoxColumn.Name = "thiaminB1DataGridViewTextBoxColumn";
+            // 
+            // riboflavinB2DataGridViewTextBoxColumn
+            // 
+            riboflavinB2DataGridViewTextBoxColumn.DataPropertyName = "RiboflavinB2";
+            riboflavinB2DataGridViewTextBoxColumn.HeaderText = "RiboflavinB2";
+            riboflavinB2DataGridViewTextBoxColumn.Name = "riboflavinB2DataGridViewTextBoxColumn";
+            // 
+            // niacinB3DataGridViewTextBoxColumn
+            // 
+            niacinB3DataGridViewTextBoxColumn.DataPropertyName = "NiacinB3";
+            niacinB3DataGridViewTextBoxColumn.HeaderText = "NiacinB3";
+            niacinB3DataGridViewTextBoxColumn.Name = "niacinB3DataGridViewTextBoxColumn";
+            // 
+            // folateDataGridViewTextBoxColumn
+            // 
+            folateDataGridViewTextBoxColumn.DataPropertyName = "Folate";
+            folateDataGridViewTextBoxColumn.HeaderText = "Folate";
+            folateDataGridViewTextBoxColumn.Name = "folateDataGridViewTextBoxColumn";
+            // 
+            // ironFeDataGridViewTextBoxColumn
+            // 
+            ironFeDataGridViewTextBoxColumn.DataPropertyName = "IronFe";
+            ironFeDataGridViewTextBoxColumn.HeaderText = "IronFe";
+            ironFeDataGridViewTextBoxColumn.Name = "ironFeDataGridViewTextBoxColumn";
+            // 
+            // magnesiumMgDataGridViewTextBoxColumn
+            // 
+            magnesiumMgDataGridViewTextBoxColumn.DataPropertyName = "MagnesiumMg";
+            magnesiumMgDataGridViewTextBoxColumn.HeaderText = "MagnesiumMg";
+            magnesiumMgDataGridViewTextBoxColumn.Name = "magnesiumMgDataGridViewTextBoxColumn";
+            // 
+            // vitaminCDataGridViewTextBoxColumn
+            // 
+            vitaminCDataGridViewTextBoxColumn.DataPropertyName = "VitaminC";
+            vitaminCDataGridViewTextBoxColumn.HeaderText = "VitaminC";
+            vitaminCDataGridViewTextBoxColumn.Name = "vitaminCDataGridViewTextBoxColumn";
+            // 
+            // caffeineDataGridViewTextBoxColumn
+            // 
+            caffeineDataGridViewTextBoxColumn.DataPropertyName = "Caffeine";
+            caffeineDataGridViewTextBoxColumn.HeaderText = "Caffeine";
+            caffeineDataGridViewTextBoxColumn.Name = "caffeineDataGridViewTextBoxColumn";
+            // 
+            // cholesterolDataGridViewTextBoxColumn
+            // 
+            cholesterolDataGridViewTextBoxColumn.DataPropertyName = "Cholesterol";
+            cholesterolDataGridViewTextBoxColumn.HeaderText = "Cholesterol";
+            cholesterolDataGridViewTextBoxColumn.Name = "cholesterolDataGridViewTextBoxColumn";
+            // 
+            // alcoholDataGridViewTextBoxColumn
+            // 
+            alcoholDataGridViewTextBoxColumn.DataPropertyName = "Alcohol";
+            alcoholDataGridViewTextBoxColumn.HeaderText = "Alcohol";
+            alcoholDataGridViewTextBoxColumn.Name = "alcoholDataGridViewTextBoxColumn";
+            // 
             // foodInputForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -891,6 +1101,8 @@
             tabPageRecipie.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAddToRecipe).EndInit();
             ((System.ComponentModel.ISupportInitialize)foodBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewRecipe).EndInit();
+            ((System.ComponentModel.ISupportInitialize)recipeBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -964,5 +1176,34 @@
         private DataGridViewTextBoxColumn foodDescriptionDataGridViewTextBoxColumn;
         private TextBox textBoxFilterRecipe;
         private Label labelFilterRecipe;
+        private DataGridView dataGridViewRecipe;
+        private DataGridViewTextBoxColumn recipeIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn foodIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn foodDescriptionDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn energyDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn proteinDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn fatTotalDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn saturatedFatDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn transFatDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn polyunsaturatedFatDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn monounsaturatedFatDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn carbohydrateDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn sugarsDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dietaryFibreDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn sodiumNaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn calciumCaDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn potassiumKDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn thiaminB1DataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn riboflavinB2DataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn niacinB3DataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn folateDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn ironFeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn magnesiumMgDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn vitaminCDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn caffeineDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn cholesterolDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn alcoholDataGridViewTextBoxColumn;
+        private BindingSource recipeBindingSource;
     }
 }
