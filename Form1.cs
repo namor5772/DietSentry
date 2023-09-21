@@ -579,7 +579,7 @@ namespace DietSentry
                 }
 
                 // restore view of previously hidden columns 
-                dataGridViewEaten.Columns[0].Visible = true; // show EatenId column
+                dataGridViewEaten.Columns[0].Visible = false; // show EatenId column
                 dataGridViewEaten.Columns[2].Visible = true; // show TimeEaten column
                 dataGridViewEaten.Columns[3].Visible = true; // show AmountEaten column
                 dataGridViewEaten.Columns[4].Visible = true; // show FoodDescription column
@@ -595,7 +595,7 @@ namespace DietSentry
                 }
 
                 // restore view of previously hidden columns 
-                dataGridViewEaten.Columns[0].Visible = true; // show EatenId column
+                dataGridViewEaten.Columns[0].Visible = false; // show EatenId column
                 dataGridViewEaten.Columns[2].Visible = true; // show TimeEaten column
                 dataGridViewEaten.Columns[3].Visible = true; // show AmountEaten column
                 dataGridViewEaten.Columns[4].Visible = true; // show FoodDescription column
@@ -709,7 +709,7 @@ namespace DietSentry
                         }
                         else
 
-                        labelInfo.Text = "Deleted food item: " + FoodSelectedId;
+                            labelInfo.Text = "Deleted food item: " + FoodSelectedId;
 
                         // refresh Foods data grid view while maintaining filter status - it is done in this complicated way
                         // because it crashes under some patricular circumstances !
