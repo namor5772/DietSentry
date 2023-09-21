@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using static DietSentry.UtilitiesRMG; // so can use the isRecipe function
 
 namespace DietSentry
 {
@@ -691,11 +692,23 @@ namespace DietSentry
                     {
                         // gain direct access to selected record in the Foods table
                         var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
-                        string FoodSelectedId = FoodSelected.FoodId.ToString(); // get Id for later display
+                        int FoodSelectedId = FoodSelected.FoodId; // get Id for later display
+                        string FoodSelectedDesc = FoodSelected.FoodDescription; // get FoodDescription for later use
 
                         // delete this record from Foods table
                         context.Foods.Remove(FoodSelected);
                         context.SaveChanges();
+
+                        // determines if this food is a recipe because extra stuff has to be deleted
+                        if (isRecipe(FoodSelectedDesc))
+                        {
+                            // delete any records in the recipe table
+                            var recipeFoods = context.Recipe.Where(r => r.FoodId == FoodSelectedId);
+                            context.Recipe.RemoveRange(recipeFoods);
+                            context.SaveChanges();
+                        }
+                        else
+
                         labelInfo.Text = "Deleted food item: " + FoodSelectedId;
 
                         // refresh Foods data grid view while maintaining filter status - it is done in this complicated way

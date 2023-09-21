@@ -25,6 +25,14 @@ namespace DietSentry
             }
         }
 
+        /* function that retruns true if the food item with the description sDesc is a recipe
+         * false otherwise */
+        public static bool isRecipe(string sDesc)
+        {
+            //string sT = sDesc.Substring(sDesc.Length - 1, 1);
+            return (sDesc.Substring(sDesc.Length - 1, 1)).Equals("*");
+        }
+
     }
 
 }

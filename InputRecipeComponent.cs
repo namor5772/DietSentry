@@ -53,7 +53,7 @@ namespace DietSentry
                 }
 
                 // collects the input, processes it and assignes it to a variable accessible in the MainForm     
-                foodInputFormX.amountOfFoodInRecipe = amount / 100.0F;
+                foodInputFormX.amountOfFoodInRecipe = amount;
                 Close();
             }
 
