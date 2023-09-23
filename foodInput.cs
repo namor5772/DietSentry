@@ -59,14 +59,17 @@ namespace DietSentry
         // 0= when dealing with non-recipe foods, 1= when dealing with recipe food
         public void ChangeFormSize(int sizeType)
         {
-            if (sizeType == 0)
-            {
-                this.Size = new Size(783, 847);
-            }
-            else // if (sizeType ==1)
-            {
-                this.Size = new Size(1175, 847);
-            }
+            ;
+            /*
+                        if (sizeType == 0)
+                        {
+                            this.Size = new Size(783, 847);
+                        }
+                        else // if (sizeType ==1)
+                        {
+                            this.Size = new Size(1175, 847);
+                        }
+            */
         }
 
 
@@ -240,15 +243,11 @@ namespace DietSentry
         }
 
 
-        // Does nothing (as intended) but close this form
+        // When {Cancel} button pressed
         private void buttonCancelAddFood_Click(object sender, EventArgs e)
         {
-            mainForm.actOnFoodAdded = false;
+            cancelInputAction();
 
-            // delete any provisionally created bits of a recipe if they exist
-            cancelAdditionOfRecipe();
-
-            // this tells the code in the MainForm to CANCEL the addition of a food item to the Foods table 
             this.Close();
         }
 
@@ -1475,6 +1474,21 @@ namespace DietSentry
         }
 
 
+        private void cancelInputAction()
+        {
+            // this tells the code in the MainForm to CANCEL the addition of a food item to the Foods table 
+            mainForm.actOnFoodAdded = false;
+
+            // delete any provisionally created bits of a recipe if they exist
+            cancelAdditionOfRecipe();
+        }
+
+
+        // alternate to pressing the {Cancel} button
+        private void foodInputForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            cancelInputAction();
+        }
     }
 }
 
