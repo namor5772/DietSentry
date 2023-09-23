@@ -770,7 +770,7 @@
             dataGridViewRecipe.Name = "dataGridViewRecipe";
             dataGridViewRecipe.RowHeadersWidth = 62;
             dataGridViewRecipe.RowTemplate.Height = 25;
-            dataGridViewRecipe.Size = new Size(664, 546);
+            dataGridViewRecipe.Size = new Size(626, 523);
             dataGridViewRecipe.TabIndex = 11;
             dataGridViewRecipe.UserDeletingRow += dataGridViewRecipe_UserDeletingRow;
             // 
@@ -867,7 +867,7 @@
             dataGridViewAddToRecipe.ShowCellErrors = false;
             dataGridViewAddToRecipe.ShowEditingIcon = false;
             dataGridViewAddToRecipe.ShowRowErrors = false;
-            dataGridViewAddToRecipe.Size = new Size(453, 546);
+            dataGridViewAddToRecipe.Size = new Size(444, 523);
             dataGridViewAddToRecipe.TabIndex = 8;
             dataGridViewAddToRecipe.CellDoubleClick += dataGridViewAddToRecipe_CellDoubleClick;
             dataGridViewAddToRecipe.KeyDown += dataGridViewAddToRecipe_KeyDown;
