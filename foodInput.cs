@@ -239,7 +239,21 @@ namespace DietSentry
                         break;
                 }
             }
+
+
+            actOnClose = false; // this prevents cancellation actions occuring when thsi form closes 
             this.Close();
+        }
+
+
+        // what needs to be done when the {Cancel} button is pressed
+        private void cancelInputAction()
+        {
+            // this tells the code in the MainForm to CANCEL the addition of a food item to the Foods table 
+            mainForm.actOnFoodAdded = false;
+
+            // delete any provisionally created bits of a recipe if they exist
+            cancelAdditionOfRecipe();
         }
 
 
@@ -248,7 +262,23 @@ namespace DietSentry
         {
             cancelInputAction();
 
+            actOnClose = false; // this prevents cancellation actions occuring when this form closes 
             this.Close();
+        }
+
+
+        // this makes pressing the {x} button behave exactly the same as pressing the {Cancel} button
+        private void foodInputForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // check the reason (UserClosing)
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                if (actOnClose) 
+                {
+                    // then we are in effect pressing the {Cancel} button by pressing the {x} button
+                    cancelInputAction();
+                }
+            }
         }
 
 
@@ -1443,10 +1473,12 @@ namespace DietSentry
 
         }
 
+
         private void tabPageRecipie_Enter(object sender, EventArgs e)
         {
             refreshRecipeDataGrid(recordID);
         }
+
 
         private void dataGridViewRecipe_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
@@ -1474,21 +1506,6 @@ namespace DietSentry
         }
 
 
-        private void cancelInputAction()
-        {
-            // this tells the code in the MainForm to CANCEL the addition of a food item to the Foods table 
-            mainForm.actOnFoodAdded = false;
-
-            // delete any provisionally created bits of a recipe if they exist
-            cancelAdditionOfRecipe();
-        }
-
-
-        // alternate to pressing the {Cancel} button
-        private void foodInputForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            cancelInputAction();
-        }
     }
 }
 

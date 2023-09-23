@@ -243,7 +243,7 @@ namespace DietSentry
             tabControlMain.Multiline = true;
             tabControlMain.Name = "tabControlMain";
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new Size(1395, 723);
+            tabControlMain.Size = new Size(1310, 836);
             tabControlMain.TabIndex = 1;
             tabControlMain.TabStop = false;
             // 
@@ -257,7 +257,7 @@ namespace DietSentry
             tabPageFood.Location = new Point(4, 27);
             tabPageFood.Name = "tabPageFood";
             tabPageFood.Padding = new Padding(3);
-            tabPageFood.Size = new Size(1387, 692);
+            tabPageFood.Size = new Size(1302, 805);
             tabPageFood.TabIndex = 0;
             tabPageFood.Text = "Food";
             tabPageFood.UseVisualStyleBackColor = true;
@@ -313,7 +313,6 @@ namespace DietSentry
             dataGridViewFoods.AllowUserToResizeRows = false;
             dataGridViewFoods.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridViewFoods.AutoGenerateColumns = false;
-            dataGridViewFoods.BorderStyle = BorderStyle.None;
             dataGridViewFoods.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.Azure;
@@ -336,7 +335,7 @@ namespace DietSentry
             dataGridViewFoods.DefaultCellStyle = dataGridViewCellStyle27;
             dataGridViewFoods.EditMode = DataGridViewEditMode.EditOnF2;
             dataGridViewFoods.EnableHeadersVisualStyles = false;
-            dataGridViewFoods.Location = new Point(3, 99);
+            dataGridViewFoods.Location = new Point(6, 99);
             dataGridViewFoods.MultiSelect = false;
             dataGridViewFoods.Name = "dataGridViewFoods";
             dataGridViewFoods.ReadOnly = true;
@@ -353,7 +352,7 @@ namespace DietSentry
             dataGridViewFoods.RowHeadersWidth = 40;
             dataGridViewFoods.RowTemplate.Height = 25;
             dataGridViewFoods.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewFoods.Size = new Size(1381, 590);
+            dataGridViewFoods.Size = new Size(1290, 700);
             dataGridViewFoods.TabIndex = 4;
             dataGridViewFoods.CellDoubleClick += dataGridViewFoods_CellDoubleClick;
             dataGridViewFoods.UserDeletingRow += dataGridViewFoods_UserDeletingRow;
@@ -736,7 +735,7 @@ namespace DietSentry
             tabPageEaten.Location = new Point(4, 27);
             tabPageEaten.Name = "tabPageEaten";
             tabPageEaten.Padding = new Padding(3);
-            tabPageEaten.Size = new Size(1387, 692);
+            tabPageEaten.Size = new Size(1302, 805);
             tabPageEaten.TabIndex = 1;
             tabPageEaten.Text = "Eaten";
             tabPageEaten.UseVisualStyleBackColor = true;
@@ -785,7 +784,6 @@ namespace DietSentry
             dataGridViewEaten.AllowUserToResizeRows = false;
             dataGridViewEaten.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridViewEaten.AutoGenerateColumns = false;
-            dataGridViewEaten.BorderStyle = BorderStyle.None;
             dataGridViewEaten.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle29.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle29.BackColor = Color.Azure;
@@ -808,7 +806,7 @@ namespace DietSentry
             dataGridViewEaten.DefaultCellStyle = dataGridViewCellStyle57;
             dataGridViewEaten.EditMode = DataGridViewEditMode.EditOnF2;
             dataGridViewEaten.EnableHeadersVisualStyles = false;
-            dataGridViewEaten.Location = new Point(3, 99);
+            dataGridViewEaten.Location = new Point(6, 99);
             dataGridViewEaten.MultiSelect = false;
             dataGridViewEaten.Name = "dataGridViewEaten";
             dataGridViewEaten.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
@@ -825,7 +823,7 @@ namespace DietSentry
             dataGridViewEaten.RowTemplate.Height = 25;
             dataGridViewEaten.RowTemplate.ReadOnly = true;
             dataGridViewEaten.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewEaten.Size = new Size(1381, 590);
+            dataGridViewEaten.Size = new Size(1290, 700);
             dataGridViewEaten.TabIndex = 0;
             dataGridViewEaten.UserDeletingRow += dataGridViewEaten_UserDeletingRow;
             // 
@@ -1248,7 +1246,7 @@ namespace DietSentry
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1397, 725);
+            ClientSize = new Size(1312, 838);
             Controls.Add(tabControlMain);
             Controls.Add(tabControl1);
             Name = "MainForm";
