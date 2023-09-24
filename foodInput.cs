@@ -14,6 +14,8 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static DietSentry.UtilitiesRMG; // so can use the UnitsString function
 using System.Security.Cryptography;
+using Microsoft.Extensions.Logging;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace DietSentry
@@ -21,7 +23,6 @@ namespace DietSentry
     public partial class foodInputForm : Form
     {
 
-        // this works but why
         private FoodsContext? dbContext;
 
         private MainForm? mainForm = null;
@@ -38,8 +39,6 @@ namespace DietSentry
                 this.Text = "Form for EDITING selected food item";
             }
         }
-
-        // this works but why?
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -94,6 +93,7 @@ namespace DietSentry
                 }
             }
         }
+
 
         private void buttonAddFood_Click(object sender, EventArgs e)
         {
@@ -205,7 +205,7 @@ namespace DietSentry
             }
             if (mainForm.inputType == 1)
             {
-                // cleaning up form if EDITING foood item
+                // cleaning up form if EDITING food item
                 // By this stage it is assumed that all mainForm.addedFoodItem values are assigned even if just to "" or 0F
 
                 // this tells the code in the MainForm to actually add the recorded Food item to the Foods table
@@ -246,6 +246,9 @@ namespace DietSentry
         }
 
 
+
+        /***** Events/functions related to cancelling a foods input *****/
+
         // what needs to be done when the {Cancel} button is pressed
         private void cancelInputAction()
         {
@@ -256,7 +259,6 @@ namespace DietSentry
             cancelAdditionOfRecipe();
         }
 
-
         // When {Cancel} button pressed
         private void buttonCancelAddFood_Click(object sender, EventArgs e)
         {
@@ -265,7 +267,6 @@ namespace DietSentry
             actOnClose = false; // this prevents cancellation actions occuring when this form closes 
             this.Close();
         }
-
 
         // this makes pressing the {x} button behave exactly the same as pressing the {Cancel} button
         private void foodInputForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -282,6 +283,7 @@ namespace DietSentry
         }
 
 
+
         private void radioButtonSolid_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonSolid.Checked)
@@ -293,7 +295,6 @@ namespace DietSentry
             }
         }
 
-
         private void radioButtonLiquid_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonLiquid.Checked)
@@ -304,7 +305,6 @@ namespace DietSentry
                 textBoxFoodDescription.Focus();
             }
         }
-
 
         private void radioButtonRecipie_CheckedChanged(object sender, EventArgs e)
         {
@@ -318,6 +318,7 @@ namespace DietSentry
         }
 
 
+
         /* Enables the completion of inputing a FoodDescription value by pressing the Enter key
          * No error checking necessary since input is an arbitrary string */
         private void textBoxFoodDescription_KeyDown(object sender, KeyEventArgs e)
@@ -329,7 +330,6 @@ namespace DietSentry
             }
         }
 
-
         /* Enables the completion of inputting a field value by having the text box loose focus, be it by pressing
          * {Shift}{Tab} or just the {Tab} key, or using the Mouse. */
         private void textBoxFoodDescription_Leave(object sender, EventArgs e)
@@ -339,10 +339,12 @@ namespace DietSentry
         }
 
 
+
         /***** START BLOCK OF EVEN FUNCTIONS *****
          * The following EVENT FUNCTIONS are related to accepting & error managing all number accepting text boxes for Food table fields */
 
-        /* Enables the completion of inputing a field value by pressing the Enter key.
+        /* General textBox field comment ***
+         * Enables the completion of inputing a field value by pressing the Enter key.
          * which actually sends a Tab key press event that leaves the text box and fires
          * the Leave event that actually accepts/processes the input text.
          * Same comment applies to corresponding functions below   */
@@ -354,8 +356,8 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
-        /* Enables the completion of inputting a field value by having the text box loose focus, be it by pressing 
+        /* General textBox field comment ***
+         * Enables the completion of inputting a field value by having the text box loose focus, be it by pressing 
          * {Shift}{Tab} or just the {Tab} key, or using the Mouse. If the input text does not parse to a positive 
          * float then the text is set to "".
          * Same comment applies to corresponding functions below */
@@ -381,7 +383,6 @@ namespace DietSentry
             }
             labelState.Text = textBoxEnergy.Text;
         }
-
         private void textBoxProtein_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -390,7 +391,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxProtein_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -413,7 +413,6 @@ namespace DietSentry
             }
             labelState.Text = textBoxProtein.Text;
         }
-
         private void textBoxFatTotal_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -422,7 +421,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxFatTotal_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -445,7 +443,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxFatTotal.Text);
         }
-
         private void textBoxSaturatedFat_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -454,7 +451,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxSaturatedFat_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -477,7 +473,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxSaturatedFat.Text);
         }
-
         private void textBoxTransFat_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -486,7 +481,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxTransFat_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -509,7 +503,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxTransFat.Text);
         }
-
         private void textBoxPolyunsaturatedFat_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -518,7 +511,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxPolyunsaturatedFat_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -541,7 +533,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxPolyunsaturatedFat.Text);
         }
-
         private void textBoxMonounsaturatedFat_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -550,7 +541,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxMonounsaturatedFat_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -573,7 +563,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxMonounsaturatedFat.Text);
         }
-
         private void textBoxCarbohydrate_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -582,7 +571,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxCarbohydrate_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -605,7 +593,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxCarbohydrate.Text);
         }
-
         private void textBoxSugars_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -614,7 +601,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxSugars_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -637,7 +623,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxSugars.Text);
         }
-
         private void textBoxDietaryFibre_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -646,7 +631,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxDietaryFibre_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -669,7 +653,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxDietaryFibre.Text);
         }
-
         private void textBoxSodiumNa_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -678,7 +661,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxSodiumNa_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -701,7 +683,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxSodiumNa.Text);
         }
-
         private void textBoxCalciumCa_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -710,7 +691,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxCalciumCa_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -733,7 +713,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxCalciumCa.Text);
         }
-
         private void textBoxPotassiumK_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -742,7 +721,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxPotassiumK_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -765,7 +743,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxPotassiumK.Text);
         }
-
         private void textBoxThiaminB1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -774,7 +751,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxThiaminB1_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -797,7 +773,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxThiaminB1.Text);
         }
-
         private void textBoxRiboflavinB2_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -806,7 +781,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxRiboflavinB2_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -829,7 +803,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxRiboflavinB2.Text);
         }
-
         private void textBoxNiacinB3_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -838,7 +811,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxNiacinB3_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -862,7 +834,6 @@ namespace DietSentry
             labelState.Text = (textBoxNiacinB3.Text);
 
         }
-
         private void textBoxFolate_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -871,7 +842,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxFolate_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -894,7 +864,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxFolate.Text);
         }
-
         private void textBoxIronFe_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -903,7 +872,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxIronFe_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -926,7 +894,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxIronFe.Text);
         }
-
         private void textBoxMagnesiumMg_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -935,7 +902,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxMagnesiumMg_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -958,7 +924,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxMagnesiumMg.Text);
         }
-
         private void textBoxVitaminC_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -967,7 +932,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxVitaminC_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -990,7 +954,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxVitaminC.Text);
         }
-
         private void textBoxCaffeine_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -999,7 +962,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxCaffeine_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -1022,7 +984,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxCaffeine.Text);
         }
-
         private void textBoxCholesterol_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -1031,7 +992,6 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
-
         private void textBoxCholesterol_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -1054,7 +1014,6 @@ namespace DietSentry
             }
             labelState.Text = (textBoxCholesterol.Text);
         }
-
         private void textBoxAlcohol_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -1086,17 +1045,18 @@ namespace DietSentry
             labelState.Text = (textBoxAlcohol.Text);
         }
 
-        /***** END BLOCK OF EVENT FUNCTIONS *****
-         * The above EVENT FUNCTIONS are related to accepting & error managing all numeric accepting text boxed for Food table fields */
+        /* The above EVENT FUNCTIONS are related to accepting & error managing all numeric accepting text boxed for Food table fields
+         ***** END BLOCK OF EVENT FUNCTIONS *****/
 
 
 
+        // Prepares form depending on what food type will be processed and whether adding or editing
         private void foodInputForm_Shown(object sender, EventArgs e)
         {
             ChangeFormSize(0);
-            if (mainForm.inputType == 0)
+            if (mainForm.inputType == 0) // setting up form for ADDING foood item
             {
-                // setting up form for ADDING foood item
+                // text on this multipurpose button tells us we will be adding food item to tables 
                 buttonAddFood.Text = "Add food";
 
                 // reset in case changed by edit state
@@ -1131,12 +1091,12 @@ namespace DietSentry
                 mainForm.addedFoodItem.Cholesterol = 0F;
                 mainForm.addedFoodItem.Alcohol = 0F;
             }
-            else if (mainForm.inputType == 1)
+            else if (mainForm.inputType == 1) // setting up form for EDITING foood item
             {
-                // setting up form for EDITING foood item
+                // text on this multipurpose button tells us we will be editing existing food item
                 buttonAddFood.Text = "Edit food";
 
-                // Set the radio button indicating the food type and then disable the ability to change it.
+                // Set radio button indicating food type being edited
                 int foodType = mainForm.foodType;
                 if ((foodType == 0) | (foodType == 3))
                 {
@@ -1156,59 +1116,68 @@ namespace DietSentry
                     tabControlAddType.SelectedTab = tabPageRecipie;
                     labelState.Text = "Nutrition information per 100 grams and all ingredients must also be in grams";
                 }
+
+                // disables changes to food type radio buttons
                 groupBoxFoodTypes.Enabled = false;
 
-                // populate form with food details
-                textBoxFoodDescription.Text = mainForm.editedFoodItem.FoodDescription;
-                textBoxEnergy.Text = string.Format("{0:N0}", mainForm.editedFoodItem.Energy);
-                textBoxProtein.Text = string.Format("{0:N1}", mainForm.editedFoodItem.Protein);
-                textBoxFatTotal.Text = string.Format("{0:N1}", mainForm.editedFoodItem.FatTotal);
-                textBoxSaturatedFat.Text = string.Format("{0:N2}", mainForm.editedFoodItem.SaturatedFat);
-                textBoxTransFat.Text = string.Format("{0:N2}", mainForm.editedFoodItem.TransFat);
-                textBoxPolyunsaturatedFat.Text = string.Format("{0:N2}", mainForm.editedFoodItem.PolyunsaturatedFat);
-                textBoxMonounsaturatedFat.Text = string.Format("{0:N2}", mainForm.editedFoodItem.MonounsaturatedFat);
-                textBoxCarbohydrate.Text = string.Format("{0:N1}", mainForm.editedFoodItem.Carbohydrate);
-                textBoxSugars.Text = string.Format("{0:N1}", mainForm.editedFoodItem.Sugars);
-                textBoxDietaryFibre.Text = string.Format("{0:N1}", mainForm.editedFoodItem.DietaryFibre);
-                textBoxSodiumNa.Text = string.Format("{0:N0}", mainForm.editedFoodItem.SodiumNa);
-                textBoxCalciumCa.Text = string.Format("{0:N0}", mainForm.editedFoodItem.CalciumCa);
-                textBoxPotassiumK.Text = string.Format("{0:N0}", mainForm.editedFoodItem.PotassiumK);
-                textBoxThiaminB1.Text = string.Format("{0:N3}", mainForm.editedFoodItem.ThiaminB1);
-                textBoxRiboflavinB2.Text = string.Format("{0:N3}", mainForm.editedFoodItem.RiboflavinB2);
-                textBoxNiacinB3.Text = string.Format("{0:N2}", mainForm.editedFoodItem.NiacinB3);
-                textBoxFolate.Text = string.Format("{0:N0}", mainForm.editedFoodItem.Folate);
-                textBoxIronFe.Text = string.Format("{0:N2}", mainForm.editedFoodItem.IronFe);
-                textBoxMagnesiumMg.Text = string.Format("{0:N0}", mainForm.editedFoodItem.MagnesiumMg);
-                textBoxVitaminC.Text = string.Format("{0:N0}", mainForm.editedFoodItem.VitaminC);
-                textBoxCaffeine.Text = string.Format("{0:N0}", mainForm.editedFoodItem.Caffeine);
-                textBoxCholesterol.Text = string.Format("{0:N0}", mainForm.editedFoodItem.Cholesterol);
-                textBoxAlcohol.Text = string.Format("{0:N1}", mainForm.editedFoodItem.Alcohol);
+                if (foodType != 2) // dealing with a non-recipe food
+                {
+                    // populate form with food details
+                    textBoxFoodDescription.Text = mainForm.editedFoodItem.FoodDescription;
+                    textBoxEnergy.Text = string.Format("{0:N0}", mainForm.editedFoodItem.Energy);
+                    textBoxProtein.Text = string.Format("{0:N1}", mainForm.editedFoodItem.Protein);
+                    textBoxFatTotal.Text = string.Format("{0:N1}", mainForm.editedFoodItem.FatTotal);
+                    textBoxSaturatedFat.Text = string.Format("{0:N2}", mainForm.editedFoodItem.SaturatedFat);
+                    textBoxTransFat.Text = string.Format("{0:N2}", mainForm.editedFoodItem.TransFat);
+                    textBoxPolyunsaturatedFat.Text = string.Format("{0:N2}", mainForm.editedFoodItem.PolyunsaturatedFat);
+                    textBoxMonounsaturatedFat.Text = string.Format("{0:N2}", mainForm.editedFoodItem.MonounsaturatedFat);
+                    textBoxCarbohydrate.Text = string.Format("{0:N1}", mainForm.editedFoodItem.Carbohydrate);
+                    textBoxSugars.Text = string.Format("{0:N1}", mainForm.editedFoodItem.Sugars);
+                    textBoxDietaryFibre.Text = string.Format("{0:N1}", mainForm.editedFoodItem.DietaryFibre);
+                    textBoxSodiumNa.Text = string.Format("{0:N0}", mainForm.editedFoodItem.SodiumNa);
+                    textBoxCalciumCa.Text = string.Format("{0:N0}", mainForm.editedFoodItem.CalciumCa);
+                    textBoxPotassiumK.Text = string.Format("{0:N0}", mainForm.editedFoodItem.PotassiumK);
+                    textBoxThiaminB1.Text = string.Format("{0:N3}", mainForm.editedFoodItem.ThiaminB1);
+                    textBoxRiboflavinB2.Text = string.Format("{0:N3}", mainForm.editedFoodItem.RiboflavinB2);
+                    textBoxNiacinB3.Text = string.Format("{0:N2}", mainForm.editedFoodItem.NiacinB3);
+                    textBoxFolate.Text = string.Format("{0:N0}", mainForm.editedFoodItem.Folate);
+                    textBoxIronFe.Text = string.Format("{0:N2}", mainForm.editedFoodItem.IronFe);
+                    textBoxMagnesiumMg.Text = string.Format("{0:N0}", mainForm.editedFoodItem.MagnesiumMg);
+                    textBoxVitaminC.Text = string.Format("{0:N0}", mainForm.editedFoodItem.VitaminC);
+                    textBoxCaffeine.Text = string.Format("{0:N0}", mainForm.editedFoodItem.Caffeine);
+                    textBoxCholesterol.Text = string.Format("{0:N0}", mainForm.editedFoodItem.Cholesterol);
+                    textBoxAlcohol.Text = string.Format("{0:N1}", mainForm.editedFoodItem.Alcohol);
 
-                // populate addedFoodItem fields with the editeFoodItem fields
-                mainForm.addedFoodItem.FoodDescription = mainForm.editedFoodItem.FoodDescription;
-                mainForm.addedFoodItem.Energy = mainForm.editedFoodItem.Energy;
-                mainForm.addedFoodItem.Protein = mainForm.editedFoodItem.Protein;
-                mainForm.addedFoodItem.FatTotal = mainForm.editedFoodItem.FatTotal;
-                mainForm.addedFoodItem.SaturatedFat = mainForm.editedFoodItem.SaturatedFat;
-                mainForm.addedFoodItem.TransFat = mainForm.editedFoodItem.TransFat;
-                mainForm.addedFoodItem.PolyunsaturatedFat = mainForm.editedFoodItem.PolyunsaturatedFat;
-                mainForm.addedFoodItem.MonounsaturatedFat = mainForm.editedFoodItem.MonounsaturatedFat;
-                mainForm.addedFoodItem.Carbohydrate = mainForm.editedFoodItem.Carbohydrate;
-                mainForm.addedFoodItem.Sugars = mainForm.editedFoodItem.Sugars;
-                mainForm.addedFoodItem.DietaryFibre = mainForm.editedFoodItem.DietaryFibre;
-                mainForm.addedFoodItem.SodiumNa = mainForm.editedFoodItem.SodiumNa;
-                mainForm.addedFoodItem.CalciumCa = mainForm.editedFoodItem.CalciumCa;
-                mainForm.addedFoodItem.PotassiumK = mainForm.editedFoodItem.PotassiumK;
-                mainForm.addedFoodItem.ThiaminB1 = mainForm.editedFoodItem.ThiaminB1;
-                mainForm.addedFoodItem.RiboflavinB2 = mainForm.editedFoodItem.RiboflavinB2;
-                mainForm.addedFoodItem.NiacinB3 = mainForm.editedFoodItem.NiacinB3;
-                mainForm.addedFoodItem.Folate = mainForm.editedFoodItem.Folate;
-                mainForm.addedFoodItem.IronFe = mainForm.editedFoodItem.IronFe;
-                mainForm.addedFoodItem.MagnesiumMg = mainForm.editedFoodItem.MagnesiumMg;
-                mainForm.addedFoodItem.VitaminC = mainForm.editedFoodItem.VitaminC;
-                mainForm.addedFoodItem.Caffeine = mainForm.editedFoodItem.Caffeine;
-                mainForm.addedFoodItem.Cholesterol = mainForm.editedFoodItem.Cholesterol;
-                mainForm.addedFoodItem.Alcohol = mainForm.editedFoodItem.Alcohol;
+                    // populate addedFoodItem fields with the editedFoodItem fields
+                    mainForm.addedFoodItem.FoodDescription = mainForm.editedFoodItem.FoodDescription;
+                    mainForm.addedFoodItem.Energy = mainForm.editedFoodItem.Energy;
+                    mainForm.addedFoodItem.Protein = mainForm.editedFoodItem.Protein;
+                    mainForm.addedFoodItem.FatTotal = mainForm.editedFoodItem.FatTotal;
+                    mainForm.addedFoodItem.SaturatedFat = mainForm.editedFoodItem.SaturatedFat;
+                    mainForm.addedFoodItem.TransFat = mainForm.editedFoodItem.TransFat;
+                    mainForm.addedFoodItem.PolyunsaturatedFat = mainForm.editedFoodItem.PolyunsaturatedFat;
+                    mainForm.addedFoodItem.MonounsaturatedFat = mainForm.editedFoodItem.MonounsaturatedFat;
+                    mainForm.addedFoodItem.Carbohydrate = mainForm.editedFoodItem.Carbohydrate;
+                    mainForm.addedFoodItem.Sugars = mainForm.editedFoodItem.Sugars;
+                    mainForm.addedFoodItem.DietaryFibre = mainForm.editedFoodItem.DietaryFibre;
+                    mainForm.addedFoodItem.SodiumNa = mainForm.editedFoodItem.SodiumNa;
+                    mainForm.addedFoodItem.CalciumCa = mainForm.editedFoodItem.CalciumCa;
+                    mainForm.addedFoodItem.PotassiumK = mainForm.editedFoodItem.PotassiumK;
+                    mainForm.addedFoodItem.ThiaminB1 = mainForm.editedFoodItem.ThiaminB1;
+                    mainForm.addedFoodItem.RiboflavinB2 = mainForm.editedFoodItem.RiboflavinB2;
+                    mainForm.addedFoodItem.NiacinB3 = mainForm.editedFoodItem.NiacinB3;
+                    mainForm.addedFoodItem.Folate = mainForm.editedFoodItem.Folate;
+                    mainForm.addedFoodItem.IronFe = mainForm.editedFoodItem.IronFe;
+                    mainForm.addedFoodItem.MagnesiumMg = mainForm.editedFoodItem.MagnesiumMg;
+                    mainForm.addedFoodItem.VitaminC = mainForm.editedFoodItem.VitaminC;
+                    mainForm.addedFoodItem.Caffeine = mainForm.editedFoodItem.Caffeine;
+                    mainForm.addedFoodItem.Cholesterol = mainForm.editedFoodItem.Cholesterol;
+                    mainForm.addedFoodItem.Alcohol = mainForm.editedFoodItem.Alcohol;
+                }
+                else // if (foodType == 2) dealing with "complicated" recipe food
+                {
+                    
+                }
             }
         }
 

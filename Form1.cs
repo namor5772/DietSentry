@@ -1,5 +1,6 @@
 using DietSentry;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -204,8 +205,9 @@ namespace DietSentry
 
         /* This is way TWO you select an item (for recording as eaten) from the food table.
          * - From the Food data grid Press Enter key on selected item.
-         * ALSO picks up when Insert key is pressed. Used to insert/Add food to the database.
-         * Selection row is then clearly not relevant but just a way of enabling this action) */
+         * ALSO picks up when Insert key is pressed. Used to Insert/Add food to the database.
+         * - Selection row is then clearly not relevant but just a way of enabling this action)
+         * ALSO picks up when F2 key is pressed. Used to Edit/Inspect selected food item (especially relevant for Recipe foods */
         private void dataGridViewFoods_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) // Selecting eaten food item
@@ -267,6 +269,8 @@ namespace DietSentry
                     else if (foodType == 2)
                     {
                         ; // DO RECIPE STUFF HERE
+                        // but actually all has already been done in the foodInputForm form
+
                     }
                     else
                     {
@@ -352,7 +356,7 @@ namespace DietSentry
                             foodType = 0; // solid - public
                         }
 
-                        // opens a dialog form used to input a record to the food table
+                        // opens a dialog form used to edit a food item
                         // positions this form at same location (ie. top left hand corner) as this MainForm
                         inputType = 1; // tells foodinput form that we are editing food item
                         foodInputForm frm = new(this);

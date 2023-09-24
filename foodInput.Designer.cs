@@ -23,17 +23,25 @@
 
         // MY "GLOBAL" VARIABLES ********* bad coding lol **********
 
-        public Boolean recordExists = false; // flag to prevent recreation of recipe record
-        public int recordID = 0; // Id of created recipe record 
+        // flag to prevent recreation of recipe record
+        public Boolean recordExists = false;
+
+        // Id of created recipe's record 
+        public int recordID = 0;
+
+        /* flags whether any pre close form actions have already been performed,
+         * so that they are not repeated when the {x} button is pressed */
         public Boolean actOnClose = true;
 
-        // A variable  which stores data collected from the foodInputForm
+        /* A variable  which stores data collected from the foodInputForm
+         * in grams (g), since mL measured foods not accepted n*/
         public float amountOfFoodInRecipe = 0.0F; // in grams (g), since mL measured foods not accepted
 
         // A string describing the eaten food selected
         public string FoodDescriptionRecipe = "BLANK";
 
         // *********************************************************
+
 
 
         #region Windows Form Designer generated code

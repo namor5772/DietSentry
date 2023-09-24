@@ -46,7 +46,7 @@ namespace DietSentry
         // 0=Solid-Public, 1=Liquid-Public, 2=Recipe, 3=Solid-Private, 4=Liquid-Private
         public int foodType;
 
-        // 0=Add, 1=Insert. Specifies behaviour in foodinput form depending on whether adding or editing a food item.
+        // 0=Add, 1=Edit. Specifies behaviour in foodinput form depending on whether adding or editing a food item.
         public int inputType;
 
         // *********************************************************
