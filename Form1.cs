@@ -326,6 +326,12 @@ namespace DietSentry
                         // determine the food type by examining the FoodDescription string
                         string editedFoodId = (editedFoodItem.FoodId).ToString(); // for later use
                         string sFD = editedFoodItem.FoodDescription;
+
+                        rDesc rFD = TruncFoodDesc(sFD);
+                        foodType = rFD.foodType;
+                        editedFoodItem.FoodDescription = rFD.truncDesc;
+
+/*
                         int ln = sFD.Length;
                         string sL1 = sFD.Substring(ln - 1); // get last character of sFD
                         string sL2 = sFD.Substring(ln - 2); // get last 2 characters of SFD
@@ -355,6 +361,7 @@ namespace DietSentry
                         {
                             foodType = 0; // solid - public
                         }
+*/
 
                         // opens a dialog form used to edit a food item
                         // positions this form at same location (ie. top left hand corner) as this MainForm

@@ -245,7 +245,6 @@ namespace DietSentry
             tabControlMain.SelectedIndex = 0;
             tabControlMain.Size = new Size(1310, 836);
             tabControlMain.TabIndex = 1;
-            tabControlMain.TabStop = false;
             // 
             // tabPageFood
             // 
