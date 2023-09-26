@@ -49,6 +49,9 @@ namespace DietSentry
         // 0=Add, 1=Edit. Specifies behaviour in foodinput form depending on whether adding or editing a food item.
         public int inputType;
 
+        // Id of edited recipe's record 
+        public int recordID = 0;
+
         // *********************************************************
 
 

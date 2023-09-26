@@ -11,10 +11,11 @@ namespace DietSentry
 
         /// <summary>
         /// function that specifies the units used for an existing food item
-        /// based on the food description string parameter sDesc, either grams (g) or millilitres (mL)
+        /// based on the food description string parameter sDesc,
+        /// either grams (g) or millilitres (mL)
         /// </summary>
         /// <param name="sDesc"></param>
-        /// <returns></returns>
+        /// <returns>a string</returns>
         public static string UnitsString(string sDesc)
         {
             string sT1 = sDesc.Substring(sDesc.Length - 3, 2);
@@ -30,11 +31,16 @@ namespace DietSentry
         }
 
 
+        /// <summary>
+        /// A record structure to a food item,
+        /// containing its type and the truncated description
+        /// </summary>
         public record struct rDesc
         {
             public int foodType;
             public string truncDesc;
         }
+
 
         /// <summary>
         /// function that takes a FoodDescription string sDesc as argument and returns a rDesc record structure
@@ -43,7 +49,7 @@ namespace DietSentry
         /// editing of adding is completed. rDesc.foodType returns the food type (integer). 
         /// </summary>
         /// <param name="sDesc"></param>
-        /// <returns></returns>
+        /// <returns>the rDesc record structure</returns>
         public static rDesc TruncFoodDesc(string sDesc)
         {
             int ln = sDesc.Length;
@@ -58,7 +64,10 @@ namespace DietSentry
             {
                 // recipe
                 rD.foodType = 2;
-                rD.truncDesc = sDesc.Substring(0, ln - 2);
+
+                // the removed string is of the form " {recipe=<grams>g}*", identified by "{"
+                sDesc.LastIndexOf('{');
+                rD.truncDesc = sDesc.Substring(0, sDesc.LastIndexOf('{')-1);
             }
             else if (sL2 == "mL")
             {
@@ -90,10 +99,11 @@ namespace DietSentry
 
 
         /// <summary>
-        /// function that returns true if the food item with the description sDesc is a recipe, false otherwise
+        /// function that returns true if the food item with the description sDesc is a recipe,
+        /// false otherwise
         /// </summary>
         /// <param name="sDesc"></param>
-        /// <returns></returns>
+        /// <returns>a boolean</returns>
         public static bool isRecipe(string sDesc)
         {
             //string sT = sDesc.Substring(sDesc.Length - 1, 1);

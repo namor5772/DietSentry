@@ -9,6 +9,7 @@ public class Recipe
     [Key]
     public int RecipeId { get; set; } // key to this recipe component
     public int FoodId { get; set; } // key to the underlying Food item that represents a recipe (it is in the food table)
+    public int CopyFg { get; set; } // 0 for normal records, 1 if a backup
     public float Amount { get; set; } // amount of this food in grams participating in the  recipe
     public string? FoodDescription { get; set; }
     public float Energy { get; set; }
