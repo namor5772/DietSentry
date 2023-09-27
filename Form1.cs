@@ -332,9 +332,11 @@ namespace DietSentry
                         editedFoodItem.FoodDescription = rFD.truncDesc;
 
                         // a bit of a cludge, need to record the Key of the selected Recipe food item being edited
-                        if (foodType==2)
+                        // as well as the unchanged food description in case of cancellation.
+                        if (foodType == 2)
                         {
                             recordID = FoodSelected.FoodId;
+                            fullFoodDescription = sFD;
                         }
 
                         // opens a dialog form used to edit a food item
@@ -347,7 +349,7 @@ namespace DietSentry
 
                         if ((actOnFoodAdded)) // then actually modify/edit food item in database otherwise ignore (if {Cancel} button pressed)
                         {
-                            if (foodType!=2)
+                            if (foodType != 2)
                             {
                                 FoodSelected.FoodDescription = addedFoodItem.FoodDescription;
                                 FoodSelected.Energy = addedFoodItem.Energy;

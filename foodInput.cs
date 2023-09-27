@@ -80,6 +80,8 @@ namespace DietSentry
                 // a recipe record has been created in food record add mode 
                 using (var context = new FoodsContext())
                 {
+                    context.Foods.Load();
+
                     // gain direct access to recipe record in the Foods table
                     var recipeFood = context.Foods.Single(b => b.FoodId == recordID);
 
@@ -87,25 +89,50 @@ namespace DietSentry
                     context.Foods.Remove(recipeFood);
                     context.SaveChanges();
 
+                    context.Recipe.Load();
+
                     // delete any created records in the recipe table
                     var recipeFoods = context.Recipe.Where(r => r.FoodId == recordID);
                     context.Recipe.RemoveRange(recipeFoods);
+
                     context.SaveChanges();
                 }
             }
-            else if ((mainForm.foodType == 2) & (mainForm.inputType ==1))
+            else if ((mainForm.foodType == 2) & (mainForm.inputType == 1))
             {
                 // a selected recipe has potentialy been edited but we are cancelling, so we need to reverse any changes.
-                 
-// ************************************************************************************************************************************************************************
-                // delete any 0 recipe items (which) represent the new edited state of the recipe,
-                // and replace the 1's in all the recipe components with 0's. 
+                using (var context = new FoodsContext())
+                {
+                    context.Recipe.Load();
+
+                    // delete any 0 recipe items which represent the new edited state of the recipe
+                    var recipeFoods0 = context.Recipe.Where(r => ((r.FoodId == recordID) & (r.CopyFg == 0)));
+                    context.Recipe.RemoveRange(recipeFoods0);
+
+                    // convert all recipe items with CopyFg=1 to have CopyFg=0
+                    var recipeFoods1 = context.Recipe.Where(r => ((r.FoodId == recordID) & (r.CopyFg == 1)));
+                    foreach (var food in recipeFoods1)
+                    {
+                        food.CopyFg = 0;
+                    }
+
+                    context.Foods.Load();
+
+                    // gain direct access to recipe record in the Foods table and restore its Food Description
+                    // it in fact it has been modified
+                    var recipeFood = context.Foods.Single(b => b.FoodId == recordID);
+                    recipeFood.FoodDescription = mainForm.fullFoodDescription;
+
+                    context.SaveChanges();
+                }
             }
         }
 
 
         private void buttonAddFood_Click(object sender, EventArgs e)
         {
+            bool ignoreBtn = false;
+
             if (mainForm.inputType == 0)
             {
                 // cleaning up form if ADDING foood item
@@ -130,86 +157,102 @@ namespace DietSentry
                 {
                     mainForm.foodType = 2; // recipe
 
-                    if (recordID != 0)  // have created a recipe 
+                    try // crashes if no recipe components to sum
                     {
-                        // completing creation of recipe
-                        using (var context = new FoodsContext())
+                        if (recordID != 0)  // have created a recipe 
                         {
-                            context.Recipe.Load();
-
-                            // summing the component foods making up the recipe 
-                            var queriedData = context.Recipe.Local.ToBindingList().GroupBy(o => o.FoodId).Select(g => new
+                            // completing creation of recipe
+                            using (var context = new FoodsContext())
                             {
-                                FoodId = g.Key,
-                                CopyFg = g.Sum(i => i.CopyFg),
-                                Amount = g.Sum(i => i.Amount),
-                                Energy = g.Sum(i => i.Energy),
-                                Protein = g.Sum(i => i.Protein),
-                                FatTotal = g.Sum(i => i.FatTotal),
-                                SaturatedFat = g.Sum(i => i.SaturatedFat),
-                                TransFat = g.Sum(i => i.TransFat),
-                                PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
-                                MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
-                                Carbohydrate = g.Sum(i => i.Carbohydrate),
-                                Sugars = g.Sum(i => i.Sugars),
-                                DietaryFibre = g.Sum(i => i.DietaryFibre),
-                                SodiumNa = g.Sum(i => i.SodiumNa),
-                                CalciumCa = g.Sum(i => i.CalciumCa),
-                                PotassiumK = g.Sum(i => i.PotassiumK),
-                                ThiaminB1 = g.Sum(i => i.ThiaminB1),
-                                RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
-                                NiacinB3 = g.Sum(i => i.NiacinB3),
-                                Folate = g.Sum(i => i.Folate),
-                                IronFe = g.Sum(i => i.IronFe),
-                                MagnesiumMg = g.Sum(i => i.MagnesiumMg),
-                                VitaminC = g.Sum(i => i.VitaminC),
-                                Caffeine = g.Sum(i => i.Caffeine),
-                                Cholesterol = g.Sum(i => i.Cholesterol),
-                                Alcohol = g.Sum(i => i.Alcohol)
-                            }).Where(x => x.FoodId == recordID).Last();
+                                context.Recipe.Load();
 
-                            textBox1.Text = string.Format("{0:N2}", queriedData.Amount);
+                                // summing the component foods making up the recipe 
+                                var queriedData = context.Recipe.Local.ToBindingList().GroupBy(o => o.FoodId).Select(g => new
+                                {
+                                    FoodId = g.Key,
+                                    CopyFg = g.Sum(i => i.CopyFg),
+                                    Amount = g.Sum(i => i.Amount),
+                                    Energy = g.Sum(i => i.Energy),
+                                    Protein = g.Sum(i => i.Protein),
+                                    FatTotal = g.Sum(i => i.FatTotal),
+                                    SaturatedFat = g.Sum(i => i.SaturatedFat),
+                                    TransFat = g.Sum(i => i.TransFat),
+                                    PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
+                                    MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
+                                    Carbohydrate = g.Sum(i => i.Carbohydrate),
+                                    Sugars = g.Sum(i => i.Sugars),
+                                    DietaryFibre = g.Sum(i => i.DietaryFibre),
+                                    SodiumNa = g.Sum(i => i.SodiumNa),
+                                    CalciumCa = g.Sum(i => i.CalciumCa),
+                                    PotassiumK = g.Sum(i => i.PotassiumK),
+                                    ThiaminB1 = g.Sum(i => i.ThiaminB1),
+                                    RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
+                                    NiacinB3 = g.Sum(i => i.NiacinB3),
+                                    Folate = g.Sum(i => i.Folate),
+                                    IronFe = g.Sum(i => i.IronFe),
+                                    MagnesiumMg = g.Sum(i => i.MagnesiumMg),
+                                    VitaminC = g.Sum(i => i.VitaminC),
+                                    Caffeine = g.Sum(i => i.Caffeine),
+                                    Cholesterol = g.Sum(i => i.Cholesterol),
+                                    Alcohol = g.Sum(i => i.Alcohol)
+                                }).Where(x => x.FoodId == recordID).Last();
 
-                            // weight of recipe in grams
-                            float rAmount = queriedData.Amount;
+                                //textBox1.Text = string.Format("{0:N2}", queriedData.Amount);
 
-                            // scaling multiplier to convert nutrient totals to per 100g for recipe food
-                            float X = 100F / rAmount;
+                                // weight of recipe in grams
+                                float rAmount = queriedData.Amount;
 
-                            // string to add to end of recipe foods description. It includes recipe weight in grams 
-                            string rsAmount = " {recipe=" + string.Format("{0:N0}", rAmount) + "g} *";
-                            textBox1.Text = rsAmount;
+                                // scaling multiplier to convert nutrient totals to per 100g for recipe food
+                                float X = 100F / rAmount;
 
-                            // updating the recipe food details (the one with the recordID Key)
-                            var editFood = context.Foods.Single(b => b.FoodId == recordID);
+                                // string to add to end of recipe foods description. It includes recipe weight in grams 
+                                string rsAmount = " {recipe=" + string.Format("{0:N0}", rAmount) + "g} *";
+                                //textBox1.Text = rsAmount;
 
-                            editFood.FoodDescription = editFood.FoodDescription + rsAmount;
-                            editFood.Energy = queriedData.Energy * X;
-                            editFood.Protein = queriedData.Protein * X;
-                            editFood.FatTotal = queriedData.FatTotal * X;
-                            editFood.SaturatedFat = queriedData.SaturatedFat * X;
-                            editFood.TransFat = queriedData.TransFat * X;
-                            editFood.PolyunsaturatedFat = queriedData.PolyunsaturatedFat * X;
-                            editFood.MonounsaturatedFat = queriedData.MonounsaturatedFat * X;
-                            editFood.Carbohydrate = queriedData.Carbohydrate * X;
-                            editFood.Sugars = queriedData.Sugars * X;
-                            editFood.DietaryFibre = queriedData.DietaryFibre * X;
-                            editFood.SodiumNa = queriedData.SodiumNa * X;
-                            editFood.CalciumCa = queriedData.CalciumCa * X;
-                            editFood.PotassiumK = queriedData.PotassiumK * X;
-                            editFood.ThiaminB1 = queriedData.ThiaminB1 * X;
-                            editFood.RiboflavinB2 = queriedData.RiboflavinB2 * X;
-                            editFood.NiacinB3 = queriedData.NiacinB3 * X;
-                            editFood.Folate = queriedData.Folate * X;
-                            editFood.IronFe = queriedData.IronFe * X;
-                            editFood.MagnesiumMg = queriedData.MagnesiumMg * X;
-                            editFood.VitaminC = queriedData.VitaminC * X;
-                            editFood.Caffeine = queriedData.Caffeine * X;
-                            editFood.Cholesterol = queriedData.Cholesterol * X;
-                            editFood.Alcohol = queriedData.Alcohol * X;
+                                // updating the recipe food details (the one with the recordID Key)
+                                var editFood = context.Foods.Single(b => b.FoodId == recordID);
 
-                            context.SaveChanges();
+                                editFood.FoodDescription = editFood.FoodDescription + rsAmount;
+                                editFood.Energy = queriedData.Energy * X;
+                                editFood.Protein = queriedData.Protein * X;
+                                editFood.FatTotal = queriedData.FatTotal * X;
+                                editFood.SaturatedFat = queriedData.SaturatedFat * X;
+                                editFood.TransFat = queriedData.TransFat * X;
+                                editFood.PolyunsaturatedFat = queriedData.PolyunsaturatedFat * X;
+                                editFood.MonounsaturatedFat = queriedData.MonounsaturatedFat * X;
+                                editFood.Carbohydrate = queriedData.Carbohydrate * X;
+                                editFood.Sugars = queriedData.Sugars * X;
+                                editFood.DietaryFibre = queriedData.DietaryFibre * X;
+                                editFood.SodiumNa = queriedData.SodiumNa * X;
+                                editFood.CalciumCa = queriedData.CalciumCa * X;
+                                editFood.PotassiumK = queriedData.PotassiumK * X;
+                                editFood.ThiaminB1 = queriedData.ThiaminB1 * X;
+                                editFood.RiboflavinB2 = queriedData.RiboflavinB2 * X;
+                                editFood.NiacinB3 = queriedData.NiacinB3 * X;
+                                editFood.Folate = queriedData.Folate * X;
+                                editFood.IronFe = queriedData.IronFe * X;
+                                editFood.MagnesiumMg = queriedData.MagnesiumMg * X;
+                                editFood.VitaminC = queriedData.VitaminC * X;
+                                editFood.Caffeine = queriedData.Caffeine * X;
+                                editFood.Cholesterol = queriedData.Cholesterol * X;
+                                editFood.Alcohol = queriedData.Alcohol * X;
+
+                                context.SaveChanges();
+                            }
                         }
+                    }
+                    catch // display message that tells you that recipes must contain component foods
+                    {
+                        // Initializes the variables to pass to the MessageBox.Show method.
+                        string message = "A recipe must contain component food items!";
+                        string caption = "CANNOT ADD THIS RECIPE";
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+
+                        // Displays the MessageBox.
+                        MessageBox.Show(message, caption, buttons);
+
+                        // prevents continued processing
+                        ignoreBtn = true;
                     }
                 }
             }
@@ -235,81 +278,86 @@ namespace DietSentry
                             context.Recipe.Load();
 
                             // summing the component foods making up the recipe 
-                            var queriedData = context.Recipe.Local.ToBindingList().GroupBy(o => o.FoodId).Select(g => new
-                            {
-                                FoodId = g.Key,
-                                CopyFg = g.Sum(i => i.CopyFg),
-                                Amount = g.Sum(i => i.Amount),
-                                Energy = g.Sum(i => i.Energy),
-                                Protein = g.Sum(i => i.Protein),
-                                FatTotal = g.Sum(i => i.FatTotal),
-                                SaturatedFat = g.Sum(i => i.SaturatedFat),
-                                TransFat = g.Sum(i => i.TransFat),
-                                PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
-                                MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
-                                Carbohydrate = g.Sum(i => i.Carbohydrate),
-                                Sugars = g.Sum(i => i.Sugars),
-                                DietaryFibre = g.Sum(i => i.DietaryFibre),
-                                SodiumNa = g.Sum(i => i.SodiumNa),
-                                CalciumCa = g.Sum(i => i.CalciumCa),
-                                PotassiumK = g.Sum(i => i.PotassiumK),
-                                ThiaminB1 = g.Sum(i => i.ThiaminB1),
-                                RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
-                                NiacinB3 = g.Sum(i => i.NiacinB3),
-                                Folate = g.Sum(i => i.Folate),
-                                IronFe = g.Sum(i => i.IronFe),
-                                MagnesiumMg = g.Sum(i => i.MagnesiumMg),
-                                VitaminC = g.Sum(i => i.VitaminC),
-                                Caffeine = g.Sum(i => i.Caffeine),
-                                Cholesterol = g.Sum(i => i.Cholesterol),
-                                Alcohol = g.Sum(i => i.Alcohol)
-                            }).Where(x => (x.FoodId == recordID)).Last();
-// ****************************************************************************************************************************************************
+                            var qData = context.Recipe.Local.ToList().
+                                Where(x => ((x.FoodId == recordID) & (x.CopyFg == 0))).
+                                GroupBy(o => o.FoodId).
+                                Select(g => new
+                                {
+                                    FoodId = g.Key,
+                                    Amount = g.Sum(i => i.Amount),
+                                    Energy = g.Sum(i => i.Energy),
+                                    Protein = g.Sum(i => i.Protein),
+                                    FatTotal = g.Sum(i => i.FatTotal),
+                                    SaturatedFat = g.Sum(i => i.SaturatedFat),
+                                    TransFat = g.Sum(i => i.TransFat),
+                                    PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
+                                    MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
+                                    Carbohydrate = g.Sum(i => i.Carbohydrate),
+                                    Sugars = g.Sum(i => i.Sugars),
+                                    DietaryFibre = g.Sum(i => i.DietaryFibre),
+                                    SodiumNa = g.Sum(i => i.SodiumNa),
+                                    CalciumCa = g.Sum(i => i.CalciumCa),
+                                    PotassiumK = g.Sum(i => i.PotassiumK),
+                                    ThiaminB1 = g.Sum(i => i.ThiaminB1),
+                                    RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
+                                    NiacinB3 = g.Sum(i => i.NiacinB3),
+                                    Folate = g.Sum(i => i.Folate),
+                                    IronFe = g.Sum(i => i.IronFe),
+                                    MagnesiumMg = g.Sum(i => i.MagnesiumMg),
+                                    VitaminC = g.Sum(i => i.VitaminC),
+                                    Caffeine = g.Sum(i => i.Caffeine),
+                                    Cholesterol = g.Sum(i => i.Cholesterol),
+                                    Alcohol = g.Sum(i => i.Alcohol)
+                                }).
+                                Last();
 
-                            textBox1.Text = string.Format("{0:N2}", queriedData.Amount);
+                            //textBox1.Text = string.Format("{0:N2}", qData.Amount);
 
                             // weight of recipe in grams
-                            float rAmount = queriedData.Amount;
+                            float rAmount = qData.Amount;
 
                             // scaling multiplier to convert nutrient totals to per 100g for recipe food
                             float X = 100F / rAmount;
 
                             // string to add to end of recipe foods description. It includes recipe weight in grams 
                             string rsAmount = " {recipe=" + string.Format("{0:N0}", rAmount) + "g} *";
-                            textBox1.Text = rsAmount;
+                            //textBox1.Text = rsAmount;
+
+                            context.Foods.Load();
 
                             // updating the recipe food details (the one with the recordID Key)
                             var editFood = context.Foods.Single(b => b.FoodId == recordID);
 
                             editFood.FoodDescription = textBoxRecipeFoodDescription.Text + rsAmount;
-                            editFood.Energy = queriedData.Energy * X;
-                            editFood.Protein = queriedData.Protein * X;
-                            editFood.FatTotal = queriedData.FatTotal * X;
-                            editFood.SaturatedFat = queriedData.SaturatedFat * X;
-                            editFood.TransFat = queriedData.TransFat * X;
-                            editFood.PolyunsaturatedFat = queriedData.PolyunsaturatedFat * X;
-                            editFood.MonounsaturatedFat = queriedData.MonounsaturatedFat * X;
-                            editFood.Carbohydrate = queriedData.Carbohydrate * X;
-                            editFood.Sugars = queriedData.Sugars * X;
-                            editFood.DietaryFibre = queriedData.DietaryFibre * X;
-                            editFood.SodiumNa = queriedData.SodiumNa * X;
-                            editFood.CalciumCa = queriedData.CalciumCa * X;
-                            editFood.PotassiumK = queriedData.PotassiumK * X;
-                            editFood.ThiaminB1 = queriedData.ThiaminB1 * X;
-                            editFood.RiboflavinB2 = queriedData.RiboflavinB2 * X;
-                            editFood.NiacinB3 = queriedData.NiacinB3 * X;
-                            editFood.Folate = queriedData.Folate * X;
-                            editFood.IronFe = queriedData.IronFe * X;
-                            editFood.MagnesiumMg = queriedData.MagnesiumMg * X;
-                            editFood.VitaminC = queriedData.VitaminC * X;
-                            editFood.Caffeine = queriedData.Caffeine * X;
-                            editFood.Cholesterol = queriedData.Cholesterol * X;
-                            editFood.Alcohol = queriedData.Alcohol * X;
+                            editFood.Energy = qData.Energy * X;
+                            editFood.Protein = qData.Protein * X;
+                            editFood.FatTotal = qData.FatTotal * X;
+                            editFood.SaturatedFat = qData.SaturatedFat * X;
+                            editFood.TransFat = qData.TransFat * X;
+                            editFood.PolyunsaturatedFat = qData.PolyunsaturatedFat * X;
+                            editFood.MonounsaturatedFat = qData.MonounsaturatedFat * X;
+                            editFood.Carbohydrate = qData.Carbohydrate * X;
+                            editFood.Sugars = qData.Sugars * X;
+                            editFood.DietaryFibre = qData.DietaryFibre * X;
+                            editFood.SodiumNa = qData.SodiumNa * X;
+                            editFood.CalciumCa = qData.CalciumCa * X;
+                            editFood.PotassiumK = qData.PotassiumK * X;
+                            editFood.ThiaminB1 = qData.ThiaminB1 * X;
+                            editFood.RiboflavinB2 = qData.RiboflavinB2 * X;
+                            editFood.NiacinB3 = qData.NiacinB3 * X;
+                            editFood.Folate = qData.Folate * X;
+                            editFood.IronFe = qData.IronFe * X;
+                            editFood.MagnesiumMg = qData.MagnesiumMg * X;
+                            editFood.VitaminC = qData.VitaminC * X;
+                            editFood.Caffeine = qData.Caffeine * X;
+                            editFood.Cholesterol = qData.Cholesterol * X;
+                            editFood.Alcohol = qData.Alcohol * X;
+
+                            // deletes the "backup" recipe food items (ie. those for which CopyFg==1)
+                            var oneData = context.Recipe.Local.ToList().Where(x => (x.CopyFg == 1));
+                            context.Recipe.RemoveRange(oneData);
 
                             context.SaveChanges();
-
-// *********************************************************************************************************************************** Remove ALL 1 type recipe components 
-
                         }
                         break;
                     case 3: // solid-private
@@ -324,9 +372,12 @@ namespace DietSentry
                 }
             }
 
-
-            actOnClose = false; // this prevents cancellation actions occuring when this form closes 
-            this.Close();
+            // finish processing unless there where no recipe components foods. 
+            if (!ignoreBtn)
+            {
+                actOnClose = false; // this prevents cancellation actions occuring when this form closes 
+                this.Close();
+            }
         }
 
 
@@ -358,7 +409,7 @@ namespace DietSentry
             // check the reason (UserClosing)
             if (e.CloseReason == CloseReason.UserClosing)
             {
-                if (actOnClose) 
+                if (actOnClose)
                 {
                     // then we are in effect pressing the {Cancel} button by pressing the {x} button
                     cancelInputAction();
@@ -1266,9 +1317,51 @@ namespace DietSentry
                     // obtains the Key for this Recipe food item
                     recordID = mainForm.recordID;
 
-// ***********************************************************************************************************************************************************
-                    // duplicate existing recipe components and flag with 1's
+                    // duplicate existing recipe components and flag with 1's, this is our backup in case we cancel our edit!
+                    using (var context = new FoodsContext())
+                    {
+                        context.Recipe.Load();
 
+                        // getting component foods for current recipe
+                        var RecipeFoods = context.Recipe.Local.ToList().Where(x => (x.FoodId == recordID));
+
+                        // duplicating them
+                        foreach (var food in RecipeFoods)
+                        {
+                            var newFood = new Recipe()
+                            {
+                                FoodId = recordID,
+                                CopyFg = 1, // indicating backup recipe food components
+                                Amount = food.Amount,
+                                FoodDescription = food.FoodDescription,
+                                Energy = food.Energy,
+                                Protein = food.Protein,
+                                FatTotal = food.FatTotal,
+                                SaturatedFat = food.SaturatedFat,
+                                TransFat = food.TransFat,
+                                PolyunsaturatedFat = food.PolyunsaturatedFat,
+                                MonounsaturatedFat = food.MonounsaturatedFat,
+                                Carbohydrate = food.Carbohydrate,
+                                Sugars = food.Sugars,
+                                DietaryFibre = food.DietaryFibre,
+                                SodiumNa = food.SodiumNa,
+                                CalciumCa = food.CalciumCa,
+                                PotassiumK = food.PotassiumK,
+                                ThiaminB1 = food.ThiaminB1,
+                                RiboflavinB2 = food.RiboflavinB2,
+                                NiacinB3 = food.NiacinB3,
+                                Folate = food.Folate,
+                                IronFe = food.IronFe,
+                                MagnesiumMg = food.MagnesiumMg,
+                                VitaminC = food.VitaminC,
+                                Caffeine = food.Caffeine,
+                                Cholesterol = food.Cholesterol,
+                                Alcohol = food.Alcohol
+                            };
+                            context.Recipe.Add(newFood);
+                        }
+                        context.SaveChanges();
+                    }
 
                     // so that we do not recreate food when we leave description text box
                     recordExists = true;
@@ -1353,13 +1446,10 @@ namespace DietSentry
 
                 // start updating dataGrid
                 recipeBindingSource.DataSource = context.Foods.Local.ToBindingList();
-//                var filteredData = context.Recipe.Local.ToBindingList().Where(x => ((x.FoodId == rID) & (x.CopyFg == 0)));
-                var filteredData = context.Recipe.Local.ToBindingList().Where(x => (x.FoodId == rID));
-//*************************************************************************************************************************************************************
-
+                var filteredData = context.Recipe.Local.ToBindingList().Where(x => ((x.FoodId == rID) & (x.CopyFg == 0)));
                 this.recipeBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
 
-                // setting focus to first displayed cell in data grid. Ignore (via exception) if nothing display in data grid 
+                // setting focus to first displayed cell in data grid. Ignore (via exception) if nothing is displayed in data grid 
                 try
                 {
                     dataGridViewRecipe.CurrentCell = dataGridViewRecipe.FirstDisplayedCell;
@@ -1410,17 +1500,14 @@ namespace DietSentry
 
                         if (amountOfFoodInRecipe > 0.0)
                         {
-                            textBox1.Text = string.Format("{0:N2}", amountOfFoodInRecipe);
+                            //textBox1.Text = string.Format("{0:N2}", amountOfFoodInRecipe);
 
                             // we can now add the appropriate entry to the Recipe table
                             float X = amountOfFoodInRecipe / 100F;
                             var newFood = new Recipe()
                             {
                                 FoodId = recordID,
-
-// ***************************************************************************************************
                                 CopyFg = 0,
-
                                 Amount = amountOfFoodInRecipe,
                                 FoodDescription = FoodSelected.FoodDescription,
                                 Energy = FoodSelected.Energy * X,
@@ -1449,7 +1536,6 @@ namespace DietSentry
                             };
                             context.Recipe.Add(newFood);
                             context.SaveChanges();
-
                             refreshRecipeDataGrid(recordID);
                         }
                     }
@@ -1577,7 +1663,6 @@ namespace DietSentry
                 }
             }
         }
-
 
     }
 }

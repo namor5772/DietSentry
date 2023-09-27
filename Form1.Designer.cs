@@ -52,6 +52,9 @@ namespace DietSentry
         // Id of edited recipe's record 
         public int recordID = 0;
 
+        // a full food description of a selected recipe food
+        public string fullFoodDescription = "BLANK";
+
         // *********************************************************
 
 
@@ -246,7 +249,7 @@ namespace DietSentry
             tabControlMain.Multiline = true;
             tabControlMain.Name = "tabControlMain";
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new Size(1310, 836);
+            tabControlMain.Size = new Size(1418, 785);
             tabControlMain.TabIndex = 1;
             // 
             // tabPageFood
@@ -259,7 +262,7 @@ namespace DietSentry
             tabPageFood.Location = new Point(4, 27);
             tabPageFood.Name = "tabPageFood";
             tabPageFood.Padding = new Padding(3);
-            tabPageFood.Size = new Size(1302, 805);
+            tabPageFood.Size = new Size(1410, 754);
             tabPageFood.TabIndex = 0;
             tabPageFood.Text = "Food";
             tabPageFood.UseVisualStyleBackColor = true;
@@ -354,7 +357,7 @@ namespace DietSentry
             dataGridViewFoods.RowHeadersWidth = 40;
             dataGridViewFoods.RowTemplate.Height = 25;
             dataGridViewFoods.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewFoods.Size = new Size(1290, 700);
+            dataGridViewFoods.Size = new Size(1398, 649);
             dataGridViewFoods.TabIndex = 4;
             dataGridViewFoods.CellDoubleClick += dataGridViewFoods_CellDoubleClick;
             dataGridViewFoods.UserDeletingRow += dataGridViewFoods_UserDeletingRow;
@@ -737,7 +740,7 @@ namespace DietSentry
             tabPageEaten.Location = new Point(4, 27);
             tabPageEaten.Name = "tabPageEaten";
             tabPageEaten.Padding = new Padding(3);
-            tabPageEaten.Size = new Size(1302, 805);
+            tabPageEaten.Size = new Size(1437, 754);
             tabPageEaten.TabIndex = 1;
             tabPageEaten.Text = "Eaten";
             tabPageEaten.UseVisualStyleBackColor = true;
@@ -1248,7 +1251,7 @@ namespace DietSentry
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1312, 838);
+            ClientSize = new Size(1420, 787);
             Controls.Add(tabControlMain);
             Controls.Add(tabControl1);
             Name = "MainForm";
