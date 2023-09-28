@@ -68,6 +68,7 @@ namespace DietSentry
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle27 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle28 = new DataGridViewCellStyle();
@@ -197,6 +198,8 @@ namespace DietSentry
             alcoholDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             eatenBindingSource = new BindingSource(components);
             recipeBindingSource = new BindingSource(components);
+            helpProviderMainForm = new HelpProvider();
+            toolTipMainForm = new ToolTip(components);
             tabControl1.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageFood.SuspendLayout();
@@ -265,6 +268,7 @@ namespace DietSentry
             tabPageFood.Size = new Size(1410, 754);
             tabPageFood.TabIndex = 0;
             tabPageFood.Text = "Food";
+            toolTipMainForm.SetToolTip(tabPageFood, "Food Tab help");
             tabPageFood.UseVisualStyleBackColor = true;
             // 
             // labelInfo
@@ -307,6 +311,7 @@ namespace DietSentry
             textBoxFilter.PlaceholderText = "Enter food filter text";
             textBoxFilter.Size = new Size(135, 23);
             textBoxFilter.TabIndex = 2;
+            toolTipMainForm.SetToolTip(textBoxFilter, resources.GetString("textBoxFilter.ToolTip"));
             textBoxFilter.WordWrap = false;
             textBoxFilter.Enter += textBoxFilter_Enter;
             textBoxFilter.KeyDown += textBoxFilter_KeyDown;
@@ -359,6 +364,7 @@ namespace DietSentry
             dataGridViewFoods.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewFoods.Size = new Size(1398, 649);
             dataGridViewFoods.TabIndex = 4;
+            toolTipMainForm.SetToolTip(dataGridViewFoods, "Hello world jkhjkhjkhjkhkjhjkjh\r\nhjgjhghjgjhghjghjh\r\njhgjhgjhgjhgjhgjhgjhjhgj");
             dataGridViewFoods.CellDoubleClick += dataGridViewFoods_CellDoubleClick;
             dataGridViewFoods.UserDeletingRow += dataGridViewFoods_UserDeletingRow;
             dataGridViewFoods.KeyDown += dataGridViewFoods_KeyDown;
@@ -436,8 +442,9 @@ namespace DietSentry
             saturatedFatDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             saturatedFatDataGridViewTextBoxColumn.DataPropertyName = "SaturatedFat";
             dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.Format = "N1";
             dataGridViewCellStyle7.NullValue = "0";
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
             saturatedFatDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle7;
             saturatedFatDataGridViewTextBoxColumn.HeaderText = "-Saturated Fat (g)";
             saturatedFatDataGridViewTextBoxColumn.MinimumWidth = 6;
@@ -451,7 +458,7 @@ namespace DietSentry
             transFatDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             transFatDataGridViewTextBoxColumn.DataPropertyName = "TransFat";
             dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.Format = "N1";
             dataGridViewCellStyle8.NullValue = "0";
             transFatDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
             transFatDataGridViewTextBoxColumn.HeaderText = "-Trans Fat (mg)";
@@ -466,7 +473,7 @@ namespace DietSentry
             polyunsaturatedFatDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             polyunsaturatedFatDataGridViewTextBoxColumn.DataPropertyName = "PolyunsaturatedFat";
             dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N2";
+            dataGridViewCellStyle9.Format = "N1";
             dataGridViewCellStyle9.NullValue = "0";
             polyunsaturatedFatDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle9;
             polyunsaturatedFatDataGridViewTextBoxColumn.HeaderText = "-Polyunsaturated Fat (g)";
@@ -481,7 +488,7 @@ namespace DietSentry
             monounsaturatedFatDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             monounsaturatedFatDataGridViewTextBoxColumn.DataPropertyName = "MonounsaturatedFat";
             dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.Format = "N1";
             dataGridViewCellStyle10.NullValue = "0";
             monounsaturatedFatDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle10;
             monounsaturatedFatDataGridViewTextBoxColumn.HeaderText = "-Monounsaturated Fat (g)";
@@ -583,7 +590,7 @@ namespace DietSentry
             thiaminB1DataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             thiaminB1DataGridViewTextBoxColumn.DataPropertyName = "ThiaminB1";
             dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle17.Format = "N3";
+            dataGridViewCellStyle17.Format = "N1";
             dataGridViewCellStyle17.NullValue = "0";
             thiaminB1DataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle17;
             thiaminB1DataGridViewTextBoxColumn.HeaderText = "Thiamin B1 (mg)";
@@ -598,7 +605,7 @@ namespace DietSentry
             riboflavinB2DataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             riboflavinB2DataGridViewTextBoxColumn.DataPropertyName = "RiboflavinB2";
             dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle18.Format = "N3";
+            dataGridViewCellStyle18.Format = "N1";
             dataGridViewCellStyle18.NullValue = "0";
             riboflavinB2DataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle18;
             riboflavinB2DataGridViewTextBoxColumn.HeaderText = "Riboflavin B2 (mg)";
@@ -613,7 +620,7 @@ namespace DietSentry
             niacinB3DataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             niacinB3DataGridViewTextBoxColumn.DataPropertyName = "NiacinB3";
             dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle19.Format = "N2";
+            dataGridViewCellStyle19.Format = "N1";
             dataGridViewCellStyle19.NullValue = "0";
             niacinB3DataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle19;
             niacinB3DataGridViewTextBoxColumn.HeaderText = "Niacin B3 (mg)";
@@ -643,7 +650,7 @@ namespace DietSentry
             ironFeDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             ironFeDataGridViewTextBoxColumn.DataPropertyName = "IronFe";
             dataGridViewCellStyle21.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle21.Format = "N2";
+            dataGridViewCellStyle21.Format = "N1";
             dataGridViewCellStyle21.NullValue = "0";
             ironFeDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle21;
             ironFeDataGridViewTextBoxColumn.HeaderText = "Iron Fe (mg)";
@@ -740,9 +747,10 @@ namespace DietSentry
             tabPageEaten.Location = new Point(4, 27);
             tabPageEaten.Name = "tabPageEaten";
             tabPageEaten.Padding = new Padding(3);
-            tabPageEaten.Size = new Size(1437, 754);
+            tabPageEaten.Size = new Size(1410, 754);
             tabPageEaten.TabIndex = 1;
             tabPageEaten.Text = "Eaten";
+            toolTipMainForm.SetToolTip(tabPageEaten, "Eaten Tab Help");
             tabPageEaten.UseVisualStyleBackColor = true;
             // 
             // checkBoxMainCols
@@ -814,7 +822,8 @@ namespace DietSentry
             dataGridViewEaten.Location = new Point(6, 99);
             dataGridViewEaten.MultiSelect = false;
             dataGridViewEaten.Name = "dataGridViewEaten";
-            dataGridViewEaten.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewEaten.ReadOnly = true;
+            dataGridViewEaten.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle58.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle58.BackColor = SystemColors.Control;
             dataGridViewCellStyle58.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -828,7 +837,7 @@ namespace DietSentry
             dataGridViewEaten.RowTemplate.Height = 25;
             dataGridViewEaten.RowTemplate.ReadOnly = true;
             dataGridViewEaten.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewEaten.Size = new Size(1290, 700);
+            dataGridViewEaten.Size = new Size(1398, 649);
             dataGridViewEaten.TabIndex = 0;
             dataGridViewEaten.UserDeletingRow += dataGridViewEaten_UserDeletingRow;
             // 
@@ -901,6 +910,7 @@ namespace DietSentry
             dataGridViewCellStyle34.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle34.Format = "N0";
             dataGridViewCellStyle34.NullValue = "0";
+            dataGridViewCellStyle34.WrapMode = DataGridViewTriState.True;
             energyDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle34;
             energyDataGridViewTextBoxColumn1.HeaderText = "Energy (kJ)";
             energyDataGridViewTextBoxColumn1.MinimumWidth = 6;
@@ -944,8 +954,9 @@ namespace DietSentry
             saturatedFatDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             saturatedFatDataGridViewTextBoxColumn1.DataPropertyName = "SaturatedFat";
             dataGridViewCellStyle37.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle37.Format = "N2";
+            dataGridViewCellStyle37.Format = "N1";
             dataGridViewCellStyle37.NullValue = "0";
+            dataGridViewCellStyle37.WrapMode = DataGridViewTriState.True;
             saturatedFatDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle37;
             saturatedFatDataGridViewTextBoxColumn1.HeaderText = "-Saturated Fat (g)";
             saturatedFatDataGridViewTextBoxColumn1.MinimumWidth = 6;
@@ -959,7 +970,7 @@ namespace DietSentry
             transFatDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             transFatDataGridViewTextBoxColumn1.DataPropertyName = "TransFat";
             dataGridViewCellStyle38.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle38.Format = "N2";
+            dataGridViewCellStyle38.Format = "N1";
             dataGridViewCellStyle38.NullValue = "0";
             transFatDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle38;
             transFatDataGridViewTextBoxColumn1.HeaderText = "-Trans Fat (mg)";
@@ -974,7 +985,7 @@ namespace DietSentry
             polyunsaturatedFatDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             polyunsaturatedFatDataGridViewTextBoxColumn1.DataPropertyName = "PolyunsaturatedFat";
             dataGridViewCellStyle39.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle39.Format = "N2";
+            dataGridViewCellStyle39.Format = "N1";
             dataGridViewCellStyle39.NullValue = "0";
             polyunsaturatedFatDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle39;
             polyunsaturatedFatDataGridViewTextBoxColumn1.HeaderText = "-Polyunsaturated Fat (g)";
@@ -989,7 +1000,7 @@ namespace DietSentry
             monounsaturatedFatDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             monounsaturatedFatDataGridViewTextBoxColumn1.DataPropertyName = "MonounsaturatedFat";
             dataGridViewCellStyle40.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle40.Format = "N2";
+            dataGridViewCellStyle40.Format = "N1";
             dataGridViewCellStyle40.NullValue = "0";
             monounsaturatedFatDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle40;
             monounsaturatedFatDataGridViewTextBoxColumn1.HeaderText = "-Monounsaturated Fat (g)";
@@ -1094,7 +1105,7 @@ namespace DietSentry
             thiaminB1DataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             thiaminB1DataGridViewTextBoxColumn1.DataPropertyName = "ThiaminB1";
             dataGridViewCellStyle47.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle47.Format = "N3";
+            dataGridViewCellStyle47.Format = "N1";
             dataGridViewCellStyle47.NullValue = "0";
             thiaminB1DataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle47;
             thiaminB1DataGridViewTextBoxColumn1.HeaderText = "Thiamin B1 (mg)";
@@ -1109,7 +1120,7 @@ namespace DietSentry
             riboflavinB2DataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             riboflavinB2DataGridViewTextBoxColumn1.DataPropertyName = "RiboflavinB2";
             dataGridViewCellStyle48.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle48.Format = "N3";
+            dataGridViewCellStyle48.Format = "N1";
             dataGridViewCellStyle48.NullValue = "0";
             riboflavinB2DataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle48;
             riboflavinB2DataGridViewTextBoxColumn1.HeaderText = "Riboflavin B2 (mg)";
@@ -1124,7 +1135,7 @@ namespace DietSentry
             niacinB3DataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             niacinB3DataGridViewTextBoxColumn1.DataPropertyName = "NiacinB3";
             dataGridViewCellStyle49.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle49.Format = "N2";
+            dataGridViewCellStyle49.Format = "N1";
             dataGridViewCellStyle49.NullValue = "0";
             niacinB3DataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle49;
             niacinB3DataGridViewTextBoxColumn1.HeaderText = "Niacin B3 (mg)";
@@ -1154,7 +1165,7 @@ namespace DietSentry
             ironFeDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             ironFeDataGridViewTextBoxColumn1.DataPropertyName = "IronFe";
             dataGridViewCellStyle51.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle51.Format = "N2";
+            dataGridViewCellStyle51.Format = "N1";
             dataGridViewCellStyle51.NullValue = "0";
             ironFeDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle51;
             ironFeDataGridViewTextBoxColumn1.HeaderText = "Iron Fe (mg)";
@@ -1247,6 +1258,11 @@ namespace DietSentry
             // 
             recipeBindingSource.DataSource = typeof(Recipe);
             // 
+            // toolTipMainForm
+            // 
+            toolTipMainForm.IsBalloon = true;
+            toolTipMainForm.ToolTipTitle = "Context Help";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1255,6 +1271,7 @@ namespace DietSentry
             Controls.Add(tabControlMain);
             Controls.Add(tabControl1);
             Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Diet Sentry";
             tabControl1.ResumeLayout(false);
             tabControlMain.ResumeLayout(false);
@@ -1283,6 +1300,13 @@ namespace DietSentry
         private Label labelFilter;
         private DataGridView dataGridViewEaten;
         private BindingSource eatenBindingSource;
+        private CheckBox checkBoxDateFilter;
+        private CheckBox checkBoxDailyTotals;
+        private CheckBox checkBoxMainCols;
+        private CheckBox checkBoxMainFoodCols;
+        private Label labelInfo;
+        public BindingSource foodBindingSource;
+        private BindingSource recipeBindingSource;
         private DataGridViewTextBoxColumn FoodIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn foodDescriptionDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn energyDataGridViewTextBoxColumn;
@@ -1308,13 +1332,6 @@ namespace DietSentry
         private DataGridViewTextBoxColumn caffeineDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn cholesterolDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn alcoholDataGridViewTextBoxColumn;
-        private CheckBox checkBoxDateFilter;
-        private CheckBox checkBoxDailyTotals;
-        private CheckBox checkBoxMainCols;
-        private CheckBox checkBoxMainFoodCols;
-        private Label labelInfo;
-        public BindingSource foodBindingSource;
-        private BindingSource recipeBindingSource;
         private DataGridViewTextBoxColumn EatenId;
         private DataGridViewTextBoxColumn DateEaten;
         private DataGridViewTextBoxColumn TimeEaten;
@@ -1343,5 +1360,7 @@ namespace DietSentry
         private DataGridViewTextBoxColumn caffeineDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn cholesterolDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn alcoholDataGridViewTextBoxColumn1;
+        private HelpProvider helpProviderMainForm;
+        private ToolTip toolTipMainForm;
     }
 }

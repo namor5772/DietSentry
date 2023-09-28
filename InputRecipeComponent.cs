@@ -16,11 +16,11 @@ namespace DietSentry
     public partial class InputRecipeComponent : Form
     {
 
-        private foodInputForm? foodInputFormX = null;
+        private FoodInputForm? foodInputFormX = null;
 
         public InputRecipeComponent(Form callingform)
         {
-            foodInputFormX = callingform as foodInputForm;
+            foodInputFormX = callingform as FoodInputForm;
             InitializeComponent();
         }
 

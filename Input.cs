@@ -17,7 +17,7 @@ namespace DietSentry
 {
     public partial class InputForm : Form
     {
-        private MainForm? mainForm = null;
+        private readonly MainForm? mainForm = null;
         public InputForm(Form callingform)
         {
             mainForm = callingform as MainForm;
@@ -30,7 +30,7 @@ namespace DietSentry
             // Call textbox's focus method and make sure initial value is ""
             this.textBoxAmount.Focus();
             this.textBoxAmount.Text = "";
-            this.labelAmount.Text = UnitsString(mainForm.eatenFoodDescription);
+            this.labelAmount.Text = UnitsString(mainForm!.eatenFoodDescription);
             this.labelDescription.Text = mainForm.eatenFoodDescription;
         }
 
@@ -53,7 +53,7 @@ namespace DietSentry
                 }
 
                 // collects the input, processes it and assignes it to a variable accessible in the MainForm     
-                mainForm.amountOfFoodEaten = amount / 100.0F;
+                mainForm!.amountOfFoodEaten = amount / 100.0F;
                 Close();
             }
         }

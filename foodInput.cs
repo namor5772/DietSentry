@@ -20,17 +20,17 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DietSentry
 {
-    public partial class foodInputForm : Form
+    public partial class FoodInputForm : Form
     {
 
         private FoodsContext? dbContext;
 
-        private MainForm? mainForm = null;
-        public foodInputForm(Form callingform)
+        private readonly MainForm? mainForm;
+        public FoodInputForm(Form callingform)
         {
             mainForm = callingform as MainForm;
             InitializeComponent();
-            if (mainForm.inputType == 0)
+            if (mainForm!.inputType == 0)
             {
                 this.Text = "Form for ADDING new food item";
             }
@@ -72,68 +72,65 @@ namespace DietSentry
         }
 
 
-        // delete any provisionally created bits of a recipe
+
+        // deletes any provisionally created recipe or reverts to original if editing was being done
         private void cancelAdditionOfRecipe()
         {
-            if ((recordID != 0) & (mainForm.inputType == 0))
+            if ((recordID != 0) & (mainForm!.inputType == 0))
             {
                 // a recipe record has been created in food record add mode 
-                using (var context = new FoodsContext())
-                {
-                    context.Foods.Load();
+                using var context = new FoodsContext();
+                context.Foods.Load();
 
-                    // gain direct access to recipe record in the Foods table
-                    var recipeFood = context.Foods.Single(b => b.FoodId == recordID);
+                // gain direct access to recipe record in the Foods table
+                var recipeFood = context.Foods.Single(b => b.FoodId == recordID);
 
-                    // delete this record from Foods table
-                    context.Foods.Remove(recipeFood);
-                    context.SaveChanges();
+                // delete this record from Foods table
+                context.Foods.Remove(recipeFood);
+                context.SaveChanges();
 
-                    context.Recipe.Load();
+                context.Recipe.Load();
 
-                    // delete any created records in the recipe table
-                    var recipeFoods = context.Recipe.Where(r => r.FoodId == recordID);
-                    context.Recipe.RemoveRange(recipeFoods);
+                // delete any created records in the recipe table
+                var recipeFoods = context.Recipe.Where(r => r.FoodId == recordID);
+                context.Recipe.RemoveRange(recipeFoods);
 
-                    context.SaveChanges();
-                }
+                context.SaveChanges();
             }
             else if ((mainForm.foodType == 2) & (mainForm.inputType == 1))
             {
                 // a selected recipe has potentialy been edited but we are cancelling, so we need to reverse any changes.
-                using (var context = new FoodsContext())
+                using var context = new FoodsContext();
+                context.Recipe.Load();
+
+                // delete any 0 recipe items which represent the new edited state of the recipe
+                var recipeFoods0 = context.Recipe.Where(r => ((r.FoodId == recordID) & (r.CopyFg == 0)));
+                context.Recipe.RemoveRange(recipeFoods0);
+
+                // convert all recipe items with CopyFg=1 to have CopyFg=0
+                var recipeFoods1 = context.Recipe.Where(r => ((r.FoodId == recordID) & (r.CopyFg == 1)));
+                foreach (var food in recipeFoods1)
                 {
-                    context.Recipe.Load();
-
-                    // delete any 0 recipe items which represent the new edited state of the recipe
-                    var recipeFoods0 = context.Recipe.Where(r => ((r.FoodId == recordID) & (r.CopyFg == 0)));
-                    context.Recipe.RemoveRange(recipeFoods0);
-
-                    // convert all recipe items with CopyFg=1 to have CopyFg=0
-                    var recipeFoods1 = context.Recipe.Where(r => ((r.FoodId == recordID) & (r.CopyFg == 1)));
-                    foreach (var food in recipeFoods1)
-                    {
-                        food.CopyFg = 0;
-                    }
-
-                    context.Foods.Load();
-
-                    // gain direct access to recipe record in the Foods table and restore its Food Description
-                    // it in fact it has been modified
-                    var recipeFood = context.Foods.Single(b => b.FoodId == recordID);
-                    recipeFood.FoodDescription = mainForm.fullFoodDescription;
-
-                    context.SaveChanges();
+                    food.CopyFg = 0;
                 }
+
+                context.Foods.Load();
+
+                // gain direct access to recipe record in the Foods table and restore its Food Description
+                // it in fact it has been modified
+                var recipeFood = context.Foods.Single(b => b.FoodId == recordID);
+                recipeFood.FoodDescription = mainForm.fullFoodDescription;
+
+                context.SaveChanges();
             }
         }
 
-
+        // when {Add food} (or renamed) {Edit food} button is pressed
         private void buttonAddFood_Click(object sender, EventArgs e)
         {
             bool ignoreBtn = false;
 
-            if (mainForm.inputType == 0)
+            if (mainForm!.inputType == 0)
             {
                 // cleaning up form if ADDING foood item
                 mainForm.actOnFoodAdded = true;
@@ -162,83 +159,81 @@ namespace DietSentry
                         if (recordID != 0)  // have created a recipe 
                         {
                             // completing creation of recipe
-                            using (var context = new FoodsContext())
+                            using var context = new FoodsContext();
+                            context.Recipe.Load();
+
+                            // summing the component foods making up the recipe 
+                            var queriedData = context.Recipe.Local.ToBindingList().GroupBy(o => o.FoodId).Select(g => new
                             {
-                                context.Recipe.Load();
+                                FoodId = g.Key,
+                                CopyFg = g.Sum(i => i.CopyFg),
+                                Amount = g.Sum(i => i.Amount),
+                                Energy = g.Sum(i => i.Energy),
+                                Protein = g.Sum(i => i.Protein),
+                                FatTotal = g.Sum(i => i.FatTotal),
+                                SaturatedFat = g.Sum(i => i.SaturatedFat),
+                                TransFat = g.Sum(i => i.TransFat),
+                                PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
+                                MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
+                                Carbohydrate = g.Sum(i => i.Carbohydrate),
+                                Sugars = g.Sum(i => i.Sugars),
+                                DietaryFibre = g.Sum(i => i.DietaryFibre),
+                                SodiumNa = g.Sum(i => i.SodiumNa),
+                                CalciumCa = g.Sum(i => i.CalciumCa),
+                                PotassiumK = g.Sum(i => i.PotassiumK),
+                                ThiaminB1 = g.Sum(i => i.ThiaminB1),
+                                RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
+                                NiacinB3 = g.Sum(i => i.NiacinB3),
+                                Folate = g.Sum(i => i.Folate),
+                                IronFe = g.Sum(i => i.IronFe),
+                                MagnesiumMg = g.Sum(i => i.MagnesiumMg),
+                                VitaminC = g.Sum(i => i.VitaminC),
+                                Caffeine = g.Sum(i => i.Caffeine),
+                                Cholesterol = g.Sum(i => i.Cholesterol),
+                                Alcohol = g.Sum(i => i.Alcohol)
+                            }).Where(x => x.FoodId == recordID).Last();
 
-                                // summing the component foods making up the recipe 
-                                var queriedData = context.Recipe.Local.ToBindingList().GroupBy(o => o.FoodId).Select(g => new
-                                {
-                                    FoodId = g.Key,
-                                    CopyFg = g.Sum(i => i.CopyFg),
-                                    Amount = g.Sum(i => i.Amount),
-                                    Energy = g.Sum(i => i.Energy),
-                                    Protein = g.Sum(i => i.Protein),
-                                    FatTotal = g.Sum(i => i.FatTotal),
-                                    SaturatedFat = g.Sum(i => i.SaturatedFat),
-                                    TransFat = g.Sum(i => i.TransFat),
-                                    PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
-                                    MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
-                                    Carbohydrate = g.Sum(i => i.Carbohydrate),
-                                    Sugars = g.Sum(i => i.Sugars),
-                                    DietaryFibre = g.Sum(i => i.DietaryFibre),
-                                    SodiumNa = g.Sum(i => i.SodiumNa),
-                                    CalciumCa = g.Sum(i => i.CalciumCa),
-                                    PotassiumK = g.Sum(i => i.PotassiumK),
-                                    ThiaminB1 = g.Sum(i => i.ThiaminB1),
-                                    RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
-                                    NiacinB3 = g.Sum(i => i.NiacinB3),
-                                    Folate = g.Sum(i => i.Folate),
-                                    IronFe = g.Sum(i => i.IronFe),
-                                    MagnesiumMg = g.Sum(i => i.MagnesiumMg),
-                                    VitaminC = g.Sum(i => i.VitaminC),
-                                    Caffeine = g.Sum(i => i.Caffeine),
-                                    Cholesterol = g.Sum(i => i.Cholesterol),
-                                    Alcohol = g.Sum(i => i.Alcohol)
-                                }).Where(x => x.FoodId == recordID).Last();
+                            //textBox1.Text = string.Format("{0:N2}", queriedData.Amount);
 
-                                //textBox1.Text = string.Format("{0:N2}", queriedData.Amount);
+                            // weight of recipe in grams
+                            float rAmount = queriedData.Amount;
 
-                                // weight of recipe in grams
-                                float rAmount = queriedData.Amount;
+                            // scaling multiplier to convert nutrient totals to per 100g for recipe food
+                            float X = 100F / rAmount;
 
-                                // scaling multiplier to convert nutrient totals to per 100g for recipe food
-                                float X = 100F / rAmount;
+                            // string to add to end of recipe foods description. It includes recipe weight in grams 
+                            string rsAmount = " {recipe=" + string.Format("{0:N0}", rAmount) + "g} *";
+                            //textBox1.Text = rsAmount;
 
-                                // string to add to end of recipe foods description. It includes recipe weight in grams 
-                                string rsAmount = " {recipe=" + string.Format("{0:N0}", rAmount) + "g} *";
-                                //textBox1.Text = rsAmount;
+                            // updating the recipe food details (the one with the recordID Key)
+                            var editFood = context.Foods.Single(b => b.FoodId == recordID);
 
-                                // updating the recipe food details (the one with the recordID Key)
-                                var editFood = context.Foods.Single(b => b.FoodId == recordID);
+                            editFood.FoodDescription += rsAmount;
+                            editFood.Energy = queriedData.Energy * X;
+                            editFood.Protein = queriedData.Protein * X;
+                            editFood.FatTotal = queriedData.FatTotal * X;
+                            editFood.SaturatedFat = queriedData.SaturatedFat * X;
+                            editFood.TransFat = queriedData.TransFat * X;
+                            editFood.PolyunsaturatedFat = queriedData.PolyunsaturatedFat * X;
+                            editFood.MonounsaturatedFat = queriedData.MonounsaturatedFat * X;
+                            editFood.Carbohydrate = queriedData.Carbohydrate * X;
+                            editFood.Sugars = queriedData.Sugars * X;
+                            editFood.DietaryFibre = queriedData.DietaryFibre * X;
+                            editFood.SodiumNa = queriedData.SodiumNa * X;
+                            editFood.CalciumCa = queriedData.CalciumCa * X;
+                            editFood.PotassiumK = queriedData.PotassiumK * X;
+                            editFood.ThiaminB1 = queriedData.ThiaminB1 * X;
+                            editFood.RiboflavinB2 = queriedData.RiboflavinB2 * X;
+                            editFood.NiacinB3 = queriedData.NiacinB3 * X;
+                            editFood.Folate = queriedData.Folate * X;
+                            editFood.IronFe = queriedData.IronFe * X;
+                            editFood.MagnesiumMg = queriedData.MagnesiumMg * X;
+                            editFood.VitaminC = queriedData.VitaminC * X;
+                            editFood.Caffeine = queriedData.Caffeine * X;
+                            editFood.Cholesterol = queriedData.Cholesterol * X;
+                            editFood.Alcohol = queriedData.Alcohol * X;
 
-                                editFood.FoodDescription = editFood.FoodDescription + rsAmount;
-                                editFood.Energy = queriedData.Energy * X;
-                                editFood.Protein = queriedData.Protein * X;
-                                editFood.FatTotal = queriedData.FatTotal * X;
-                                editFood.SaturatedFat = queriedData.SaturatedFat * X;
-                                editFood.TransFat = queriedData.TransFat * X;
-                                editFood.PolyunsaturatedFat = queriedData.PolyunsaturatedFat * X;
-                                editFood.MonounsaturatedFat = queriedData.MonounsaturatedFat * X;
-                                editFood.Carbohydrate = queriedData.Carbohydrate * X;
-                                editFood.Sugars = queriedData.Sugars * X;
-                                editFood.DietaryFibre = queriedData.DietaryFibre * X;
-                                editFood.SodiumNa = queriedData.SodiumNa * X;
-                                editFood.CalciumCa = queriedData.CalciumCa * X;
-                                editFood.PotassiumK = queriedData.PotassiumK * X;
-                                editFood.ThiaminB1 = queriedData.ThiaminB1 * X;
-                                editFood.RiboflavinB2 = queriedData.RiboflavinB2 * X;
-                                editFood.NiacinB3 = queriedData.NiacinB3 * X;
-                                editFood.Folate = queriedData.Folate * X;
-                                editFood.IronFe = queriedData.IronFe * X;
-                                editFood.MagnesiumMg = queriedData.MagnesiumMg * X;
-                                editFood.VitaminC = queriedData.VitaminC * X;
-                                editFood.Caffeine = queriedData.Caffeine * X;
-                                editFood.Cholesterol = queriedData.Cholesterol * X;
-                                editFood.Alcohol = queriedData.Alcohol * X;
-
-                                context.SaveChanges();
-                            }
+                            context.SaveChanges();
                         }
                     }
                     catch // display message that tells you that recipes must contain component foods
@@ -258,7 +253,7 @@ namespace DietSentry
             }
             if (mainForm.inputType == 1)
             {
-                // cleaning up form if EDITING food item
+                // finishing processing the EDITING of a food item
                 // By this stage it is assumed that all mainForm.addedFoodItem values are assigned even if just to "" or 0F
 
                 // this tells the code in the MainForm to actually add the recorded Food item to the Foods table
@@ -273,8 +268,9 @@ namespace DietSentry
                         mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " mL";
                         break;
                     case 2: // recipe
-                        using (var context = new FoodsContext())
+                        try // crashes if no recipe components to sum
                         {
+                            using var context = new FoodsContext();
                             context.Recipe.Load();
 
                             // summing the component foods making up the recipe 
@@ -310,8 +306,6 @@ namespace DietSentry
                                     Alcohol = g.Sum(i => i.Alcohol)
                                 }).
                                 Last();
-
-                            //textBox1.Text = string.Format("{0:N2}", qData.Amount);
 
                             // weight of recipe in grams
                             float rAmount = qData.Amount;
@@ -359,6 +353,19 @@ namespace DietSentry
 
                             context.SaveChanges();
                         }
+                        catch // display message that tells you that recipes must contain component foods
+                        {
+                            // Initializes the variables to pass to the MessageBox.Show method.
+                            string message = "A recipe must contain component food items!";
+                            string caption = "CANNOT EDIT THIS RECIPE";
+                            MessageBoxButtons buttons = MessageBoxButtons.OK;
+
+                            // Displays the MessageBox.
+                            MessageBox.Show(message, caption, buttons);
+
+                            // prevents continued processing
+                            ignoreBtn = true;
+                        }
                         break;
                     case 3: // solid-private
                         mainForm.addedFoodItem.FoodDescription = (mainForm.addedFoodItem.FoodDescription) + " #";
@@ -384,17 +391,17 @@ namespace DietSentry
 
         /***** Events/functions related to cancelling a foods input *****/
 
-        // what needs to be done when the {Cancel} button is pressed
+        // What needs to be done when the {Cancel} button is pressed
         private void cancelInputAction()
         {
             // this tells the code in the MainForm to CANCEL the addition of a food item to the Foods table 
-            mainForm.actOnFoodAdded = false;
+            mainForm!.actOnFoodAdded = false;
 
             // delete any provisionally created bits of a recipe if they exist
             cancelAdditionOfRecipe();
         }
 
-        // When {Cancel} button pressed
+        // When {Cancel} button is pressed, also linked to pressing the {Esc} Key
         private void buttonCancelAddFood_Click(object sender, EventArgs e)
         {
             cancelInputAction();
@@ -419,6 +426,7 @@ namespace DietSentry
 
 
 
+        // toggles between food input forms/layouts
         private void radioButtonSolid_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonSolid.Checked)
@@ -454,7 +462,7 @@ namespace DietSentry
 
 
 
-        /* Enables the completion of inputing a FoodDescription value by pressing the Enter key
+        /* Enables the completion of inputting a food or recipie description string by pressing the Enter key
          * No error checking necessary since input is an arbitrary string */
         private void textBoxFoodDescription_KeyDown(object sender, KeyEventArgs e)
         {
@@ -464,18 +472,84 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+        private void textBoxRecipeFoodDescription_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
+                SendKeys.Send("{TAB}");
+            }
+        }
 
-        /* Enables the completion of inputting a field value by having the text box loose focus, be it by pressing
-         * {Shift}{Tab} or just the {Tab} key, or using the Mouse. */
+        /* Enables the completion of inputting a food or recipe description string by having the text box lose focus,
+         * be it by pressing {Shift}{Tab} or just the {Tab} key, or using the Mouse. */
         private void textBoxFoodDescription_Leave(object sender, EventArgs e)
         {
-            mainForm.addedFoodItem.FoodDescription = textBoxFoodDescription.Text;
-            labelState.Text = textBoxFoodDescription.Text;
+            mainForm!.addedFoodItem.FoodDescription = textBoxFoodDescription.Text;
+        }
+        private void textBoxRecipeFoodDescription_Leave(object sender, EventArgs e)
+        {
+            if (!recordExists)
+            {
+                using (var context = new FoodsContext())
+                {
+                    // this creates the initial main food item record for a recipe. It will be edited (or deleted) later.
+                    // It is needed now so we can identify it by its unique FoodId Key.
+                    var newFood = new Food()
+                    {
+                        FoodDescription = textBoxRecipeFoodDescription.Text,
+                        Energy = 0F,
+                        Protein = 0F,
+                        FatTotal = 0F,
+                        SaturatedFat = 0F,
+                        TransFat = 0F,
+                        PolyunsaturatedFat = 0F,
+                        MonounsaturatedFat = 0F,
+                        Carbohydrate = 0F,
+                        Sugars = 0F,
+                        DietaryFibre = 0F,
+                        SodiumNa = 0F,
+                        CalciumCa = 0F,
+                        PotassiumK = 0F,
+                        ThiaminB1 = 0F,
+                        RiboflavinB2 = 0F,
+                        NiacinB3 = 0F,
+                        Folate = 0F,
+                        IronFe = 0F,
+                        MagnesiumMg = 0F,
+                        VitaminC = 0F,
+                        Caffeine = 0F,
+                        Cholesterol = 0F,
+                        Alcohol = 0F
+                    };
+                    context.Foods.Add(newFood);
+                    context.SaveChanges();
+                    recordID = newFood.FoodId;
+                    //labelState.Text = string.Format("{0:N0}", recordID);
+
+                    // on first leaving of this textbox create
+                    //labelState.Text = textBoxRecipeFoodDescription.Text;
+
+                    // gain access for editing to food item via its known Key
+                    var editFood = context.Foods.Single(b => b.FoodId == recordID);
+                    context.SaveChanges();
+                }
+
+                // so we don't recreate record next time we leave this textBox
+                recordExists = true;
+            }
+            else // if (recordExists)
+            {
+                using var context = new FoodsContext();
+                var editFood = context.Foods.Single(b => b.FoodId == recordID);
+                editFood.FoodDescription = textBoxRecipeFoodDescription.Text;
+                context.SaveChanges();
+            }
         }
 
 
 
-        /***** START BLOCK OF EVEN FUNCTIONS *****
+        /***** START BLOCK OF EVENT FUNCTIONS *****
          * The following EVENT FUNCTIONS are related to accepting & error managing all number accepting text boxes for Food table fields */
 
         /* General textBox field comment ***
@@ -491,6 +565,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         /* General textBox field comment ***
          * Enables the completion of inputting a field value by having the text box loose focus, be it by pressing 
          * {Shift}{Tab} or just the {Tab} key, or using the Mouse. If the input text does not parse to a positive 
@@ -503,21 +578,21 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxEnergy.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.Energy = 0F;
+                    mainForm!.addedFoodItem.Energy = 0F;
                     textBoxEnergy.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.Energy = float.Parse(textBoxEnergy.Text);
+                    mainForm!.addedFoodItem.Energy = float.Parse(textBoxEnergy.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.Energy = 0F;
+                mainForm!.addedFoodItem.Energy = 0F;
                 textBoxEnergy.Text = "";
             }
-            labelState.Text = textBoxEnergy.Text;
         }
+
         private void textBoxProtein_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -533,20 +608,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxProtein.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.Protein = 0F;
+                    mainForm!.addedFoodItem.Protein = 0F;
                     textBoxProtein.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.Protein = float.Parse(textBoxProtein.Text);
+                    mainForm!.addedFoodItem.Protein = float.Parse(textBoxProtein.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.Protein = 0F;
+                mainForm!.addedFoodItem.Protein = 0F;
                 textBoxProtein.Text = "";
             }
-            labelState.Text = textBoxProtein.Text;
         }
         private void textBoxFatTotal_KeyDown(object sender, KeyEventArgs e)
         {
@@ -563,20 +637,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxFatTotal.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.FatTotal = 0F;
+                    mainForm!.addedFoodItem.FatTotal = 0F;
                     textBoxFatTotal.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.FatTotal = float.Parse(textBoxFatTotal.Text);
+                    mainForm!.addedFoodItem.FatTotal = float.Parse(textBoxFatTotal.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.FatTotal = 0F;
+                mainForm!.addedFoodItem.FatTotal = 0F;
                 textBoxFatTotal.Text = "";
             }
-            labelState.Text = (textBoxFatTotal.Text);
         }
         private void textBoxSaturatedFat_KeyDown(object sender, KeyEventArgs e)
         {
@@ -593,20 +666,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxSaturatedFat.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.SaturatedFat = 0F;
+                    mainForm!.addedFoodItem.SaturatedFat = 0F;
                     textBoxSaturatedFat.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.SaturatedFat = float.Parse(textBoxSaturatedFat.Text);
+                    mainForm!.addedFoodItem.SaturatedFat = float.Parse(textBoxSaturatedFat.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.SaturatedFat = 0F;
+                mainForm!.addedFoodItem.SaturatedFat = 0F;
                 textBoxSaturatedFat.Text = "";
             }
-            labelState.Text = (textBoxSaturatedFat.Text);
         }
         private void textBoxTransFat_KeyDown(object sender, KeyEventArgs e)
         {
@@ -623,20 +695,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxTransFat.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.TransFat = 0F;
+                    mainForm!.addedFoodItem.TransFat = 0F;
                     textBoxTransFat.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.TransFat = float.Parse(textBoxTransFat.Text);
+                    mainForm!.addedFoodItem.TransFat = float.Parse(textBoxTransFat.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.TransFat = 0F;
+                mainForm!.addedFoodItem.TransFat = 0F;
                 textBoxTransFat.Text = "";
             }
-            labelState.Text = (textBoxTransFat.Text);
         }
         private void textBoxPolyunsaturatedFat_KeyDown(object sender, KeyEventArgs e)
         {
@@ -653,20 +724,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxPolyunsaturatedFat.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.PolyunsaturatedFat = 0F;
+                    mainForm!.addedFoodItem.PolyunsaturatedFat = 0F;
                     textBoxPolyunsaturatedFat.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.PolyunsaturatedFat = float.Parse(textBoxPolyunsaturatedFat.Text);
+                    mainForm!.addedFoodItem.PolyunsaturatedFat = float.Parse(textBoxPolyunsaturatedFat.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.PolyunsaturatedFat = 0F;
+                mainForm!.addedFoodItem.PolyunsaturatedFat = 0F;
                 textBoxPolyunsaturatedFat.Text = "";
             }
-            labelState.Text = (textBoxPolyunsaturatedFat.Text);
         }
         private void textBoxMonounsaturatedFat_KeyDown(object sender, KeyEventArgs e)
         {
@@ -683,20 +753,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxMonounsaturatedFat.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.MonounsaturatedFat = 0F;
+                    mainForm!.addedFoodItem.MonounsaturatedFat = 0F;
                     textBoxMonounsaturatedFat.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.MonounsaturatedFat = float.Parse(textBoxMonounsaturatedFat.Text);
+                    mainForm!.addedFoodItem.MonounsaturatedFat = float.Parse(textBoxMonounsaturatedFat.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.MonounsaturatedFat = 0F;
+                mainForm!.addedFoodItem.MonounsaturatedFat = 0F;
                 textBoxMonounsaturatedFat.Text = "";
             }
-            labelState.Text = (textBoxMonounsaturatedFat.Text);
         }
         private void textBoxCarbohydrate_KeyDown(object sender, KeyEventArgs e)
         {
@@ -713,20 +782,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxCarbohydrate.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.Carbohydrate = 0F;
+                    mainForm!.addedFoodItem.Carbohydrate = 0F;
                     textBoxCarbohydrate.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.Carbohydrate = float.Parse(textBoxCarbohydrate.Text);
+                    mainForm!.addedFoodItem.Carbohydrate = float.Parse(textBoxCarbohydrate.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.Carbohydrate = 0F;
+                mainForm!.addedFoodItem.Carbohydrate = 0F;
                 textBoxCarbohydrate.Text = "";
             }
-            labelState.Text = (textBoxCarbohydrate.Text);
         }
         private void textBoxSugars_KeyDown(object sender, KeyEventArgs e)
         {
@@ -743,20 +811,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxSugars.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.Sugars = 0F;
+                    mainForm!.addedFoodItem.Sugars = 0F;
                     textBoxSugars.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.Sugars = float.Parse(textBoxSugars.Text);
+                    mainForm!.addedFoodItem.Sugars = float.Parse(textBoxSugars.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.Sugars = 0F;
+                mainForm!.addedFoodItem.Sugars = 0F;
                 textBoxSugars.Text = "";
             }
-            labelState.Text = (textBoxSugars.Text);
         }
         private void textBoxDietaryFibre_KeyDown(object sender, KeyEventArgs e)
         {
@@ -773,20 +840,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxDietaryFibre.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.DietaryFibre = 0F;
+                    mainForm!.addedFoodItem.DietaryFibre = 0F;
                     textBoxDietaryFibre.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.DietaryFibre = float.Parse(textBoxDietaryFibre.Text);
+                    mainForm!.addedFoodItem.DietaryFibre = float.Parse(textBoxDietaryFibre.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.DietaryFibre = 0F;
+                mainForm!.addedFoodItem.DietaryFibre = 0F;
                 textBoxDietaryFibre.Text = "";
             }
-            labelState.Text = (textBoxDietaryFibre.Text);
         }
         private void textBoxSodiumNa_KeyDown(object sender, KeyEventArgs e)
         {
@@ -803,20 +869,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxSodiumNa.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.SodiumNa = 0F;
+                    mainForm!.addedFoodItem.SodiumNa = 0F;
                     textBoxSodiumNa.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.SodiumNa = float.Parse(textBoxSodiumNa.Text);
+                    mainForm!.addedFoodItem.SodiumNa = float.Parse(textBoxSodiumNa.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.SodiumNa = 0F;
+                mainForm!.addedFoodItem.SodiumNa = 0F;
                 textBoxSodiumNa.Text = "";
             }
-            labelState.Text = (textBoxSodiumNa.Text);
         }
         private void textBoxCalciumCa_KeyDown(object sender, KeyEventArgs e)
         {
@@ -833,20 +898,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxCalciumCa.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.CalciumCa = 0F;
+                    mainForm!.addedFoodItem.CalciumCa = 0F;
                     textBoxCalciumCa.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.CalciumCa = float.Parse(textBoxCalciumCa.Text);
+                    mainForm!.addedFoodItem.CalciumCa = float.Parse(textBoxCalciumCa.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.CalciumCa = 0F;
+                mainForm!.addedFoodItem.CalciumCa = 0F;
                 textBoxCalciumCa.Text = "";
             }
-            labelState.Text = (textBoxCalciumCa.Text);
         }
         private void textBoxPotassiumK_KeyDown(object sender, KeyEventArgs e)
         {
@@ -863,20 +927,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxPotassiumK.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.PotassiumK = 0F;
+                    mainForm!.addedFoodItem.PotassiumK = 0F;
                     textBoxPotassiumK.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.PotassiumK = float.Parse(textBoxPotassiumK.Text);
+                    mainForm!.addedFoodItem.PotassiumK = float.Parse(textBoxPotassiumK.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.PotassiumK = 0F;
+                mainForm!.addedFoodItem.PotassiumK = 0F;
                 textBoxPotassiumK.Text = "";
             }
-            labelState.Text = (textBoxPotassiumK.Text);
         }
         private void textBoxThiaminB1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -893,20 +956,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxThiaminB1.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.ThiaminB1 = 0F;
+                    mainForm!.addedFoodItem.ThiaminB1 = 0F;
                     textBoxThiaminB1.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.ThiaminB1 = float.Parse(textBoxThiaminB1.Text);
+                    mainForm!.addedFoodItem.ThiaminB1 = float.Parse(textBoxThiaminB1.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.ThiaminB1 = 0F;
+                mainForm!.addedFoodItem.ThiaminB1 = 0F;
                 textBoxThiaminB1.Text = "";
             }
-            labelState.Text = (textBoxThiaminB1.Text);
         }
         private void textBoxRiboflavinB2_KeyDown(object sender, KeyEventArgs e)
         {
@@ -923,20 +985,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxRiboflavinB2.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.RiboflavinB2 = 0F;
+                    mainForm!.addedFoodItem.RiboflavinB2 = 0F;
                     textBoxRiboflavinB2.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.RiboflavinB2 = float.Parse(textBoxRiboflavinB2.Text);
+                    mainForm!.addedFoodItem.RiboflavinB2 = float.Parse(textBoxRiboflavinB2.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.RiboflavinB2 = 0F;
+                mainForm!.addedFoodItem.RiboflavinB2 = 0F;
                 textBoxRiboflavinB2.Text = "";
             }
-            labelState.Text = (textBoxRiboflavinB2.Text);
         }
         private void textBoxNiacinB3_KeyDown(object sender, KeyEventArgs e)
         {
@@ -953,21 +1014,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxNiacinB3.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.NiacinB3 = 0F;
+                    mainForm!.addedFoodItem.NiacinB3 = 0F;
                     textBoxNiacinB3.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.NiacinB3 = float.Parse(textBoxNiacinB3.Text);
+                    mainForm!.addedFoodItem.NiacinB3 = float.Parse(textBoxNiacinB3.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.NiacinB3 = 0F;
+                mainForm!.addedFoodItem.NiacinB3 = 0F;
                 textBoxNiacinB3.Text = "";
             }
-            labelState.Text = (textBoxNiacinB3.Text);
-
         }
         private void textBoxFolate_KeyDown(object sender, KeyEventArgs e)
         {
@@ -984,20 +1043,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxFolate.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.Folate = 0F;
+                    mainForm!.addedFoodItem.Folate = 0F;
                     textBoxFolate.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.Folate = float.Parse(textBoxFolate.Text);
+                    mainForm!.addedFoodItem.Folate = float.Parse(textBoxFolate.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.Folate = 0F;
+                mainForm!.addedFoodItem.Folate = 0F;
                 textBoxFolate.Text = "";
             }
-            labelState.Text = (textBoxFolate.Text);
         }
         private void textBoxIronFe_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1014,20 +1072,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxIronFe.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.IronFe = 0F;
+                    mainForm!.addedFoodItem.IronFe = 0F;
                     textBoxIronFe.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.IronFe = float.Parse(textBoxIronFe.Text);
+                    mainForm!.addedFoodItem.IronFe = float.Parse(textBoxIronFe.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.IronFe = 0F;
+                mainForm!.addedFoodItem.IronFe = 0F;
                 textBoxIronFe.Text = "";
             }
-            labelState.Text = (textBoxIronFe.Text);
         }
         private void textBoxMagnesiumMg_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1044,20 +1101,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxMagnesiumMg.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.MagnesiumMg = 0F;
+                    mainForm!.addedFoodItem.MagnesiumMg = 0F;
                     textBoxMagnesiumMg.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.MagnesiumMg = float.Parse(textBoxMagnesiumMg.Text);
+                    mainForm!.addedFoodItem.MagnesiumMg = float.Parse(textBoxMagnesiumMg.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.MagnesiumMg = 0F;
+                mainForm!.addedFoodItem.MagnesiumMg = 0F;
                 textBoxMagnesiumMg.Text = "";
             }
-            labelState.Text = (textBoxMagnesiumMg.Text);
         }
         private void textBoxVitaminC_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1074,20 +1130,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxVitaminC.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.VitaminC = 0F;
+                    mainForm!.addedFoodItem.VitaminC = 0F;
                     textBoxVitaminC.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.VitaminC = float.Parse(textBoxVitaminC.Text);
+                    mainForm!.addedFoodItem.VitaminC = float.Parse(textBoxVitaminC.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.VitaminC = 0F;
+                mainForm!.addedFoodItem.VitaminC = 0F;
                 textBoxVitaminC.Text = "";
             }
-            labelState.Text = (textBoxVitaminC.Text);
         }
         private void textBoxCaffeine_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1104,20 +1159,20 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxCaffeine.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.Caffeine = 0F;
+                    mainForm!.addedFoodItem.Caffeine = 0F;
                     textBoxCaffeine.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.Caffeine = float.Parse(textBoxCaffeine.Text);
+                    mainForm!.addedFoodItem.Caffeine = float.Parse(textBoxCaffeine.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.Caffeine = 0F;
+                mainForm!.addedFoodItem.Caffeine = 0F;
                 textBoxCaffeine.Text = "";
             }
-            labelState.Text = (textBoxCaffeine.Text);
+            //labelState.Text = (textBoxCaffeine.Text);
         }
         private void textBoxCholesterol_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1134,20 +1189,20 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxCholesterol.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.Cholesterol = 0F;
+                    mainForm!.addedFoodItem.Cholesterol = 0F;
                     textBoxCholesterol.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.Cholesterol = float.Parse(textBoxCholesterol.Text);
+                    mainForm!.addedFoodItem.Cholesterol = float.Parse(textBoxCholesterol.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.Cholesterol = 0F;
+                mainForm!.addedFoodItem.Cholesterol = 0F;
                 textBoxCholesterol.Text = "";
             }
-            labelState.Text = (textBoxCholesterol.Text);
+            //labelState.Text = (textBoxCholesterol.Text);
         }
         private void textBoxAlcohol_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1164,20 +1219,19 @@ namespace DietSentry
             {
                 if (float.Parse(textBoxAlcohol.Text) < 0.0)
                 {
-                    mainForm.addedFoodItem.Alcohol = 0F;
+                    mainForm!.addedFoodItem.Alcohol = 0F;
                     textBoxAlcohol.Text = "";
                 }
                 else
                 {
-                    mainForm.addedFoodItem.Alcohol = float.Parse(textBoxAlcohol.Text);
+                    mainForm!.addedFoodItem.Alcohol = float.Parse(textBoxAlcohol.Text);
                 }
             }
             catch // any exception
             {
-                mainForm.addedFoodItem.Alcohol = 0F;
+                mainForm!.addedFoodItem.Alcohol = 0F;
                 textBoxAlcohol.Text = "";
             }
-            labelState.Text = (textBoxAlcohol.Text);
         }
 
         /* The above EVENT FUNCTIONS are related to accepting & error managing all numeric accepting text boxed for Food table fields
@@ -1185,11 +1239,12 @@ namespace DietSentry
 
 
 
-        // Prepares form depending on what food type will be processed and whether adding or editing
+        // Prepares this form depending on what food type will be processed and whether adding or editing
+        // This information is obtained from public variables in the parent form.
         private void foodInputForm_Shown(object sender, EventArgs e)
         {
             ChangeFormSize(0);
-            if (mainForm.inputType == 0) // setting up form for ADDING foood item
+            if (mainForm!.inputType == 0) // setting up form for ADDING foood item
             {
                 // text on this multipurpose button tells us we will be adding food item to tables 
                 buttonAddFood.Text = "Add food";
@@ -1262,21 +1317,21 @@ namespace DietSentry
                     textBoxEnergy.Text = string.Format("{0:N0}", mainForm.editedFoodItem.Energy);
                     textBoxProtein.Text = string.Format("{0:N1}", mainForm.editedFoodItem.Protein);
                     textBoxFatTotal.Text = string.Format("{0:N1}", mainForm.editedFoodItem.FatTotal);
-                    textBoxSaturatedFat.Text = string.Format("{0:N2}", mainForm.editedFoodItem.SaturatedFat);
-                    textBoxTransFat.Text = string.Format("{0:N2}", mainForm.editedFoodItem.TransFat);
-                    textBoxPolyunsaturatedFat.Text = string.Format("{0:N2}", mainForm.editedFoodItem.PolyunsaturatedFat);
-                    textBoxMonounsaturatedFat.Text = string.Format("{0:N2}", mainForm.editedFoodItem.MonounsaturatedFat);
+                    textBoxSaturatedFat.Text = string.Format("{0:N1}", mainForm.editedFoodItem.SaturatedFat);
+                    textBoxTransFat.Text = string.Format("{0:N1}", mainForm.editedFoodItem.TransFat);
+                    textBoxPolyunsaturatedFat.Text = string.Format("{0:N1}", mainForm.editedFoodItem.PolyunsaturatedFat);
+                    textBoxMonounsaturatedFat.Text = string.Format("{0:N1}", mainForm.editedFoodItem.MonounsaturatedFat);
                     textBoxCarbohydrate.Text = string.Format("{0:N1}", mainForm.editedFoodItem.Carbohydrate);
                     textBoxSugars.Text = string.Format("{0:N1}", mainForm.editedFoodItem.Sugars);
                     textBoxDietaryFibre.Text = string.Format("{0:N1}", mainForm.editedFoodItem.DietaryFibre);
                     textBoxSodiumNa.Text = string.Format("{0:N0}", mainForm.editedFoodItem.SodiumNa);
                     textBoxCalciumCa.Text = string.Format("{0:N0}", mainForm.editedFoodItem.CalciumCa);
                     textBoxPotassiumK.Text = string.Format("{0:N0}", mainForm.editedFoodItem.PotassiumK);
-                    textBoxThiaminB1.Text = string.Format("{0:N3}", mainForm.editedFoodItem.ThiaminB1);
-                    textBoxRiboflavinB2.Text = string.Format("{0:N3}", mainForm.editedFoodItem.RiboflavinB2);
-                    textBoxNiacinB3.Text = string.Format("{0:N2}", mainForm.editedFoodItem.NiacinB3);
+                    textBoxThiaminB1.Text = string.Format("{0:N1}", mainForm.editedFoodItem.ThiaminB1);
+                    textBoxRiboflavinB2.Text = string.Format("{0:N1}", mainForm.editedFoodItem.RiboflavinB2);
+                    textBoxNiacinB3.Text = string.Format("{0:N1}", mainForm.editedFoodItem.NiacinB3);
                     textBoxFolate.Text = string.Format("{0:N0}", mainForm.editedFoodItem.Folate);
-                    textBoxIronFe.Text = string.Format("{0:N2}", mainForm.editedFoodItem.IronFe);
+                    textBoxIronFe.Text = string.Format("{0:N1}", mainForm.editedFoodItem.IronFe);
                     textBoxMagnesiumMg.Text = string.Format("{0:N0}", mainForm.editedFoodItem.MagnesiumMg);
                     textBoxVitaminC.Text = string.Format("{0:N0}", mainForm.editedFoodItem.VitaminC);
                     textBoxCaffeine.Text = string.Format("{0:N0}", mainForm.editedFoodItem.Caffeine);
@@ -1373,93 +1428,27 @@ namespace DietSentry
         }
 
 
-        private void textBoxRecipeFoodDescription_Leave(object sender, EventArgs e)
-        {
-            if (!recordExists)
-            {
-                using (var context = new FoodsContext())
-                {
-                    // this creates the initial main food item record for a recipe. It will be edited (or deleted) later.
-                    // It is needed now so we can identify it by its unique FoodId Key.
-                    var newFood = new Food()
-                    {
-                        FoodDescription = textBoxRecipeFoodDescription.Text,
-                        Energy = 0F,
-                        Protein = 0F,
-                        FatTotal = 0F,
-                        SaturatedFat = 0F,
-                        TransFat = 0F,
-                        PolyunsaturatedFat = 0F,
-                        MonounsaturatedFat = 0F,
-                        Carbohydrate = 0F,
-                        Sugars = 0F,
-                        DietaryFibre = 0F,
-                        SodiumNa = 0F,
-                        CalciumCa = 0F,
-                        PotassiumK = 0F,
-                        ThiaminB1 = 0F,
-                        RiboflavinB2 = 0F,
-                        NiacinB3 = 0F,
-                        Folate = 0F,
-                        IronFe = 0F,
-                        MagnesiumMg = 0F,
-                        VitaminC = 0F,
-                        Caffeine = 0F,
-                        Cholesterol = 0F,
-                        Alcohol = 0F
-                    };
-                    context.Foods.Add(newFood);
-                    context.SaveChanges();
-                    recordID = newFood.FoodId;
-                    labelState.Text = string.Format("{0:N0}", recordID);
-
-                    // on first leaving of this textbox create
-                    labelState.Text = textBoxRecipeFoodDescription.Text;
-
-                    // gain access for editing to food item via its known Key
-                    var editFood = context.Foods.Single(b => b.FoodId == recordID);
-                    context.SaveChanges();
-                }
-
-                // so we don't recreate record next time we leave this textBox
-                recordExists = true;
-            }
-            else // if (recordExists)
-            {
-                using (var context = new FoodsContext())
-                {
-                    var editFood = context.Foods.Single(b => b.FoodId == recordID);
-                    editFood.FoodDescription = textBoxRecipeFoodDescription.Text;
-                    context.SaveChanges();
-                }
-            }
-
-            // for debugging
-            labelState.Text = textBoxRecipeFoodDescription.Text;
-        }
 
         private void refreshRecipeDataGrid(int rID)
         {
-            using (var context = new FoodsContext())
+            using var context = new FoodsContext();
+            context.Recipe.Load();
+
+            // start updating dataGrid
+            recipeBindingSource.DataSource = context.Foods.Local.ToBindingList();
+            var filteredData = context.Recipe.Local.ToBindingList().Where(x => ((x.FoodId == rID) & (x.CopyFg == 0)));
+            this.recipeBindingSource.DataSource = filteredData.Any() ? filteredData : filteredData.ToArray();
+
+            // setting focus to first displayed cell in data grid. Ignore (via exception) if nothing is displayed in data grid 
+            try
             {
-                context.Recipe.Load();
-
-                // start updating dataGrid
-                recipeBindingSource.DataSource = context.Foods.Local.ToBindingList();
-                var filteredData = context.Recipe.Local.ToBindingList().Where(x => ((x.FoodId == rID) & (x.CopyFg == 0)));
-                this.recipeBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
-
-                // setting focus to first displayed cell in data grid. Ignore (via exception) if nothing is displayed in data grid 
-                try
-                {
-                    dataGridViewRecipe.CurrentCell = dataGridViewRecipe.FirstDisplayedCell;
-                    dataGridViewRecipe.CurrentCell.Selected = true;
-                    dataGridViewRecipe.Focus();
-                }
-                catch
-                {
-                    ; // do nothing!
-                }
+                dataGridViewRecipe.CurrentCell = dataGridViewRecipe.FirstDisplayedCell;
+                dataGridViewRecipe.CurrentCell.Selected = true;
+                dataGridViewRecipe.Focus();
+            }
+            catch
+            {
+                ; // do nothing!
             }
         }
 
@@ -1469,80 +1458,85 @@ namespace DietSentry
 
             if (foodItem != null)
             {
-                using (var context = new FoodsContext())
+                using var context = new FoodsContext();
+
+                // gain access to selected entry in food table
+                var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
+                FoodDescriptionRecipe = FoodSelected.FoodDescription;
+
+                // if selected food is a liquid (ie. measured in mL) then cannot add it to recipe
+                if (UnitsString(FoodDescriptionRecipe!) == "mL")
                 {
-                    // gain access to selected entry in food table
-                    var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
-                    FoodDescriptionRecipe = FoodSelected.FoodDescription;
+                    // Initializes the variables to pass to the MessageBox.Show method.
+                    string message = "Only foods measured in grams can be added to a recipe";
+                    string caption = "CANNOT ADD THIS FOOD";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
 
-                    // if selected food is a liquid (ie. measured in mL) then cannot add it to recipe
-                    if (UnitsString(FoodDescriptionRecipe) == "mL")
+                    // Displays the MessageBox.
+                    MessageBox.Show(message, caption, buttons);
+                }
+                else // selected food is a solid or recipe (ie. measured in g) so can continue processing it
+                {
+                    // opens dialog used to input the quantity of that food in recipe, position is "locked" in relation to this form
+                    InputRecipeComponent frm = new(this)
                     {
-                        // Initializes the variables to pass to the MessageBox.Show method.
-                        string message = "Only foods measured in grams can be added to a recipe";
-                        string caption = "CANNOT ADD THIS FOOD";
-                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+                        StartPosition = FormStartPosition.Manual
+                    };
+                    Point pf = new(12, 55);
+                    frm.Location = this.PointToScreen(pf);
+                    frm.ShowDialog();
 
-                        // Displays the MessageBox.
-                        MessageBox.Show(message, caption, buttons);
-                    }
-                    else // selected food is a solid or recipe (ie. measured in g) so can continue processing it
+                    // set focus back to food selected
+                    dataGridViewAddToRecipe.CurrentCell.Selected = true;
+
+                    if (amountOfFoodInRecipe > 0.0)
                     {
-                        // opens dialog used to input the quantity of that food in recipe, position is "locked" in relation to this form
-                        InputRecipeComponent frm = new(this);
-                        frm.StartPosition = FormStartPosition.Manual;
-                        Point pf = new Point(14, 113);
-                        frm.Location = this.PointToScreen(pf);
-                        frm.ShowDialog();
+                        //textBox1.Text = string.Format("{0:N2}", amountOfFoodInRecipe);
 
-                        // set focus back to food selected
-                        dataGridViewAddToRecipe.CurrentCell.Selected = true;
-
-                        if (amountOfFoodInRecipe > 0.0)
+                        // we can now add the appropriate entry to the Recipe table
+                        float X = amountOfFoodInRecipe / 100F;
+                        var newFood = new Recipe()
                         {
-                            //textBox1.Text = string.Format("{0:N2}", amountOfFoodInRecipe);
-
-                            // we can now add the appropriate entry to the Recipe table
-                            float X = amountOfFoodInRecipe / 100F;
-                            var newFood = new Recipe()
-                            {
-                                FoodId = recordID,
-                                CopyFg = 0,
-                                Amount = amountOfFoodInRecipe,
-                                FoodDescription = FoodSelected.FoodDescription,
-                                Energy = FoodSelected.Energy * X,
-                                Protein = FoodSelected.Protein * X,
-                                FatTotal = FoodSelected.FatTotal * X,
-                                SaturatedFat = FoodSelected.SaturatedFat * X,
-                                TransFat = FoodSelected.TransFat * X,
-                                PolyunsaturatedFat = FoodSelected.PolyunsaturatedFat * X,
-                                MonounsaturatedFat = FoodSelected.MonounsaturatedFat * X,
-                                Carbohydrate = FoodSelected.Carbohydrate * X,
-                                Sugars = FoodSelected.Sugars * X,
-                                DietaryFibre = FoodSelected.DietaryFibre * X,
-                                SodiumNa = FoodSelected.SodiumNa * X,
-                                CalciumCa = FoodSelected.CalciumCa * X,
-                                PotassiumK = FoodSelected.PotassiumK * X,
-                                ThiaminB1 = FoodSelected.ThiaminB1 * X,
-                                RiboflavinB2 = FoodSelected.RiboflavinB2 * X,
-                                NiacinB3 = FoodSelected.NiacinB3 * X,
-                                Folate = FoodSelected.Folate * X,
-                                IronFe = FoodSelected.IronFe * X,
-                                MagnesiumMg = FoodSelected.MagnesiumMg * X,
-                                VitaminC = FoodSelected.VitaminC * X,
-                                Caffeine = FoodSelected.Caffeine * X,
-                                Cholesterol = FoodSelected.Cholesterol * X,
-                                Alcohol = FoodSelected.Alcohol * X
-                            };
-                            context.Recipe.Add(newFood);
-                            context.SaveChanges();
-                            refreshRecipeDataGrid(recordID);
-                        }
+                            FoodId = recordID,
+                            CopyFg = 0,
+                            Amount = amountOfFoodInRecipe,
+                            FoodDescription = FoodSelected.FoodDescription,
+                            Energy = FoodSelected.Energy * X,
+                            Protein = FoodSelected.Protein * X,
+                            FatTotal = FoodSelected.FatTotal * X,
+                            SaturatedFat = FoodSelected.SaturatedFat * X,
+                            TransFat = FoodSelected.TransFat * X,
+                            PolyunsaturatedFat = FoodSelected.PolyunsaturatedFat * X,
+                            MonounsaturatedFat = FoodSelected.MonounsaturatedFat * X,
+                            Carbohydrate = FoodSelected.Carbohydrate * X,
+                            Sugars = FoodSelected.Sugars * X,
+                            DietaryFibre = FoodSelected.DietaryFibre * X,
+                            SodiumNa = FoodSelected.SodiumNa * X,
+                            CalciumCa = FoodSelected.CalciumCa * X,
+                            PotassiumK = FoodSelected.PotassiumK * X,
+                            ThiaminB1 = FoodSelected.ThiaminB1 * X,
+                            RiboflavinB2 = FoodSelected.RiboflavinB2 * X,
+                            NiacinB3 = FoodSelected.NiacinB3 * X,
+                            Folate = FoodSelected.Folate * X,
+                            IronFe = FoodSelected.IronFe * X,
+                            MagnesiumMg = FoodSelected.MagnesiumMg * X,
+                            VitaminC = FoodSelected.VitaminC * X,
+                            Caffeine = FoodSelected.Caffeine * X,
+                            Cholesterol = FoodSelected.Cholesterol * X,
+                            Alcohol = FoodSelected.Alcohol * X
+                        };
+                        context.Recipe.Add(newFood);
+                        context.SaveChanges();
+                        refreshRecipeDataGrid(recordID);
                     }
                 }
             }
         }
 
+        private void tabPageRecipie_Enter(object sender, EventArgs e)
+        {
+            refreshRecipeDataGrid(recordID);
+        }
 
         /* This is way ONE you select a food (for adding to a recipe) from the Food table.
          * - From the Food data grid Double Click selected item with mouse */
@@ -1550,7 +1544,6 @@ namespace DietSentry
         {
             actWhenRecipeFoodSelected();
         }
-
 
         /* This is way TWO you select an item (for adding to a recipe) from the Food table.
          * - From the Food data grid Press the Enter key on selected item. */
@@ -1562,53 +1555,6 @@ namespace DietSentry
                 e.Handled = true; // prevents Enter key press causing next lower cell getting focus 
             }
         }
-
-
-        /* Code that acts on Food filtering states
-         * There are 2 states and this makes sure the foods datagrid always correctly displays the data
-         * there is an argument which determines the sort order via the Id: 0=Asc, 1=Desc */
-        private void actOnFoodRecipeFilteringStates(int sortingType)
-        {
-            using (var context = new FoodsContext())
-            {
-                context.Foods.Load();
-
-                // start updating dataGridViewFood
-                foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
-                if (sortingType == 0)
-                {
-                    foodBindingSource.Sort = "FoodId Asc"; // sort in Ascending order by Id
-                }
-                else // if (sortingType == 1)
-                {
-                    foodBindingSource.Sort = "FoodId Desc"; // sort in Descending order by Id
-                }
-
-                // determine current filter from labelFilter label.
-                if (labelFilterRecipe.Text == "Unfiltered")
-                {
-                    ;
-                }
-                else // if have filer
-                {
-                    var filteredData = context.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(labelFilterRecipe.Text));
-                    this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
-                }
-
-                // setting focus to first displayed cell in data grid. Ignore (via exception) if nothing display in data grid 
-                try
-                {
-                    dataGridViewAddToRecipe.CurrentCell = dataGridViewAddToRecipe.FirstDisplayedCell;
-                    dataGridViewAddToRecipe.CurrentCell.Selected = true;
-                    dataGridViewAddToRecipe.Focus();
-                }
-                catch
-                {
-                    ; // do nothing!
-                }
-            }
-        }
-
 
         /* Only reacts to the Enter key being pressed in the Food filter text box, by processing the filter request */
         private void textBoxFilterRecipe_KeyDown(object sender, KeyEventArgs e)
@@ -1629,15 +1575,50 @@ namespace DietSentry
 
                 actOnFoodRecipeFilteringStates(0);
             }
-
         }
 
-
-        private void tabPageRecipie_Enter(object sender, EventArgs e)
+        /* Code that acts on Food filtering states
+         * There are 2 states and this makes sure the foods datagrid always correctly displays the data
+         * there is an argument which determines the sort order via the Id: 0=Asc, 1=Desc */
+        private void actOnFoodRecipeFilteringStates(int sortingType)
         {
-            refreshRecipeDataGrid(recordID);
-        }
+            using var context = new FoodsContext();
+            context.Foods.Load();
 
+            // start updating dataGridViewFood
+            foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
+            if (sortingType == 0)
+            {
+                foodBindingSource.Sort = "FoodId Asc"; // sort in Ascending order by Id
+            }
+            else // if (sortingType == 1)
+            {
+                foodBindingSource.Sort = "FoodId Desc"; // sort in Descending order by Id
+            }
+
+            // determine current filter from labelFilter label.
+            if (labelFilterRecipe.Text == "Unfiltered")
+            {
+                ;
+            }
+            else // if have filer
+            {
+                var filteredData = context.Foods.Local.ToBindingList().Where(x => x.FoodDescription!.Contains(labelFilterRecipe.Text));
+                this.foodBindingSource.DataSource = filteredData.Any() ? filteredData : filteredData.ToArray();
+            }
+
+            // setting focus to first displayed cell in data grid. Ignore (via exception) if nothing display in data grid 
+            try
+            {
+                dataGridViewAddToRecipe.CurrentCell = dataGridViewAddToRecipe.FirstDisplayedCell;
+                dataGridViewAddToRecipe.CurrentCell.Selected = true;
+                dataGridViewAddToRecipe.Focus();
+            }
+            catch
+            {
+                ; // do nothing!
+            }
+        }
 
         private void dataGridViewRecipe_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
@@ -1649,18 +1630,16 @@ namespace DietSentry
 
             if (recipeItem != null)
             {
-                using (var context = new FoodsContext())
-                {
-                    // gain direct access to selected entry in Eaten table
-                    var FoodSelected = context.Recipe.Single(b => b.RecipeId == recipeItem.RecipeId);
+                using var context = new FoodsContext();
+                // gain direct access to selected entry in Eaten table
+                var FoodSelected = context.Recipe.Single(b => b.RecipeId == recipeItem.RecipeId);
 
-                    // delete this row from Eaten table
-                    context.Recipe.Remove(FoodSelected);
-                    context.SaveChanges();
+                // delete this row from Eaten table
+                context.Recipe.Remove(FoodSelected);
+                context.SaveChanges();
 
-                    // refresh Recipe data grid view while maintaining filter status
-                    refreshRecipeDataGrid(recordID);
-                }
+                // refresh Recipe data grid view while maintaining filter status
+                refreshRecipeDataGrid(recordID);
             }
         }
 

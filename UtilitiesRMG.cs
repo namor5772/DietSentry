@@ -8,7 +8,6 @@ namespace DietSentry
 {
     internal class UtilitiesRMG
     {
-
         /// <summary>
         /// function that specifies the units used for an existing food item
         /// based on the food description string parameter sDesc,

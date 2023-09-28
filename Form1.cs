@@ -12,7 +12,6 @@ namespace DietSentry
 {
     public partial class MainForm : Form
     {
-
         private FoodsContext? dbContext;
 
         public MainForm()
@@ -28,109 +27,105 @@ namespace DietSentry
 
             if (foodItem != null)
             {
-                using (var context = new FoodsContext())
+                using var context = new FoodsContext();
+                // gain access to selected entry in food table
+                var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
+                eatenFoodDescription = FoodSelected.FoodDescription;
+
+                // opens dialog used to input the quantity of that food eaten, position is "locked" to the food tabPage
+                InputForm frm = new(this)
                 {
-                    // gain access to selected entry in food table
-                    var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
-                    eatenFoodDescription = FoodSelected.FoodDescription;
+                    StartPosition = FormStartPosition.Manual,
+                    Location = this.PointToScreen(tabPageFood.Location)
+                };
+                frm.ShowDialog();
 
-                    // opens dialog used to input the quantity of that food eaten, position is "locked" to the food tabPage
-                    InputForm frm = new(this);
-                    frm.StartPosition = FormStartPosition.Manual;
-                    frm.Location = this.PointToScreen(tabPageFood.Location);
-                    frm.ShowDialog();
-
-                    // only act on input if amout eaten >0, this includes the case when Enter is immediately pressed in the text box
-                    if (amountOfFoodEaten > 0.0)
+                // only act on input if amout eaten >0, this includes the case when Enter is immediately pressed in the text box
+                if (amountOfFoodEaten > 0.0)
+                {
+                    // we can now add the appropriate entry to the Eaten table, sort it and refresh its Eaten data grid and give it focus
+                    var EatenFood = context.Eaten;
+                    EatenFood.Add(new Eaten
                     {
-                        // we can now add the appropriate entry to the Eaten table, sort it and refresh its Eaten data grid and give it focus
-                        var EatenFood = context.Eaten;
-                        EatenFood.Add(new Eaten
-                        {
-                            DateEaten = DateTime.Now.ToString("d-MMM-yy"),
-                            TimeEaten = DateTime.Now.ToString("hh:mm"),
-                            AmountEaten = amountOfFoodEaten * 100F,
-                            FoodDescription = FoodSelected.FoodDescription,
-                            Energy = (FoodSelected.Energy) * amountOfFoodEaten,
-                            Protein = (FoodSelected.Protein) * amountOfFoodEaten,
-                            FatTotal = (FoodSelected.FatTotal) * amountOfFoodEaten,
-                            SaturatedFat = (FoodSelected.SaturatedFat) * amountOfFoodEaten,
-                            TransFat = (FoodSelected.TransFat) * amountOfFoodEaten,
-                            PolyunsaturatedFat = (FoodSelected.PolyunsaturatedFat) * amountOfFoodEaten,
-                            MonounsaturatedFat = (FoodSelected.MonounsaturatedFat) * amountOfFoodEaten,
-                            Carbohydrate = (FoodSelected.Carbohydrate) * amountOfFoodEaten,
-                            Sugars = (FoodSelected.Sugars) * amountOfFoodEaten,
-                            DietaryFibre = (FoodSelected.DietaryFibre) * amountOfFoodEaten,
-                            SodiumNa = (FoodSelected.SodiumNa) * amountOfFoodEaten,
-                            CalciumCa = (FoodSelected.CalciumCa) * amountOfFoodEaten,
-                            PotassiumK = (FoodSelected.PotassiumK) * amountOfFoodEaten,
-                            ThiaminB1 = (FoodSelected.ThiaminB1) * amountOfFoodEaten,
-                            RiboflavinB2 = (FoodSelected.RiboflavinB2) * amountOfFoodEaten,
-                            NiacinB3 = (FoodSelected.NiacinB3) * amountOfFoodEaten,
-                            Folate = (FoodSelected.Folate) * amountOfFoodEaten,
-                            IronFe = (FoodSelected.IronFe) * amountOfFoodEaten,
-                            MagnesiumMg = (FoodSelected.MagnesiumMg) * amountOfFoodEaten,
-                            VitaminC = (FoodSelected.VitaminC) * amountOfFoodEaten,
-                            Caffeine = (FoodSelected.Caffeine) * amountOfFoodEaten,
-                            Cholesterol = (FoodSelected.Cholesterol) * amountOfFoodEaten,
-                            Alcohol = (FoodSelected.Alcohol) * amountOfFoodEaten
-                        });
-                        context.SaveChanges();
+                        DateEaten = DateTime.Now.ToString("d-MMM-yy"),
+                        TimeEaten = DateTime.Now.ToString("hh:mm"),
+                        AmountEaten = amountOfFoodEaten * 100F,
+                        FoodDescription = FoodSelected.FoodDescription,
+                        Energy = (FoodSelected.Energy) * amountOfFoodEaten,
+                        Protein = (FoodSelected.Protein) * amountOfFoodEaten,
+                        FatTotal = (FoodSelected.FatTotal) * amountOfFoodEaten,
+                        SaturatedFat = (FoodSelected.SaturatedFat) * amountOfFoodEaten,
+                        TransFat = (FoodSelected.TransFat) * amountOfFoodEaten,
+                        PolyunsaturatedFat = (FoodSelected.PolyunsaturatedFat) * amountOfFoodEaten,
+                        MonounsaturatedFat = (FoodSelected.MonounsaturatedFat) * amountOfFoodEaten,
+                        Carbohydrate = (FoodSelected.Carbohydrate) * amountOfFoodEaten,
+                        Sugars = (FoodSelected.Sugars) * amountOfFoodEaten,
+                        DietaryFibre = (FoodSelected.DietaryFibre) * amountOfFoodEaten,
+                        SodiumNa = (FoodSelected.SodiumNa) * amountOfFoodEaten,
+                        CalciumCa = (FoodSelected.CalciumCa) * amountOfFoodEaten,
+                        PotassiumK = (FoodSelected.PotassiumK) * amountOfFoodEaten,
+                        ThiaminB1 = (FoodSelected.ThiaminB1) * amountOfFoodEaten,
+                        RiboflavinB2 = (FoodSelected.RiboflavinB2) * amountOfFoodEaten,
+                        NiacinB3 = (FoodSelected.NiacinB3) * amountOfFoodEaten,
+                        Folate = (FoodSelected.Folate) * amountOfFoodEaten,
+                        IronFe = (FoodSelected.IronFe) * amountOfFoodEaten,
+                        MagnesiumMg = (FoodSelected.MagnesiumMg) * amountOfFoodEaten,
+                        VitaminC = (FoodSelected.VitaminC) * amountOfFoodEaten,
+                        Caffeine = (FoodSelected.Caffeine) * amountOfFoodEaten,
+                        Cholesterol = (FoodSelected.Cholesterol) * amountOfFoodEaten,
+                        Alcohol = (FoodSelected.Alcohol) * amountOfFoodEaten
+                    });
+                    context.SaveChanges();
 
-                        // Updates the dataGridViewEaten while maintaining filtering states and making the Eaten tab visible
-                        actOnEatenFoodFilteringStates();
-                        tabControlMain.SelectedTab = tabPageEaten;
-                    }
+                    // Updates the dataGridViewEaten while maintaining filtering states and making the Eaten tab visible
+                    actOnEatenFoodFilteringStates();
+                    tabControlMain.SelectedTab = tabPageEaten;
                 }
             }
         }
-
 
         /* Code that acts on Food filtering states
          * There are 2 states and this makes sure the foods datagrid always correctly displays the data
          * there is an argument which determines the sort order via the Id: 0=Asc, 1=Desc */
         private void actOnFoodFilteringStates(int sortingType)
         {
-            using (var context = new FoodsContext())
+            using var context = new FoodsContext();
+            context.Foods.Load();
+
+            // start updating dataGridViewFood
+            foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
+            if (sortingType == 0)
             {
-                context.Foods.Load();
+                foodBindingSource.Sort = "FoodId Asc"; // sort in Ascending order by Id
+            }
+            else // if (sortingType == 1)
+            {
+                foodBindingSource.Sort = "FoodId Desc"; // sort in Descending order by Id
+            }
 
-                // start updating dataGridViewFood
-                foodBindingSource.DataSource = context.Foods.Local.ToBindingList();
-                if (sortingType == 0)
-                {
-                    foodBindingSource.Sort = "FoodId Asc"; // sort in Ascending order by Id
-                }
-                else // if (sortingType == 1)
-                {
-                    foodBindingSource.Sort = "FoodId Desc"; // sort in Descending order by Id
-                }
+            // determine current filter from labelFilter label.
+            if (labelFilter.Text == "Unfiltered")
+            {
+                ;
+            }
+            else // if have filer
+            {
+                var filteredData = context.Foods.Local.ToBindingList().Where(x => x.FoodDescription!.Contains(labelFilter.Text));
+                this.foodBindingSource.DataSource = filteredData.Any() ? filteredData : filteredData.ToArray();
+            }
 
-                // determine current filter from labelFilter label.
-                if (labelFilter.Text == "Unfiltered")
-                {
-                    ;
-                }
-                else // if have filer
-                {
-                    var filteredData = context.Foods.Local.ToBindingList().Where(x => x.FoodDescription.Contains(labelFilter.Text));
-                    this.foodBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
-                }
-
-                // setting focus to first displayed cell in data grid. Ignore (via exception) if nothing display in data grid 
-                try
-                {
-                    dataGridViewFoods.CurrentCell = dataGridViewFoods.FirstDisplayedCell;
-                    dataGridViewFoods.CurrentCell.Selected = true;
-                    dataGridViewFoods.Focus();
-                }
-                catch
-                {
-                    ; // do nothing!
-                }
+            // setting focus to first displayed cell in data grid. Ignore (via exception) if nothing display in data grid 
+            try
+            {
+                dataGridViewFoods.CurrentCell = dataGridViewFoods.FirstDisplayedCell;
+                dataGridViewFoods.CurrentCell.Selected = true;
+                dataGridViewFoods.Focus();
+            }
+            catch
+            {
+                ; // do nothing!
             }
         }
-
 
         protected override void OnLoad(EventArgs e)
         {
@@ -155,7 +150,6 @@ namespace DietSentry
             actOnEatenFoodFilteringStates();
         }
 
-
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
@@ -163,7 +157,6 @@ namespace DietSentry
             this.dbContext?.Dispose();
             this.dbContext = null;
         }
-
 
         /* Only reacts to the Enter key being pressed in the Food filter text box, by processing the filter request */
         private void textBoxFilter_KeyDown(object sender, KeyEventArgs e)
@@ -186,7 +179,6 @@ namespace DietSentry
             }
         }
 
-
         /* When the Food filter text box is entered just clears the text */
         private void textBoxFilter_Enter(object sender, EventArgs e)
         {
@@ -194,14 +186,12 @@ namespace DietSentry
             textBoxFilter.Text = "";
         }
 
-
         /* This is way ONE you select an item (for recording as eaten) from the Food table.
          * - From the Food data grid Double Click selected item with mouse */
         private void dataGridViewFoods_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             actWhenFoodSelected();
         }
-
 
         /* This is way TWO you select an item (for recording as eaten) from the food table.
          * - From the Food data grid Press Enter key on selected item.
@@ -220,56 +210,56 @@ namespace DietSentry
                 // opens a dialog form used to input a record to the food table
                 // positions this form at same location (ie. top left hand corner) as this MainForm
                 inputType = 0; // tells foodInput form that we are adding food item
-                foodInputForm frm = new(this);
-                frm.StartPosition = FormStartPosition.Manual;
-                frm.Location = this.Location;
+                FoodInputForm frm = new(this)
+                {
+                    StartPosition = FormStartPosition.Manual,
+                    Location = this.Location
+                };
                 frm.ShowDialog();
 
                 if (actOnFoodAdded) // then actually add food item to database otherwise ignore (if {Cancel} button pressed)
                 {
                     if ((foodType == 0) | (foodType == 1) | (foodType == 3) | (foodType == 4))
                     {
-                        using (var context = new FoodsContext())
+                        using var context = new FoodsContext();
+                        // we can now add the appropriate entry to the Food table, this is done in the mainForm but could have been
+                        // done more logically in the foodInput form.
+                        var NewFood = context.Foods;
+                        NewFood.Add(new Food
                         {
-                            // we can now add the appropriate entry to the Food table, this is done in the mainForm but could have been
-                            // done more logically in the foodInput form.
-                            var NewFood = context.Foods;
-                            NewFood.Add(new Food
-                            {
-                                FoodDescription = addedFoodItem.FoodDescription,
-                                Energy = addedFoodItem.Energy,
-                                Protein = addedFoodItem.Protein,
-                                FatTotal = addedFoodItem.FatTotal,
-                                SaturatedFat = addedFoodItem.SaturatedFat,
-                                TransFat = addedFoodItem.TransFat,
-                                PolyunsaturatedFat = addedFoodItem.PolyunsaturatedFat,
-                                MonounsaturatedFat = addedFoodItem.MonounsaturatedFat,
-                                Carbohydrate = addedFoodItem.Carbohydrate,
-                                Sugars = addedFoodItem.Sugars,
-                                DietaryFibre = addedFoodItem.DietaryFibre,
-                                SodiumNa = addedFoodItem.SodiumNa,
-                                CalciumCa = addedFoodItem.CalciumCa,
-                                PotassiumK = addedFoodItem.PotassiumK,
-                                ThiaminB1 = addedFoodItem.ThiaminB1,
-                                RiboflavinB2 = addedFoodItem.RiboflavinB2,
-                                NiacinB3 = addedFoodItem.NiacinB3,
-                                Folate = addedFoodItem.Folate,
-                                IronFe = addedFoodItem.IronFe,
-                                MagnesiumMg = addedFoodItem.MagnesiumMg,
-                                VitaminC = addedFoodItem.VitaminC,
-                                Caffeine = addedFoodItem.Caffeine,
-                                Cholesterol = addedFoodItem.Cholesterol,
-                                Alcohol = addedFoodItem.Alcohol
-                            });
-                            context.SaveChanges();
+                            FoodDescription = addedFoodItem.FoodDescription,
+                            Energy = addedFoodItem.Energy,
+                            Protein = addedFoodItem.Protein,
+                            FatTotal = addedFoodItem.FatTotal,
+                            SaturatedFat = addedFoodItem.SaturatedFat,
+                            TransFat = addedFoodItem.TransFat,
+                            PolyunsaturatedFat = addedFoodItem.PolyunsaturatedFat,
+                            MonounsaturatedFat = addedFoodItem.MonounsaturatedFat,
+                            Carbohydrate = addedFoodItem.Carbohydrate,
+                            Sugars = addedFoodItem.Sugars,
+                            DietaryFibre = addedFoodItem.DietaryFibre,
+                            SodiumNa = addedFoodItem.SodiumNa,
+                            CalciumCa = addedFoodItem.CalciumCa,
+                            PotassiumK = addedFoodItem.PotassiumK,
+                            ThiaminB1 = addedFoodItem.ThiaminB1,
+                            RiboflavinB2 = addedFoodItem.RiboflavinB2,
+                            NiacinB3 = addedFoodItem.NiacinB3,
+                            Folate = addedFoodItem.Folate,
+                            IronFe = addedFoodItem.IronFe,
+                            MagnesiumMg = addedFoodItem.MagnesiumMg,
+                            VitaminC = addedFoodItem.VitaminC,
+                            Caffeine = addedFoodItem.Caffeine,
+                            Cholesterol = addedFoodItem.Cholesterol,
+                            Alcohol = addedFoodItem.Alcohol
+                        });
+                        context.SaveChanges();
 
-                            labelInfo.Text = "Added new food item: " + addedFoodItem.FoodDescription;
-                        }
+                        labelInfo.Text = "Added new food item " + addedFoodItem.FoodDescription;
                     }
                     else if (foodType == 2)
                     {
                         ; // DO RECIPE STUFF HERE
-                        // but actually all has already been done in the foodInputForm form
+                        // but actually all has already been done in the FoodInputForm form
 
                     }
                     else
@@ -291,111 +281,109 @@ namespace DietSentry
 
                 if (foodItem != null)
                 {
-                    using (var context = new FoodsContext())
+                    using var context = new FoodsContext();
+                    // gain access to selected entry in food table
+                    var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
+
+                    // copy its fields to the public editedFooditem class instance
+                    editedFoodItem.FoodId = FoodSelected.FoodId;
+                    editedFoodItem.FoodDescription = FoodSelected.FoodDescription;
+                    editedFoodItem.Energy = FoodSelected.Energy;
+                    editedFoodItem.Protein = FoodSelected.Protein;
+                    editedFoodItem.FatTotal = FoodSelected.FatTotal;
+                    editedFoodItem.SaturatedFat = FoodSelected.SaturatedFat;
+                    editedFoodItem.TransFat = FoodSelected.TransFat;
+                    editedFoodItem.PolyunsaturatedFat = FoodSelected.PolyunsaturatedFat;
+                    editedFoodItem.MonounsaturatedFat = FoodSelected.MonounsaturatedFat;
+                    editedFoodItem.Carbohydrate = FoodSelected.Carbohydrate;
+                    editedFoodItem.Sugars = FoodSelected.Sugars;
+                    editedFoodItem.DietaryFibre = FoodSelected.DietaryFibre;
+                    editedFoodItem.SodiumNa = FoodSelected.SodiumNa;
+                    editedFoodItem.CalciumCa = FoodSelected.CalciumCa;
+                    editedFoodItem.PotassiumK = FoodSelected.PotassiumK;
+                    editedFoodItem.ThiaminB1 = FoodSelected.ThiaminB1;
+                    editedFoodItem.RiboflavinB2 = FoodSelected.RiboflavinB2;
+                    editedFoodItem.NiacinB3 = FoodSelected.NiacinB3;
+                    editedFoodItem.Folate = FoodSelected.Folate;
+                    editedFoodItem.IronFe = FoodSelected.IronFe;
+                    editedFoodItem.MagnesiumMg = FoodSelected.MagnesiumMg;
+                    editedFoodItem.VitaminC = FoodSelected.VitaminC;
+                    editedFoodItem.Caffeine = FoodSelected.Caffeine;
+                    editedFoodItem.Cholesterol = FoodSelected.Cholesterol;
+                    editedFoodItem.Alcohol = FoodSelected.Alcohol;
+
+                    // determine the food type by examining the FoodDescription string
+                    string editedFoodId = (editedFoodItem.FoodId).ToString(); // for later use
+                    string sFD = editedFoodItem.FoodDescription!;
+
+                    rDesc rFD = TruncFoodDesc(sFD);
+                    foodType = rFD.foodType;
+                    editedFoodItem.FoodDescription = rFD.truncDesc;
+
+                    // a bit of a cludge, need to record the Key of the selected Recipe food item being edited
+                    // as well as the unchanged food description in case of cancellation.
+                    if (foodType == 2)
                     {
-                        // gain access to selected entry in food table
-                        var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
+                        recordID = FoodSelected.FoodId;
+                        fullFoodDescription = sFD;
+                    }
 
-                        // copy its fields to the public editedFooditem class instance
-                        editedFoodItem.FoodId = FoodSelected.FoodId;
-                        editedFoodItem.FoodDescription = FoodSelected.FoodDescription;
-                        editedFoodItem.Energy = FoodSelected.Energy;
-                        editedFoodItem.Protein = FoodSelected.Protein;
-                        editedFoodItem.FatTotal = FoodSelected.FatTotal;
-                        editedFoodItem.SaturatedFat = FoodSelected.SaturatedFat;
-                        editedFoodItem.TransFat = FoodSelected.TransFat;
-                        editedFoodItem.PolyunsaturatedFat = FoodSelected.PolyunsaturatedFat;
-                        editedFoodItem.MonounsaturatedFat = FoodSelected.MonounsaturatedFat;
-                        editedFoodItem.Carbohydrate = FoodSelected.Carbohydrate;
-                        editedFoodItem.Sugars = FoodSelected.Sugars;
-                        editedFoodItem.DietaryFibre = FoodSelected.DietaryFibre;
-                        editedFoodItem.SodiumNa = FoodSelected.SodiumNa;
-                        editedFoodItem.CalciumCa = FoodSelected.CalciumCa;
-                        editedFoodItem.PotassiumK = FoodSelected.PotassiumK;
-                        editedFoodItem.ThiaminB1 = FoodSelected.ThiaminB1;
-                        editedFoodItem.RiboflavinB2 = FoodSelected.RiboflavinB2;
-                        editedFoodItem.NiacinB3 = FoodSelected.NiacinB3;
-                        editedFoodItem.Folate = FoodSelected.Folate;
-                        editedFoodItem.IronFe = FoodSelected.IronFe;
-                        editedFoodItem.MagnesiumMg = FoodSelected.MagnesiumMg;
-                        editedFoodItem.VitaminC = FoodSelected.VitaminC;
-                        editedFoodItem.Caffeine = FoodSelected.Caffeine;
-                        editedFoodItem.Cholesterol = FoodSelected.Cholesterol;
-                        editedFoodItem.Alcohol = FoodSelected.Alcohol;
+                    // opens a dialog form used to edit a food item
+                    // positions this form at same location (ie. top left hand corner) as this MainForm
+                    inputType = 1; // tells foodinput form that we are editing food item
+                    FoodInputForm frm = new(this)
+                    {
+                        StartPosition = FormStartPosition.Manual,
+                        Location = this.Location
+                    };
+                    frm.ShowDialog();
 
-                        // determine the food type by examining the FoodDescription string
-                        string editedFoodId = (editedFoodItem.FoodId).ToString(); // for later use
-                        string sFD = editedFoodItem.FoodDescription;
-
-                        rDesc rFD = TruncFoodDesc(sFD);
-                        foodType = rFD.foodType;
-                        editedFoodItem.FoodDescription = rFD.truncDesc;
-
-                        // a bit of a cludge, need to record the Key of the selected Recipe food item being edited
-                        // as well as the unchanged food description in case of cancellation.
-                        if (foodType == 2)
+                    if ((actOnFoodAdded)) // then actually modify/edit food item in database otherwise ignore (if {Cancel} button pressed)
+                    {
+                        if (foodType != 2)
                         {
-                            recordID = FoodSelected.FoodId;
-                            fullFoodDescription = sFD;
+                            FoodSelected.FoodDescription = addedFoodItem.FoodDescription;
+                            FoodSelected.Energy = addedFoodItem.Energy;
+                            FoodSelected.Protein = addedFoodItem.Protein;
+                            FoodSelected.FatTotal = addedFoodItem.FatTotal;
+                            FoodSelected.SaturatedFat = addedFoodItem.SaturatedFat;
+                            FoodSelected.TransFat = addedFoodItem.TransFat;
+                            FoodSelected.PolyunsaturatedFat = addedFoodItem.PolyunsaturatedFat;
+                            FoodSelected.MonounsaturatedFat = addedFoodItem.MonounsaturatedFat;
+                            FoodSelected.Carbohydrate = addedFoodItem.Carbohydrate;
+                            FoodSelected.Sugars = addedFoodItem.Sugars;
+                            FoodSelected.DietaryFibre = addedFoodItem.DietaryFibre;
+                            FoodSelected.SodiumNa = addedFoodItem.SodiumNa;
+                            FoodSelected.CalciumCa = addedFoodItem.CalciumCa;
+                            FoodSelected.PotassiumK = addedFoodItem.PotassiumK;
+                            FoodSelected.ThiaminB1 = addedFoodItem.ThiaminB1;
+                            FoodSelected.RiboflavinB2 = addedFoodItem.RiboflavinB2;
+                            FoodSelected.NiacinB3 = addedFoodItem.NiacinB3;
+                            FoodSelected.Folate = addedFoodItem.Folate;
+                            FoodSelected.IronFe = addedFoodItem.IronFe;
+                            FoodSelected.MagnesiumMg = addedFoodItem.MagnesiumMg;
+                            FoodSelected.VitaminC = addedFoodItem.VitaminC;
+                            FoodSelected.Caffeine = addedFoodItem.Caffeine;
+                            FoodSelected.Cholesterol = addedFoodItem.Cholesterol;
+                            FoodSelected.Alcohol = addedFoodItem.Alcohol;
+
+                            context.SaveChanges();
+                            actOnFoodFilteringStates(0);
                         }
-
-                        // opens a dialog form used to edit a food item
-                        // positions this form at same location (ie. top left hand corner) as this MainForm
-                        inputType = 1; // tells foodinput form that we are editing food item
-                        foodInputForm frm = new(this);
-                        frm.StartPosition = FormStartPosition.Manual;
-                        frm.Location = this.Location;
-                        frm.ShowDialog();
-
-                        if ((actOnFoodAdded)) // then actually modify/edit food item in database otherwise ignore (if {Cancel} button pressed)
+                        else // if if (foodType!=2)
                         {
-                            if (foodType != 2)
-                            {
-                                FoodSelected.FoodDescription = addedFoodItem.FoodDescription;
-                                FoodSelected.Energy = addedFoodItem.Energy;
-                                FoodSelected.Protein = addedFoodItem.Protein;
-                                FoodSelected.FatTotal = addedFoodItem.FatTotal;
-                                FoodSelected.SaturatedFat = addedFoodItem.SaturatedFat;
-                                FoodSelected.TransFat = addedFoodItem.TransFat;
-                                FoodSelected.PolyunsaturatedFat = addedFoodItem.PolyunsaturatedFat;
-                                FoodSelected.MonounsaturatedFat = addedFoodItem.MonounsaturatedFat;
-                                FoodSelected.Carbohydrate = addedFoodItem.Carbohydrate;
-                                FoodSelected.Sugars = addedFoodItem.Sugars;
-                                FoodSelected.DietaryFibre = addedFoodItem.DietaryFibre;
-                                FoodSelected.SodiumNa = addedFoodItem.SodiumNa;
-                                FoodSelected.CalciumCa = addedFoodItem.CalciumCa;
-                                FoodSelected.PotassiumK = addedFoodItem.PotassiumK;
-                                FoodSelected.ThiaminB1 = addedFoodItem.ThiaminB1;
-                                FoodSelected.RiboflavinB2 = addedFoodItem.RiboflavinB2;
-                                FoodSelected.NiacinB3 = addedFoodItem.NiacinB3;
-                                FoodSelected.Folate = addedFoodItem.Folate;
-                                FoodSelected.IronFe = addedFoodItem.IronFe;
-                                FoodSelected.MagnesiumMg = addedFoodItem.MagnesiumMg;
-                                FoodSelected.VitaminC = addedFoodItem.VitaminC;
-                                FoodSelected.Caffeine = addedFoodItem.Caffeine;
-                                FoodSelected.Cholesterol = addedFoodItem.Cholesterol;
-                                FoodSelected.Alcohol = addedFoodItem.Alcohol;
-
-                                context.SaveChanges();
-                                actOnFoodFilteringStates(0);
-                            }
-                            else // if if (foodType!=2)
-                            {
-                                actOnFoodFilteringStates(1);
-                            }
-                            labelInfo.Text = "Edited food item: " + editedFoodId;
+                            actOnFoodFilteringStates(1);
                         }
-                        else // editing of food item cancelled
-                        {
-                            labelInfo.Text = "Editing of food item: " + editedFoodId + " cancelled";
-                        }
-
+                        labelInfo.Text = "Edited food item " + editedFoodId;
+                    }
+                    else // editing of food item cancelled
+                    {
+                        labelInfo.Text = "Editing of food item " + editedFoodId + " cancelled";
                     }
                 }
             }
 
         }
-
 
         /* Manually implements the deletion of an Eaten table row
          * This was partly to overcome an exception raised when done automatically
@@ -413,18 +401,16 @@ namespace DietSentry
 
                 if (foodItem != null)
                 {
-                    using (var context = new FoodsContext())
-                    {
-                        // gain direct access to selected entry in Eaten table
-                        var FoodSelected = context.Eaten.Single(b => b.EatenId == foodItem.EatenId);
+                    using var context = new FoodsContext();
+                    // gain direct access to selected entry in Eaten table
+                    var FoodSelected = context.Eaten.Single(b => b.EatenId == foodItem.EatenId);
 
-                        // delete this row from Eaten table
-                        context.Eaten.Remove(FoodSelected);
-                        context.SaveChanges();
+                    // delete this row from Eaten table
+                    context.Eaten.Remove(FoodSelected);
+                    context.SaveChanges();
 
-                        // refresh Eaten data grid view while maintaining filter status
-                        actOnEatenFoodFilteringStates();
-                    }
+                    // refresh Eaten data grid view while maintaining filter status
+                    actOnEatenFoodFilteringStates();
                 }
             }
             else // prevent row deletion and inform user of this by displaying Message Box
@@ -440,7 +426,6 @@ namespace DietSentry
             }
         }
 
-
         /* Code that acts on Eaten foods filtering states, only showing the current days data and/or aggregating by days
          * There are 4 states and this makes sure the Eaten foods datagrid always correctly displays the data */
         private void actOnEatenFoodFilteringStates()
@@ -451,52 +436,50 @@ namespace DietSentry
             {
                 try
                 {
-                    using (var context = new FoodsContext())
+                    using var context = new FoodsContext();
+                    context.Eaten.Load();
+
+                    // display queried data in DataGrid (in particular aggregated by date and summed)
+                    var queriedData = context.Eaten.Local.ToBindingList().GroupBy(o => o.DateEaten).Select(g => new
                     {
-                        context.Eaten.Load();
+                        DateEaten = g.Key,
+                        AmountEaten = g.Sum(i => i.AmountEaten),
+                        Energy = g.Sum(i => i.Energy),
+                        Protein = g.Sum(i => i.Protein),
+                        FatTotal = g.Sum(i => i.FatTotal),
+                        SaturatedFat = g.Sum(i => i.SaturatedFat),
+                        TransFat = g.Sum(i => i.TransFat),
+                        PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
+                        MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
+                        Carbohydrate = g.Sum(i => i.Carbohydrate),
+                        Sugars = g.Sum(i => i.Sugars),
+                        DietaryFibre = g.Sum(i => i.DietaryFibre),
+                        SodiumNa = g.Sum(i => i.SodiumNa),
+                        CalciumCa = g.Sum(i => i.CalciumCa),
+                        PotassiumK = g.Sum(i => i.PotassiumK),
+                        ThiaminB1 = g.Sum(i => i.ThiaminB1),
+                        RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
+                        NiacinB3 = g.Sum(i => i.NiacinB3),
+                        Folate = g.Sum(i => i.Folate),
+                        IronFe = g.Sum(i => i.IronFe),
+                        MagnesiumMg = g.Sum(i => i.MagnesiumMg),
+                        VitaminC = g.Sum(i => i.VitaminC),
+                        Caffeine = g.Sum(i => i.Caffeine),
+                        Cholesterol = g.Sum(i => i.Cholesterol),
+                        Alcohol = g.Sum(i => i.Alcohol)
+                    });//.Where(x => x.DateEaten.Contains(sDate));
 
-                        // display queried data in DataGrid (in particular aggregated by date and summed)
-                        var queriedData = context.Eaten.Local.ToBindingList().GroupBy(o => o.DateEaten).Select(g => new
-                        {
-                            DateEaten = g.Key,
-                            AmountEaten = g.Sum(i => i.AmountEaten),
-                            Energy = g.Sum(i => i.Energy),
-                            Protein = g.Sum(i => i.Protein),
-                            FatTotal = g.Sum(i => i.FatTotal),
-                            SaturatedFat = g.Sum(i => i.SaturatedFat),
-                            TransFat = g.Sum(i => i.TransFat),
-                            PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
-                            MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
-                            Carbohydrate = g.Sum(i => i.Carbohydrate),
-                            Sugars = g.Sum(i => i.Sugars),
-                            DietaryFibre = g.Sum(i => i.DietaryFibre),
-                            SodiumNa = g.Sum(i => i.SodiumNa),
-                            CalciumCa = g.Sum(i => i.CalciumCa),
-                            PotassiumK = g.Sum(i => i.PotassiumK),
-                            ThiaminB1 = g.Sum(i => i.ThiaminB1),
-                            RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
-                            NiacinB3 = g.Sum(i => i.NiacinB3),
-                            Folate = g.Sum(i => i.Folate),
-                            IronFe = g.Sum(i => i.IronFe),
-                            MagnesiumMg = g.Sum(i => i.MagnesiumMg),
-                            VitaminC = g.Sum(i => i.VitaminC),
-                            Caffeine = g.Sum(i => i.Caffeine),
-                            Cholesterol = g.Sum(i => i.Cholesterol),
-                            Alcohol = g.Sum(i => i.Alcohol)
-                        });//.Where(x => x.DateEaten.Contains(sDate));
+                    // hide columns not necessary for display of aggregated data
+                    dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
+                    dataGridViewEaten.Columns[2].Visible = false; // hide TimeEaten column
+                    dataGridViewEaten.Columns[3].Visible = false; // hide AmountEaten column
+                    dataGridViewEaten.Columns[4].Visible = false; // hide FoodDescription column
 
-                        // hide columns not necessary for display of aggregated data
-                        dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
-                        dataGridViewEaten.Columns[2].Visible = false; // hide TimeEaten column
-                        dataGridViewEaten.Columns[3].Visible = false; // hide AmountEaten column
-                        dataGridViewEaten.Columns[4].Visible = false; // hide FoodDescription column
+                    // the queried data table result should only contain one record/row.
 
-                        // the queried data table result should only contain one record/row.
-
-                        // this is where exception occurs.
-                        // this binds the data so that it is displayed in the data grid.
-                        eatenBindingSource.DataSource = queriedData.Count() > 0 ? queriedData : queriedData.ToArray();
-                    }
+                    // this is where exception occurs.
+                    // this binds the data so that it is displayed in the data grid.
+                    eatenBindingSource.DataSource = queriedData.Any() ? queriedData : queriedData.ToArray();
                 }
                 catch // some sorting problem
                 {
@@ -507,52 +490,50 @@ namespace DietSentry
             {
                 try
                 {
-                    using (var context = new FoodsContext())
+                    using var context = new FoodsContext();
+                    context.Eaten.Load();
+
+                    // display queried data in DataGrid (in particular aggregated by date and summed)
+                    var queriedData = context.Eaten.Local.ToBindingList().GroupBy(o => o.DateEaten).Select(g => new
                     {
-                        context.Eaten.Load();
+                        DateEaten = g.Key,
+                        AmountEaten = g.Sum(i => i.AmountEaten),
+                        Energy = g.Sum(i => i.Energy),
+                        Protein = g.Sum(i => i.Protein),
+                        FatTotal = g.Sum(i => i.FatTotal),
+                        SaturatedFat = g.Sum(i => i.SaturatedFat),
+                        TransFat = g.Sum(i => i.TransFat),
+                        PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
+                        MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
+                        Carbohydrate = g.Sum(i => i.Carbohydrate),
+                        Sugars = g.Sum(i => i.Sugars),
+                        DietaryFibre = g.Sum(i => i.DietaryFibre),
+                        SodiumNa = g.Sum(i => i.SodiumNa),
+                        CalciumCa = g.Sum(i => i.CalciumCa),
+                        PotassiumK = g.Sum(i => i.PotassiumK),
+                        ThiaminB1 = g.Sum(i => i.ThiaminB1),
+                        RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
+                        NiacinB3 = g.Sum(i => i.NiacinB3),
+                        Folate = g.Sum(i => i.Folate),
+                        IronFe = g.Sum(i => i.IronFe),
+                        MagnesiumMg = g.Sum(i => i.MagnesiumMg),
+                        VitaminC = g.Sum(i => i.VitaminC),
+                        Caffeine = g.Sum(i => i.Caffeine),
+                        Cholesterol = g.Sum(i => i.Cholesterol),
+                        Alcohol = g.Sum(i => i.Alcohol)
+                    }).Where(x => x.DateEaten!.Contains(sDate));
 
-                        // display queried data in DataGrid (in particular aggregated by date and summed)
-                        var queriedData = context.Eaten.Local.ToBindingList().GroupBy(o => o.DateEaten).Select(g => new
-                        {
-                            DateEaten = g.Key,
-                            AmountEaten = g.Sum(i => i.AmountEaten),
-                            Energy = g.Sum(i => i.Energy),
-                            Protein = g.Sum(i => i.Protein),
-                            FatTotal = g.Sum(i => i.FatTotal),
-                            SaturatedFat = g.Sum(i => i.SaturatedFat),
-                            TransFat = g.Sum(i => i.TransFat),
-                            PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
-                            MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
-                            Carbohydrate = g.Sum(i => i.Carbohydrate),
-                            Sugars = g.Sum(i => i.Sugars),
-                            DietaryFibre = g.Sum(i => i.DietaryFibre),
-                            SodiumNa = g.Sum(i => i.SodiumNa),
-                            CalciumCa = g.Sum(i => i.CalciumCa),
-                            PotassiumK = g.Sum(i => i.PotassiumK),
-                            ThiaminB1 = g.Sum(i => i.ThiaminB1),
-                            RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
-                            NiacinB3 = g.Sum(i => i.NiacinB3),
-                            Folate = g.Sum(i => i.Folate),
-                            IronFe = g.Sum(i => i.IronFe),
-                            MagnesiumMg = g.Sum(i => i.MagnesiumMg),
-                            VitaminC = g.Sum(i => i.VitaminC),
-                            Caffeine = g.Sum(i => i.Caffeine),
-                            Cholesterol = g.Sum(i => i.Cholesterol),
-                            Alcohol = g.Sum(i => i.Alcohol)
-                        }).Where(x => x.DateEaten.Contains(sDate));
+                    // hide columns not necessary for display of aggregated data
+                    dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
+                    dataGridViewEaten.Columns[2].Visible = false; // hide TimeEaten column
+                    dataGridViewEaten.Columns[3].Visible = false; // hide AmountEaten column
+                    dataGridViewEaten.Columns[4].Visible = false; // hide FoodDescription column
 
-                        // hide columns not necessary for display of aggregated data
-                        dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
-                        dataGridViewEaten.Columns[2].Visible = false; // hide TimeEaten column
-                        dataGridViewEaten.Columns[3].Visible = false; // hide AmountEaten column
-                        dataGridViewEaten.Columns[4].Visible = false; // hide FoodDescription column
+                    // the queried data table result should only contain one record/row.
 
-                        // the queried data table result should only contain one record/row.
-
-                        // this is where exception occurs.
-                        // this binds the data so that it is displayed in the data grid.
-                        eatenBindingSource.DataSource = queriedData.Count() > 0 ? queriedData : queriedData.ToArray();
-                    }
+                    // this is where exception occurs.
+                    // this binds the data so that it is displayed in the data grid.
+                    eatenBindingSource.DataSource = queriedData.Any() ? queriedData : queriedData.ToArray();
                 }
                 catch // some sorting problem
                 {
@@ -567,8 +548,8 @@ namespace DietSentry
                     context.Eaten.Load();
                     eatenBindingSource.DataSource = context.Eaten.Local.ToBindingList();
                     eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
-                    var filteredData = context.Eaten.Local.ToBindingList().Where(x => x.DateEaten.Contains(sDate));
-                    this.eatenBindingSource.DataSource = filteredData.Count() > 0 ? filteredData : filteredData.ToArray();
+                    var filteredData = context.Eaten.Local.ToBindingList().Where(x => x.DateEaten!.Contains(sDate));
+                    this.eatenBindingSource.DataSource = filteredData.Any() ? filteredData : filteredData.ToArray();
                 }
 
                 // restore view of previously hidden columns 
@@ -594,7 +575,6 @@ namespace DietSentry
                 dataGridViewEaten.Columns[4].Visible = true; // show FoodDescription column
             }
         }
-
 
         /* Changes visibility of columns in the Eaten Foods data grid in response to the corresponding check box's state */
         private void actOnEatenFoodColumnStates()
@@ -640,13 +620,11 @@ namespace DietSentry
             }
         }
 
-
         /* Wrapper for actOnEatenFoodFilteringStates() when Date filter check box state changed */
         private void checkBoxDateFilter_CheckedChanged(object sender, EventArgs e)
         {
             actOnEatenFoodFilteringStates();
         }
-
 
         /* Wrapper for actOnEatenFoodFilteringStates() when Totals filter check box state changed */
         private void checkBoxDailyTotals_CheckedChanged(object sender, EventArgs e)
@@ -654,13 +632,11 @@ namespace DietSentry
             actOnEatenFoodFilteringStates();
         }
 
-
         /* Wrapper for actOnEatenFoodColumnStates() when check box state changed */
         private void checkBoxMainCols_CheckedChanged(object sender, EventArgs e)
         {
             actOnEatenFoodColumnStates();
         }
-
 
         /* Manually implements the deletion of a Food selected in its data grid
          * This is to control the process and fully delete recipe foods. Multi selection is disabled for convenience
@@ -681,38 +657,35 @@ namespace DietSentry
 
                 if (foodItem != null)
                 {
-                    using (var context = new FoodsContext())
+                    using var context = new FoodsContext();
+                    // gain direct access to selected record in the Foods table
+                    var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
+                    int FoodSelectedId = FoodSelected.FoodId; // get Id for later display
+                    string FoodSelectedDesc = FoodSelected.FoodDescription!; // get FoodDescription for later use
+
+                    // delete this record from Foods table
+                    context.Foods.Remove(FoodSelected);
+                    context.SaveChanges();
+
+                    // determines if this food is a recipe because extra stuff has to be deleted
+                    if (isRecipe(FoodSelectedDesc))
                     {
-                        // gain direct access to selected record in the Foods table
-                        var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
-                        int FoodSelectedId = FoodSelected.FoodId; // get Id for later display
-                        string FoodSelectedDesc = FoodSelected.FoodDescription; // get FoodDescription for later use
-
-                        // delete this record from Foods table
-                        context.Foods.Remove(FoodSelected);
+                        // delete any records in the recipe table
+                        var recipeFoods = context.Recipe.Where(r => r.FoodId == FoodSelectedId);
+                        context.Recipe.RemoveRange(recipeFoods);
                         context.SaveChanges();
-
-                        // determines if this food is a recipe because extra stuff has to be deleted
-                        if (isRecipe(FoodSelectedDesc))
-                        {
-                            // delete any records in the recipe table
-                            var recipeFoods = context.Recipe.Where(r => r.FoodId == FoodSelectedId);
-                            context.Recipe.RemoveRange(recipeFoods);
-                            context.SaveChanges();
-                        }
-                        else
-
-                            labelInfo.Text = "Deleted food item: " + FoodSelectedId;
-
-                        // refresh Foods data grid view while maintaining filter status - it is done in this complicated way
-                        // because it crashes under some patricular circumstances !
-                        string SF = labelFilter.Text;
-                        labelFilter.Text = "Unfiltered";
-                        actOnFoodFilteringStates(0);
-                        labelFilter.Text = SF;
-                        actOnFoodFilteringStates(0);
-
                     }
+                    else
+
+                        labelInfo.Text = "Deleted food item " + FoodSelectedId;
+
+                    // refresh Foods data grid view while maintaining filter status - it is done in this complicated way
+                    // because it crashes under some patricular circumstances !
+                    string SF = labelFilter.Text;
+                    labelFilter.Text = "Unfiltered";
+                    actOnFoodFilteringStates(0);
+                    labelFilter.Text = SF;
+                    actOnFoodFilteringStates(0);
                 }
             }
             else
@@ -720,7 +693,6 @@ namespace DietSentry
                 labelInfo.Text = "Deletion of selected food item cancelled";
             }
         }
-
 
         /* Changes visibility of columns in the Foods data grid in response to the corresponing check box's state */
         private void actOnFoodColumnStates()
@@ -765,12 +737,10 @@ namespace DietSentry
             }
         }
 
-
         /* Wrapper for actOnFoodColumnStates() when controlling check box's state changed */
         private void checkBoxMainFoodCols_CheckedChanged(object sender, EventArgs e)
         {
             actOnFoodColumnStates();
         }
-
     }
 }
