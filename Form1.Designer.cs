@@ -290,7 +290,7 @@ namespace DietSentry
             checkBoxMainFoodCols.TabIndex = 8;
             checkBoxMainFoodCols.Text = "Only show main columns";
             checkBoxMainFoodCols.UseVisualStyleBackColor = true;
-            checkBoxMainFoodCols.CheckedChanged += checkBoxMainFoodCols_CheckedChanged;
+            checkBoxMainFoodCols.CheckedChanged += CheckBoxMainFoodCols_CheckedChanged;
             // 
             // labelFilter
             // 
@@ -313,8 +313,8 @@ namespace DietSentry
             textBoxFilter.TabIndex = 2;
             toolTipMainForm.SetToolTip(textBoxFilter, resources.GetString("textBoxFilter.ToolTip"));
             textBoxFilter.WordWrap = false;
-            textBoxFilter.Enter += textBoxFilter_Enter;
-            textBoxFilter.KeyDown += textBoxFilter_KeyDown;
+            textBoxFilter.Enter += TextBoxFilter_Enter;
+            textBoxFilter.KeyDown += TextBoxFilter_KeyDown;
             // 
             // dataGridViewFoods
             // 
@@ -365,9 +365,9 @@ namespace DietSentry
             dataGridViewFoods.Size = new Size(1398, 649);
             dataGridViewFoods.TabIndex = 4;
             toolTipMainForm.SetToolTip(dataGridViewFoods, "Hello world jkhjkhjkhjkhkjhjkjh\r\nhjgjhghjgjhghjghjh\r\njhgjhgjhgjhgjhgjhgjhjhgj");
-            dataGridViewFoods.CellDoubleClick += dataGridViewFoods_CellDoubleClick;
-            dataGridViewFoods.UserDeletingRow += dataGridViewFoods_UserDeletingRow;
-            dataGridViewFoods.KeyDown += dataGridViewFoods_KeyDown;
+            dataGridViewFoods.CellDoubleClick += DataGridViewFoods_CellDoubleClick;
+            dataGridViewFoods.UserDeletingRow += DataGridViewFoods_UserDeletingRow;
+            dataGridViewFoods.KeyDown += DataGridViewFoods_KeyDown;
             // 
             // FoodIdDataGridViewTextBoxColumn
             // 
@@ -764,7 +764,7 @@ namespace DietSentry
             checkBoxMainCols.TabIndex = 7;
             checkBoxMainCols.Text = "Only show main columns";
             checkBoxMainCols.UseVisualStyleBackColor = true;
-            checkBoxMainCols.CheckedChanged += checkBoxMainCols_CheckedChanged;
+            checkBoxMainCols.CheckedChanged += CheckBoxMainCols_CheckedChanged;
             // 
             // checkBoxDailyTotals
             // 
@@ -775,7 +775,7 @@ namespace DietSentry
             checkBoxDailyTotals.TabIndex = 6;
             checkBoxDailyTotals.Text = "Display daily totals";
             checkBoxDailyTotals.UseVisualStyleBackColor = true;
-            checkBoxDailyTotals.CheckedChanged += checkBoxDailyTotals_CheckedChanged;
+            checkBoxDailyTotals.CheckedChanged += CheckBoxDailyTotals_CheckedChanged;
             // 
             // checkBoxDateFilter
             // 
@@ -788,7 +788,7 @@ namespace DietSentry
             checkBoxDateFilter.TabIndex = 5;
             checkBoxDateFilter.Text = "Filter by today's date";
             checkBoxDateFilter.UseVisualStyleBackColor = true;
-            checkBoxDateFilter.CheckedChanged += checkBoxDateFilter_CheckedChanged;
+            checkBoxDateFilter.CheckedChanged += CheckBoxDateFilter_CheckedChanged;
             // 
             // dataGridViewEaten
             // 
@@ -839,7 +839,7 @@ namespace DietSentry
             dataGridViewEaten.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewEaten.Size = new Size(1398, 649);
             dataGridViewEaten.TabIndex = 0;
-            dataGridViewEaten.UserDeletingRow += dataGridViewEaten_UserDeletingRow;
+            dataGridViewEaten.UserDeletingRow += DataGridViewEaten_UserDeletingRow;
             // 
             // EatenId
             // 

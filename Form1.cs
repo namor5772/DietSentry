@@ -21,7 +21,7 @@ namespace DietSentry
 
         /* Code that acts when a food item is selected (in whatever way) from the Foods dataGridView.
          * It prompts for amount of food eaten and appends a time stamped row to the Eaten foods table */
-        private void actWhenFoodSelected()
+        private void ActWhenFoodSelected()
         {
             var foodItem = (Food)dataGridViewFoods.CurrentRow.DataBoundItem;
 
@@ -78,7 +78,7 @@ namespace DietSentry
                     context.SaveChanges();
 
                     // Updates the dataGridViewEaten while maintaining filtering states and making the Eaten tab visible
-                    actOnEatenFoodFilteringStates();
+                    ActOnEatenFoodFilteringStates();
                     tabControlMain.SelectedTab = tabPageEaten;
                 }
             }
@@ -87,7 +87,7 @@ namespace DietSentry
         /* Code that acts on Food filtering states
          * There are 2 states and this makes sure the foods datagrid always correctly displays the data
          * there is an argument which determines the sort order via the Id: 0=Asc, 1=Desc */
-        private void actOnFoodFilteringStates(int sortingType)
+        private void ActOnFoodFilteringStates(int sortingType)
         {
             using var context = new FoodsContext();
             context.Foods.Load();
@@ -145,9 +145,9 @@ namespace DietSentry
             this.eatenBindingSource.DataSource = dbContext.Eaten.Local.ToBindingList();
             this.recipeBindingSource.DataSource = dbContext.Recipe.Local.ToBindingList();
 
-            actOnFoodColumnStates();
-            actOnEatenFoodColumnStates();
-            actOnEatenFoodFilteringStates();
+            ActOnFoodColumnStates();
+            ActOnEatenFoodColumnStates();
+            ActOnEatenFoodFilteringStates();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -159,7 +159,7 @@ namespace DietSentry
         }
 
         /* Only reacts to the Enter key being pressed in the Food filter text box, by processing the filter request */
-        private void textBoxFilter_KeyDown(object sender, KeyEventArgs e)
+        private void TextBoxFilter_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -175,12 +175,12 @@ namespace DietSentry
                 }
                 textBoxFilter.Text = "";
 
-                actOnFoodFilteringStates(0);
+                ActOnFoodFilteringStates(0);
             }
         }
 
         /* When the Food filter text box is entered just clears the text */
-        private void textBoxFilter_Enter(object sender, EventArgs e)
+        private void TextBoxFilter_Enter(object sender, EventArgs e)
         {
             // always clear filter when enter text box
             textBoxFilter.Text = "";
@@ -188,9 +188,9 @@ namespace DietSentry
 
         /* This is way ONE you select an item (for recording as eaten) from the Food table.
          * - From the Food data grid Double Click selected item with mouse */
-        private void dataGridViewFoods_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewFoods_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            actWhenFoodSelected();
+            ActWhenFoodSelected();
         }
 
         /* This is way TWO you select an item (for recording as eaten) from the food table.
@@ -198,11 +198,11 @@ namespace DietSentry
          * ALSO picks up when Insert key is pressed. Used to Insert/Add food to the database.
          * - Selection row is then clearly not relevant but just a way of enabling this action)
          * ALSO picks up when F2 key is pressed. Used to Edit/Inspect selected food item (especially relevant for Recipe foods */
-        private void dataGridViewFoods_KeyDown(object sender, KeyEventArgs e)
+        private void DataGridViewFoods_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) // Selecting eaten food item
             {
-                actWhenFoodSelected();
+                ActWhenFoodSelected();
                 e.Handled = true; // prevents Enter key press causing next lower cell getting focus 
             }
             else if (e.KeyCode == Keys.Insert) // Adding/Inserting new food item into database
@@ -268,7 +268,7 @@ namespace DietSentry
                     }
 
                     // refresh Foods data grid view while maintaining filter status
-                    actOnFoodFilteringStates(1);
+                    ActOnFoodFilteringStates(1);
                 }
                 else // addition of food item cancelled
                 {
@@ -368,11 +368,11 @@ namespace DietSentry
                             FoodSelected.Alcohol = addedFoodItem.Alcohol;
 
                             context.SaveChanges();
-                            actOnFoodFilteringStates(0);
+                            ActOnFoodFilteringStates(0);
                         }
                         else // if if (foodType!=2)
                         {
-                            actOnFoodFilteringStates(1);
+                            ActOnFoodFilteringStates(1);
                         }
                         labelInfo.Text = "Edited food item " + editedFoodId;
                     }
@@ -388,7 +388,7 @@ namespace DietSentry
         /* Manually implements the deletion of an Eaten table row
          * This was partly to overcome an exception raised when done automatically
          * mult selection is disabled for convenience */
-        private void dataGridViewEaten_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        private void DataGridViewEaten_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
             // cancel the automatic deletion process (to avoid raising exceptions)
             e.Cancel = true;
@@ -410,7 +410,7 @@ namespace DietSentry
                     context.SaveChanges();
 
                     // refresh Eaten data grid view while maintaining filter status
-                    actOnEatenFoodFilteringStates();
+                    ActOnEatenFoodFilteringStates();
                 }
             }
             else // prevent row deletion and inform user of this by displaying Message Box
@@ -428,7 +428,7 @@ namespace DietSentry
 
         /* Code that acts on Eaten foods filtering states, only showing the current days data and/or aggregating by days
          * There are 4 states and this makes sure the Eaten foods datagrid always correctly displays the data */
-        private void actOnEatenFoodFilteringStates()
+        private void ActOnEatenFoodFilteringStates()
         {
             string sDate = DateTime.Now.ToString("d-MMM-yy");
 
@@ -577,7 +577,7 @@ namespace DietSentry
         }
 
         /* Changes visibility of columns in the Eaten Foods data grid in response to the corresponding check box's state */
-        private void actOnEatenFoodColumnStates()
+        private void ActOnEatenFoodColumnStates()
         {
             if (checkBoxMainCols.Checked)
             {
@@ -621,27 +621,27 @@ namespace DietSentry
         }
 
         /* Wrapper for actOnEatenFoodFilteringStates() when Date filter check box state changed */
-        private void checkBoxDateFilter_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxDateFilter_CheckedChanged(object sender, EventArgs e)
         {
-            actOnEatenFoodFilteringStates();
+            ActOnEatenFoodFilteringStates();
         }
 
         /* Wrapper for actOnEatenFoodFilteringStates() when Totals filter check box state changed */
-        private void checkBoxDailyTotals_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxDailyTotals_CheckedChanged(object sender, EventArgs e)
         {
-            actOnEatenFoodFilteringStates();
+            ActOnEatenFoodFilteringStates();
         }
 
         /* Wrapper for actOnEatenFoodColumnStates() when check box state changed */
-        private void checkBoxMainCols_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxMainCols_CheckedChanged(object sender, EventArgs e)
         {
-            actOnEatenFoodColumnStates();
+            ActOnEatenFoodColumnStates();
         }
 
         /* Manually implements the deletion of a Food selected in its data grid
          * This is to control the process and fully delete recipe foods. Multi selection is disabled for convenience
          * This is run when a row is selected and any Delete key pressed (Delete or Del on the number pad) */
-        private void dataGridViewFoods_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        private void DataGridViewFoods_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
             // cancel the automatic deletion process (to avoid raising exceptions and for manual enhancements)
             e.Cancel = true;
@@ -683,9 +683,9 @@ namespace DietSentry
                     // because it crashes under some patricular circumstances !
                     string SF = labelFilter.Text;
                     labelFilter.Text = "Unfiltered";
-                    actOnFoodFilteringStates(0);
+                    ActOnFoodFilteringStates(0);
                     labelFilter.Text = SF;
-                    actOnFoodFilteringStates(0);
+                    ActOnFoodFilteringStates(0);
                 }
             }
             else
@@ -695,7 +695,7 @@ namespace DietSentry
         }
 
         /* Changes visibility of columns in the Foods data grid in response to the corresponing check box's state */
-        private void actOnFoodColumnStates()
+        private void ActOnFoodColumnStates()
         {
             if (checkBoxMainFoodCols.Checked)
             {
@@ -738,9 +738,9 @@ namespace DietSentry
         }
 
         /* Wrapper for actOnFoodColumnStates() when controlling check box's state changed */
-        private void checkBoxMainFoodCols_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxMainFoodCols_CheckedChanged(object sender, EventArgs e)
         {
-            actOnFoodColumnStates();
+            ActOnFoodColumnStates();
         }
     }
 }

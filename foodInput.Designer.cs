@@ -168,7 +168,7 @@
             radioButtonRecipie.TabIndex = 3;
             radioButtonRecipie.Text = "Recipe";
             radioButtonRecipie.UseVisualStyleBackColor = true;
-            radioButtonRecipie.CheckedChanged += radioButtonRecipie_CheckedChanged;
+            radioButtonRecipie.CheckedChanged += RadioButtonRecipie_CheckedChanged;
             // 
             // radioButtonLiquid
             // 
@@ -179,7 +179,7 @@
             radioButtonLiquid.TabIndex = 2;
             radioButtonLiquid.Text = "Liquid";
             radioButtonLiquid.UseVisualStyleBackColor = true;
-            radioButtonLiquid.CheckedChanged += radioButtonLiquid_CheckedChanged;
+            radioButtonLiquid.CheckedChanged += RadioButtonLiquid_CheckedChanged;
             // 
             // radioButtonSolid
             // 
@@ -192,7 +192,7 @@
             radioButtonSolid.TabStop = true;
             radioButtonSolid.Text = "Solid";
             radioButtonSolid.UseVisualStyleBackColor = true;
-            radioButtonSolid.CheckedChanged += radioButtonSolid_CheckedChanged;
+            radioButtonSolid.CheckedChanged += RadioButtonSolid_CheckedChanged;
             // 
             // buttonAddFood
             // 
@@ -203,7 +203,7 @@
             buttonAddFood.TabIndex = 5;
             buttonAddFood.Text = "Add food";
             buttonAddFood.UseVisualStyleBackColor = true;
-            buttonAddFood.Click += buttonAddFood_Click;
+            buttonAddFood.Click += ButtonAddFood_Click;
             // 
             // buttonCancelAddFood
             // 
@@ -214,7 +214,7 @@
             buttonCancelAddFood.TabIndex = 6;
             buttonCancelAddFood.Text = "Cancel";
             buttonCancelAddFood.UseVisualStyleBackColor = true;
-            buttonCancelAddFood.Click += buttonCancelAddFood_Click;
+            buttonCancelAddFood.Click += ButtonCancelAddFood_Click;
             // 
             // labelState
             // 
@@ -257,7 +257,7 @@
             tabPageRecipie.Size = new Size(1412, 679);
             tabPageRecipie.TabIndex = 1;
             tabPageRecipie.Text = "Add Recipie";
-            tabPageRecipie.Enter += tabPageRecipie_Enter;
+            tabPageRecipie.Enter += TabPageRecipie_Enter;
             // 
             // labelIngredients
             // 
@@ -316,7 +316,7 @@
             dataGridViewRecipe.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewRecipe.Size = new Size(926, 590);
             dataGridViewRecipe.TabIndex = 0;
-            dataGridViewRecipe.UserDeletingRow += dataGridViewRecipe_UserDeletingRow;
+            dataGridViewRecipe.UserDeletingRow += DataGridViewRecipe_UserDeletingRow;
             // 
             // amountDataGridViewTextBoxColumn
             // 
@@ -404,7 +404,7 @@
             textBoxFilterRecipe.Size = new Size(135, 23);
             textBoxFilterRecipe.TabIndex = 9;
             textBoxFilterRecipe.WordWrap = false;
-            textBoxFilterRecipe.KeyDown += textBoxFilterRecipe_KeyDown;
+            textBoxFilterRecipe.KeyDown += TextBoxFilterRecipe_KeyDown;
             // 
             // dataGridViewAddToRecipe
             // 
@@ -457,8 +457,8 @@
             dataGridViewAddToRecipe.ShowRowErrors = false;
             dataGridViewAddToRecipe.Size = new Size(444, 590);
             dataGridViewAddToRecipe.TabIndex = 8;
-            dataGridViewAddToRecipe.CellDoubleClick += dataGridViewAddToRecipe_CellDoubleClick;
-            dataGridViewAddToRecipe.KeyDown += dataGridViewAddToRecipe_KeyDown;
+            dataGridViewAddToRecipe.CellDoubleClick += DataGridViewAddToRecipe_CellDoubleClick;
+            dataGridViewAddToRecipe.KeyDown += DataGridViewAddToRecipe_KeyDown;
             // 
             // foodDescriptionDataGridViewTextBoxColumn
             // 
@@ -480,8 +480,8 @@
             textBoxRecipeFoodDescription.Name = "textBoxRecipeFoodDescription";
             textBoxRecipeFoodDescription.Size = new Size(845, 23);
             textBoxRecipeFoodDescription.TabIndex = 5;
-            textBoxRecipeFoodDescription.KeyDown += textBoxRecipeFoodDescription_KeyDown;
-            textBoxRecipeFoodDescription.Leave += textBoxRecipeFoodDescription_Leave;
+            textBoxRecipeFoodDescription.KeyDown += TextBoxRecipeFoodDescription_KeyDown;
+            textBoxRecipeFoodDescription.Leave += TextBoxRecipeFoodDescription_Leave;
             // 
             // labelRecipeFoodDescription
             // 
@@ -557,8 +557,8 @@
             textBoxAlcohol.Size = new Size(78, 23);
             textBoxAlcohol.TabIndex = 47;
             textBoxAlcohol.TextAlign = HorizontalAlignment.Right;
-            textBoxAlcohol.KeyDown += textBoxAlcohol_KeyDown;
-            textBoxAlcohol.Leave += textBoxAlcohol_Leave;
+            textBoxAlcohol.KeyDown += TextBoxAlcohol_KeyDown;
+            textBoxAlcohol.Leave += TextBoxAlcohol_Leave;
             // 
             // labelAlcohol
             // 
@@ -576,8 +576,8 @@
             textBoxCholesterol.Size = new Size(78, 23);
             textBoxCholesterol.TabIndex = 45;
             textBoxCholesterol.TextAlign = HorizontalAlignment.Right;
-            textBoxCholesterol.KeyDown += textBoxCholesterol_KeyDown;
-            textBoxCholesterol.Leave += textBoxCholesterol_Leave;
+            textBoxCholesterol.KeyDown += TextBoxCholesterol_KeyDown;
+            textBoxCholesterol.Leave += TextBoxCholesterol_Leave;
             // 
             // labelCholesterol
             // 
@@ -595,8 +595,8 @@
             textBoxCaffeine.Size = new Size(78, 23);
             textBoxCaffeine.TabIndex = 43;
             textBoxCaffeine.TextAlign = HorizontalAlignment.Right;
-            textBoxCaffeine.KeyDown += textBoxCaffeine_KeyDown;
-            textBoxCaffeine.Leave += textBoxCaffeine_Leave;
+            textBoxCaffeine.KeyDown += TextBoxCaffeine_KeyDown;
+            textBoxCaffeine.Leave += TextBoxCaffeine_Leave;
             // 
             // labelCaffeine
             // 
@@ -614,8 +614,8 @@
             textBoxVitaminC.Size = new Size(78, 23);
             textBoxVitaminC.TabIndex = 41;
             textBoxVitaminC.TextAlign = HorizontalAlignment.Right;
-            textBoxVitaminC.KeyDown += textBoxVitaminC_KeyDown;
-            textBoxVitaminC.Leave += textBoxVitaminC_Leave;
+            textBoxVitaminC.KeyDown += TextBoxVitaminC_KeyDown;
+            textBoxVitaminC.Leave += TextBoxVitaminC_Leave;
             // 
             // labelVitaminC
             // 
@@ -633,8 +633,8 @@
             textBoxMagnesiumMg.Size = new Size(78, 23);
             textBoxMagnesiumMg.TabIndex = 39;
             textBoxMagnesiumMg.TextAlign = HorizontalAlignment.Right;
-            textBoxMagnesiumMg.KeyDown += textBoxMagnesiumMg_KeyDown;
-            textBoxMagnesiumMg.Leave += textBoxMagnesiumMg_Leave;
+            textBoxMagnesiumMg.KeyDown += TextBoxMagnesiumMg_KeyDown;
+            textBoxMagnesiumMg.Leave += TextBoxMagnesiumMg_Leave;
             // 
             // labelMagnesiumMg
             // 
@@ -652,8 +652,8 @@
             textBoxIronFe.Size = new Size(78, 23);
             textBoxIronFe.TabIndex = 37;
             textBoxIronFe.TextAlign = HorizontalAlignment.Right;
-            textBoxIronFe.KeyDown += textBoxIronFe_KeyDown;
-            textBoxIronFe.Leave += textBoxIronFe_Leave;
+            textBoxIronFe.KeyDown += TextBoxIronFe_KeyDown;
+            textBoxIronFe.Leave += TextBoxIronFe_Leave;
             // 
             // labelIronFe
             // 
@@ -671,8 +671,8 @@
             textBoxFolate.Size = new Size(78, 23);
             textBoxFolate.TabIndex = 35;
             textBoxFolate.TextAlign = HorizontalAlignment.Right;
-            textBoxFolate.KeyDown += textBoxFolate_KeyDown;
-            textBoxFolate.Leave += textBoxFolate_Leave;
+            textBoxFolate.KeyDown += TextBoxFolate_KeyDown;
+            textBoxFolate.Leave += TextBoxFolate_Leave;
             // 
             // labelFolate
             // 
@@ -690,8 +690,8 @@
             textBoxNiacinB3.Size = new Size(78, 23);
             textBoxNiacinB3.TabIndex = 33;
             textBoxNiacinB3.TextAlign = HorizontalAlignment.Right;
-            textBoxNiacinB3.KeyDown += textBoxNiacinB3_KeyDown;
-            textBoxNiacinB3.Leave += textBoxNiacinB3_Leave;
+            textBoxNiacinB3.KeyDown += TextBoxNiacinB3_KeyDown;
+            textBoxNiacinB3.Leave += TextBoxNiacinB3_Leave;
             // 
             // labelNiacinB3
             // 
@@ -709,8 +709,8 @@
             textBoxRiboflavinB2.Size = new Size(78, 23);
             textBoxRiboflavinB2.TabIndex = 31;
             textBoxRiboflavinB2.TextAlign = HorizontalAlignment.Right;
-            textBoxRiboflavinB2.KeyDown += textBoxRiboflavinB2_KeyDown;
-            textBoxRiboflavinB2.Leave += textBoxRiboflavinB2_Leave;
+            textBoxRiboflavinB2.KeyDown += TextBoxRiboflavinB2_KeyDown;
+            textBoxRiboflavinB2.Leave += TextBoxRiboflavinB2_Leave;
             // 
             // labelRiboflavinB2
             // 
@@ -728,8 +728,8 @@
             textBoxThiaminB1.Size = new Size(78, 23);
             textBoxThiaminB1.TabIndex = 29;
             textBoxThiaminB1.TextAlign = HorizontalAlignment.Right;
-            textBoxThiaminB1.KeyDown += textBoxThiaminB1_KeyDown;
-            textBoxThiaminB1.Leave += textBoxThiaminB1_Leave;
+            textBoxThiaminB1.KeyDown += TextBoxThiaminB1_KeyDown;
+            textBoxThiaminB1.Leave += TextBoxThiaminB1_Leave;
             // 
             // labelThiaminB1
             // 
@@ -747,8 +747,8 @@
             textBoxPotassiumK.Size = new Size(78, 23);
             textBoxPotassiumK.TabIndex = 27;
             textBoxPotassiumK.TextAlign = HorizontalAlignment.Right;
-            textBoxPotassiumK.KeyDown += textBoxPotassiumK_KeyDown;
-            textBoxPotassiumK.Leave += textBoxPotassiumK_Leave;
+            textBoxPotassiumK.KeyDown += TextBoxPotassiumK_KeyDown;
+            textBoxPotassiumK.Leave += TextBoxPotassiumK_Leave;
             // 
             // labelPotassiumK
             // 
@@ -766,8 +766,8 @@
             textBoxCalciumCa.Size = new Size(78, 23);
             textBoxCalciumCa.TabIndex = 25;
             textBoxCalciumCa.TextAlign = HorizontalAlignment.Right;
-            textBoxCalciumCa.KeyDown += textBoxCalciumCa_KeyDown;
-            textBoxCalciumCa.Leave += textBoxCalciumCa_Leave;
+            textBoxCalciumCa.KeyDown += TextBoxCalciumCa_KeyDown;
+            textBoxCalciumCa.Leave += TextBoxCalciumCa_Leave;
             // 
             // labelCalciumCa
             // 
@@ -785,8 +785,8 @@
             textBoxSodiumNa.Size = new Size(78, 23);
             textBoxSodiumNa.TabIndex = 23;
             textBoxSodiumNa.TextAlign = HorizontalAlignment.Right;
-            textBoxSodiumNa.KeyDown += textBoxSodiumNa_KeyDown;
-            textBoxSodiumNa.Leave += textBoxSodiumNa_Leave;
+            textBoxSodiumNa.KeyDown += TextBoxSodiumNa_KeyDown;
+            textBoxSodiumNa.Leave += TextBoxSodiumNa_Leave;
             // 
             // labelSodiumNa
             // 
@@ -804,8 +804,8 @@
             textBoxDietaryFibre.Size = new Size(78, 23);
             textBoxDietaryFibre.TabIndex = 21;
             textBoxDietaryFibre.TextAlign = HorizontalAlignment.Right;
-            textBoxDietaryFibre.KeyDown += textBoxDietaryFibre_KeyDown;
-            textBoxDietaryFibre.Leave += textBoxDietaryFibre_Leave;
+            textBoxDietaryFibre.KeyDown += TextBoxDietaryFibre_KeyDown;
+            textBoxDietaryFibre.Leave += TextBoxDietaryFibre_Leave;
             // 
             // labelDietaryFibre
             // 
@@ -823,8 +823,8 @@
             textBoxSugars.Size = new Size(78, 23);
             textBoxSugars.TabIndex = 19;
             textBoxSugars.TextAlign = HorizontalAlignment.Right;
-            textBoxSugars.KeyDown += textBoxSugars_KeyDown;
-            textBoxSugars.Leave += textBoxSugars_Leave;
+            textBoxSugars.KeyDown += TextBoxSugars_KeyDown;
+            textBoxSugars.Leave += TextBoxSugars_Leave;
             // 
             // labelSugars
             // 
@@ -842,8 +842,8 @@
             textBoxCarbohydrate.Size = new Size(78, 23);
             textBoxCarbohydrate.TabIndex = 17;
             textBoxCarbohydrate.TextAlign = HorizontalAlignment.Right;
-            textBoxCarbohydrate.KeyDown += textBoxCarbohydrate_KeyDown;
-            textBoxCarbohydrate.Leave += textBoxCarbohydrate_Leave;
+            textBoxCarbohydrate.KeyDown += TextBoxCarbohydrate_KeyDown;
+            textBoxCarbohydrate.Leave += TextBoxCarbohydrate_Leave;
             // 
             // labelCarbohydrate
             // 
@@ -861,8 +861,8 @@
             textBoxMonounsaturatedFat.Size = new Size(78, 23);
             textBoxMonounsaturatedFat.TabIndex = 15;
             textBoxMonounsaturatedFat.TextAlign = HorizontalAlignment.Right;
-            textBoxMonounsaturatedFat.KeyDown += textBoxMonounsaturatedFat_KeyDown;
-            textBoxMonounsaturatedFat.Leave += textBoxMonounsaturatedFat_Leave;
+            textBoxMonounsaturatedFat.KeyDown += TextBoxMonounsaturatedFat_KeyDown;
+            textBoxMonounsaturatedFat.Leave += TextBoxMonounsaturatedFat_Leave;
             // 
             // labelMonounsaturatedFat
             // 
@@ -880,8 +880,8 @@
             textBoxPolyunsaturatedFat.Size = new Size(78, 23);
             textBoxPolyunsaturatedFat.TabIndex = 13;
             textBoxPolyunsaturatedFat.TextAlign = HorizontalAlignment.Right;
-            textBoxPolyunsaturatedFat.KeyDown += textBoxPolyunsaturatedFat_KeyDown;
-            textBoxPolyunsaturatedFat.Leave += textBoxPolyunsaturatedFat_Leave;
+            textBoxPolyunsaturatedFat.KeyDown += TextBoxPolyunsaturatedFat_KeyDown;
+            textBoxPolyunsaturatedFat.Leave += TextBoxPolyunsaturatedFat_Leave;
             // 
             // labelPolyunsaturatedFat
             // 
@@ -899,8 +899,8 @@
             textBoxTransFat.Size = new Size(78, 23);
             textBoxTransFat.TabIndex = 11;
             textBoxTransFat.TextAlign = HorizontalAlignment.Right;
-            textBoxTransFat.KeyDown += textBoxTransFat_KeyDown;
-            textBoxTransFat.Leave += textBoxTransFat_Leave;
+            textBoxTransFat.KeyDown += TextBoxTransFat_KeyDown;
+            textBoxTransFat.Leave += TextBoxTransFat_Leave;
             // 
             // labelTransFat
             // 
@@ -918,8 +918,8 @@
             textBoxSaturatedFat.Size = new Size(78, 23);
             textBoxSaturatedFat.TabIndex = 9;
             textBoxSaturatedFat.TextAlign = HorizontalAlignment.Right;
-            textBoxSaturatedFat.KeyDown += textBoxSaturatedFat_KeyDown;
-            textBoxSaturatedFat.Leave += textBoxSaturatedFat_Leave;
+            textBoxSaturatedFat.KeyDown += TextBoxSaturatedFat_KeyDown;
+            textBoxSaturatedFat.Leave += TextBoxSaturatedFat_Leave;
             // 
             // labelSaturatedFat
             // 
@@ -937,8 +937,8 @@
             textBoxFatTotal.Size = new Size(78, 23);
             textBoxFatTotal.TabIndex = 7;
             textBoxFatTotal.TextAlign = HorizontalAlignment.Right;
-            textBoxFatTotal.KeyDown += textBoxFatTotal_KeyDown;
-            textBoxFatTotal.Leave += textBoxFatTotal_Leave;
+            textBoxFatTotal.KeyDown += TextBoxFatTotal_KeyDown;
+            textBoxFatTotal.Leave += TextBoxFatTotal_Leave;
             // 
             // labelFatTotal
             // 
@@ -956,8 +956,8 @@
             textBoxProtein.Size = new Size(78, 23);
             textBoxProtein.TabIndex = 5;
             textBoxProtein.TextAlign = HorizontalAlignment.Right;
-            textBoxProtein.KeyDown += textBoxProtein_KeyDown;
-            textBoxProtein.Leave += textBoxProtein_Leave;
+            textBoxProtein.KeyDown += TextBoxProtein_KeyDown;
+            textBoxProtein.Leave += TextBoxProtein_Leave;
             // 
             // textBoxEnergy
             // 
@@ -966,8 +966,8 @@
             textBoxEnergy.Size = new Size(78, 23);
             textBoxEnergy.TabIndex = 4;
             textBoxEnergy.TextAlign = HorizontalAlignment.Right;
-            textBoxEnergy.KeyDown += textBoxEnergy_KeyDown;
-            textBoxEnergy.Leave += textBoxEnergy_Leave;
+            textBoxEnergy.KeyDown += TextBoxEnergy_KeyDown;
+            textBoxEnergy.Leave += TextBoxEnergy_Leave;
             // 
             // textBoxFoodDescription
             // 
@@ -976,8 +976,8 @@
             textBoxFoodDescription.Name = "textBoxFoodDescription";
             textBoxFoodDescription.Size = new Size(1203, 23);
             textBoxFoodDescription.TabIndex = 3;
-            textBoxFoodDescription.KeyDown += textBoxFoodDescription_KeyDown;
-            textBoxFoodDescription.Leave += textBoxFoodDescription_Leave;
+            textBoxFoodDescription.KeyDown += TextBoxFoodDescription_KeyDown;
+            textBoxFoodDescription.Leave += TextBoxFoodDescription_Leave;
             // 
             // labelProtein
             // 
@@ -1023,8 +1023,8 @@
             MinimizeBox = false;
             Name = "FoodInputForm";
             Text = "Form for adding a food to the database";
-            FormClosing += foodInputForm_FormClosing;
-            Shown += foodInputForm_Shown;
+            FormClosing += FoodInputForm_FormClosing;
+            Shown += FoodInputForm_Shown;
             groupBoxFoodTypes.ResumeLayout(false);
             groupBoxFoodTypes.PerformLayout();
             tabControlAddType.ResumeLayout(false);

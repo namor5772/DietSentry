@@ -35,7 +35,7 @@ namespace DietSentry
         }
 
 
-        private void textBoxAmount_KeyDown(object sender, KeyEventArgs e)
+        private void TextBoxAmount_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {

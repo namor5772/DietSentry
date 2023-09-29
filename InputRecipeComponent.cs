@@ -16,7 +16,7 @@ namespace DietSentry
     public partial class InputRecipeComponent : Form
     {
 
-        private FoodInputForm? foodInputFormX = null;
+        private readonly FoodInputForm? foodInputFormX;
 
         public InputRecipeComponent(Form callingform)
         {
@@ -30,12 +30,12 @@ namespace DietSentry
             // Call textbox's focus method and make sure initial value is ""
             this.textBoxAmount.Focus();
             this.textBoxAmount.Text = "";
-            this.labelAmount.Text = UnitsString(foodInputFormX.FoodDescriptionRecipe);
+            this.labelAmount.Text = UnitsString(foodInputFormX!.FoodDescriptionRecipe);
             this.labelDescription.Text = foodInputFormX.FoodDescriptionRecipe;
         }
 
 
-        private void textBoxAmount_KeyDown(object sender, KeyEventArgs e)
+        private void TextBoxAmount_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -53,7 +53,7 @@ namespace DietSentry
                 }
 
                 // collects the input, processes it and assignes it to a variable accessible in the MainForm     
-                foodInputFormX.amountOfFoodInRecipe = amount;
+                foodInputFormX!.amountOfFoodInRecipe = amount;
                 Close();
             }
 

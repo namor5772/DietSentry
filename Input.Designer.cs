@@ -39,7 +39,7 @@
             textBoxAmount.Name = "textBoxAmount";
             textBoxAmount.Size = new Size(89, 23);
             textBoxAmount.TabIndex = 1;
-            textBoxAmount.KeyDown += textBoxAmount_KeyDown;
+            textBoxAmount.KeyDown += TextBoxAmount_KeyDown;
             // 
             // labelAmount
             // 
