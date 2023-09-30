@@ -168,6 +168,10 @@ namespace DietSentry
             checkBoxDailyTotals = new CheckBox();
             checkBoxDateFilter = new CheckBox();
             dataGridViewEaten = new DataGridView();
+            eatenBindingSource = new BindingSource(components);
+            recipeBindingSource = new BindingSource(components);
+            helpProviderMainForm = new HelpProvider();
+            toolTipMainForm = new ToolTip(components);
             EatenId = new DataGridViewTextBoxColumn();
             DateEaten = new DataGridViewTextBoxColumn();
             TimeEaten = new DataGridViewTextBoxColumn();
@@ -196,10 +200,6 @@ namespace DietSentry
             caffeineDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             cholesterolDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             alcoholDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            eatenBindingSource = new BindingSource(components);
-            recipeBindingSource = new BindingSource(components);
-            helpProviderMainForm = new HelpProvider();
-            toolTipMainForm = new ToolTip(components);
             tabControl1.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageFood.SuspendLayout();
@@ -289,6 +289,7 @@ namespace DietSentry
             checkBoxMainFoodCols.Size = new Size(161, 19);
             checkBoxMainFoodCols.TabIndex = 8;
             checkBoxMainFoodCols.Text = "Only show main columns";
+            toolTipMainForm.SetToolTip(checkBoxMainFoodCols, resources.GetString("checkBoxMainFoodCols.ToolTip"));
             checkBoxMainFoodCols.UseVisualStyleBackColor = true;
             checkBoxMainFoodCols.CheckedChanged += CheckBoxMainFoodCols_CheckedChanged;
             // 
@@ -301,6 +302,7 @@ namespace DietSentry
             labelFilter.Size = new Size(59, 15);
             labelFilter.TabIndex = 3;
             labelFilter.Text = "Unfiltered";
+            toolTipMainForm.SetToolTip(labelFilter, "Displays the last filter applied to the Food table as\r\ndisplayed in the below DataGrid.\r\n\r\nIf data is unfiltered, the text \"Unfiltered\" will be displayed.");
             // 
             // textBoxFilter
             // 
@@ -381,6 +383,7 @@ namespace DietSentry
             FoodIdDataGridViewTextBoxColumn.MinimumWidth = 8;
             FoodIdDataGridViewTextBoxColumn.Name = "FoodIdDataGridViewTextBoxColumn";
             FoodIdDataGridViewTextBoxColumn.ReadOnly = true;
+            FoodIdDataGridViewTextBoxColumn.ToolTipText = "TEST";
             FoodIdDataGridViewTextBoxColumn.Width = 41;
             // 
             // foodDescriptionDataGridViewTextBoxColumn
@@ -841,13 +844,26 @@ namespace DietSentry
             dataGridViewEaten.TabIndex = 0;
             dataGridViewEaten.UserDeletingRow += DataGridViewEaten_UserDeletingRow;
             // 
+            // eatenBindingSource
+            // 
+            eatenBindingSource.DataSource = typeof(Eaten);
+            // 
+            // recipeBindingSource
+            // 
+            recipeBindingSource.DataSource = typeof(Recipe);
+            // 
+            // toolTipMainForm
+            // 
+            toolTipMainForm.IsBalloon = true;
+            toolTipMainForm.ToolTipTitle = "Context Help";
+            // 
             // EatenId
             // 
             EatenId.DataPropertyName = "EatenId";
             EatenId.HeaderText = "Id";
             EatenId.Name = "EatenId";
             EatenId.ReadOnly = true;
-            EatenId.Visible = false;
+            EatenId.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // DateEaten
             // 
@@ -1250,19 +1266,6 @@ namespace DietSentry
             alcoholDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
             alcoholDataGridViewTextBoxColumn1.Width = 64;
             // 
-            // eatenBindingSource
-            // 
-            eatenBindingSource.DataSource = typeof(Eaten);
-            // 
-            // recipeBindingSource
-            // 
-            recipeBindingSource.DataSource = typeof(Recipe);
-            // 
-            // toolTipMainForm
-            // 
-            toolTipMainForm.IsBalloon = true;
-            toolTipMainForm.ToolTipTitle = "Context Help";
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1307,6 +1310,8 @@ namespace DietSentry
         private Label labelInfo;
         public BindingSource foodBindingSource;
         private BindingSource recipeBindingSource;
+        private HelpProvider helpProviderMainForm;
+        private ToolTip toolTipMainForm;
         private DataGridViewTextBoxColumn FoodIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn foodDescriptionDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn energyDataGridViewTextBoxColumn;
@@ -1360,7 +1365,5 @@ namespace DietSentry
         private DataGridViewTextBoxColumn caffeineDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn cholesterolDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn alcoholDataGridViewTextBoxColumn1;
-        private HelpProvider helpProviderMainForm;
-        private ToolTip toolTipMainForm;
     }
 }

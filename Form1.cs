@@ -440,34 +440,37 @@ namespace DietSentry
                     context.Eaten.Load();
 
                     // display queried data in DataGrid (in particular aggregated by date and summed)
-                    var queriedData = context.Eaten.Local.ToBindingList().GroupBy(o => o.DateEaten).Select(g => new
-                    {
-                        DateEaten = g.Key,
-                        AmountEaten = g.Sum(i => i.AmountEaten),
-                        Energy = g.Sum(i => i.Energy),
-                        Protein = g.Sum(i => i.Protein),
-                        FatTotal = g.Sum(i => i.FatTotal),
-                        SaturatedFat = g.Sum(i => i.SaturatedFat),
-                        TransFat = g.Sum(i => i.TransFat),
-                        PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
-                        MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
-                        Carbohydrate = g.Sum(i => i.Carbohydrate),
-                        Sugars = g.Sum(i => i.Sugars),
-                        DietaryFibre = g.Sum(i => i.DietaryFibre),
-                        SodiumNa = g.Sum(i => i.SodiumNa),
-                        CalciumCa = g.Sum(i => i.CalciumCa),
-                        PotassiumK = g.Sum(i => i.PotassiumK),
-                        ThiaminB1 = g.Sum(i => i.ThiaminB1),
-                        RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
-                        NiacinB3 = g.Sum(i => i.NiacinB3),
-                        Folate = g.Sum(i => i.Folate),
-                        IronFe = g.Sum(i => i.IronFe),
-                        MagnesiumMg = g.Sum(i => i.MagnesiumMg),
-                        VitaminC = g.Sum(i => i.VitaminC),
-                        Caffeine = g.Sum(i => i.Caffeine),
-                        Cholesterol = g.Sum(i => i.Cholesterol),
-                        Alcohol = g.Sum(i => i.Alcohol)
-                    });//.Where(x => x.DateEaten.Contains(sDate));
+                    var queriedData = context.Eaten.Local.ToBindingList().
+                        GroupBy(o => o.DateEaten).Select(g => new
+                        {
+                            DateEaten = g.Key,
+                            EatenId = g.Max(i => i.EatenId),
+                            AmountEaten = g.Sum(i => i.AmountEaten),
+                            Energy = g.Sum(i => i.Energy),
+                            Protein = g.Sum(i => i.Protein),
+                            FatTotal = g.Sum(i => i.FatTotal),
+                            SaturatedFat = g.Sum(i => i.SaturatedFat),
+                            TransFat = g.Sum(i => i.TransFat),
+                            PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
+                            MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
+                            Carbohydrate = g.Sum(i => i.Carbohydrate),
+                            Sugars = g.Sum(i => i.Sugars),
+                            DietaryFibre = g.Sum(i => i.DietaryFibre),
+                            SodiumNa = g.Sum(i => i.SodiumNa),
+                            CalciumCa = g.Sum(i => i.CalciumCa),
+                            PotassiumK = g.Sum(i => i.PotassiumK),
+                            ThiaminB1 = g.Sum(i => i.ThiaminB1),
+                            RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
+                            NiacinB3 = g.Sum(i => i.NiacinB3),
+                            Folate = g.Sum(i => i.Folate),
+                            IronFe = g.Sum(i => i.IronFe),
+                            MagnesiumMg = g.Sum(i => i.MagnesiumMg),
+                            VitaminC = g.Sum(i => i.VitaminC),
+                            Caffeine = g.Sum(i => i.Caffeine),
+                            Cholesterol = g.Sum(i => i.Cholesterol),
+                            Alcohol = g.Sum(i => i.Alcohol)
+                        }).
+                        OrderByDescending(x => x.EatenId);
 
                     // hide columns not necessary for display of aggregated data
                     dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
@@ -494,34 +497,39 @@ namespace DietSentry
                     context.Eaten.Load();
 
                     // display queried data in DataGrid (in particular aggregated by date and summed)
-                    var queriedData = context.Eaten.Local.ToBindingList().GroupBy(o => o.DateEaten).Select(g => new
-                    {
-                        DateEaten = g.Key,
-                        AmountEaten = g.Sum(i => i.AmountEaten),
-                        Energy = g.Sum(i => i.Energy),
-                        Protein = g.Sum(i => i.Protein),
-                        FatTotal = g.Sum(i => i.FatTotal),
-                        SaturatedFat = g.Sum(i => i.SaturatedFat),
-                        TransFat = g.Sum(i => i.TransFat),
-                        PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
-                        MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
-                        Carbohydrate = g.Sum(i => i.Carbohydrate),
-                        Sugars = g.Sum(i => i.Sugars),
-                        DietaryFibre = g.Sum(i => i.DietaryFibre),
-                        SodiumNa = g.Sum(i => i.SodiumNa),
-                        CalciumCa = g.Sum(i => i.CalciumCa),
-                        PotassiumK = g.Sum(i => i.PotassiumK),
-                        ThiaminB1 = g.Sum(i => i.ThiaminB1),
-                        RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
-                        NiacinB3 = g.Sum(i => i.NiacinB3),
-                        Folate = g.Sum(i => i.Folate),
-                        IronFe = g.Sum(i => i.IronFe),
-                        MagnesiumMg = g.Sum(i => i.MagnesiumMg),
-                        VitaminC = g.Sum(i => i.VitaminC),
-                        Caffeine = g.Sum(i => i.Caffeine),
-                        Cholesterol = g.Sum(i => i.Cholesterol),
-                        Alcohol = g.Sum(i => i.Alcohol)
-                    }).Where(x => x.DateEaten!.Contains(sDate));
+                    var queriedData = context.Eaten.Local.ToBindingList().
+                        GroupBy(o => o.DateEaten).
+                        Select(g => new
+                        {
+                            DateEaten = g.Key,
+                            EatenId = g.Max(i => i.EatenId), // use Max so sorting by date & time works!
+                            AmountEaten = g.Sum(i => i.AmountEaten),
+                            Energy = g.Sum(i => i.Energy),
+                            Protein = g.Sum(i => i.Protein),
+                            FatTotal = g.Sum(i => i.FatTotal),
+                            SaturatedFat = g.Sum(i => i.SaturatedFat),
+                            TransFat = g.Sum(i => i.TransFat),
+                            PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
+                            MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
+                            Carbohydrate = g.Sum(i => i.Carbohydrate),
+                            Sugars = g.Sum(i => i.Sugars),
+                            DietaryFibre = g.Sum(i => i.DietaryFibre),
+                            SodiumNa = g.Sum(i => i.SodiumNa),
+                            CalciumCa = g.Sum(i => i.CalciumCa),
+                            PotassiumK = g.Sum(i => i.PotassiumK),
+                            ThiaminB1 = g.Sum(i => i.ThiaminB1),
+                            RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
+                            NiacinB3 = g.Sum(i => i.NiacinB3),
+                            Folate = g.Sum(i => i.Folate),
+                            IronFe = g.Sum(i => i.IronFe),
+                            MagnesiumMg = g.Sum(i => i.MagnesiumMg),
+                            VitaminC = g.Sum(i => i.VitaminC),
+                            Caffeine = g.Sum(i => i.Caffeine),
+                            Cholesterol = g.Sum(i => i.Cholesterol),
+                            Alcohol = g.Sum(i => i.Alcohol)
+                        }).
+                        Where(x => x.DateEaten!.Contains(sDate)).
+                        OrderByDescending(x => x.EatenId);
 
                     // hide columns not necessary for display of aggregated data
                     dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
@@ -546,10 +554,10 @@ namespace DietSentry
                 {
                     // update dataGridViewEaten with todays date as filter
                     context.Eaten.Load();
-                    eatenBindingSource.DataSource = context.Eaten.Local.ToBindingList();
-                    eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
-                    var filteredData = context.Eaten.Local.ToBindingList().Where(x => x.DateEaten!.Contains(sDate));
-                    this.eatenBindingSource.DataSource = filteredData.Any() ? filteredData : filteredData.ToArray();
+                    var queriedData = context.Eaten.Local.ToBindingList().
+                        Where(x => x.DateEaten!.Contains(sDate)).
+                        OrderByDescending(x => x.EatenId);
+                    eatenBindingSource.DataSource = queriedData.Any() ? queriedData : queriedData.ToArray();
                 }
 
                 // restore view of previously hidden columns 
@@ -564,8 +572,8 @@ namespace DietSentry
                 {
                     // update dataGridViewEaten with no filters
                     context.Eaten.Load();
-                    eatenBindingSource.DataSource = context.Eaten.Local.ToBindingList();
-                    eatenBindingSource.Sort = "EatenId Asc"; // also sort in Ascending order by Id
+                    eatenBindingSource.DataSource = context.Eaten.Local.ToBindingList().
+                        OrderByDescending(x => x.EatenId);
                 }
 
                 // restore view of previously hidden columns 
