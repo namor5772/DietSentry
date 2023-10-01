@@ -15,6 +15,13 @@ namespace DietSentry
         public SplashScreen()
         {
             InitializeComponent();
+
+
+
+
+            MainForm mf = new MainForm();
+            mf.Show();
+
         }
 
         private void button1_Click(object sender, EventArgs e)

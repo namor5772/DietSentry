@@ -35,7 +35,7 @@
             // button1
             // 
             button1.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(65, 65);
+            button1.Location = new Point(12, 12);
             button1.Name = "button1";
             button1.Size = new Size(222, 112);
             button1.TabIndex = 0;
@@ -46,7 +46,7 @@
             // button2
             // 
             button2.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(313, 65);
+            button2.Location = new Point(240, 12);
             button2.Name = "button2";
             button2.Size = new Size(222, 112);
             button2.TabIndex = 1;
@@ -58,7 +58,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(600, 268);
+            ClientSize = new Size(475, 145);
             Controls.Add(button2);
             Controls.Add(button1);
             Name = "SplashScreen";
