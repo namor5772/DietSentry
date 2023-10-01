@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="bin\Debug\net7.0-windows\foods - Copy.db" />
     <None Include="bin\Debug\net7.0-windows\foods.db" />
   </ItemGroup>
 

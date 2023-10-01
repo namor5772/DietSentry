@@ -34,7 +34,7 @@ namespace DietSentry
         /// A record structure to a food item,
         /// containing its type and the truncated description
         /// </summary>
-        public record struct rDesc
+        public record struct RDesc
         {
             public int foodType;
             public string truncDesc;
@@ -49,15 +49,15 @@ namespace DietSentry
         /// </summary>
         /// <param name="sDesc"></param>
         /// <returns>the rDesc record structure</returns>
-        public static rDesc TruncFoodDesc(string sDesc)
+        public static RDesc TruncFoodDesc(string sDesc)
         {
             int ln = sDesc.Length;
-            string sL1 = sDesc.Substring(ln - 1); // get last character of sDesc
-            string sL2 = sDesc.Substring(ln - 2); // get last 2 characters of SDesc
-            string sL3 = sDesc.Substring(ln - 3); // get last 3 characters of SDesc
-            string sT1 = sDesc.Substring(sDesc.Length - 3, 2);
-            string sT2 = sDesc.Substring(sDesc.Length - 2, 2);
-            rDesc rD;
+            string sL1 = sDesc[(ln - 1)..]; // get last character of sDesc
+            string sL2 = sDesc[(ln - 2)..]; // get last 2 characters of SDesc
+            string sL3 = sDesc[(ln - 3)..]; // get last 3 characters of SDesc
+//            _ = sDesc.Substring(sDesc.Length - 3, 2);
+//            _ = sDesc.Substring(sDesc.Length - 2, 2);
+            RDesc rD;
 
             if (sL1 == "*")
             {
@@ -66,25 +66,25 @@ namespace DietSentry
 
                 // the removed string is of the form " {recipe=<grams>g}*", identified by "{"
                 sDesc.LastIndexOf('{');
-                rD.truncDesc = sDesc.Substring(0, sDesc.LastIndexOf('{')-1);
+                rD.truncDesc = sDesc[..(sDesc.LastIndexOf('{') - 1)];
             }
             else if (sL2 == "mL")
             {
                 // liquid - public
                 rD.foodType = 1;
-                rD.truncDesc = sDesc.Substring(0, ln - 3);
+                rD.truncDesc = sDesc[..(ln - 3)];
             }
             else if (sL3 == "mL#")
             {
                 // liquid - private
                 rD.foodType = 4;
-                rD.truncDesc = sDesc.Substring(0, ln - 4);
+                rD.truncDesc = sDesc[..(ln - 4)];
             }
             else if (sL1 == "#")
             {
                 // solid - private
                 rD.foodType = 3;
-                rD.truncDesc = sDesc.Substring(0, ln - 2);
+                rD.truncDesc = sDesc[..(ln - 2)];
             }
             else
             {
@@ -103,7 +103,7 @@ namespace DietSentry
         /// </summary>
         /// <param name="sDesc"></param>
         /// <returns>a boolean</returns>
-        public static bool isRecipe(string sDesc)
+        public static bool IsRecipe(string sDesc)
         {
             //string sT = sDesc.Substring(sDesc.Length - 1, 1);
             return (sDesc.Substring(sDesc.Length - 1, 1)).Equals("*");

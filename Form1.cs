@@ -7,6 +7,8 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using static DietSentry.UtilitiesRMG; // so can use the isRecipe function
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 
 namespace DietSentry
 {
@@ -316,7 +318,7 @@ namespace DietSentry
                     string editedFoodId = (editedFoodItem.FoodId).ToString(); // for later use
                     string sFD = editedFoodItem.FoodDescription!;
 
-                    rDesc rFD = TruncFoodDesc(sFD);
+                    RDesc rFD = TruncFoodDesc(sFD);
                     foodType = rFD.foodType;
                     editedFoodItem.FoodDescription = rFD.truncDesc;
 
@@ -676,7 +678,7 @@ namespace DietSentry
                     context.SaveChanges();
 
                     // determines if this food is a recipe because extra stuff has to be deleted
-                    if (isRecipe(FoodSelectedDesc))
+                    if (IsRecipe(FoodSelectedDesc))
                     {
                         // delete any records in the recipe table
                         var recipeFoods = context.Recipe.Where(r => r.FoodId == FoodSelectedId);
