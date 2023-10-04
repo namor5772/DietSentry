@@ -275,6 +275,7 @@
             dataGridViewRecipe.AllowUserToResizeRows = false;
             dataGridViewRecipe.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             dataGridViewRecipe.AutoGenerateColumns = false;
+            dataGridViewRecipe.BorderStyle = BorderStyle.None;
             dataGridViewRecipe.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.Azure;
@@ -414,6 +415,8 @@
             dataGridViewAddToRecipe.AllowUserToResizeRows = false;
             dataGridViewAddToRecipe.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             dataGridViewAddToRecipe.AutoGenerateColumns = false;
+            dataGridViewAddToRecipe.BorderStyle = BorderStyle.None;
+            dataGridViewAddToRecipe.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dataGridViewAddToRecipe.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = Color.Azure;

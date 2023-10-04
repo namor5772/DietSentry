@@ -55,20 +55,20 @@ namespace DietSentry
         }
 
 
-/*
-        // 0= when dealing with non-recipe foods, 1= when dealing with recipe food
-        public void ChangeFormSize(int sizeType)
-        {
-            if (sizeType == 0)
-            {
-                this.Size = new Size(783, 847);
-            }
-            else // if (sizeType ==1)
-            {
-                this.Size = new Size(1175, 847);
-            }
-        }
-*/
+        /*
+                // 0= when dealing with non-recipe foods, 1= when dealing with recipe food
+                public void ChangeFormSize(int sizeType)
+                {
+                    if (sizeType == 0)
+                    {
+                        this.Size = new Size(783, 847);
+                    }
+                    else // if (sizeType ==1)
+                    {
+                        this.Size = new Size(1175, 847);
+                    }
+                }
+        */
 
 
         // deletes any provisionally created recipe or reverts to original if editing was being done

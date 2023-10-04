@@ -17,12 +17,12 @@ namespace DietSentry
             InitializeComponent();
         }
 
-        private void aTimer_Tick(object sender, EventArgs e)
+        private void ATimer_Tick(object sender, EventArgs e)
         {
             iTick += 1;
-            if (iTick == 60)
+            if (iTick == 30)
             {
-                // display slashscreen for 3 seconds (ie. 60 intervals of 50ms)
+                // display slashscreen for 1.5 seconds (ie.30 intervals of 50ms)
                 Close();
             }
             else if (iTick <= 20)
