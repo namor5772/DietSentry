@@ -25,6 +25,9 @@ namespace DietSentry
 
         // MY "GLOBAL" VARIABLES ********* bad coding lol **********
 
+        // counter for timer ticks
+        private int iTick = 0;
+
         // variable which is set to true so that something specific can be done when MainForm is reactivated after InputForm is closed
         public Boolean actOnInputFormClose = false;
 
@@ -168,10 +171,6 @@ namespace DietSentry
             checkBoxDailyTotals = new CheckBox();
             checkBoxDateFilter = new CheckBox();
             dataGridViewEaten = new DataGridView();
-            eatenBindingSource = new BindingSource(components);
-            recipeBindingSource = new BindingSource(components);
-            helpProviderMainForm = new HelpProvider();
-            toolTipMainForm = new ToolTip(components);
             EatenId = new DataGridViewTextBoxColumn();
             DateEaten = new DataGridViewTextBoxColumn();
             TimeEaten = new DataGridViewTextBoxColumn();
@@ -200,6 +199,11 @@ namespace DietSentry
             caffeineDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             cholesterolDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             alcoholDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            eatenBindingSource = new BindingSource(components);
+            recipeBindingSource = new BindingSource(components);
+            helpProviderMainForm = new HelpProvider();
+            toolTipMainForm = new ToolTip(components);
+            aTimer = new System.Windows.Forms.Timer(components);
             tabControl1.SuspendLayout();
             tabControlMain.SuspendLayout();
             tabPageFood.SuspendLayout();
@@ -844,19 +848,6 @@ namespace DietSentry
             dataGridViewEaten.TabIndex = 0;
             dataGridViewEaten.UserDeletingRow += DataGridViewEaten_UserDeletingRow;
             // 
-            // eatenBindingSource
-            // 
-            eatenBindingSource.DataSource = typeof(Eaten);
-            // 
-            // recipeBindingSource
-            // 
-            recipeBindingSource.DataSource = typeof(Recipe);
-            // 
-            // toolTipMainForm
-            // 
-            toolTipMainForm.IsBalloon = true;
-            toolTipMainForm.ToolTipTitle = "Context Help";
-            // 
             // EatenId
             // 
             EatenId.DataPropertyName = "EatenId";
@@ -1266,6 +1257,24 @@ namespace DietSentry
             alcoholDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
             alcoholDataGridViewTextBoxColumn1.Width = 64;
             // 
+            // eatenBindingSource
+            // 
+            eatenBindingSource.DataSource = typeof(Eaten);
+            // 
+            // recipeBindingSource
+            // 
+            recipeBindingSource.DataSource = typeof(Recipe);
+            // 
+            // toolTipMainForm
+            // 
+            toolTipMainForm.IsBalloon = true;
+            toolTipMainForm.ToolTipTitle = "Context Help";
+            // 
+            // aTimer
+            // 
+            aTimer.Enabled = true;
+            aTimer.Tick += aTimer_Tick;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1274,6 +1283,7 @@ namespace DietSentry
             Controls.Add(tabControlMain);
             Controls.Add(tabControl1);
             Name = "MainForm";
+            Opacity = 0D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Diet Sentry";
             tabControl1.ResumeLayout(false);
@@ -1365,5 +1375,6 @@ namespace DietSentry
         private DataGridViewTextBoxColumn caffeineDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn cholesterolDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn alcoholDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.Timer aTimer;
     }
 }

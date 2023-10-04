@@ -20,6 +20,9 @@
             base.Dispose(disposing);
         }
 
+        // counter for timer ticks
+        private int iTick = 0;
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -28,40 +31,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            button2 = new Button();
+            components = new System.ComponentModel.Container();
+            aTimer = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
-            // button1
+            // aTimer
             // 
-            button1.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(12, 12);
-            button1.Name = "button1";
-            button1.Size = new Size(222, 112);
-            button1.TabIndex = 0;
-            button1.Text = "START";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
-            // button2
-            // 
-            button2.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(240, 12);
-            button2.Name = "button2";
-            button2.Size = new Size(222, 112);
-            button2.TabIndex = 1;
-            button2.Text = "FINISH";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            aTimer.Enabled = true;
+            aTimer.Interval = 50;
+            aTimer.Tick += aTimer_Tick;
             // 
             // SplashScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(475, 145);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            BackColor = SystemColors.MenuHighlight;
+            ClientSize = new Size(601, 331);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "SplashScreen";
+            Opacity = 0D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Splash Screen";
             TopMost = true;
@@ -70,7 +58,6 @@
 
         #endregion
 
-        private Button button1;
-        private Button button2;
+        private System.Windows.Forms.Timer aTimer;
     }
 }

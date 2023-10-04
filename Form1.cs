@@ -18,7 +18,31 @@ namespace DietSentry
 
         public MainForm()
         {
+            SplashScreen splash = new SplashScreen();
+            splash.Show();
+
             InitializeComponent();
+        }
+
+        private void aTimer_Tick(object sender, EventArgs e)
+        {
+            iTick += 1;
+            if (iTick <= 25)
+            {
+                // keep this form invisible (ie 0% opacity) for 2.5 seconds
+                // while splash screen display and then closes, with 0.5 seconds overlap.
+                ;
+            }
+            else if ((iTick > 26) & (iTick <= 35))
+            {
+                // increase opacity from 0% to 100% over 1 second
+                Opacity = (iTick - 25) / 10F;
+            }
+            else if (iTick == 35)
+            {
+                // shut down timer, not needed anymore
+                aTimer.Enabled = false;
+            }
         }
 
         /* Code that acts when a food item is selected (in whatever way) from the Foods dataGridView.

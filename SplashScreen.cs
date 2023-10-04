@@ -17,14 +17,19 @@ namespace DietSentry
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void aTimer_Tick(object sender, EventArgs e)
         {
-            MainForm mf = new MainForm();
-            mf.Show();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
+            iTick += 1;
+            if (iTick == 60)
+            {
+                // display slashscreen for 3 seconds (ie. 60 intervals of 50ms)
+                Close();
+            }
+            else if (iTick <= 20)
+            {
+                // increase Opacity from 0% to 100% in 20 increments of 50ms 
+                Opacity = iTick / 20F;
+            }
         }
     }
 }
