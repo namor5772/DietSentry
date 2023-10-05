@@ -71,12 +71,16 @@ namespace DietSentry
                 // only act on input if amout eaten >0, this includes the case when Enter is immediately pressed in the text box
                 if (amountOfFoodEaten > 0.0)
                 {
+                    // creating time stamp 
+                    DateTime ts = DateTime.Now;
+
                     // we can now add the appropriate entry to the Eaten table, sort it and refresh its Eaten data grid and give it focus
                     var EatenFood = context.Eaten;
                     EatenFood.Add(new Eaten
                     {
-                        DateEaten = DateTime.Now.ToString("d-MMM-yy"),
-                        TimeEaten = DateTime.Now.ToString("HH:mm"), // 24hr hour format
+                        DateEaten = ts.ToString("d-MMM-yy"),
+                        TimeEaten = ts.ToString("HH:mm"), // 24hr hour format
+                        EatenTs = MTimeSpan(ts), // Number of whole minutes elapsed since start of reference date 1-Jan-2023
                         AmountEaten = amountOfFoodEaten * 100F,
                         FoodDescription = FoodSelected.FoodDescription,
                         Energy = (FoodSelected.Energy) * amountOfFoodEaten,
@@ -482,6 +486,7 @@ namespace DietSentry
                         {
                             DateEaten = g.Key,
                             EatenId = g.Max(i => i.EatenId),
+                            EatenTs = g.Max(i => i.EatenTs), // use Max so sorting by date & time works!
                             AmountEaten = g.Sum(i => i.AmountEaten),
                             Energy = g.Sum(i => i.Energy),
                             Protein = g.Sum(i => i.Protein),
@@ -507,13 +512,14 @@ namespace DietSentry
                             Cholesterol = g.Sum(i => i.Cholesterol),
                             Alcohol = g.Sum(i => i.Alcohol)
                         }).
-                        OrderByDescending(x => x.EatenId);
+                        OrderByDescending(x => x.EatenTs);
+//                    OrderByDescending(x => x.EatenId);
 
                     // hide columns not necessary for display of aggregated data
                     dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
                     dataGridViewEaten.Columns[2].Visible = false; // hide TimeEaten column
-                    dataGridViewEaten.Columns[3].Visible = false; // hide AmountEaten column
-                    dataGridViewEaten.Columns[4].Visible = false; // hide FoodDescription column
+                    dataGridViewEaten.Columns[4].Visible = false; // hide AmountEaten column
+                    dataGridViewEaten.Columns[5].Visible = false; // hide FoodDescription column
 
                     // the queried data table result should only contain one record/row.
 
@@ -539,7 +545,8 @@ namespace DietSentry
                         Select(g => new
                         {
                             DateEaten = g.Key,
-                            EatenId = g.Max(i => i.EatenId), // use Max so sorting by date & time works!
+                            EatenId = g.Max(i => i.EatenId),
+                            EatenTs = g.Max(i => i.EatenId), // use Max so sorting by date & time works!
                             AmountEaten = g.Sum(i => i.AmountEaten),
                             Energy = g.Sum(i => i.Energy),
                             Protein = g.Sum(i => i.Protein),
@@ -566,13 +573,14 @@ namespace DietSentry
                             Alcohol = g.Sum(i => i.Alcohol)
                         }).
                         Where(x => x.DateEaten!.Contains(sDate)).
-                        OrderByDescending(x => x.EatenId);
+                        OrderByDescending(x => x.EatenTs);
+//                    OrderByDescending(x => x.EatenId);
 
                     // hide columns not necessary for display of aggregated data
                     dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
                     dataGridViewEaten.Columns[2].Visible = false; // hide TimeEaten column
-                    dataGridViewEaten.Columns[3].Visible = false; // hide AmountEaten column
-                    dataGridViewEaten.Columns[4].Visible = false; // hide FoodDescription column
+                    dataGridViewEaten.Columns[4].Visible = false; // hide AmountEaten column
+                    dataGridViewEaten.Columns[5].Visible = false; // hide FoodDescription column
 
                     // the queried data table result should only contain one record/row.
 
@@ -593,15 +601,15 @@ namespace DietSentry
                     context.Eaten.Load();
                     var queriedData = context.Eaten.Local.ToBindingList().
                         Where(x => x.DateEaten!.Contains(sDate)).
-                        OrderByDescending(x => x.EatenId);
+                        OrderByDescending(x => x.EatenTs);
                     eatenBindingSource.DataSource = queriedData.Any() ? queriedData : queriedData.ToArray();
                 }
 
                 // restore view of previously hidden columns 
                 dataGridViewEaten.Columns[0].Visible = false; // show EatenId column
                 dataGridViewEaten.Columns[2].Visible = true; // show TimeEaten column
-                dataGridViewEaten.Columns[3].Visible = true; // show AmountEaten column
-                dataGridViewEaten.Columns[4].Visible = true; // show FoodDescription column
+                dataGridViewEaten.Columns[4].Visible = true; // show AmountEaten column
+                dataGridViewEaten.Columns[5].Visible = true; // show FoodDescription column
             }
             else // ((!checkBoxDailyTotals.Checked)&(!checkBoxDateFilter.Checked))
             {
@@ -610,14 +618,14 @@ namespace DietSentry
                     // update dataGridViewEaten with no filters
                     context.Eaten.Load();
                     eatenBindingSource.DataSource = context.Eaten.Local.ToBindingList().
-                        OrderByDescending(x => x.EatenId);
+                        OrderByDescending(x => x.EatenTs);
                 }
 
                 // restore view of previously hidden columns 
                 dataGridViewEaten.Columns[0].Visible = false; // show EatenId column
                 dataGridViewEaten.Columns[2].Visible = true; // show TimeEaten column
-                dataGridViewEaten.Columns[3].Visible = true; // show AmountEaten column
-                dataGridViewEaten.Columns[4].Visible = true; // show FoodDescription column
+                dataGridViewEaten.Columns[4].Visible = true; // show AmountEaten column
+                dataGridViewEaten.Columns[5].Visible = true; // show FoodDescription column
             }
         }
 
@@ -629,40 +637,40 @@ namespace DietSentry
             {
                 // hide non-main columns 
                 //dataGridViewEaten.Columns[3].Visible = false; // hide AmountEaten column
-                dataGridViewEaten.Columns[9].Visible = false; // hide TransFat column
-                dataGridViewEaten.Columns[10].Visible = false; // hide PolyunsaturatedFat column
-                dataGridViewEaten.Columns[11].Visible = false; // hide MonounsaturatedFat column
-                dataGridViewEaten.Columns[16].Visible = false; // hide CalciumCa column
-                dataGridViewEaten.Columns[17].Visible = false; // hide PotassiumK column
-                dataGridViewEaten.Columns[18].Visible = false; // hide ThiaminB1 column
-                dataGridViewEaten.Columns[19].Visible = false; // hide RiboflavinB2 column
-                dataGridViewEaten.Columns[20].Visible = false; // hide NiacinB3 column
-                dataGridViewEaten.Columns[21].Visible = false; // hide Folate column
-                dataGridViewEaten.Columns[22].Visible = false; // hide IronFe column
-                dataGridViewEaten.Columns[23].Visible = false; // hide MagnesiumMg column
-                dataGridViewEaten.Columns[24].Visible = false; // hide VitaminC column
-                dataGridViewEaten.Columns[25].Visible = false; // hide Caffeine column
-                dataGridViewEaten.Columns[26].Visible = false; // hide Cholesterol column
-                dataGridViewEaten.Columns[27].Visible = false; // hide Alcohol column
+                dataGridViewEaten.Columns[10].Visible = false; // hide TransFat column
+                dataGridViewEaten.Columns[11].Visible = false; // hide PolyunsaturatedFat column
+                dataGridViewEaten.Columns[12].Visible = false; // hide MonounsaturatedFat column
+                dataGridViewEaten.Columns[17].Visible = false; // hide CalciumCa column
+                dataGridViewEaten.Columns[18].Visible = false; // hide PotassiumK column
+                dataGridViewEaten.Columns[19].Visible = false; // hide ThiaminB1 column
+                dataGridViewEaten.Columns[20].Visible = false; // hide RiboflavinB2 column
+                dataGridViewEaten.Columns[21].Visible = false; // hide NiacinB3 column
+                dataGridViewEaten.Columns[22].Visible = false; // hide Folate column
+                dataGridViewEaten.Columns[23].Visible = false; // hide IronFe column
+                dataGridViewEaten.Columns[24].Visible = false; // hide MagnesiumMg column
+                dataGridViewEaten.Columns[25].Visible = false; // hide VitaminC column
+                dataGridViewEaten.Columns[26].Visible = false; // hide Caffeine column
+                dataGridViewEaten.Columns[27].Visible = false; // hide Cholesterol column
+                dataGridViewEaten.Columns[28].Visible = false; // hide Alcohol column
             }
             else // if (!checkBoxMainCols.Checked)
             {
                 // restore view of previously hidden non-main columns 
-                dataGridViewEaten.Columns[9].Visible = true; // show TransFat column
-                dataGridViewEaten.Columns[10].Visible = true; // show PolyunsaturatedFat column
-                dataGridViewEaten.Columns[11].Visible = true; // show MonounsaturatedFat column
-                dataGridViewEaten.Columns[16].Visible = true; // show CalciumCa column
-                dataGridViewEaten.Columns[17].Visible = true; // show PotassiumK column
-                dataGridViewEaten.Columns[18].Visible = true; // show ThiaminB1 column
-                dataGridViewEaten.Columns[19].Visible = true; // show RiboflavinB2 column
-                dataGridViewEaten.Columns[20].Visible = true; // show NiacinB3 column
-                dataGridViewEaten.Columns[21].Visible = true; // show Folate column
-                dataGridViewEaten.Columns[22].Visible = true; // show IronFe column
-                dataGridViewEaten.Columns[23].Visible = true; // show MagnesiumMg column
-                dataGridViewEaten.Columns[24].Visible = true; // show VitaminC column
-                dataGridViewEaten.Columns[25].Visible = true; // show Caffeine column
-                dataGridViewEaten.Columns[26].Visible = true; // show Cholesterol column
-                dataGridViewEaten.Columns[27].Visible = true; // show Alcohol column
+                dataGridViewEaten.Columns[10].Visible = true; // show TransFat column
+                dataGridViewEaten.Columns[11].Visible = true; // show PolyunsaturatedFat column
+                dataGridViewEaten.Columns[12].Visible = true; // show MonounsaturatedFat column
+                dataGridViewEaten.Columns[17].Visible = true; // show CalciumCa column
+                dataGridViewEaten.Columns[18].Visible = true; // show PotassiumK column
+                dataGridViewEaten.Columns[19].Visible = true; // show ThiaminB1 column
+                dataGridViewEaten.Columns[20].Visible = true; // show RiboflavinB2 column
+                dataGridViewEaten.Columns[21].Visible = true; // show NiacinB3 column
+                dataGridViewEaten.Columns[22].Visible = true; // show Folate column
+                dataGridViewEaten.Columns[23].Visible = true; // show IronFe column
+                dataGridViewEaten.Columns[24].Visible = true; // show MagnesiumMg column
+                dataGridViewEaten.Columns[25].Visible = true; // show VitaminC column
+                dataGridViewEaten.Columns[26].Visible = true; // show Caffeine column
+                dataGridViewEaten.Columns[27].Visible = true; // show Cholesterol column
+                dataGridViewEaten.Columns[28].Visible = true; // show Alcohol column
             }
         }
 

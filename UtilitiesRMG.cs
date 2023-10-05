@@ -55,8 +55,6 @@ namespace DietSentry
             string sL1 = sDesc[(ln - 1)..]; // get last character of sDesc
             string sL2 = sDesc[(ln - 2)..]; // get last 2 characters of SDesc
             string sL3 = sDesc[(ln - 3)..]; // get last 3 characters of SDesc
-//            _ = sDesc.Substring(sDesc.Length - 3, 2);
-//            _ = sDesc.Substring(sDesc.Length - 2, 2);
             RDesc rD;
 
             if (sL1 == "*")
@@ -109,6 +107,27 @@ namespace DietSentry
             return (sDesc.Substring(sDesc.Length - 1, 1)).Equals("*");
         }
 
+
+        /// <summary>
+        /// function that returns the number of whole minutes elapsed from start of 1-Jan-2023
+        /// (ie. midnight on 31-Dec-2022) to toDateTime
+        /// </summary>
+        /// <param name="toDateTime"></param>
+        /// <returns></returns>
+        public static int MTimeSpan(DateTime toDateTime)
+        {
+            DateTime drf = new(2023, 1, 1); // reference starting DateTime
+            TimeSpan vTs = toDateTime-drf;
+            string sTs1 = vTs.ToString("%d"); // whole days from drf to dtn 
+            string sTs2 = vTs.ToString("%h"); // part of day in hours
+            string sTs3 = vTs.ToString("%m"); // part of day in minutes
+            int iTs1 = Int32.Parse(sTs1); // days
+            int iTs2 = Int32.Parse(sTs2); // hours
+            int iTs3 = Int32.Parse(sTs3); // minutes
+            int Ts = (24 * 60) * iTs1 + 60 * iTs2 + iTs3; // number of minutes from drf till dtn.
+
+            return Ts;
+        }
     }
 
 }

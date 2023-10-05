@@ -117,6 +117,60 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="toolTipMainForm.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>672, 17</value>
+  </metadata>
+  <data name="checkBoxMainFoodCols.ToolTip" xml:space="preserve">
+    <value>By default this CheckBox is initially checked.
+
+In Unchecked state all fields in the food table are displayed in the below
+DataGrid.
+
+In Checked state it only certain fields from the food table to be
+displayed in the below DataGrid. In particular only the nutritional information
+for Energy, Protein, Fat Total and Saturated, Carbohydrate, Sugars, Dietary Fibre
+and Sodium. The Id and Food description are always displayed.</value>
+  </data>
+  <data name="textBoxFilter.ToolTip" xml:space="preserve">
+    <value>This TextBox accepts filter text.
+
+Type in it and press the {Enter} key. 
+The below DataGrid will then display only those foods
+whose &lt;Food description&gt; field contains the filter text.
+The filter text will clear and be displayed to the right and
+focus will transfer to the first row (if any) in the DataGrid.
+If there are no filter results, focus will remain in the (now 
+empty) TextBox.
+
+If no string is entered into this TextBox (ie. the {Enter} key
+is pressed without typing anything) then ALL Food data will
+be displayed in the below DataGrid, and the the text
+"Unfiltered" will display to its right.</value>
+  </data>
+  <metadata name="FoodIdDataGridViewTextBoxColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="energyDataGridViewTextBoxColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="foodBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="EatenId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="DateEaten.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="TimeEaten.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="EatenTs.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="eatenBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>173, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1873,57 +1927,6 @@
         CiiigAooooA//9k=
 </value>
   </data>
-  <metadata name="toolTipMainForm.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>672, 17</value>
-  </metadata>
-  <data name="checkBoxMainFoodCols.ToolTip" xml:space="preserve">
-    <value>By default this CheckBox is initially checked.
-
-In Unchecked state all fields in the food table are displayed in the below
-DataGrid.
-
-In Checked state it only certain fields from the food table to be
-displayed in the below DataGrid. In particular only the nutritional information
-for Energy, Protein, Fat Total and Saturated, Carbohydrate, Sugars, Dietary Fibre
-and Sodium. The Id and Food description are always displayed.</value>
-  </data>
-  <data name="textBoxFilter.ToolTip" xml:space="preserve">
-    <value>This TextBox accepts filter text.
-
-Type in it and press the {Enter} key. 
-The below DataGrid will then display only those foods
-whose &lt;Food description&gt; field contains the filter text.
-The filter text will clear and be displayed to the right and
-focus will transfer to the first row (if any) in the DataGrid.
-If there are no filter results, focus will remain in the (now 
-empty) TextBox.
-
-If no string is entered into this TextBox (ie. the {Enter} key
-is pressed without typing anything) then ALL Food data will
-be displayed in the below DataGrid, and the the text
-"Unfiltered" will display to its right.</value>
-  </data>
-  <metadata name="FoodIdDataGridViewTextBoxColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="energyDataGridViewTextBoxColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="foodBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="EatenId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="DateEaten.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="TimeEaten.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="eatenBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>173, 17</value>
-  </metadata>
   <metadata name="recipeBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>333, 17</value>
   </metadata>
