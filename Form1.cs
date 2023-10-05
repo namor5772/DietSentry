@@ -611,7 +611,7 @@ namespace DietSentry
                 // restore view of previously hidden columns 
                 dataGridViewEaten.Columns[0].Visible = false; // show EatenId column
                 dataGridViewEaten.Columns[2].Visible = true; // show TimeEaten column
-                dataGridViewEaten.Columns[3].Visible = true; // show EatenTs column
+                dataGridViewEaten.Columns[3].Visible = false; // show EatenTs column
                 dataGridViewEaten.Columns[4].Visible = true; // show AmountEaten column
                 dataGridViewEaten.Columns[5].Visible = true; // show FoodDescription column
             }
@@ -628,7 +628,7 @@ namespace DietSentry
                 // restore view of previously hidden columns 
                 dataGridViewEaten.Columns[0].Visible = false; // show EatenId column
                 dataGridViewEaten.Columns[2].Visible = true; // show TimeEaten column
-                dataGridViewEaten.Columns[3].Visible = true; // show EatenTs column
+                dataGridViewEaten.Columns[3].Visible = false; // show EatenTs column
                 dataGridViewEaten.Columns[4].Visible = true; // show AmountEaten column
                 dataGridViewEaten.Columns[5].Visible = true; // show FoodDescription column
             }
