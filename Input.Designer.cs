@@ -31,6 +31,7 @@
             textBoxAmount = new TextBox();
             labelAmount = new Label();
             labelDescription = new Label();
+            dateTimePickerEaten = new DateTimePicker();
             SuspendLayout();
             // 
             // textBoxAmount
@@ -45,7 +46,7 @@
             // 
             labelAmount.AutoSize = true;
             labelAmount.ForeColor = SystemColors.HighlightText;
-            labelAmount.Location = new Point(135, 40);
+            labelAmount.Location = new Point(118, 40);
             labelAmount.Name = "labelAmount";
             labelAmount.Size = new Size(33, 15);
             labelAmount.TabIndex = 2;
@@ -61,16 +62,31 @@
             labelDescription.TabIndex = 3;
             labelDescription.Text = "description";
             // 
+            // dateTimePickerEaten
+            // 
+            dateTimePickerEaten.Cursor = Cursors.Cross;
+            dateTimePickerEaten.CustomFormat = "  dd-MMM-yyyy   HH : mm";
+            dateTimePickerEaten.Format = DateTimePickerFormat.Custom;
+            dateTimePickerEaten.Location = new Point(210, 37);
+            dateTimePickerEaten.MaxDate = new DateTime(2123, 1, 1, 0, 0, 0, 0);
+            dateTimePickerEaten.MinDate = new DateTime(2023, 1, 1, 0, 0, 0, 0);
+            dateTimePickerEaten.Name = "dateTimePickerEaten";
+            dateTimePickerEaten.Size = new Size(160, 23);
+            dateTimePickerEaten.TabIndex = 4;
+            dateTimePickerEaten.KeyDown += dateTimePickerEaten_KeyDown;
+            // 
             // InputForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Highlight;
-            ClientSize = new Size(382, 81);
+            ClientSize = new Size(392, 79);
             ControlBox = false;
+            Controls.Add(dateTimePickerEaten);
             Controls.Add(labelDescription);
             Controls.Add(labelAmount);
             Controls.Add(textBoxAmount);
+            ForeColor = SystemColors.ControlText;
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
             Name = "InputForm";
@@ -85,5 +101,6 @@
         private TextBox textBoxAmount;
         private Label labelAmount;
         private Label labelDescription;
+        private DateTimePicker dateTimePickerEaten;
     }
 }

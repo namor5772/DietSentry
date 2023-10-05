@@ -416,7 +416,6 @@
             dataGridViewAddToRecipe.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             dataGridViewAddToRecipe.AutoGenerateColumns = false;
             dataGridViewAddToRecipe.BorderStyle = BorderStyle.None;
-            dataGridViewAddToRecipe.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dataGridViewAddToRecipe.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = Color.Azure;

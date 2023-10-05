@@ -71,8 +71,9 @@ namespace DietSentry
                 // only act on input if amout eaten >0, this includes the case when Enter is immediately pressed in the text box
                 if (amountOfFoodEaten > 0.0)
                 {
-                    // creating time stamp 
-                    DateTime ts = DateTime.Now;
+                    //                    DateTime ts = DateTime.Now;
+                    // creating time stamp, it is actually generated in the InputForm either as "now" by default or manually adjusted
+                    DateTime ts = dateTimeEaten;
 
                     // we can now add the appropriate entry to the Eaten table, sort it and refresh its Eaten data grid and give it focus
                     var EatenFood = context.Eaten;
@@ -513,18 +514,17 @@ namespace DietSentry
                             Alcohol = g.Sum(i => i.Alcohol)
                         }).
                         OrderByDescending(x => x.EatenTs);
-//                    OrderByDescending(x => x.EatenId);
 
                     // hide columns not necessary for display of aggregated data
                     dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
                     dataGridViewEaten.Columns[2].Visible = false; // hide TimeEaten column
-                    dataGridViewEaten.Columns[3].Visible = false; // hide EatenTs column
+                    dataGridViewEaten.Columns[3].Visible = true; // hide EatenTs column *****
                     dataGridViewEaten.Columns[4].Visible = false; // hide AmountEaten column
                     dataGridViewEaten.Columns[5].Visible = false; // hide FoodDescription column
 
                     // the queried data table result should only contain one record/row.
 
-                    // this is where exception occurs.
+                    // this is where exception might occur.
                     // this binds the data so that it is displayed in the data grid.
                     eatenBindingSource.DataSource = queriedData.Any() ? queriedData : queriedData.ToArray();
                 }
@@ -575,13 +575,11 @@ namespace DietSentry
                         }).
                         Where(x => x.DateEaten!.Contains(sDate)).
                         OrderByDescending(x => x.EatenTs);
-//                    OrderByDescending(x => x.EatenId);
 
                     // hide columns not necessary for display of aggregated data
                     dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
                     dataGridViewEaten.Columns[2].Visible = false; // hide TimeEaten column
-                    dataGridViewEaten.Columns[3].Visible = false; // hide EatenTs column
-                    dataGridViewEaten.Columns[3].Visible = false; // hide EatenTs column
+                    dataGridViewEaten.Columns[3].Visible = true; // hide EatenTs column *****
                     dataGridViewEaten.Columns[4].Visible = false; // hide AmountEaten column
                     dataGridViewEaten.Columns[5].Visible = false; // hide FoodDescription column
 
@@ -611,7 +609,7 @@ namespace DietSentry
                 // restore view of previously hidden columns 
                 dataGridViewEaten.Columns[0].Visible = false; // show EatenId column
                 dataGridViewEaten.Columns[2].Visible = true; // show TimeEaten column
-                dataGridViewEaten.Columns[3].Visible = false; // show EatenTs column
+                dataGridViewEaten.Columns[3].Visible = true; // show EatenTs column *****
                 dataGridViewEaten.Columns[4].Visible = true; // show AmountEaten column
                 dataGridViewEaten.Columns[5].Visible = true; // show FoodDescription column
             }
@@ -628,7 +626,7 @@ namespace DietSentry
                 // restore view of previously hidden columns 
                 dataGridViewEaten.Columns[0].Visible = false; // show EatenId column
                 dataGridViewEaten.Columns[2].Visible = true; // show TimeEaten column
-                dataGridViewEaten.Columns[3].Visible = false; // show EatenTs column
+                dataGridViewEaten.Columns[3].Visible = true; // show EatenTs column *****
                 dataGridViewEaten.Columns[4].Visible = true; // show AmountEaten column
                 dataGridViewEaten.Columns[5].Visible = true; // show FoodDescription column
             }
