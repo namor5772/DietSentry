@@ -12,7 +12,6 @@ using System.Windows.Forms;
 using static DietSentry.UtilitiesRMG; // so can use the UnitsString function
 
 
-
 namespace DietSentry
 {
     public partial class InputForm : Form
@@ -33,7 +32,7 @@ namespace DietSentry
             this.labelDescription.Text = mainForm.eatenFoodDescription;
         }
 
-        private void actOnEnterKeyPress()
+        private void ActOnEnterKeyPress()
         {
             // if any problems with parsing return 0 and just ignore attempt at adding food to Eaten table
             float amount;
@@ -59,16 +58,16 @@ namespace DietSentry
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
-                actOnEnterKeyPress();
+                ActOnEnterKeyPress();
             }
         }
 
-        private void dateTimePickerEaten_KeyDown(object sender, KeyEventArgs e)
+        private void DateTimePickerEaten_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
-                actOnEnterKeyPress();
+                ActOnEnterKeyPress();
             }
 
         }

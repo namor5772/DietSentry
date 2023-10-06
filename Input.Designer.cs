@@ -73,7 +73,7 @@
             dateTimePickerEaten.Name = "dateTimePickerEaten";
             dateTimePickerEaten.Size = new Size(160, 23);
             dateTimePickerEaten.TabIndex = 4;
-            dateTimePickerEaten.KeyDown += dateTimePickerEaten_KeyDown;
+            dateTimePickerEaten.KeyDown += DateTimePickerEaten_KeyDown;
             // 
             // InputForm
             // 

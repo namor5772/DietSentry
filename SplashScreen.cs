@@ -20,9 +20,9 @@ namespace DietSentry
         private void ATimer_Tick(object sender, EventArgs e)
         {
             iTick += 1;
-            if (iTick == 30)
+            if (iTick == 50)
             {
-                // display slashscreen for 1.5 seconds (ie.30 intervals of 50ms)
+                // display slashscreen for 2.5 seconds (ie.50 intervals of 50ms)
                 Close();
             }
             else if (iTick <= 20)

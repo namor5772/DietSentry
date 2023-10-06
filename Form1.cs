@@ -28,18 +28,18 @@ namespace DietSentry
         private void ATimer_Tick(object sender, EventArgs e)
         {
             iTick += 1;
-            if (iTick <= 16)
+            if (iTick <= 26)
             {
-                // keep this form invisible (ie 0% opacity) for 1.6 seconds
+                // keep this form invisible (ie 0% opacity) for 2.6 seconds
                 // while splash screen displays and then closes, with 0 seconds overlap.
                 ;
             }
-            else if ((iTick > 16) & (iTick <= 18))
+            else if ((iTick > 26) & (iTick <= 28))
             {
                 // increase opacity from 0% to 100% over 1 second
                 Opacity = (iTick - 16) / 2F;
             }
-            else if (iTick == 19)
+            else if (iTick == 29)
             {
                 // shut down timer, not needed anymore
                 aTimer.Enabled = false;
@@ -179,6 +179,9 @@ namespace DietSentry
             this.foodBindingSource.DataSource = dbContext.Foods.Local.ToBindingList();
             this.eatenBindingSource.DataSource = dbContext.Eaten.Local.ToBindingList();
             this.recipeBindingSource.DataSource = dbContext.Recipe.Local.ToBindingList();
+
+            // the default value on loading is today's date
+            dateEatenFilter = dateTimePickerEaten.Value;
 
             ActOnFoodColumnStates();
             ActOnEatenFoodColumnStates();
@@ -472,7 +475,8 @@ namespace DietSentry
          * There are 4 states and this makes sure the Eaten foods datagrid always correctly displays the data */
         private void ActOnEatenFoodFilteringStates()
         {
-            string sDate = DateTime.Now.ToString("d-MMM-yy");
+            // string sDate = DateTime.Now.ToString("d-MMM-yy");
+            string sDate = dateEatenFilter.ToString("d-MMM-yy");
 
             if ((checkBoxDailyTotals.Checked) & (!(checkBoxDateFilter.Checked)))
             {
@@ -804,6 +808,23 @@ namespace DietSentry
         private void CheckBoxMainFoodCols_CheckedChanged(object sender, EventArgs e)
         {
             ActOnFoodColumnStates();
+        }
+
+        private void dateTimePickerEaten_Leave(object sender, EventArgs e)
+        {
+            dateEatenFilter = dateTimePickerEaten.Value;
+            ActOnEatenFoodFilteringStates();
+        }
+
+        private void dateTimePickerEaten_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
+
+                dateEatenFilter = dateTimePickerEaten.Value;
+                ActOnEatenFoodFilteringStates();
+            }
         }
     }
 }
