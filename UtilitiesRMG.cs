@@ -103,7 +103,7 @@ namespace DietSentry
         /// <returns>a boolean</returns>
         public static bool IsRecipe(string sDesc)
         {
-            //string sT = sDesc.Substring(sDesc.Length - 1, 1);
+            // checks that last character of input string equals "*"
             return (sDesc.Substring(sDesc.Length - 1, 1)).Equals("*");
         }
 
