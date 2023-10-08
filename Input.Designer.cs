@@ -64,14 +64,13 @@
             // 
             // dateTimePickerEaten
             // 
-            dateTimePickerEaten.Cursor = Cursors.Cross;
             dateTimePickerEaten.CustomFormat = "  dd-MMM-yyyy   HH : mm";
             dateTimePickerEaten.Format = DateTimePickerFormat.Custom;
-            dateTimePickerEaten.Location = new Point(210, 37);
+            dateTimePickerEaten.Location = new Point(195, 37);
             dateTimePickerEaten.MaxDate = new DateTime(2123, 1, 1, 0, 0, 0, 0);
             dateTimePickerEaten.MinDate = new DateTime(2023, 1, 1, 0, 0, 0, 0);
             dateTimePickerEaten.Name = "dateTimePickerEaten";
-            dateTimePickerEaten.Size = new Size(160, 23);
+            dateTimePickerEaten.Size = new Size(186, 23);
             dateTimePickerEaten.TabIndex = 4;
             dateTimePickerEaten.KeyDown += DateTimePickerEaten_KeyDown;
             // 
@@ -80,7 +79,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Highlight;
-            ClientSize = new Size(392, 79);
+            ClientSize = new Size(403, 79);
             ControlBox = false;
             Controls.Add(dateTimePickerEaten);
             Controls.Add(labelDescription);

@@ -46,10 +46,11 @@
             // 
             // pictureBoxSplashScreen
             // 
+            pictureBoxSplashScreen.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBoxSplashScreen.Image = (Image)resources.GetObject("pictureBoxSplashScreen.Image");
-            pictureBoxSplashScreen.Location = new Point(0, 0);
+            pictureBoxSplashScreen.Location = new Point(12, 12);
             pictureBoxSplashScreen.Name = "pictureBoxSplashScreen";
-            pictureBoxSplashScreen.Size = new Size(485, 424);
+            pictureBoxSplashScreen.Size = new Size(496, 434);
             pictureBoxSplashScreen.TabIndex = 0;
             pictureBoxSplashScreen.TabStop = false;
             // 
@@ -57,8 +58,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.MenuHighlight;
-            ClientSize = new Size(485, 424);
+            BackColor = Color.Lime;
+            ClientSize = new Size(520, 458);
             Controls.Add(pictureBoxSplashScreen);
             FormBorderStyle = FormBorderStyle.None;
             Name = "SplashScreen";

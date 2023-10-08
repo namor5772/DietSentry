@@ -75,7 +75,6 @@ namespace DietSentry
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle27 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle28 = new DataGridViewCellStyle();
@@ -208,8 +207,6 @@ namespace DietSentry
             eatenBindingSource = new BindingSource(components);
             tabPageHelp = new TabPage();
             recipeBindingSource = new BindingSource(components);
-            helpProviderMainForm = new HelpProvider();
-            toolTipMainForm = new ToolTip(components);
             aTimer = new System.Windows.Forms.Timer(components);
             tabControl1.SuspendLayout();
             tabControlMain.SuspendLayout();
@@ -279,7 +276,6 @@ namespace DietSentry
             tabPageFood.Size = new Size(1410, 757);
             tabPageFood.TabIndex = 0;
             tabPageFood.Text = "Food";
-            toolTipMainForm.SetToolTip(tabPageFood, "Food Tab help");
             tabPageFood.UseVisualStyleBackColor = true;
             // 
             // labelInfo
@@ -300,7 +296,6 @@ namespace DietSentry
             checkBoxMainFoodCols.Size = new Size(161, 19);
             checkBoxMainFoodCols.TabIndex = 8;
             checkBoxMainFoodCols.Text = "Only show main columns";
-            toolTipMainForm.SetToolTip(checkBoxMainFoodCols, resources.GetString("checkBoxMainFoodCols.ToolTip"));
             checkBoxMainFoodCols.UseVisualStyleBackColor = true;
             checkBoxMainFoodCols.CheckedChanged += CheckBoxMainFoodCols_CheckedChanged;
             // 
@@ -313,7 +308,6 @@ namespace DietSentry
             labelFilter.Size = new Size(59, 15);
             labelFilter.TabIndex = 3;
             labelFilter.Text = "Unfiltered";
-            toolTipMainForm.SetToolTip(labelFilter, "Displays the last filter applied to the Food table as\r\ndisplayed in the below DataGrid.\r\n\r\nIf data is unfiltered, the text \"Unfiltered\" will be displayed.");
             // 
             // textBoxFilter
             // 
@@ -324,7 +318,6 @@ namespace DietSentry
             textBoxFilter.PlaceholderText = "Enter food filter text";
             textBoxFilter.Size = new Size(135, 23);
             textBoxFilter.TabIndex = 2;
-            toolTipMainForm.SetToolTip(textBoxFilter, resources.GetString("textBoxFilter.ToolTip"));
             textBoxFilter.WordWrap = false;
             textBoxFilter.Enter += TextBoxFilter_Enter;
             textBoxFilter.KeyDown += TextBoxFilter_KeyDown;
@@ -376,9 +369,9 @@ namespace DietSentry
             dataGridViewFoods.RowHeadersWidth = 40;
             dataGridViewFoods.RowTemplate.Height = 25;
             dataGridViewFoods.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewFoods.ShowCellToolTips = false;
             dataGridViewFoods.Size = new Size(1398, 652);
             dataGridViewFoods.TabIndex = 4;
-            toolTipMainForm.SetToolTip(dataGridViewFoods, "Hello world jkhjkhjkhjkhkjhjkjh\r\nhjgjhghjgjhghjghjh\r\njhgjhgjhgjhgjhgjhgjhjhgj");
             dataGridViewFoods.CellDoubleClick += DataGridViewFoods_CellDoubleClick;
             dataGridViewFoods.UserDeletingRow += DataGridViewFoods_UserDeletingRow;
             dataGridViewFoods.KeyDown += DataGridViewFoods_KeyDown;
@@ -766,7 +759,6 @@ namespace DietSentry
             tabPageEaten.Size = new Size(1410, 757);
             tabPageEaten.TabIndex = 1;
             tabPageEaten.Text = "Eaten";
-            toolTipMainForm.SetToolTip(tabPageEaten, "Eaten Tab Help");
             tabPageEaten.UseVisualStyleBackColor = true;
             // 
             // dateTimePickerEaten
@@ -777,7 +769,7 @@ namespace DietSentry
             dateTimePickerEaten.MaxDate = new DateTime(2123, 1, 1, 0, 0, 0, 0);
             dateTimePickerEaten.MinDate = new DateTime(2023, 1, 1, 0, 0, 0, 0);
             dateTimePickerEaten.Name = "dateTimePickerEaten";
-            dateTimePickerEaten.Size = new Size(120, 23);
+            dateTimePickerEaten.Size = new Size(128, 23);
             dateTimePickerEaten.TabIndex = 8;
             dateTimePickerEaten.KeyDown += dateTimePickerEaten_KeyDown;
             dateTimePickerEaten.Leave += dateTimePickerEaten_Leave;
@@ -867,6 +859,7 @@ namespace DietSentry
             dataGridViewEaten.RowTemplate.Height = 25;
             dataGridViewEaten.RowTemplate.ReadOnly = true;
             dataGridViewEaten.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewEaten.ShowCellToolTips = false;
             dataGridViewEaten.Size = new Size(1398, 652);
             dataGridViewEaten.TabIndex = 0;
             dataGridViewEaten.UserDeletingRow += DataGridViewEaten_UserDeletingRow;
@@ -1304,11 +1297,6 @@ namespace DietSentry
             // 
             recipeBindingSource.DataSource = typeof(Recipe);
             // 
-            // toolTipMainForm
-            // 
-            toolTipMainForm.IsBalloon = true;
-            toolTipMainForm.ToolTipTitle = "Context Help";
-            // 
             // aTimer
             // 
             aTimer.Enabled = true;
@@ -1325,6 +1313,7 @@ namespace DietSentry
             Opacity = 0D;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Diet Sentry 2.0";
+            TransparencyKey = Color.Lime;
             tabControl1.ResumeLayout(false);
             tabControlMain.ResumeLayout(false);
             tabPageFood.ResumeLayout(false);
@@ -1359,8 +1348,6 @@ namespace DietSentry
         private Label labelInfo;
         public BindingSource foodBindingSource;
         private BindingSource recipeBindingSource;
-        private HelpProvider helpProviderMainForm;
-        private ToolTip toolTipMainForm;
         private System.Windows.Forms.Timer aTimer;
         private TabPage tabPageHelp;
         private DataGridViewTextBoxColumn FoodIdDataGridViewTextBoxColumn;

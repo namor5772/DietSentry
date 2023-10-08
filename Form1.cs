@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
@@ -79,7 +80,11 @@ namespace DietSentry
                     var EatenFood = context.Eaten;
                     EatenFood.Add(new Eaten
                     {
-                        DateEaten = ts.ToString("d-MMM-yy"),
+                        // even though the contents of the DateTimePicker component may display data in a format determined by the Windows locale,
+                        // the following makes sure that the date is stored in the db table in the en-AU format, since that cannot be changed in SQLite
+                        // when the locale is changed. Otherwise app will "crash" if locale is changed from en_AU.
+                        DateEaten = ts.ToString("d-MMM-yy", CultureInfo.CreateSpecificCulture("en-AU")),
+
                         TimeEaten = ts.ToString("HH:mm"), // 24hr hour format
                         EatenTs = MTimeSpan(ts), // Number of whole minutes elapsed since start of reference date 1-Jan-2023
                         AmountEaten = amountOfFoodEaten * 100F,
@@ -475,8 +480,10 @@ namespace DietSentry
          * There are 4 states and this makes sure the Eaten foods datagrid always correctly displays the data */
         private void ActOnEatenFoodFilteringStates()
         {
-            // string sDate = DateTime.Now.ToString("d-MMM-yy");
-            string sDate = dateEatenFilter.ToString("d-MMM-yy");
+            // even though the contents of the DateTimePicker component may display data in a format determined by the Windows locale,
+            // the following makes sure that the date is selected is expressed in the en-AU format, since that cannot be changed in SQLite
+            // when the locale is changed. Otherwise app will "crash" if locale is changed from en_AU.
+            string sDate = dateEatenFilter.ToString("d-MMM-yy", CultureInfo.CreateSpecificCulture("en-AU"));
 
             if ((checkBoxDailyTotals.Checked) & (!(checkBoxDateFilter.Checked)))
             {
@@ -577,7 +584,7 @@ namespace DietSentry
                             Cholesterol = g.Sum(i => i.Cholesterol),
                             Alcohol = g.Sum(i => i.Alcohol)
                         }).
-                        Where(x => x.DateEaten!.Contains(sDate)).
+                        Where(x => x.DateEaten!.Equals(sDate)).
                         OrderByDescending(x => x.EatenTs);
 
                     // hide columns not necessary for display of aggregated data
@@ -605,7 +612,7 @@ namespace DietSentry
                     // update dataGridViewEaten with todays date as filter
                     context.Eaten.Load();
                     var queriedData = context.Eaten.Local.ToBindingList().
-                        Where(x => x.DateEaten!.Contains(sDate)).
+                        Where(x => x.DateEaten!.Equals(sDate)).
                         OrderByDescending(x => x.EatenTs);
                     eatenBindingSource.DataSource = queriedData.Any() ? queriedData : queriedData.ToArray();
                 }
