@@ -205,7 +205,6 @@ namespace DietSentry
             cholesterolDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             alcoholDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             eatenBindingSource = new BindingSource(components);
-            tabPageHelp = new TabPage();
             recipeBindingSource = new BindingSource(components);
             aTimer = new System.Windows.Forms.Timer(components);
             tabControl1.SuspendLayout();
@@ -254,7 +253,6 @@ namespace DietSentry
             tabControlMain.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControlMain.Controls.Add(tabPageFood);
             tabControlMain.Controls.Add(tabPageEaten);
-            tabControlMain.Controls.Add(tabPageHelp);
             tabControlMain.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             tabControlMain.Location = new Point(0, 0);
             tabControlMain.Multiline = true;
@@ -1284,15 +1282,6 @@ namespace DietSentry
             // 
             eatenBindingSource.DataSource = typeof(Eaten);
             // 
-            // tabPageHelp
-            // 
-            tabPageHelp.Location = new Point(4, 24);
-            tabPageHelp.Name = "tabPageHelp";
-            tabPageHelp.Size = new Size(1410, 757);
-            tabPageHelp.TabIndex = 2;
-            tabPageHelp.Text = "Help";
-            tabPageHelp.UseVisualStyleBackColor = true;
-            // 
             // recipeBindingSource
             // 
             recipeBindingSource.DataSource = typeof(Recipe);
@@ -1349,7 +1338,6 @@ namespace DietSentry
         public BindingSource foodBindingSource;
         private BindingSource recipeBindingSource;
         private System.Windows.Forms.Timer aTimer;
-        private TabPage tabPageHelp;
         private DataGridViewTextBoxColumn FoodIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn foodDescriptionDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn energyDataGridViewTextBoxColumn;
