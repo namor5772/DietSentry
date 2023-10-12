@@ -1,6 +1,6 @@
 ﻿namespace DietSentry
 {
-    partial class InputRecipeComponent
+    partial class InputDensity
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            textBoxDensity = new TextBox();
             labelDescription = new Label();
-            textBoxAmount = new TextBox();
-            labelAmount = new Label();
+            labelDensity = new Label();
             SuspendLayout();
+            // 
+            // textBoxDensity
+            // 
+            textBoxDensity.Location = new Point(23, 37);
+            textBoxDensity.Name = "textBoxDensity";
+            textBoxDensity.Size = new Size(89, 23);
+            textBoxDensity.TabIndex = 6;
             // 
             // labelDescription
             // 
@@ -40,51 +47,42 @@
             labelDescription.Location = new Point(12, 9);
             labelDescription.Name = "labelDescription";
             labelDescription.Size = new Size(358, 15);
-            labelDescription.TabIndex = 4;
+            labelDescription.TabIndex = 7;
             labelDescription.Text = "description";
             // 
-            // textBoxAmount
+            // labelDensity
             // 
-            textBoxAmount.Location = new Point(23, 37);
-            textBoxAmount.Name = "textBoxAmount";
-            textBoxAmount.Size = new Size(89, 23);
-            textBoxAmount.TabIndex = 5;
-            textBoxAmount.KeyDown += TextBoxAmount_KeyDown;
+            labelDensity.AutoSize = true;
+            labelDensity.ForeColor = SystemColors.HighlightText;
+            labelDensity.Location = new Point(125, 40);
+            labelDensity.Name = "labelDensity";
+            labelDensity.Size = new Size(90, 15);
+            labelDensity.TabIndex = 8;
+            labelDensity.Text = "density in g/mL";
             // 
-            // labelAmount
-            // 
-            labelAmount.AutoSize = true;
-            labelAmount.ForeColor = SystemColors.HighlightText;
-            labelAmount.Location = new Point(125, 40);
-            labelAmount.Name = "labelAmount";
-            labelAmount.Size = new Size(33, 15);
-            labelAmount.TabIndex = 6;
-            labelAmount.Text = "units";
-            // 
-            // InputRecipeComponent
+            // InputDensity
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Highlight;
             ClientSize = new Size(382, 78);
             ControlBox = false;
-            Controls.Add(labelAmount);
-            Controls.Add(textBoxAmount);
+            Controls.Add(labelDensity);
             Controls.Add(labelDescription);
+            Controls.Add(textBoxDensity);
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
-            Name = "InputRecipeComponent";
-            Text = "Amount of selected food";
-            TopMost = true;
-            Shown += InputRecipeComponent_Shown;
+            MinimizeBox = false;
+            Name = "InputDensity";
+            Text = "InputDensity";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
+        private TextBox textBoxDensity;
         private Label labelDescription;
-        private TextBox textBoxAmount;
-        private Label labelAmount;
+        private Label labelDensity;
     }
 }

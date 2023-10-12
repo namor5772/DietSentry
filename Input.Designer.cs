@@ -46,7 +46,7 @@
             // 
             labelAmount.AutoSize = true;
             labelAmount.ForeColor = SystemColors.HighlightText;
-            labelAmount.Location = new Point(118, 40);
+            labelAmount.Location = new Point(125, 40);
             labelAmount.Name = "labelAmount";
             labelAmount.Size = new Size(33, 15);
             labelAmount.TabIndex = 2;
