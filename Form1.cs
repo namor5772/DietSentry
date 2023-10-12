@@ -245,7 +245,8 @@ namespace DietSentry
          * - From the Food data grid Press Enter key on selected item.
          * ALSO picks up when Insert key is pressed. Used to Insert/Add food to the database.
          * - Selection row is then clearly not relevant but just a way of enabling this action)
-         * ALSO picks up when F2 key is pressed. Used to Edit/Inspect selected food item (especially relevant for Recipe foods */
+         * ALSO picks up when F2 key is pressed. Used to Edit/Inspect selected food item (especially relevant for Recipe foods
+         * ALSO picks up when F4 key is pressed. Used to create a g denominated (Solid) copy of a mL (Liquid) food item */
         private void DataGridViewFoods_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) // Selecting eaten food item
@@ -429,6 +430,10 @@ namespace DietSentry
                         labelInfo.Text = "Editing of food item " + editedFoodId + " cancelled";
                     }
                 }
+            }
+            else if (e.KeyCode == Keys.F4) // Creating Solid copy of Liquid food item
+            {
+                labelInfo.Text = "{F4} Key pressed";
             }
 
         }

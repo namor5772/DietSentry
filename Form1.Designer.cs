@@ -286,6 +286,7 @@ namespace DietSentry
             richTextBoxHelp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             richTextBoxHelp.BackColor = SystemColors.ControlLight;
             richTextBoxHelp.BorderStyle = BorderStyle.None;
+            richTextBoxHelp.EnableAutoDragDrop = true;
             richTextBoxHelp.Location = new Point(1000, 3);
             richTextBoxHelp.Name = "richTextBoxHelp";
             richTextBoxHelp.Size = new Size(404, 93);
