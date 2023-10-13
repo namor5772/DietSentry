@@ -433,11 +433,90 @@ namespace DietSentry
             }
             else if (e.KeyCode == Keys.F4) // Creating Solid copy of Liquid food item
             {
-                labelInfo.Text = "{F4} Key pressed";
+                var foodItem = (Food)dataGridViewFoods.CurrentRow.DataBoundItem;
+
+                if (foodItem != null)
+                {
+                    using var context = new FoodsContext();
+
+                    // gain access to selected entry in food table
+                    var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
+
+                    // determine if selected food is a Liquid, as this is the only type that can be processed
+                    RDesc rDesc = TruncFoodDesc(FoodSelected.FoodDescription!);
+
+                    // get truncated food description and food type identifier
+                    editedFoodDescription = rDesc.truncDesc;
+                    int fT = rDesc.foodType;
+
+                    labelInfo.Text = "{F4} Key pressed:   " + fT.ToString();
+
+                    if ((fT == 1) | (fT == 4)) // can continue since selected a food which is a liquid
+                    {
+                        // opens dialog used to input the density of the selected liquid food eaten
+                        InputDensity frm = new(this)
+                        {
+                            StartPosition = FormStartPosition.Manual,
+                            Location = this.PointToScreen(tabPageFood.Location)
+                        };
+                        frm.ShowDialog();
+
+                        labelInfo.Text = "{F4} Key pressed:   " + fT.ToString() + "  " + densityOfFood.ToString();
+
+                        if (densityOfFood == 0.0) // invalid input, so error message
+                        {
+                            // Initializes the variables to pass to the MessageBox.Show method.
+                            string message = "Try again!";
+                            string caption = "INVALID DENSITY INPUT";
+                            MessageBoxButtons buttons = MessageBoxButtons.OK;
+
+                            // Displays the MessageBox.
+                            MessageBox.Show(message, caption, buttons);
+                            checkBoxDailyTotals.Checked = false;
+                        }
+
+                        // copy selected food items fields to the public editedFoodItem class instance for further processing
+                        editedFoodItem.FoodId = FoodSelected.FoodId;
+                        editedFoodItem.FoodDescription = editedFoodDescription; // already loaded
+                        editedFoodItem.Energy = FoodSelected.Energy;
+                        editedFoodItem.Protein = FoodSelected.Protein;
+                        editedFoodItem.FatTotal = FoodSelected.FatTotal;
+                        editedFoodItem.SaturatedFat = FoodSelected.SaturatedFat;
+                        editedFoodItem.TransFat = FoodSelected.TransFat;
+                        editedFoodItem.PolyunsaturatedFat = FoodSelected.PolyunsaturatedFat;
+                        editedFoodItem.MonounsaturatedFat = FoodSelected.MonounsaturatedFat;
+                        editedFoodItem.Carbohydrate = FoodSelected.Carbohydrate;
+                        editedFoodItem.Sugars = FoodSelected.Sugars;
+                        editedFoodItem.DietaryFibre = FoodSelected.DietaryFibre;
+                        editedFoodItem.SodiumNa = FoodSelected.SodiumNa;
+                        editedFoodItem.CalciumCa = FoodSelected.CalciumCa;
+                        editedFoodItem.PotassiumK = FoodSelected.PotassiumK;
+                        editedFoodItem.ThiaminB1 = FoodSelected.ThiaminB1;
+                        editedFoodItem.RiboflavinB2 = FoodSelected.RiboflavinB2;
+                        editedFoodItem.NiacinB3 = FoodSelected.NiacinB3;
+                        editedFoodItem.Folate = FoodSelected.Folate;
+                        editedFoodItem.IronFe = FoodSelected.IronFe;
+                        editedFoodItem.MagnesiumMg = FoodSelected.MagnesiumMg;
+                        editedFoodItem.VitaminC = FoodSelected.VitaminC;
+                        editedFoodItem.Caffeine = FoodSelected.Caffeine;
+                        editedFoodItem.Cholesterol = FoodSelected.Cholesterol;
+                        editedFoodItem.Alcohol = FoodSelected.Alcohol;
+                    }
+                    else // no further processing possible so display "Error" message box
+                    {
+                        // Initializes the variables to pass to the MessageBox.Show method.
+                        string message = "Only possible when Liquid food selected";
+                        string caption = "CANNOT CREATE SOLID FOOD";
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+
+                        // Displays the MessageBox.
+                        MessageBox.Show(message, caption, buttons);
+                        checkBoxDailyTotals.Checked = false;
+                    }
+
+                }
             }
-
         }
-
 
         /* Manually implements the deletion of an Eaten table row
          * This was partly to overcome an exception raised when done automatically
@@ -822,13 +901,13 @@ namespace DietSentry
             ActOnFoodColumnStates();
         }
 
-        private void dateTimePickerEaten_Leave(object sender, EventArgs e)
+        private void DateTimePickerEaten_Leave(object sender, EventArgs e)
         {
             dateEatenFilter = dateTimePickerEaten.Value;
             ActOnEatenFoodFilteringStates();
         }
 
-        private void dateTimePickerEaten_KeyDown(object sender, KeyEventArgs e)
+        private void DateTimePickerEaten_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {

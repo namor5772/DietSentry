@@ -31,15 +31,19 @@ namespace DietSentry
         // variable which is set to true so that something specific can be done when MainForm is reactivated after InputForm is closed
         public Boolean actOnInputFormClose = false;
 
-        // Variables in MainForm which store data collected from the InputForm
+        // Variables in MainForm which store data collected from the InputForm and the DensityForm
         public float amountOfFoodEaten = 0.0F; // in "units" of 100 g or mL
         public DateTime dateTimeEaten; // the time when a food was recorded as eaten
+        public float densityOfFood = 0.0F; // in units of g/ml
 
         // date filter for Eaten foods (in Eaten tab)
         public DateTime dateEatenFilter;
 
         // A string describing the eaten food selected
         public string eatenFoodDescription = "BLANK";
+
+        // A string describing the food selected
+        public string editedFoodDescription = "BLANK";
 
         // Declaring some Food item class instances
         public Food addedFoodItem = new Food();
@@ -49,6 +53,8 @@ namespace DietSentry
          * after foodinputForm is closed, ignored otherwise. ie this "transmits" code behaviour of pressing the [Add] or [Cancel] buttons when
          * foodinput Form is closed */
         public Boolean actOnFoodAdded;
+
+
 
         // 0=Solid-Public, 1=Liquid-Public, 2=Recipe, 3=Solid-Private, 4=Liquid-Private
         public int foodType;
@@ -796,8 +802,8 @@ namespace DietSentry
             dateTimePickerEaten.Name = "dateTimePickerEaten";
             dateTimePickerEaten.Size = new Size(128, 23);
             dateTimePickerEaten.TabIndex = 8;
-            dateTimePickerEaten.KeyDown += dateTimePickerEaten_KeyDown;
-            dateTimePickerEaten.Leave += dateTimePickerEaten_Leave;
+            dateTimePickerEaten.KeyDown += DateTimePickerEaten_KeyDown;
+            dateTimePickerEaten.Leave += DateTimePickerEaten_Leave;
             // 
             // checkBoxMainCols
             // 
