@@ -303,7 +303,7 @@ namespace DietSentry
                         });
                         context.SaveChanges();
 
-                        labelInfoFood.Text = "Added new food item " + addedFoodItem.FoodDescription;
+                        labelInfo.Text = "Added new food item " + addedFoodItem.FoodDescription;
                     }
                     else if (foodType == 2)
                     {
@@ -321,7 +321,7 @@ namespace DietSentry
                 }
                 else // addition of food item cancelled
                 {
-                    labelInfoFood.Text = "Addition of food item cancelled";
+                    labelInfo.Text = "Addition of food item cancelled";
                 }
             }
             else if (e.KeyCode == Keys.F2) // Editing selected food item
@@ -423,11 +423,11 @@ namespace DietSentry
                         {
                             ActOnFoodFilteringStates(1);
                         }
-                        labelInfoFood.Text = "Edited food item " + editedFoodId;
+                        labelInfo.Text = "Edited food item " + editedFoodId;
                     }
                     else // editing of food item cancelled
                     {
-                        labelInfoFood.Text = "Editing of food item " + editedFoodId + " cancelled";
+                        labelInfo.Text = "Editing of food item " + editedFoodId + " cancelled";
                     }
                 }
             }
@@ -474,7 +474,7 @@ namespace DietSentry
                         else // proceed to create copy of food item in Solid form
                         {
                             // Creating new FoodDescription, with the same trucated base but extension varying depending on original food type
-                            string sDescriptionDensity = editedFoodDescription + " {density=" + string.Format("{0:N3}", densityOfFood) + "g/ml}";
+                            string sDescriptionDensity = editedFoodDescription + " {densitye=" + string.Format("{0:N3}", densityOfFood) + "g/ml}";
                             if (fT == 1) // dealing with "public" liquid
                             {
                                 editedFoodDescription = sDescriptionDensity;
@@ -545,33 +545,21 @@ namespace DietSentry
             // can delete row only if the totals filter check boxed is unchecked
             if ((!checkBoxDailyTotals.Checked))
             {
-                // Initializes the variables to pass to the MessageBox.Show method.
-                string message = "Are you sure you wish to delete the selected eaten food?";
-                string caption = "DELETE CONFIRMATION";
-                DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
+                // determine row to be deleted from Eaten table by accessing it in its dataGrid
+                var foodItem = (Eaten)this.dataGridViewEaten.CurrentRow.DataBoundItem;
 
-                if (result == DialogResult.Yes)
+                if (foodItem != null)
                 {
-                    // determine row to be deleted from Eaten table by accessing it in its dataGrid
-                    var foodItem = (Eaten)this.dataGridViewEaten.CurrentRow.DataBoundItem;
+                    using var context = new FoodsContext();
+                    // gain direct access to selected entry in Eaten table
+                    var FoodSelected = context.Eaten.Single(b => b.EatenId == foodItem.EatenId);
 
-                    if (foodItem != null)
-                    {
-                        using var context = new FoodsContext();
-                        // gain direct access to selected entry in Eaten table
-                        var FoodSelected = context.Eaten.Single(b => b.EatenId == foodItem.EatenId);
+                    // delete this row from Eaten table
+                    context.Eaten.Remove(FoodSelected);
+                    context.SaveChanges();
 
-                        // delete this row from Eaten table
-                        context.Eaten.Remove(FoodSelected);
-                        context.SaveChanges();
-
-                        // refresh Eaten data grid view while maintaining filter status
-                        ActOnEatenFoodFilteringStates();
-                    }
-                }
-                else
-                {
-                    labelInfoEaten.Text = "Deletion of selected eaten food cancelled!";
+                    // refresh Eaten data grid view while maintaining filter status
+                    ActOnEatenFoodFilteringStates();
                 }
             }
             else // prevent row deletion and inform user of this by displaying Message Box
@@ -861,7 +849,7 @@ namespace DietSentry
                     }
                     else
 
-                        labelInfoFood.Text = "Deleted food item " + FoodSelectedId;
+                        labelInfo.Text = "Deleted food item " + FoodSelectedId;
 
                     // refresh Foods data grid view while maintaining filter status - it is done in this complicated way
                     // because it crashes under some patricular circumstances !
@@ -874,7 +862,7 @@ namespace DietSentry
             }
             else
             {
-                labelInfoFood.Text = "Deletion of selected food item cancelled";
+                labelInfo.Text = "Deletion of selected food item cancelled";
             }
         }
 
