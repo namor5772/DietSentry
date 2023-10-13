@@ -443,17 +443,14 @@ namespace DietSentry
                     var FoodSelected = context.Foods.Single(b => b.FoodId == foodItem.FoodId);
 
                     // determine if selected food is a Liquid, as this is the only type that can be processed
-                    RDesc rDesc = TruncFoodDesc(FoodSelected.FoodDescription!);
-
                     // get truncated food description and food type identifier
+                    RDesc rDesc = TruncFoodDesc(FoodSelected.FoodDescription!);
                     editedFoodDescription = rDesc.truncDesc;
                     int fT = rDesc.foodType;
 
-                    labelInfo.Text = "{F4} Key pressed:   " + fT.ToString();
-
                     if ((fT == 1) | (fT == 4)) // can continue since selected a food which is a liquid
                     {
-                        // opens dialog used to input the density of the selected liquid food eaten
+                        // opens dialog used to input the density of the selected liquid foodn
                         InputDensity frm = new(this)
                         {
                             StartPosition = FormStartPosition.Manual,
@@ -461,50 +458,69 @@ namespace DietSentry
                         };
                         frm.ShowDialog();
 
-                        labelInfo.Text = "{F4} Key pressed:   " + fT.ToString() + "  " + densityOfFood.ToString();
+//                        labelInfo.Text = "{F4} Key pressed:   " + fT.ToString() + "  " + densityOfFood.ToString();
 
                         if (densityOfFood == 0.0) // invalid input, so error message
                         {
-                            // Initializes the variables to pass to the MessageBox.Show method.
+                            // Initializes the variables to pass to the MessageBox.Show method
                             string message = "Try again!";
-                            string caption = "INVALID DENSITY INPUT";
+                            string caption = "INVALID DENSITY";
                             MessageBoxButtons buttons = MessageBoxButtons.OK;
 
                             // Displays the MessageBox.
                             MessageBox.Show(message, caption, buttons);
                             checkBoxDailyTotals.Checked = false;
                         }
+                        else // proceed to create copy of food item in Solid form
+                        {
+                            // Creating new FoodDescription, with the same trucated base but extension varying depending on original food type
+                            string sDescriptionDensity = editedFoodDescription + " {densitye=" + string.Format("{0:N3}", densityOfFood) + "g/ml}";
+                            if (fT == 1) // dealing with "public" liquid
+                            {
+                                editedFoodDescription = sDescriptionDensity;
+                            }
+                            else // (fT==4) and dealing with "private" liquid
+                            {
+                                editedFoodDescription = sDescriptionDensity + " #";
+                            }
 
-                        // copy selected food items fields to the public editedFoodItem class instance for further processing
-                        editedFoodItem.FoodId = FoodSelected.FoodId;
-                        editedFoodItem.FoodDescription = editedFoodDescription; // already loaded
-                        editedFoodItem.Energy = FoodSelected.Energy;
-                        editedFoodItem.Protein = FoodSelected.Protein;
-                        editedFoodItem.FatTotal = FoodSelected.FatTotal;
-                        editedFoodItem.SaturatedFat = FoodSelected.SaturatedFat;
-                        editedFoodItem.TransFat = FoodSelected.TransFat;
-                        editedFoodItem.PolyunsaturatedFat = FoodSelected.PolyunsaturatedFat;
-                        editedFoodItem.MonounsaturatedFat = FoodSelected.MonounsaturatedFat;
-                        editedFoodItem.Carbohydrate = FoodSelected.Carbohydrate;
-                        editedFoodItem.Sugars = FoodSelected.Sugars;
-                        editedFoodItem.DietaryFibre = FoodSelected.DietaryFibre;
-                        editedFoodItem.SodiumNa = FoodSelected.SodiumNa;
-                        editedFoodItem.CalciumCa = FoodSelected.CalciumCa;
-                        editedFoodItem.PotassiumK = FoodSelected.PotassiumK;
-                        editedFoodItem.ThiaminB1 = FoodSelected.ThiaminB1;
-                        editedFoodItem.RiboflavinB2 = FoodSelected.RiboflavinB2;
-                        editedFoodItem.NiacinB3 = FoodSelected.NiacinB3;
-                        editedFoodItem.Folate = FoodSelected.Folate;
-                        editedFoodItem.IronFe = FoodSelected.IronFe;
-                        editedFoodItem.MagnesiumMg = FoodSelected.MagnesiumMg;
-                        editedFoodItem.VitaminC = FoodSelected.VitaminC;
-                        editedFoodItem.Caffeine = FoodSelected.Caffeine;
-                        editedFoodItem.Cholesterol = FoodSelected.Cholesterol;
-                        editedFoodItem.Alcohol = FoodSelected.Alcohol;
+                            var CopiedFood = context.Foods;
+                            CopiedFood.Add(new Food
+                            {
+                                FoodDescription = editedFoodDescription,
+                                Energy = FoodSelected.Energy / densityOfFood,
+                                Protein = FoodSelected.Protein / densityOfFood,
+                                FatTotal = FoodSelected.FatTotal / densityOfFood,
+                                SaturatedFat = FoodSelected.SaturatedFat / densityOfFood,
+                                TransFat = FoodSelected.TransFat / densityOfFood,
+                                PolyunsaturatedFat = FoodSelected.PolyunsaturatedFat / densityOfFood,
+                                MonounsaturatedFat = FoodSelected.MonounsaturatedFat / densityOfFood,
+                                Carbohydrate = FoodSelected.Carbohydrate / densityOfFood,
+                                Sugars = FoodSelected.Sugars / densityOfFood,
+                                DietaryFibre = FoodSelected.DietaryFibre / densityOfFood,
+                                SodiumNa = FoodSelected.SodiumNa / densityOfFood,
+                                CalciumCa = FoodSelected.CalciumCa / densityOfFood,
+                                PotassiumK = FoodSelected.PotassiumK / densityOfFood,
+                                ThiaminB1 = FoodSelected.ThiaminB1 / densityOfFood,
+                                RiboflavinB2 = FoodSelected.RiboflavinB2 / densityOfFood,
+                                NiacinB3 = FoodSelected.NiacinB3 / densityOfFood,
+                                Folate = FoodSelected.Folate / densityOfFood,
+                                IronFe = FoodSelected.IronFe / densityOfFood,
+                                MagnesiumMg = FoodSelected.MagnesiumMg / densityOfFood,
+                                VitaminC = FoodSelected.VitaminC / densityOfFood,
+                                Caffeine = FoodSelected.Caffeine / densityOfFood,
+                                Cholesterol = FoodSelected.Cholesterol / densityOfFood,
+                                Alcohol = FoodSelected.Alcohol / densityOfFood
+                            });
+
+                            context.SaveChanges();
+                            ActOnFoodFilteringStates(1);
+                        }
+
                     }
                     else // no further processing possible so display "Error" message box
                     {
-                        // Initializes the variables to pass to the MessageBox.Show method.
+                        // Initializes the variables to pass to the MessageBox.Show method
                         string message = "Only possible when Liquid food selected";
                         string caption = "CANNOT CREATE SOLID FOOD";
                         MessageBoxButtons buttons = MessageBoxButtons.OK;

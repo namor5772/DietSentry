@@ -27,7 +27,7 @@ namespace DietSentry
             // Call textbox's focus method and make sure initial value is ""
             this.textBoxDensity.Focus();
             this.textBoxDensity.Text = "";
-            this.labelDescription.Text = mainForm.editedFoodDescription;
+            this.labelDescription.Text = mainForm!.editedFoodDescription;
         }
 
         private void ActOnEnterKeyPress()
