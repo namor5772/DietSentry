@@ -546,7 +546,7 @@ namespace DietSentry
             if ((!checkBoxDailyTotals.Checked))
             {
                 // Initializes the variables to pass to the MessageBox.Show method.
-                string message = "Are you sure you wish to delete the selected eaten food?";
+                string message = "Are you sure you wish to DELETE the selected eaten food?";
                 string caption = "DELETE CONFIRMATION";
                 DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
 
