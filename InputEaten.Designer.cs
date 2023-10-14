@@ -1,6 +1,6 @@
 ﻿namespace DietSentry
 {
-    partial class InputForm
+    partial class InputEaten
     {
         /// <summary>
         /// Required designer variable.
@@ -30,8 +30,8 @@
         {
             textBoxAmount = new TextBox();
             labelAmount = new Label();
-            labelDescription = new Label();
             dateTimePickerEaten = new DateTimePicker();
+            labelDescription = new Label();
             SuspendLayout();
             // 
             // textBoxAmount
@@ -39,8 +39,7 @@
             textBoxAmount.Location = new Point(23, 37);
             textBoxAmount.Name = "textBoxAmount";
             textBoxAmount.Size = new Size(89, 23);
-            textBoxAmount.TabIndex = 1;
-            textBoxAmount.KeyDown += TextBoxAmount_KeyDown;
+            textBoxAmount.TabIndex = 2;
             // 
             // labelAmount
             // 
@@ -49,18 +48,8 @@
             labelAmount.Location = new Point(125, 40);
             labelAmount.Name = "labelAmount";
             labelAmount.Size = new Size(33, 15);
-            labelAmount.TabIndex = 2;
+            labelAmount.TabIndex = 3;
             labelAmount.Text = "units";
-            // 
-            // labelDescription
-            // 
-            labelDescription.AutoEllipsis = true;
-            labelDescription.ForeColor = SystemColors.HighlightText;
-            labelDescription.Location = new Point(12, 9);
-            labelDescription.Name = "labelDescription";
-            labelDescription.Size = new Size(358, 15);
-            labelDescription.TabIndex = 3;
-            labelDescription.Text = "description";
             // 
             // dateTimePickerEaten
             // 
@@ -71,35 +60,44 @@
             dateTimePickerEaten.MinDate = new DateTime(2023, 1, 1, 0, 0, 0, 0);
             dateTimePickerEaten.Name = "dateTimePickerEaten";
             dateTimePickerEaten.Size = new Size(186, 23);
-            dateTimePickerEaten.TabIndex = 4;
-            dateTimePickerEaten.KeyDown += DateTimePickerEaten_KeyDown;
+            dateTimePickerEaten.TabIndex = 5;
             // 
-            // InputForm
+            // labelDescription
+            // 
+            labelDescription.AutoEllipsis = true;
+            labelDescription.ForeColor = SystemColors.HighlightText;
+            labelDescription.Location = new Point(12, 9);
+            labelDescription.Name = "labelDescription";
+            labelDescription.Size = new Size(358, 15);
+            labelDescription.TabIndex = 6;
+            labelDescription.Text = "description";
+            // 
+            // InputEaten
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Highlight;
             ClientSize = new Size(403, 79);
             ControlBox = false;
-            Controls.Add(dateTimePickerEaten);
             Controls.Add(labelDescription);
+            Controls.Add(dateTimePickerEaten);
             Controls.Add(labelAmount);
             Controls.Add(textBoxAmount);
             ForeColor = SystemColors.ControlText;
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
-            Name = "InputForm";
-            Text = "InputFood";
+            Name = "InputEaten";
+            Text = "InputEaten";
             TopMost = true;
-            Shown += InputForm_Shown;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
+
         private TextBox textBoxAmount;
         private Label labelAmount;
-        private Label labelDescription;
         private DateTimePicker dateTimePickerEaten;
+        private Label labelDescription;
     }
 }
