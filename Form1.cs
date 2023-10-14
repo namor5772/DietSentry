@@ -953,7 +953,7 @@ namespace DietSentry
         }
 
 
-        private void dataGridViewEaten_KeyDown(object sender, KeyEventArgs e)
+        private void DataGridViewEaten_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F2) // Selecting eaten food item
             {

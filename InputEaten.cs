@@ -23,26 +23,15 @@ namespace DietSentry
 
         private void InputEaten_Shown(object sender, EventArgs e)
         {
-            string efd = mainForm!.eatenFoodDescription;
-            RDesc rf = TruncFoodDesc(efd);
-
-            // Call textbox's focus method and populate it & the dateTimePicker control with the current values  
+            // Call textbox's focus method
             this.textBoxAmount.Focus();
-            this.labelDescription.Text = rf.truncDesc; // only show the truncated description (to avoid confusion)
 
+            // Populate all controls with the current values (from selected eaten food)
+            this.labelDescription.Text = TruncFoodDesc(mainForm!.eatenFoodDescription).truncDesc; 
             float afe = mainForm.amountOfFoodEaten; // doing this to avoid compiler warning CS1690
             this.textBoxAmount.Text = afe.ToString();
-
-            this.labelAmount.Text = UnitsString(efd);
-
-            string sDate = mainForm.sDate;
-            string sTime = mainForm.sTime;
-            this.labelDescription.Text = this.labelDescription.Text + " " + sDate + " " + sTime;
-
-
-
-            DateTime myDate = DateTime.Parse(sDate + " " + sTime);
-            dateTimePickerEaten.Value = myDate;
+            this.labelAmount.Text = UnitsString(mainForm.eatenFoodDescription); // g or mL
+            this.dateTimePickerEaten.Value = DateTime.Parse(mainForm.sDate + " " + mainForm.sTime); 
         }
     }
 }

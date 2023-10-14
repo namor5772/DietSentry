@@ -39,7 +39,7 @@
             textBoxDensity.Name = "textBoxDensity";
             textBoxDensity.Size = new Size(89, 23);
             textBoxDensity.TabIndex = 6;
-            textBoxDensity.KeyDown += textBoxDensity_KeyDown;
+            textBoxDensity.KeyDown += TextBoxDensity_KeyDown;
             // 
             // labelDescription
             // 

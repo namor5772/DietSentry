@@ -921,7 +921,7 @@ namespace DietSentry
             dataGridViewEaten.Size = new Size(1398, 652);
             dataGridViewEaten.TabIndex = 0;
             dataGridViewEaten.UserDeletingRow += DataGridViewEaten_UserDeletingRow;
-            dataGridViewEaten.KeyDown += dataGridViewEaten_KeyDown;
+            dataGridViewEaten.KeyDown += DataGridViewEaten_KeyDown;
             // 
             // EatenId
             // 

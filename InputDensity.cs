@@ -54,7 +54,7 @@ namespace DietSentry
             Close();
         }
 
-        private void textBoxDensity_KeyDown(object sender, KeyEventArgs e)
+        private void TextBoxDensity_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
