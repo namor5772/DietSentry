@@ -118,6 +118,8 @@ namespace DietSentry
                     // Updates the dataGridViewEaten while maintaining filtering states and making the Eaten tab visible
                     ActOnEatenFoodFilteringStates();
                     tabControlMain.SelectedTab = tabPageEaten;
+
+                    labelInfoEaten.Text = "Added food: " + FoodSelected.FoodDescription;
                 }
             }
         }
@@ -423,11 +425,11 @@ namespace DietSentry
                         {
                             ActOnFoodFilteringStates(1);
                         }
-                        labelInfoFood.Text = "Edited food item " + editedFoodId;
+                        labelInfoFood.Text = "Edited food item " + editedFoodId + " : " + FoodSelected.FoodDescription;
                     }
                     else // editing of food item cancelled
                     {
-                        labelInfoFood.Text = "Editing of food item " + editedFoodId + " cancelled";
+                        labelInfoFood.Text = "Cancelled editing of food item " + editedFoodId + " : " + FoodSelected.FoodDescription;
                     }
                 }
             }
@@ -548,7 +550,7 @@ namespace DietSentry
                 // Initializes the variables to pass to the MessageBox.Show method.
                 string message = "Are you sure you wish to DELETE the selected eaten food?";
                 string caption = "DELETE CONFIRMATION";
-                DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
+                DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button2);
 
                 if (result == DialogResult.Yes)
                 {
@@ -567,6 +569,8 @@ namespace DietSentry
 
                         // refresh Eaten data grid view while maintaining filter status
                         ActOnEatenFoodFilteringStates();
+
+                        labelInfoEaten.Text = "Deleted selected food: "+foodItem.FoodDescription;
                     }
                 }
                 else
@@ -584,6 +588,8 @@ namespace DietSentry
                 // Displays the MessageBox.
                 MessageBox.Show(message, caption, buttons);
                 checkBoxDailyTotals.Checked = false;
+
+                labelInfoEaten.Text = "Selection was not a particular food, so could not be deleted!";
             }
         }
 
@@ -861,7 +867,7 @@ namespace DietSentry
                     }
                     else
 
-                        labelInfoFood.Text = "Deleted food item " + FoodSelectedId;
+                        labelInfoFood.Text = "Deleted food item " + FoodSelectedId + " : " + FoodSelectedDesc;
 
                     // refresh Foods data grid view while maintaining filter status - it is done in this complicated way
                     // because it crashes under some patricular circumstances !
@@ -874,7 +880,7 @@ namespace DietSentry
             }
             else
             {
-                labelInfoFood.Text = "Deletion of selected food item cancelled";
+                labelInfoFood.Text = "Cancelled deletion of selected food item";
             }
         }
 
