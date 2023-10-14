@@ -460,7 +460,7 @@ namespace DietSentry
                         };
                         frm.ShowDialog();
 
-//                        labelInfo.Text = "{F4} Key pressed:   " + fT.ToString() + "  " + densityOfFood.ToString();
+                        //                        labelInfo.Text = "{F4} Key pressed:   " + fT.ToString() + "  " + densityOfFood.ToString();
 
                         if (densityOfFood == 0.0) // invalid input, so error message
                         {
@@ -570,7 +570,7 @@ namespace DietSentry
                         // refresh Eaten data grid view while maintaining filter status
                         ActOnEatenFoodFilteringStates();
 
-                        labelInfoEaten.Text = "Deleted selected food: "+foodItem.FoodDescription;
+                        labelInfoEaten.Text = "Deleted selected food: " + foodItem.FoodDescription;
                     }
                 }
                 else
@@ -953,6 +953,11 @@ namespace DietSentry
         }
 
         private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPageFood_Click(object sender, EventArgs e)
         {
 
         }

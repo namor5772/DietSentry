@@ -117,11 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="richTextBoxHelp.Text" xml:space="preserve">
+  <data name="richTextBoxHelpFood.Text" xml:space="preserve">
     <value>HELP   On selected food item row :
 {Enter} Key or Double-Click:   Adds food to Eaten table 
 {Delete} or {Del} Key:                Deletes food from (below) Foods table
-{Insert} or {Ins} Key:                  Adds new food to Foods table
+{Insert} or {Ins} Key:                  Adds new food to Foods table (selected row irrelevant)
 {F2} Key:                                     Edits selected food item
 {F4} Key:                                     Creates Solid food from selected Liquid food</value>
   </data>
@@ -134,6 +134,11 @@
   <metadata name="foodBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="richTextBoxHelpEaten.Text" xml:space="preserve">
+    <value>HELP   On selected food item row :
+{Delete} or {Del} Key:                Deletes eaten food from (below) Eaten table
+{F2} Key:                                     Edits selected eaten food item's time stamp &amp; amount</value>
+  </data>
   <metadata name="EatenId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
