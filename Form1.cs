@@ -973,8 +973,8 @@ namespace DietSentry
                         // obtain information necessary to default populate the InputEaten form
                         amountOfFoodEaten = FoodSelected.AmountEaten;
                         eatenFoodDescription = FoodSelected.FoodDescription;
-
-
+                        sDate = FoodSelected.DateEaten;
+                        sTime = FoodSelected.TimeEaten;
                     }
 
                     // opens dialog used to edit the amount & timestamp of the selected eaten food

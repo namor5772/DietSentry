@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Data.SqlTypes;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
 namespace DietSentry
@@ -34,6 +35,8 @@ namespace DietSentry
         // Variables in MainForm which store data collected from the InputForm and the DensityForm
         public float amountOfFoodEaten = 0.0F; // in "units" of 100 g or mL
         public DateTime dateTimeEaten; // the time when a food was recorded as eaten
+        public string sDate;
+        public string sTime;
         public float densityOfFood = 0.0F; // in units of g/ml
 
         // date filter for Eaten foods (in Eaten tab)

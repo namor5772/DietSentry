@@ -34,6 +34,15 @@ namespace DietSentry
             this.textBoxAmount.Text = afe.ToString();
 
             this.labelAmount.Text = UnitsString(efd);
+
+            string sDate = mainForm.sDate;
+            string sTime = mainForm.sTime;
+            this.labelDescription.Text = this.labelDescription.Text + " " + sDate + " " + sTime;
+
+
+
+            DateTime myDate = DateTime.Parse(sDate + " " + sTime);
+            dateTimePickerEaten.Value = myDate;
         }
     }
 }
