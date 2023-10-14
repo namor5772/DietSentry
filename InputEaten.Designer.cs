@@ -40,6 +40,7 @@
             textBoxAmount.Name = "textBoxAmount";
             textBoxAmount.Size = new Size(89, 23);
             textBoxAmount.TabIndex = 2;
+            textBoxAmount.KeyDown += TextBoxAmount_KeyDown;
             // 
             // labelAmount
             // 
@@ -61,6 +62,7 @@
             dateTimePickerEaten.Name = "dateTimePickerEaten";
             dateTimePickerEaten.Size = new Size(186, 23);
             dateTimePickerEaten.TabIndex = 5;
+            dateTimePickerEaten.KeyDown += DateTimePickerEaten_KeyDown;
             // 
             // labelDescription
             // 

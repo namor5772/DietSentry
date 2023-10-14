@@ -1,5 +1,6 @@
 using DietSentry;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -952,7 +953,6 @@ namespace DietSentry
             }
         }
 
-
         private void DataGridViewEaten_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F2) // Selecting eaten food item
@@ -960,22 +960,19 @@ namespace DietSentry
                 // can edit row only if the totals filter check boxed is unchecked
                 if ((!checkBoxDailyTotals.Checked))
                 {
-                    // determine row to be deleted from Eaten table by accessing it in its dataGrid
+                    // determine row to be edited in Eaten table by accessing it in its dataGrid
                     var foodItem = (Eaten)this.dataGridViewEaten.CurrentRow.DataBoundItem;
 
-                    if (foodItem != null)
-                    {
-                        using var context = new FoodsContext();
+                    using var context = new FoodsContext();
 
-                        // gain direct access to selected entry in Eaten table
-                        var FoodSelected = context.Eaten.Single(b => b.EatenId == foodItem.EatenId);
+                    // gain direct access to selected entry in Eaten table
+                    var FoodSelected = context.Eaten.Single(b => b.EatenId == foodItem.EatenId);
 
-                        // obtain information necessary to default populate the InputEaten form
-                        amountOfFoodEaten = FoodSelected.AmountEaten;
-                        eatenFoodDescription = FoodSelected.FoodDescription;
-                        sDate = FoodSelected.DateEaten;
-                        sTime = FoodSelected.TimeEaten;
-                    }
+                    // obtain information necessary to populate the InputEaten form
+                    amountOfFoodEaten = FoodSelected.AmountEaten;
+                    eatenFoodDescription = FoodSelected.FoodDescription;
+                    sDate = FoodSelected.DateEaten;
+                    sTime = FoodSelected.TimeEaten;
 
                     // opens dialog used to edit the amount & timestamp of the selected eaten food
                     InputEaten frm = new(this)
@@ -984,6 +981,59 @@ namespace DietSentry
                         Location = this.PointToScreen(tabPageFood.Location)
                     };
                     frm.ShowDialog();
+
+                    // only act on input if amount eaten >0, else we have an input error
+                    if (amountOfFoodEaten > 0.0)
+                    {
+                        // update timestamp fields (note specific culture!)
+                        FoodSelected.DateEaten = dateTimeEaten.ToString("d-MMM-yy", CultureInfo.CreateSpecificCulture("en-AU"));
+                        FoodSelected.TimeEaten = dateTimeEaten.ToString("HH:mm"); // 24hr hour format
+                        FoodSelected.EatenTs = MTimeSpan(dateTimeEaten); // Number of whole minutes elapsed since start of reference date 1-Jan-2023
+
+                        // calculate nutrition scaling factor
+                        float sf =  amountOfFoodEaten / FoodSelected.AmountEaten;
+
+                        // scale all relevant fields
+                        FoodSelected.AmountEaten *= sf;
+                        FoodSelected.Energy *= sf;
+                        FoodSelected.Protein *= sf;
+                        FoodSelected.FatTotal *= sf;
+                        FoodSelected.SaturatedFat *= sf;
+                        FoodSelected.TransFat *= sf;
+                        FoodSelected.PolyunsaturatedFat *= sf;
+                        FoodSelected.MonounsaturatedFat *= sf;
+                        FoodSelected.Carbohydrate *= sf;
+                        FoodSelected.Sugars *= sf;
+                        FoodSelected.DietaryFibre *= sf;
+                        FoodSelected.SodiumNa *= sf;
+                        FoodSelected.CalciumCa *= sf;
+                        FoodSelected.PotassiumK *= sf;
+                        FoodSelected.ThiaminB1 *= sf;
+                        FoodSelected.RiboflavinB2 *= sf;
+                        FoodSelected.NiacinB3 *= sf;
+                        FoodSelected.Folate *= sf;
+                        FoodSelected.IronFe *= sf;
+                        FoodSelected.MagnesiumMg *= sf;
+                        FoodSelected.VitaminC *= sf;
+                        FoodSelected.Caffeine *= sf;
+                        FoodSelected.Cholesterol *= sf;
+                        FoodSelected.Alcohol *= sf;
+
+                        context.SaveChanges();
+                        ActOnEatenFoodFilteringStates();
+                        labelInfoEaten.Text = "Selected eaten food successfully edited!";
+                    }
+                    else // display error message box
+                    {
+                        // Initializes the variables to pass to the MessageBox.Show method.
+                        string message = "There was an error in the amount entered!";
+                        string caption = "COULD NOT EDIT ROW";
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+
+                        // Displays the MessageBox.
+                        MessageBox.Show(message, caption, buttons);
+                        labelInfoEaten.Text = "Error in amount. Editing not performed";
+                    }
                 }
                 else // display "error" message box
                 {
@@ -995,7 +1045,6 @@ namespace DietSentry
                     // Displays the MessageBox.
                     MessageBox.Show(message, caption, buttons);
                     checkBoxDailyTotals.Checked = false; // uncheck this box as a help for attempted editing
-
                     labelInfoEaten.Text = "Selection was not a particular food, so could not be edited!";
                 }
 
