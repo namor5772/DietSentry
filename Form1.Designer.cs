@@ -287,7 +287,6 @@ namespace DietSentry
             tabPageFood.Size = new Size(1410, 757);
             tabPageFood.TabIndex = 0;
             tabPageFood.Text = "Food";
-            tabPageFood.Click += tabPageFood_Click;
             // 
             // richTextBoxHelpFood
             // 
@@ -1362,7 +1361,6 @@ namespace DietSentry
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Diet Sentry 2.0";
             TransparencyKey = Color.Lime;
-            Load += MainForm_Load;
             tabControl1.ResumeLayout(false);
             tabControlMain.ResumeLayout(false);
             tabPageFood.ResumeLayout(false);

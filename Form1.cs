@@ -305,7 +305,7 @@ namespace DietSentry
                         });
                         context.SaveChanges();
 
-                        labelInfoFood.Text = "Added new food item " + addedFoodItem.FoodDescription;
+                        labelInfoFood.Text = "Added new food item : " + addedFoodItem.FoodDescription;
                     }
                     else if (foodType == 2)
                     {
@@ -952,26 +952,54 @@ namespace DietSentry
             }
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPageFood_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void dataGridViewEaten_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F2) // Selecting eaten food item
             {
+                // can edit row only if the totals filter check boxed is unchecked
+                if ((!checkBoxDailyTotals.Checked))
+                {
+                    // determine row to be deleted from Eaten table by accessing it in its dataGrid
+                    var foodItem = (Eaten)this.dataGridViewEaten.CurrentRow.DataBoundItem;
+
+                    if (foodItem != null)
+                    {
+                        using var context = new FoodsContext();
+
+                        // gain direct access to selected entry in Eaten table
+                        var FoodSelected = context.Eaten.Single(b => b.EatenId == foodItem.EatenId);
+
+                        // obtain information necessary to default populate the InputEaten form
+                        amountOfFoodEaten = FoodSelected.AmountEaten;
+                        eatenFoodDescription = FoodSelected.FoodDescription;
 
 
+                    }
 
+                    // opens dialog used to edit the amount & timestamp of the selected eaten food
+                    InputEaten frm = new(this)
+                    {
+                        StartPosition = FormStartPosition.Manual,
+                        Location = this.PointToScreen(tabPageFood.Location)
+                    };
+                    frm.ShowDialog();
+                }
+                else // display "error" message box
+                {
+                    // Initializes the variables to pass to the MessageBox.Show method.
+                    string message = "Only possible when not showing totalled data";
+                    string caption = "CANNOT EDIT ROW";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+
+                    // Displays the MessageBox.
+                    MessageBox.Show(message, caption, buttons);
+                    checkBoxDailyTotals.Checked = false; // uncheck this box as a help for attempted editing
+
+                    labelInfoEaten.Text = "Selection was not a particular food, so could not be edited!";
+                }
 
             }
-
         }
     }
 }

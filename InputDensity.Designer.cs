@@ -35,7 +35,7 @@
             // 
             // textBoxDensity
             // 
-            textBoxDensity.Location = new Point(23, 37);
+            textBoxDensity.Location = new Point(23, 41);
             textBoxDensity.Name = "textBoxDensity";
             textBoxDensity.Size = new Size(89, 23);
             textBoxDensity.TabIndex = 6;
@@ -55,7 +55,7 @@
             // 
             labelDensity.AutoSize = true;
             labelDensity.ForeColor = SystemColors.HighlightText;
-            labelDensity.Location = new Point(125, 40);
+            labelDensity.Location = new Point(125, 44);
             labelDensity.Name = "labelDensity";
             labelDensity.Size = new Size(90, 15);
             labelDensity.TabIndex = 8;
@@ -66,7 +66,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Highlight;
-            ClientSize = new Size(382, 78);
+            ClientSize = new Size(382, 96);
             ControlBox = false;
             Controls.Add(labelDensity);
             Controls.Add(labelDescription);

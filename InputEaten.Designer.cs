@@ -36,7 +36,7 @@
             // 
             // textBoxAmount
             // 
-            textBoxAmount.Location = new Point(23, 37);
+            textBoxAmount.Location = new Point(23, 41);
             textBoxAmount.Name = "textBoxAmount";
             textBoxAmount.Size = new Size(89, 23);
             textBoxAmount.TabIndex = 2;
@@ -45,7 +45,7 @@
             // 
             labelAmount.AutoSize = true;
             labelAmount.ForeColor = SystemColors.HighlightText;
-            labelAmount.Location = new Point(125, 40);
+            labelAmount.Location = new Point(125, 44);
             labelAmount.Name = "labelAmount";
             labelAmount.Size = new Size(33, 15);
             labelAmount.TabIndex = 3;
@@ -55,7 +55,7 @@
             // 
             dateTimePickerEaten.CustomFormat = "  dd-MMM-yyyy   HH : mm";
             dateTimePickerEaten.Format = DateTimePickerFormat.Custom;
-            dateTimePickerEaten.Location = new Point(195, 37);
+            dateTimePickerEaten.Location = new Point(195, 41);
             dateTimePickerEaten.MaxDate = new DateTime(2123, 1, 1, 0, 0, 0, 0);
             dateTimePickerEaten.MinDate = new DateTime(2023, 1, 1, 0, 0, 0, 0);
             dateTimePickerEaten.Name = "dateTimePickerEaten";
@@ -77,7 +77,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Highlight;
-            ClientSize = new Size(403, 79);
+            ClientSize = new Size(403, 96);
             ControlBox = false;
             Controls.Add(labelDescription);
             Controls.Add(dateTimePickerEaten);
@@ -89,6 +89,7 @@
             Name = "InputEaten";
             Text = "InputEaten";
             TopMost = true;
+            Shown += InputEaten_Shown;
             ResumeLayout(false);
             PerformLayout();
         }
