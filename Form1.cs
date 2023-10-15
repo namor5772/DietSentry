@@ -991,7 +991,7 @@ namespace DietSentry
                         FoodSelected.EatenTs = MTimeSpan(dateTimeEaten); // Number of whole minutes elapsed since start of reference date 1-Jan-2023
 
                         // calculate nutrition scaling factor
-                        float sf =  amountOfFoodEaten / FoodSelected.AmountEaten;
+                        float sf = amountOfFoodEaten / FoodSelected.AmountEaten;
 
                         // scale all relevant fields
                         FoodSelected.AmountEaten *= sf;
@@ -1048,6 +1048,25 @@ namespace DietSentry
                     labelInfoEaten.Text = "Selection was not a particular food, so could not be edited!";
                 }
 
+            }
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            // Create an OpenFileDialog to request a file to open.
+            OpenFileDialog openFile1 = new()
+            {
+                // Initialize the OpenFileDialog to look for RTF files.
+                DefaultExt = "*.rtf",
+                Filter = "RTF Files|*.rtf"
+            };
+
+            // Determine whether the user selected a file from the OpenFileDialog. 
+            if (openFile1.ShowDialog() == System.Windows.Forms.DialogResult.OK &&
+               openFile1.FileName.Length > 0)
+            {
+                // Load the contents of the file into the RichTextBox.
+                richTextBoxHelp.LoadFile(openFile1.FileName);
             }
         }
     }
