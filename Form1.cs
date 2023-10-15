@@ -1069,5 +1069,15 @@ namespace DietSentry
                 richTextBoxHelp.LoadFile(openFile1.FileName);
             }
         }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            int rci = this.richTextBoxHelp.Find(textBoxFind.Text);
+            labelFind.Text = rci.ToString();
+            int rcl = this.richTextBoxHelp.GetLineFromCharIndex(rci);
+            labelFind2.Text = rcl.ToString();
+            richTextBoxHelp.SelectionStart = rci;
+            richTextBoxHelp.ScrollToCaret();
+        }
     }
 }
