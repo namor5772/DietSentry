@@ -1,5 +1,4 @@
-using DietSentry;
-using Microsoft.EntityFrameworkCore;
+using DietSentry;using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -1078,6 +1077,17 @@ namespace DietSentry
             labelFind2.Text = rcl.ToString();
             richTextBoxHelp.SelectionStart = rci;
             richTextBoxHelp.ScrollToCaret();
+        }
+
+        private void ButtonHelp_Click(object sender, EventArgs e)
+        {
+            // opens help form
+            Help frm = new(this)
+            {
+                StartPosition = FormStartPosition.Manual,
+                Location = this.PointToScreen(tabPageFood.Location)
+            };
+            frm.Show();
         }
     }
 }
