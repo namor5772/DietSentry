@@ -119,11 +119,11 @@
   </resheader>
   <data name="richTextBoxHelpFood.Text" xml:space="preserve">
     <value>HELP   On selected food item row :
-{Enter} Key or Double-Click:   Adds food to Eaten table 
-{Delete} or {Del} Key:                Deletes food from (below) Foods table
-{Insert} or {Ins} Key:                  Adds new food to Foods table (selected row irrelevant)
-{F2} Key:                                     Edits selected food item
-{F4} Key:                                     Creates Solid food from selected Liquid food</value>
+{Enter} Key or Double-Click:          Adds food to Eaten table 
+{Delete} or {Del} Key:                       Deletes food from (below) Foods table
+{Insert} or {Ins} Key:                         Adds new food to Foods table (selected row irrelevant)
+{F2} Key:                                            Edits selected food item
+{F4} Key:                                            Creates Solid food from selected Liquid food</value>
   </data>
   <metadata name="FoodIdDataGridViewTextBoxColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -136,8 +136,8 @@
   </metadata>
   <data name="richTextBoxHelpEaten.Text" xml:space="preserve">
     <value>HELP   On selected food item row :
-{Delete} or {Del} Key:                Deletes eaten food from (below) Eaten table
-{F2} Key:                                     Edits selected eaten food item's time stamp &amp; amount</value>
+{Delete} or {Del} Key:          Deletes eaten food from (below) Eaten table
+{F2} Key:                               Edits selected eaten food item's time stamp &amp; amount</value>
   </data>
   <metadata name="EatenId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -160,13 +160,10 @@
   <metadata name="aTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>486, 16</value>
   </metadata>
-  <metadata name="helpProviderMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>576, 16</value>
-  </metadata>
   <metadata name="openFileDialogHelp.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>724, 16</value>
+    <value>571, 19</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>46</value>
+    <value>55</value>
   </metadata>
 </root>

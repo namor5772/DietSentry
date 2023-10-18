@@ -1081,12 +1081,44 @@ namespace DietSentry
 
         private void ButtonHelp_Click(object sender, EventArgs e)
         {
-            // opens help form
+            sHelpFind = "Diet Sentry overview";
+
+            // sets position and opens help form
             Help frm = new(this)
             {
-                StartPosition = FormStartPosition.Manual,
-                Location = this.PointToScreen(tabPageFood.Location)
+                StartPosition = FormStartPosition.Manual
             };
+            int ix = this.PointToScreen(tabPageFood.Location).X;
+            int iy = this.PointToScreen(tabPageFood.Location).Y;
+            frm.Location = new Point(ix - 7, iy); // the 7 is a bit of a cludge
+            frm.Show();
+        }
+
+        private void tabPageFood_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            // sets position and opens help form
+            Help frm = new(this)
+            {
+                StartPosition = FormStartPosition.Manual
+            };
+            int ix = this.PointToScreen(tabPageFood.Location).X;
+            int iy = this.PointToScreen(tabPageFood.Location).Y;
+            frm.Location = new Point(ix - 7, iy); // the 7 is a bit of a cludge
+            frm.Show();
+        }
+
+        private void dataGridViewFoods_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            sHelpFind = "#Food DataGrid";
+
+            // sets position and opens help form
+            Help frm = new(this)
+            {
+                StartPosition = FormStartPosition.Manual
+            };
+            int ix = this.PointToScreen(tabPageFood.Location).X;
+            int iy = this.PointToScreen(tabPageFood.Location).Y;
+            frm.Location = new Point(ix - 7, iy); // the 7 is a bit of a cludge
             frm.Show();
         }
     }

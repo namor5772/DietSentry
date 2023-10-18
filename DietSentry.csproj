@@ -16,7 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="DietSentry.rtf" />
     <None Remove="Splash.bmp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="DietSentry.rtf" />
   </ItemGroup>
 
   <ItemGroup>
