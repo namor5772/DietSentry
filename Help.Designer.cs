@@ -46,7 +46,7 @@ namespace DietSentry
             richTextBoxHelp.Location = new Point(2, 50);
             richTextBoxHelp.Name = "richTextBoxHelp";
             richTextBoxHelp.ScrollBars = RichTextBoxScrollBars.None;
-            richTextBoxHelp.Size = new Size(793, 396);
+            richTextBoxHelp.Size = new Size(755, 396);
             richTextBoxHelp.TabIndex = 0;
             richTextBoxHelp.Text = "";
             // 
@@ -54,6 +54,7 @@ namespace DietSentry
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Info;
             ClientSize = new Size(800, 450);
             Controls.Add(richTextBoxHelp);
             MaximizeBox = false;

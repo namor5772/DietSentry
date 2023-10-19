@@ -40,6 +40,7 @@
             textBoxAmount.Name = "textBoxAmount";
             textBoxAmount.Size = new Size(89, 23);
             textBoxAmount.TabIndex = 1;
+            textBoxAmount.HelpRequested += textBoxAmount_HelpRequested;
             textBoxAmount.KeyDown += TextBoxAmount_KeyDown;
             // 
             // labelAmount

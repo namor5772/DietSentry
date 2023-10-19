@@ -1079,47 +1079,56 @@ namespace DietSentry
             richTextBoxHelp.ScrollToCaret();
         }
 
+
+        private void HelpCore()
+        {
+            // sets position and opens help form
+            Help frm = new(this)
+            {
+                StartPosition = FormStartPosition.Manual
+            };
+            int ix = this.PointToScreen(tabPageFood.Location).X;
+            int iy = this.PointToScreen(tabPageFood.Location).Y;
+            frm.Location = new Point(ix - 7, iy); // the 7 is a bit of a cludge
+            frm.Show();
+        }
+
         private void ButtonHelp_Click(object sender, EventArgs e)
         {
             sHelpFind = "Diet Sentry overview";
-
-            // sets position and opens help form
-            Help frm = new(this)
-            {
-                StartPosition = FormStartPosition.Manual
-            };
-            int ix = this.PointToScreen(tabPageFood.Location).X;
-            int iy = this.PointToScreen(tabPageFood.Location).Y;
-            frm.Location = new Point(ix - 7, iy); // the 7 is a bit of a cludge
-            frm.Show();
+            HelpCore();
         }
 
-        private void tabPageFood_HelpRequested(object sender, HelpEventArgs hlpevent)
+        private void TabPageFood_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
-            // sets position and opens help form
-            Help frm = new(this)
-            {
-                StartPosition = FormStartPosition.Manual
-            };
-            int ix = this.PointToScreen(tabPageFood.Location).X;
-            int iy = this.PointToScreen(tabPageFood.Location).Y;
-            frm.Location = new Point(ix - 7, iy); // the 7 is a bit of a cludge
-            frm.Show();
+            sHelpFind = "#Food tab";
+            HelpCore();
         }
 
-        private void dataGridViewFoods_HelpRequested(object sender, HelpEventArgs hlpevent)
+        private void DataGridViewFoods_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             sHelpFind = "#Food DataGrid";
-
-            // sets position and opens help form
-            Help frm = new(this)
-            {
-                StartPosition = FormStartPosition.Manual
-            };
-            int ix = this.PointToScreen(tabPageFood.Location).X;
-            int iy = this.PointToScreen(tabPageFood.Location).Y;
-            frm.Location = new Point(ix - 7, iy); // the 7 is a bit of a cludge
-            frm.Show();
+            HelpCore();
         }
+
+        private void TextBoxFilter_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            sHelpFind = "#Food filter";
+            HelpCore();
+        }
+
+        private void CheckBoxMainFoodCols_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            sHelpFind = "#Food CheckBox";
+            HelpCore();
+        }
+
+        private void DataGridViewEaten_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            sHelpFind = "#Eaten DataGrid";
+            HelpCore();
+        }
+
     }
+
 }

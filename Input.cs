@@ -71,5 +71,25 @@ namespace DietSentry
             }
 
         }
+
+        private void HelpCore()
+        {
+            // sets position and opens help form
+            Help frm = new(this)
+            {
+                StartPosition = FormStartPosition.Manual
+            };
+            int ix = this.PointToScreen(labelDescription.Location).X;
+            int iy = this.PointToScreen(labelDescription.Location).Y;
+            frm.Location = new Point(ix - 7, iy); // the 7 is a bit of a cludge
+            frm.Show();
+        }
+
+
+        private void textBoxAmount_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            mainForm!.sHelpFind = "Diet Sentry overview";
+            HelpCore();
+        }
     }
 }
