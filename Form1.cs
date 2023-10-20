@@ -1082,8 +1082,9 @@ namespace DietSentry
 
         /*
          * The following implements the context sensitive help for controls in this form
-         * If a control has focus pressing the {F1} key, brings up the help form with the rtf text
-         * positioned at the appropriate topic
+         * If a control has focus pressing the {F1} key brings up the help form with the rtf text
+         * positioned at the appropriate topic. The HelpCore() function will be different in different forms
+         * to adjust positioning of the help form.
          */
         private void HelpCore()
         {

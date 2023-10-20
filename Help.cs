@@ -23,20 +23,20 @@ namespace DietSentry
             InitializeComponent();
 
         }
-        /*
-                public Help(Form callingform)
-                {
-                    mainForm = callingform as MainForm;
-                    InitializeComponent();
-                }
-        */
+ 
         private void Help_Load(object sender, EventArgs e)
         {
             // load rtf file into richTextBox
             richTextBoxHelp.LoadFile(@"C:\Users\grobl\source\repos\DietSentry\DietSentry.rtf");
 
-            // using "global" context dependent search string, find its position in rtf help file and make it top row  
+            // using "global" context dependent search string, find its position in rtf help file and make it top row
             int rci = this.richTextBoxHelp.Find(UtilitiesRMG.SHelpFind);
+            if (rci == -1)
+            {
+                // this occurs if couldn't find search string
+                rci = this.richTextBoxHelp.Find("Help system error");
+            }
+
             richTextBoxHelp.SelectionStart = rci;
             richTextBoxHelp.ScrollToCaret();
 
