@@ -96,13 +96,13 @@ namespace DietSentry
             HelpCore();
         }
 
-        private void dateTimePickerEaten_HelpRequested(object sender, HelpEventArgs hlpevent)
+        private void DateTimePickerEaten_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             UtilitiesRMG.SHelpFind = "#Eaten food dialog";
             HelpCore();
         }
 
-        private void labelHelpFoodEatenDialog_MouseHover(object sender, EventArgs e)
+        private void LabelHelpFoodEatenDialog_MouseHover(object sender, EventArgs e)
         {
             UtilitiesRMG.SHelpFind = "#Eaten food dialog";
             HelpCore();

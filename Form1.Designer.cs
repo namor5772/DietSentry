@@ -184,11 +184,11 @@ namespace DietSentry
             cholesterolDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             alcoholDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             tabPageFood = new TabPage();
+            labelHelpShowCols = new Label();
             labelHelpFoodDataGrid = new Label();
             labelHelpFoodFilter = new Label();
             labelHelpFoodTab = new Label();
             buttonHelp = new Button();
-            richTextBoxHelpFood = new RichTextBox();
             textBoxFilter = new TextBox();
             labelInfoFood = new Label();
             checkBoxMainFoodCols = new CheckBox();
@@ -851,11 +851,11 @@ namespace DietSentry
             tabPageFood.AutoScroll = true;
             tabPageFood.BackColor = Color.Transparent;
             tabPageFood.BorderStyle = BorderStyle.FixedSingle;
+            tabPageFood.Controls.Add(labelHelpShowCols);
             tabPageFood.Controls.Add(labelHelpFoodDataGrid);
             tabPageFood.Controls.Add(labelHelpFoodFilter);
             tabPageFood.Controls.Add(labelHelpFoodTab);
             tabPageFood.Controls.Add(buttonHelp);
-            tabPageFood.Controls.Add(richTextBoxHelpFood);
             tabPageFood.Controls.Add(textBoxFilter);
             tabPageFood.Controls.Add(labelInfoFood);
             tabPageFood.Controls.Add(checkBoxMainFoodCols);
@@ -869,6 +869,18 @@ namespace DietSentry
             tabPageFood.Text = "Food";
             tabPageFood.HelpRequested += TabPageFood_HelpRequested;
             // 
+            // labelHelpShowCols
+            // 
+            labelHelpShowCols.BackColor = Color.YellowGreen;
+            labelHelpShowCols.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelHelpShowCols.ForeColor = SystemColors.ButtonHighlight;
+            labelHelpShowCols.Location = new Point(95, 19);
+            labelHelpShowCols.Name = "labelHelpShowCols";
+            labelHelpShowCols.Size = new Size(14, 15);
+            labelHelpShowCols.TabIndex = 16;
+            labelHelpShowCols.Text = "?";
+            labelHelpShowCols.MouseHover += labelHelpShowCols_MouseHover;
+            // 
             // labelHelpFoodDataGrid
             // 
             labelHelpFoodDataGrid.AutoSize = true;
@@ -880,7 +892,7 @@ namespace DietSentry
             labelHelpFoodDataGrid.Size = new Size(14, 15);
             labelHelpFoodDataGrid.TabIndex = 15;
             labelHelpFoodDataGrid.Text = "?";
-            labelHelpFoodDataGrid.MouseHover += labelHelpFoodDataGrid_MouseHover;
+            labelHelpFoodDataGrid.MouseHover += LabelHelpFoodDataGrid_MouseHover;
             // 
             // labelHelpFoodFilter
             // 
@@ -893,11 +905,10 @@ namespace DietSentry
             labelHelpFoodFilter.Size = new Size(14, 15);
             labelHelpFoodFilter.TabIndex = 14;
             labelHelpFoodFilter.Text = "?";
-            labelHelpFoodFilter.MouseHover += labelHelpFoodFilter_MouseHover;
+            labelHelpFoodFilter.MouseHover += LabelHelpFoodFilter_MouseHover;
             // 
             // labelHelpFoodTab
             // 
-            labelHelpFoodTab.AutoSize = true;
             labelHelpFoodTab.BackColor = Color.YellowGreen;
             labelHelpFoodTab.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelHelpFoodTab.ForeColor = SystemColors.ButtonHighlight;
@@ -906,7 +917,7 @@ namespace DietSentry
             labelHelpFoodTab.Size = new Size(14, 15);
             labelHelpFoodTab.TabIndex = 12;
             labelHelpFoodTab.Text = "?";
-            labelHelpFoodTab.MouseHover += labelHelpFoodTab_MouseHover;
+            labelHelpFoodTab.MouseHover += LabelHelpFoodTab_MouseHover;
             // 
             // buttonHelp
             // 
@@ -917,18 +928,6 @@ namespace DietSentry
             buttonHelp.Text = "HELP";
             buttonHelp.UseVisualStyleBackColor = true;
             buttonHelp.Click += ButtonHelp_Click;
-            // 
-            // richTextBoxHelpFood
-            // 
-            richTextBoxHelpFood.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            richTextBoxHelpFood.BackColor = SystemColors.ControlLight;
-            richTextBoxHelpFood.BorderStyle = BorderStyle.None;
-            richTextBoxHelpFood.EnableAutoDragDrop = true;
-            richTextBoxHelpFood.Location = new Point(851, 6);
-            richTextBoxHelpFood.Name = "richTextBoxHelpFood";
-            richTextBoxHelpFood.Size = new Size(529, 93);
-            richTextBoxHelpFood.TabIndex = 10;
-            richTextBoxHelpFood.Text = resources.GetString("richTextBoxHelpFood.Text");
             // 
             // textBoxFilter
             // 
@@ -959,7 +958,7 @@ namespace DietSentry
             checkBoxMainFoodCols.AutoSize = true;
             checkBoxMainFoodCols.Checked = true;
             checkBoxMainFoodCols.CheckState = CheckState.Checked;
-            checkBoxMainFoodCols.Location = new Point(100, 18);
+            checkBoxMainFoodCols.Location = new Point(116, 18);
             checkBoxMainFoodCols.Name = "checkBoxMainFoodCols";
             checkBoxMainFoodCols.Size = new Size(161, 19);
             checkBoxMainFoodCols.TabIndex = 8;
@@ -1495,7 +1494,6 @@ namespace DietSentry
         private DataGridViewTextBoxColumn alcoholDataGridViewTextBoxColumn1;
         private TabPage tabPageFood;
         private Button buttonHelp;
-        private RichTextBox richTextBoxHelpFood;
         private TextBox textBoxFilter;
         private Label labelInfoFood;
         private CheckBox checkBoxMainFoodCols;
@@ -1530,5 +1528,6 @@ namespace DietSentry
         private Label labelHelpFoodTab;
         private Label labelHelpFoodDataGrid;
         private Label labelHelpFoodFilter;
+        private Label labelHelpShowCols;
     }
 }

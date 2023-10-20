@@ -35,39 +35,28 @@ namespace DietSentry
         private void InitializeComponent()
         {
             richTextBoxHelp = new RichTextBox();
-            label1 = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
             // richTextBoxHelp
             // 
             richTextBoxHelp.AccessibleRole = AccessibleRole.None;
             richTextBoxHelp.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            richTextBoxHelp.BackColor = SystemColors.Info;
+            richTextBoxHelp.BackColor = SystemColors.Window;
             richTextBoxHelp.BorderStyle = BorderStyle.None;
-            richTextBoxHelp.Location = new Point(2, 50);
+            richTextBoxHelp.Location = new Point(2, 3);
             richTextBoxHelp.Name = "richTextBoxHelp";
             richTextBoxHelp.ScrollBars = RichTextBoxScrollBars.None;
-            richTextBoxHelp.Size = new Size(755, 396);
+            richTextBoxHelp.Size = new Size(543, 630);
             richTextBoxHelp.TabIndex = 0;
             richTextBoxHelp.Text = "";
             richTextBoxHelp.KeyDown += richTextBoxHelp_KeyDown;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 1;
-            label1.Text = "label1";
             // 
             // Help
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.Info;
-            ClientSize = new Size(800, 450);
-            Controls.Add(label1);
+            BackColor = SystemColors.Window;
+            ClientSize = new Size(588, 637);
             Controls.Add(richTextBoxHelp);
             MaximizeBox = false;
             MinimizeBox = false;
@@ -77,12 +66,10 @@ namespace DietSentry
             TopMost = true;
             Load += Help_Load;
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private RichTextBox richTextBoxHelp;
-        private System.Windows.Forms.Label label1;
     }
 }

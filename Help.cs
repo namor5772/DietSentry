@@ -46,7 +46,7 @@ namespace DietSentry
 
         private void richTextBoxHelp_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if ((e.KeyCode == Keys.Enter)|(e.KeyCode == Keys.Escape))
             {
                 e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
                 this.Close();

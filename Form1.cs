@@ -1054,77 +1054,115 @@ namespace DietSentry
         /*
          * The following implements the context sensitive help for controls in this form
          * If a control has focus pressing the {F1} key brings up the help form with the rtf text
-         * positioned at the appropriate topic. The HelpCore() function will be different in different forms
-         * to adjust positioning of the help form.
+         * positioned at the appropriate topic. In addition hovering with mouse over any [?] buttons
+         * does the same for the nearby control or form element.
          */
-        private void HelpCore()
+
+        private static void HelpCore(int ix, int iy)
         {
             // sets position and opens help form
             Help frm = new()
             {
-                StartPosition = FormStartPosition.Manual
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(ix, iy)
             };
-            int ix = this.PointToScreen(tabPageFood.Location).X;
-            int iy = this.PointToScreen(tabPageFood.Location).Y;
-            frm.Location = new Point(ix - 7+6, iy+50); // the 7 is a bit of a cludge
             frm.Show();
         }
 
         private void ButtonHelp_Click(object sender, EventArgs e)
         {
+            int iw = buttonHelp.Size.Width;
+            int ih = 48; // fudge to buttonHelp.Size.Height;
+            int ix = this.PointToScreen(buttonHelp.Location).X + iw;
+            int iy = this.PointToScreen(buttonHelp.Location).Y + ih;
             UtilitiesRMG.SHelpFind = "Diet Sentry overview";
-            HelpCore();
+            HelpCore(ix, iy);
         }
+
+
+        // Help via hovering over [?] button
+
+        private void LabelHelpFoodTab_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
+            int iw = labelHelpFoodTab.Size.Width;
+            int ih = 40; // fudge to labelHelpFoodTab.Size.Height;
+            int ix = this.PointToScreen(labelHelpFoodTab.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpFoodTab.Location).Y + ih;
+            HelpCore(ix, iy);
+        }
+
+        private void LabelHelpFoodFilter_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Food filter";
+            int iw = labelHelpFoodFilter.Size.Width;
+            int ih = 40; // fudge to textBoxFilter.Size.Height;
+            int ix = PointToScreen(labelHelpFoodFilter.Location).X + iw;
+            int iy = PointToScreen(labelHelpFoodFilter.Location).Y + ih;
+            HelpCore(ix, iy);
+        }
+
+        private void LabelHelpFoodDataGrid_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Food DataGrid";
+            int iw = labelHelpFoodDataGrid.Size.Width;
+            int ih = 40; // fudge
+            int ix = this.PointToScreen(dataGridViewFoods.Location).X + iw;
+            int iy = this.PointToScreen(dataGridViewFoods.Location).Y + ih;
+            HelpCore(ix, iy);
+        }
+
+        private void labelHelpShowCols_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Food CheckBox";
+            int iw = labelHelpShowCols.Size.Width;
+            int ih = 40; // fudge
+            int ix = this.PointToScreen(labelHelpShowCols.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpShowCols.Location).Y + ih;
+            HelpCore(ix, iy);
+        }
+
+        // Help via {F1} key press in selected control
 
         private void TabPageFood_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             UtilitiesRMG.SHelpFind = "#Food tab";
-            HelpCore();
+            int ix = this.PointToScreen(tabPageFood.Location).X;
+            int iy = this.PointToScreen(tabPageFood.Location).Y;
+            HelpCore(ix, iy);
         }
 
         private void DataGridViewFoods_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             UtilitiesRMG.SHelpFind = "#Food DataGrid";
-            HelpCore();
+            int ix = this.PointToScreen(tabPageFood.Location).X;
+            int iy = this.PointToScreen(tabPageFood.Location).Y;
+            HelpCore(ix, iy);
         }
 
         private void TextBoxFilter_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             UtilitiesRMG.SHelpFind = "#Food filter";
-            HelpCore();
+            int ix = this.PointToScreen(tabPageFood.Location).X;
+            int iy = this.PointToScreen(tabPageFood.Location).Y;
+            HelpCore(ix, iy);
         }
 
         private void CheckBoxMainFoodCols_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             UtilitiesRMG.SHelpFind = "#Food CheckBox";
-            HelpCore();
+            int ix = this.PointToScreen(tabPageFood.Location).X;
+            int iy = this.PointToScreen(tabPageFood.Location).Y;
+            HelpCore(ix, iy);
         }
 
         private void DataGridViewEaten_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
             UtilitiesRMG.SHelpFind = "#Eaten DataGrid";
-            HelpCore();
+            int ix = this.PointToScreen(tabPageFood.Location).X;
+            int iy = this.PointToScreen(tabPageFood.Location).Y;
+            HelpCore(ix, iy);
         }
 
-        // the new way with [?] "hover button"
-
-        private void labelHelpFoodTab_MouseHover(object sender, EventArgs e)
-        {
-            UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
-            HelpCore();
-        }
-
-        private void labelHelpFoodFilter_MouseHover(object sender, EventArgs e)
-        {
-            UtilitiesRMG.SHelpFind = "#Food filter";
-            HelpCore();
-        }
-
-        private void labelHelpFoodDataGrid_MouseHover(object sender, EventArgs e)
-        {
-            UtilitiesRMG.SHelpFind = "#Food DataGrid";
-            HelpCore();
-        }
     }
-
 }

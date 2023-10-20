@@ -78,7 +78,7 @@
             dateTimePickerEaten.Name = "dateTimePickerEaten";
             dateTimePickerEaten.Size = new Size(186, 23);
             dateTimePickerEaten.TabIndex = 4;
-            dateTimePickerEaten.HelpRequested += dateTimePickerEaten_HelpRequested;
+            dateTimePickerEaten.HelpRequested += DateTimePickerEaten_HelpRequested;
             dateTimePickerEaten.KeyDown += DateTimePickerEaten_KeyDown;
             // 
             // labelHelpFoodEatenDialog
@@ -92,7 +92,7 @@
             labelHelpFoodEatenDialog.Size = new Size(14, 15);
             labelHelpFoodEatenDialog.TabIndex = 15;
             labelHelpFoodEatenDialog.Text = "?";
-            labelHelpFoodEatenDialog.MouseHover += labelHelpFoodEatenDialog_MouseHover;
+            labelHelpFoodEatenDialog.MouseHover += LabelHelpFoodEatenDialog_MouseHover;
             // 
             // InputForm
             // 
