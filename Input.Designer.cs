@@ -36,6 +36,7 @@
             labelAmount = new Label();
             labelDescription = new Label();
             dateTimePickerEaten = new DateTimePicker();
+            labelHelpFoodEatenDialog = new Label();
             SuspendLayout();
             // 
             // textBoxAmount
@@ -61,9 +62,9 @@
             // 
             labelDescription.AutoEllipsis = true;
             labelDescription.ForeColor = SystemColors.HighlightText;
-            labelDescription.Location = new Point(12, 9);
+            labelDescription.Location = new Point(23, 9);
             labelDescription.Name = "labelDescription";
-            labelDescription.Size = new Size(358, 15);
+            labelDescription.Size = new Size(347, 15);
             labelDescription.TabIndex = 3;
             labelDescription.Text = "description";
             // 
@@ -80,6 +81,19 @@
             dateTimePickerEaten.HelpRequested += dateTimePickerEaten_HelpRequested;
             dateTimePickerEaten.KeyDown += DateTimePickerEaten_KeyDown;
             // 
+            // labelHelpFoodEatenDialog
+            // 
+            labelHelpFoodEatenDialog.AutoSize = true;
+            labelHelpFoodEatenDialog.BackColor = Color.YellowGreen;
+            labelHelpFoodEatenDialog.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelHelpFoodEatenDialog.ForeColor = SystemColors.ButtonHighlight;
+            labelHelpFoodEatenDialog.Location = new Point(5, 9);
+            labelHelpFoodEatenDialog.Name = "labelHelpFoodEatenDialog";
+            labelHelpFoodEatenDialog.Size = new Size(14, 15);
+            labelHelpFoodEatenDialog.TabIndex = 15;
+            labelHelpFoodEatenDialog.Text = "?";
+            labelHelpFoodEatenDialog.MouseHover += labelHelpFoodEatenDialog_MouseHover;
+            // 
             // InputForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -87,6 +101,7 @@
             BackColor = SystemColors.Highlight;
             ClientSize = new Size(403, 96);
             ControlBox = false;
+            Controls.Add(labelHelpFoodEatenDialog);
             Controls.Add(dateTimePickerEaten);
             Controls.Add(labelDescription);
             Controls.Add(labelAmount);
@@ -107,5 +122,6 @@
         private Label labelAmount;
         private Label labelDescription;
         private DateTimePicker dateTimePickerEaten;
+        private Label labelHelpFoodEatenDialog;
     }
 }

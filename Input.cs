@@ -84,8 +84,8 @@ namespace DietSentry
             {
                 StartPosition = FormStartPosition.Manual
             };
-            int ix = this.PointToScreen(labelDescription.Location).X;
-            int iy = this.PointToScreen(labelDescription.Location).Y;
+            int ix = this.PointToScreen(labelHelpFoodEatenDialog.Location).X;
+            int iy = this.PointToScreen(labelHelpFoodEatenDialog.Location).Y;
             frm.Location = new Point(ix - 7, iy); // the 7 is a bit of a cludge
             frm.Show();
         }
@@ -97,6 +97,12 @@ namespace DietSentry
         }
 
         private void dateTimePickerEaten_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            UtilitiesRMG.SHelpFind = "#Eaten food dialog";
+            HelpCore();
+        }
+
+        private void labelHelpFoodEatenDialog_MouseHover(object sender, EventArgs e)
         {
             UtilitiesRMG.SHelpFind = "#Eaten food dialog";
             HelpCore();

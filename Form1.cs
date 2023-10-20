@@ -1050,35 +1050,6 @@ namespace DietSentry
             }
         }
 
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            // Create an OpenFileDialog to request a file to open.
-            OpenFileDialog openFile1 = new()
-            {
-                // Initialize the OpenFileDialog to look for RTF files.
-                DefaultExt = "*.rtf",
-                Filter = "RTF Files|*.rtf"
-            };
-
-            // Determine whether the user selected a file from the OpenFileDialog. 
-            if (openFile1.ShowDialog() == System.Windows.Forms.DialogResult.OK &&
-               openFile1.FileName.Length > 0)
-            {
-                // Load the contents of the file into the RichTextBox.
-                richTextBoxHelp.LoadFile(openFile1.FileName);
-            }
-        }
-
-        private void Button2_Click(object sender, EventArgs e)
-        {
-            int rci = this.richTextBoxHelp.Find(textBoxFind.Text);
-            labelFind.Text = rci.ToString();
-            int rcl = this.richTextBoxHelp.GetLineFromCharIndex(rci);
-            labelFind2.Text = rcl.ToString();
-            richTextBoxHelp.SelectionStart = rci;
-            richTextBoxHelp.ScrollToCaret();
-        }
-
 
         /*
          * The following implements the context sensitive help for controls in this form
@@ -1095,7 +1066,7 @@ namespace DietSentry
             };
             int ix = this.PointToScreen(tabPageFood.Location).X;
             int iy = this.PointToScreen(tabPageFood.Location).Y;
-            frm.Location = new Point(ix - 7, iy); // the 7 is a bit of a cludge
+            frm.Location = new Point(ix - 7+6, iy+50); // the 7 is a bit of a cludge
             frm.Show();
         }
 
@@ -1135,6 +1106,25 @@ namespace DietSentry
             HelpCore();
         }
 
+        // the new way with [?] "hover button"
+
+        private void labelHelpFoodTab_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
+            HelpCore();
+        }
+
+        private void labelHelpFoodFilter_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Food filter";
+            HelpCore();
+        }
+
+        private void labelHelpFoodDataGrid_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Food DataGrid";
+            HelpCore();
+        }
     }
 
 }
