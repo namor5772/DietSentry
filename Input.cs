@@ -9,7 +9,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static DietSentry.UtilitiesRMG; // so can use the UnitsString function
+using static DietSentry.UtilitiesRMG; // so can use the UnitsString & SHelpFind functions
 
 
 namespace DietSentry
@@ -75,7 +75,7 @@ namespace DietSentry
         private void HelpCore()
         {
             // sets position and opens help form
-            Help frm = new(this)
+            Help frm = new()
             {
                 StartPosition = FormStartPosition.Manual
             };
@@ -86,9 +86,9 @@ namespace DietSentry
         }
 
 
-        private void textBoxAmount_HelpRequested(object sender, HelpEventArgs hlpevent)
+        private void TextBoxAmount_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
-            mainForm!.sHelpFind = "Diet Sentry overview";
+            UtilitiesRMG.SHelpFind = "#Food filter";
             HelpCore();
         }
     }

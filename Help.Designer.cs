@@ -35,6 +35,7 @@ namespace DietSentry
         private void InitializeComponent()
         {
             richTextBoxHelp = new RichTextBox();
+            label1 = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
             // richTextBoxHelp
@@ -50,12 +51,22 @@ namespace DietSentry
             richTextBoxHelp.TabIndex = 0;
             richTextBoxHelp.Text = "";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 1;
+            label1.Text = "label1";
+            // 
             // Help
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Info;
             ClientSize = new Size(800, 450);
+            Controls.Add(label1);
             Controls.Add(richTextBoxHelp);
             MaximizeBox = false;
             MinimizeBox = false;
@@ -65,10 +76,12 @@ namespace DietSentry
             TopMost = true;
             Load += Help_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private RichTextBox richTextBoxHelp;
+        private System.Windows.Forms.Label label1;
     }
 }

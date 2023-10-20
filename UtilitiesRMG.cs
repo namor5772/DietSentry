@@ -8,6 +8,22 @@ namespace DietSentry
 {
     internal class UtilitiesRMG
     {
+
+        // string used to find context sensitive help in rtf file
+        private static string sHelpFind = "BLANK";
+
+        public static string SHelpFind
+        {
+            get
+            {
+                return sHelpFind;
+            }
+            set
+            {
+                sHelpFind = value;
+            }
+        }
+
         /// <summary>
         /// function that specifies the units used for an existing food item
         /// based on the food description string parameter sDesc,

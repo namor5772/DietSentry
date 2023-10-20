@@ -20,6 +20,10 @@
             base.Dispose(disposing);
         }
 
+        // string used to find context sensitive help in rtf file
+        public string sHelpFind = "BLANK";
+
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -40,7 +44,7 @@
             textBoxAmount.Name = "textBoxAmount";
             textBoxAmount.Size = new Size(89, 23);
             textBoxAmount.TabIndex = 1;
-            textBoxAmount.HelpRequested += textBoxAmount_HelpRequested;
+            textBoxAmount.HelpRequested += TextBoxAmount_HelpRequested;
             textBoxAmount.KeyDown += TextBoxAmount_KeyDown;
             // 
             // labelAmount

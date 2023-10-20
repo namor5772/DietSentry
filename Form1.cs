@@ -1080,10 +1080,15 @@ namespace DietSentry
         }
 
 
+        /*
+         * The following implements the context sensitive help for controls in this form
+         * If a control has focus pressing the {F1} key, brings up the help form with the rtf text
+         * positioned at the appropriate topic
+         */
         private void HelpCore()
         {
             // sets position and opens help form
-            Help frm = new(this)
+            Help frm = new()
             {
                 StartPosition = FormStartPosition.Manual
             };
@@ -1095,37 +1100,37 @@ namespace DietSentry
 
         private void ButtonHelp_Click(object sender, EventArgs e)
         {
-            sHelpFind = "Diet Sentry overview";
+            UtilitiesRMG.SHelpFind = "Diet Sentry overview";
             HelpCore();
         }
 
         private void TabPageFood_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
-            sHelpFind = "#Food tab";
+            UtilitiesRMG.SHelpFind = "#Food tab";
             HelpCore();
         }
 
         private void DataGridViewFoods_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
-            sHelpFind = "#Food DataGrid";
+            UtilitiesRMG.SHelpFind = "#Food DataGrid";
             HelpCore();
         }
 
         private void TextBoxFilter_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
-            sHelpFind = "#Food filter";
+            UtilitiesRMG.SHelpFind = "#Food filter";
             HelpCore();
         }
 
         private void CheckBoxMainFoodCols_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
-            sHelpFind = "#Food CheckBox";
+            UtilitiesRMG.SHelpFind = "#Food CheckBox";
             HelpCore();
         }
 
         private void DataGridViewEaten_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
-            sHelpFind = "#Eaten DataGrid";
+            UtilitiesRMG.SHelpFind = "#Eaten DataGrid";
             HelpCore();
         }
 
