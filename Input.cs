@@ -69,9 +69,14 @@ namespace DietSentry
                 e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
                 ActOnEnterKeyPress();
             }
-
         }
 
+        /*
+         * The following implements the context sensitive help for controls in this form
+         * If a control has focus pressing the {F1} key brings up the help form with the rtf text
+         * positioned at the appropriate topic. The HelpCore() function will be different in different forms
+         * to adjust positioning of the help form.
+         */
         private void HelpCore()
         {
             // sets position and opens help form
@@ -85,10 +90,15 @@ namespace DietSentry
             frm.Show();
         }
 
-
         private void TextBoxAmount_HelpRequested(object sender, HelpEventArgs hlpevent)
         {
-            UtilitiesRMG.SHelpFind = "#Food filter";
+            UtilitiesRMG.SHelpFind = "#Eaten food dialog";
+            HelpCore();
+        }
+
+        private void dateTimePickerEaten_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            UtilitiesRMG.SHelpFind = "#Eaten food dialog";
             HelpCore();
         }
     }

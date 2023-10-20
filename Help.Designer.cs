@@ -50,6 +50,7 @@ namespace DietSentry
             richTextBoxHelp.Size = new Size(755, 396);
             richTextBoxHelp.TabIndex = 0;
             richTextBoxHelp.Text = "";
+            richTextBoxHelp.KeyDown += richTextBoxHelp_KeyDown;
             // 
             // label1
             // 

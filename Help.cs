@@ -16,14 +16,14 @@ namespace DietSentry
 {
     public partial class Help : Form
     {
-//        private readonly MainForm? mainForm;
+        //        private readonly MainForm? mainForm;
 
         public Help()
         {
             InitializeComponent();
 
         }
- 
+
         private void Help_Load(object sender, EventArgs e)
         {
             // load rtf file into richTextBox
@@ -42,6 +42,15 @@ namespace DietSentry
 
             // clear selection view (maintaining position)
             richTextBoxHelp.DeselectAll();
+        }
+
+        private void richTextBoxHelp_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
+                this.Close();
+            }
         }
     }
 }
