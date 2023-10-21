@@ -46,17 +46,17 @@ namespace DietSentry
             richTextBoxHelp.Location = new Point(2, 3);
             richTextBoxHelp.Name = "richTextBoxHelp";
             richTextBoxHelp.ScrollBars = RichTextBoxScrollBars.None;
-            richTextBoxHelp.Size = new Size(543, 630);
+            richTextBoxHelp.Size = new Size(688, 630);
             richTextBoxHelp.TabIndex = 0;
             richTextBoxHelp.Text = "";
-            richTextBoxHelp.KeyDown += richTextBoxHelp_KeyDown;
+            richTextBoxHelp.KeyDown += RichTextBoxHelp_KeyDown;
             // 
             // Help
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(588, 637);
+            ClientSize = new Size(733, 637);
             Controls.Add(richTextBoxHelp);
             MaximizeBox = false;
             MinimizeBox = false;

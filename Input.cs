@@ -71,41 +71,30 @@ namespace DietSentry
             }
         }
 
+
         /*
-         * The following implements the context sensitive help for controls in this form
-         * If a control has focus pressing the {F1} key brings up the help form with the rtf text
-         * positioned at the appropriate topic. The HelpCore() function will be different in different forms
-         * to adjust positioning of the help form.
+         * Hovering with mouse over any [?] button brings up the help form
+         * with the rtf text positioned at the appropriate topic.
          */
-        private void HelpCore()
+        private static void HelpCore(int ix, int iy)
         {
             // sets position and opens help form
             Help frm = new()
             {
-                StartPosition = FormStartPosition.Manual
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(ix, iy)
             };
-            int ix = this.PointToScreen(labelHelpFoodEatenDialog.Location).X;
-            int iy = this.PointToScreen(labelHelpFoodEatenDialog.Location).Y;
-            frm.Location = new Point(ix - 7, iy); // the 7 is a bit of a cludge
             frm.Show();
-        }
-
-        private void TextBoxAmount_HelpRequested(object sender, HelpEventArgs hlpevent)
-        {
-            UtilitiesRMG.SHelpFind = "#Eaten food dialog";
-            HelpCore();
-        }
-
-        private void DateTimePickerEaten_HelpRequested(object sender, HelpEventArgs hlpevent)
-        {
-            UtilitiesRMG.SHelpFind = "#Eaten food dialog";
-            HelpCore();
         }
 
         private void LabelHelpFoodEatenDialog_MouseHover(object sender, EventArgs e)
         {
             UtilitiesRMG.SHelpFind = "#Eaten food dialog";
-            HelpCore();
+            int iw = 10; // fudge
+            int ih = 18; // fudge
+            int ix = this.PointToScreen(labelHelpFoodEatenDialog.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpFoodEatenDialog.Location).Y + ih;
+            HelpCore(ix, iy);
         }
     }
 }

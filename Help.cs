@@ -44,7 +44,7 @@ namespace DietSentry
             richTextBoxHelp.DeselectAll();
         }
 
-        private void richTextBoxHelp_KeyDown(object sender, KeyEventArgs e)
+        private void RichTextBoxHelp_KeyDown(object sender, KeyEventArgs e)
         {
             if ((e.KeyCode == Keys.Enter)|(e.KeyCode == Keys.Escape))
             {

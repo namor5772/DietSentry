@@ -184,6 +184,7 @@ namespace DietSentry
             cholesterolDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             alcoholDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             tabPageFood = new TabPage();
+            labelHelpFoodInfo = new Label();
             labelHelpShowCols = new Label();
             labelHelpFoodDataGrid = new Label();
             labelHelpFoodFilter = new Label();
@@ -424,7 +425,6 @@ namespace DietSentry
             dataGridViewEaten.Size = new Size(1372, 581);
             dataGridViewEaten.TabIndex = 0;
             dataGridViewEaten.UserDeletingRow += DataGridViewEaten_UserDeletingRow;
-            dataGridViewEaten.HelpRequested += DataGridViewEaten_HelpRequested;
             dataGridViewEaten.KeyDown += DataGridViewEaten_KeyDown;
             // 
             // EatenId
@@ -851,6 +851,7 @@ namespace DietSentry
             tabPageFood.AutoScroll = true;
             tabPageFood.BackColor = Color.Transparent;
             tabPageFood.BorderStyle = BorderStyle.FixedSingle;
+            tabPageFood.Controls.Add(labelHelpFoodInfo);
             tabPageFood.Controls.Add(labelHelpShowCols);
             tabPageFood.Controls.Add(labelHelpFoodDataGrid);
             tabPageFood.Controls.Add(labelHelpFoodFilter);
@@ -867,7 +868,18 @@ namespace DietSentry
             tabPageFood.Size = new Size(1388, 691);
             tabPageFood.TabIndex = 0;
             tabPageFood.Text = "Food";
-            tabPageFood.HelpRequested += TabPageFood_HelpRequested;
+            // 
+            // labelHelpFoodInfo
+            // 
+            labelHelpFoodInfo.BackColor = Color.YellowGreen;
+            labelHelpFoodInfo.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelHelpFoodInfo.ForeColor = SystemColors.ButtonHighlight;
+            labelHelpFoodInfo.Location = new Point(312, 19);
+            labelHelpFoodInfo.Name = "labelHelpFoodInfo";
+            labelHelpFoodInfo.Size = new Size(14, 15);
+            labelHelpFoodInfo.TabIndex = 17;
+            labelHelpFoodInfo.Text = "?";
+            labelHelpFoodInfo.MouseHover += LabelHelpFoodInfo_MouseHover;
             // 
             // labelHelpShowCols
             // 
@@ -879,7 +891,7 @@ namespace DietSentry
             labelHelpShowCols.Size = new Size(14, 15);
             labelHelpShowCols.TabIndex = 16;
             labelHelpShowCols.Text = "?";
-            labelHelpShowCols.MouseHover += labelHelpShowCols_MouseHover;
+            labelHelpShowCols.MouseHover += LabelHelpShowCols_MouseHover;
             // 
             // labelHelpFoodDataGrid
             // 
@@ -939,7 +951,6 @@ namespace DietSentry
             textBoxFilter.Size = new Size(135, 23);
             textBoxFilter.TabIndex = 2;
             textBoxFilter.WordWrap = false;
-            textBoxFilter.HelpRequested += TextBoxFilter_HelpRequested;
             textBoxFilter.Enter += TextBoxFilter_Enter;
             textBoxFilter.KeyDown += TextBoxFilter_KeyDown;
             // 
@@ -947,11 +958,11 @@ namespace DietSentry
             // 
             labelInfoFood.AutoSize = true;
             labelInfoFood.BackColor = SystemColors.ControlLight;
-            labelInfoFood.Location = new Point(320, 19);
+            labelInfoFood.Location = new Point(332, 19);
             labelInfoFood.Name = "labelInfoFood";
-            labelInfoFood.Size = new Size(37, 15);
+            labelInfoFood.Size = new Size(13, 15);
             labelInfoFood.TabIndex = 9;
-            labelInfoFood.Text = "          ";
+            labelInfoFood.Text = "  ";
             // 
             // checkBoxMainFoodCols
             // 
@@ -965,7 +976,6 @@ namespace DietSentry
             checkBoxMainFoodCols.Text = "Only show main columns";
             checkBoxMainFoodCols.UseVisualStyleBackColor = true;
             checkBoxMainFoodCols.CheckedChanged += CheckBoxMainFoodCols_CheckedChanged;
-            checkBoxMainFoodCols.HelpRequested += CheckBoxMainFoodCols_HelpRequested;
             // 
             // labelFilter
             // 
@@ -1029,7 +1039,6 @@ namespace DietSentry
             dataGridViewFoods.TabIndex = 4;
             dataGridViewFoods.CellDoubleClick += DataGridViewFoods_CellDoubleClick;
             dataGridViewFoods.UserDeletingRow += DataGridViewFoods_UserDeletingRow;
-            dataGridViewFoods.HelpRequested += DataGridViewFoods_HelpRequested;
             dataGridViewFoods.KeyDown += DataGridViewFoods_KeyDown;
             // 
             // FoodIdDataGridViewTextBoxColumn
@@ -1529,5 +1538,6 @@ namespace DietSentry
         private Label labelHelpFoodDataGrid;
         private Label labelHelpFoodFilter;
         private Label labelHelpShowCols;
+        private Label labelHelpFoodInfo;
     }
 }

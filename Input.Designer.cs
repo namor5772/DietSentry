@@ -45,7 +45,6 @@
             textBoxAmount.Name = "textBoxAmount";
             textBoxAmount.Size = new Size(89, 23);
             textBoxAmount.TabIndex = 1;
-            textBoxAmount.HelpRequested += TextBoxAmount_HelpRequested;
             textBoxAmount.KeyDown += TextBoxAmount_KeyDown;
             // 
             // labelAmount
@@ -78,7 +77,6 @@
             dateTimePickerEaten.Name = "dateTimePickerEaten";
             dateTimePickerEaten.Size = new Size(186, 23);
             dateTimePickerEaten.TabIndex = 4;
-            dateTimePickerEaten.HelpRequested += DateTimePickerEaten_HelpRequested;
             dateTimePickerEaten.KeyDown += DateTimePickerEaten_KeyDown;
             // 
             // labelHelpFoodEatenDialog

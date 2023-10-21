@@ -1052,10 +1052,8 @@ namespace DietSentry
 
 
         /*
-         * The following implements the context sensitive help for controls in this form
-         * If a control has focus pressing the {F1} key brings up the help form with the rtf text
-         * positioned at the appropriate topic. In addition hovering with mouse over any [?] buttons
-         * does the same for the nearby control or form element.
+         * Hovering with mouse over any [?] button brings up the help form
+         * with the rtf text positioned at the appropriate topic.
          */
 
         private static void HelpCore(int ix, int iy)
@@ -1075,7 +1073,7 @@ namespace DietSentry
             int ih = 48; // fudge to buttonHelp.Size.Height;
             int ix = this.PointToScreen(buttonHelp.Location).X + iw;
             int iy = this.PointToScreen(buttonHelp.Location).Y + ih;
-            UtilitiesRMG.SHelpFind = "Diet Sentry overview";
+            UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
             HelpCore(ix, iy);
         }
 
@@ -1086,7 +1084,7 @@ namespace DietSentry
         {
             UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
             int iw = labelHelpFoodTab.Size.Width;
-            int ih = 40; // fudge to labelHelpFoodTab.Size.Height;
+            int ih = 40; // fudge
             int ix = this.PointToScreen(labelHelpFoodTab.Location).X + iw;
             int iy = this.PointToScreen(labelHelpFoodTab.Location).Y + ih;
             HelpCore(ix, iy);
@@ -1096,7 +1094,7 @@ namespace DietSentry
         {
             UtilitiesRMG.SHelpFind = "#Food filter";
             int iw = labelHelpFoodFilter.Size.Width;
-            int ih = 40; // fudge to textBoxFilter.Size.Height;
+            int ih = 40; // fudge
             int ix = PointToScreen(labelHelpFoodFilter.Location).X + iw;
             int iy = PointToScreen(labelHelpFoodFilter.Location).Y + ih;
             HelpCore(ix, iy);
@@ -1112,7 +1110,7 @@ namespace DietSentry
             HelpCore(ix, iy);
         }
 
-        private void labelHelpShowCols_MouseHover(object sender, EventArgs e)
+        private void LabelHelpShowCols_MouseHover(object sender, EventArgs e)
         {
             UtilitiesRMG.SHelpFind = "#Food CheckBox";
             int iw = labelHelpShowCols.Size.Width;
@@ -1122,45 +1120,13 @@ namespace DietSentry
             HelpCore(ix, iy);
         }
 
-        // Help via {F1} key press in selected control
-
-        private void TabPageFood_HelpRequested(object sender, HelpEventArgs hlpevent)
+        private void LabelHelpFoodInfo_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Food tab";
-            int ix = this.PointToScreen(tabPageFood.Location).X;
-            int iy = this.PointToScreen(tabPageFood.Location).Y;
-            HelpCore(ix, iy);
-        }
-
-        private void DataGridViewFoods_HelpRequested(object sender, HelpEventArgs hlpevent)
-        {
-            UtilitiesRMG.SHelpFind = "#Food DataGrid";
-            int ix = this.PointToScreen(tabPageFood.Location).X;
-            int iy = this.PointToScreen(tabPageFood.Location).Y;
-            HelpCore(ix, iy);
-        }
-
-        private void TextBoxFilter_HelpRequested(object sender, HelpEventArgs hlpevent)
-        {
-            UtilitiesRMG.SHelpFind = "#Food filter";
-            int ix = this.PointToScreen(tabPageFood.Location).X;
-            int iy = this.PointToScreen(tabPageFood.Location).Y;
-            HelpCore(ix, iy);
-        }
-
-        private void CheckBoxMainFoodCols_HelpRequested(object sender, HelpEventArgs hlpevent)
-        {
-            UtilitiesRMG.SHelpFind = "#Food CheckBox";
-            int ix = this.PointToScreen(tabPageFood.Location).X;
-            int iy = this.PointToScreen(tabPageFood.Location).Y;
-            HelpCore(ix, iy);
-        }
-
-        private void DataGridViewEaten_HelpRequested(object sender, HelpEventArgs hlpevent)
-        {
-            UtilitiesRMG.SHelpFind = "#Eaten DataGrid";
-            int ix = this.PointToScreen(tabPageFood.Location).X;
-            int iy = this.PointToScreen(tabPageFood.Location).Y;
+            UtilitiesRMG.SHelpFind = "#Food info label";
+            int iw = labelHelpFoodInfo.Size.Width;
+            int ih = 40; // fudge
+            int ix = this.PointToScreen(labelHelpFoodInfo.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpFoodInfo.Location).Y + ih;
             HelpCore(ix, iy);
         }
 
