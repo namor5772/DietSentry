@@ -460,7 +460,7 @@ namespace DietSentry
                         };
                         frm.ShowDialog();
 
-                        //                        labelInfo.Text = "{F4} Key pressed:   " + fT.ToString() + "  " + densityOfFood.ToString();
+                        labelInfoFood.Text = "{F4} Key pressed:   " + fT.ToString() + "  " + densityOfFood.ToString();
 
                         if (densityOfFood == 0.0) // invalid input, so error message
                         {
@@ -472,6 +472,10 @@ namespace DietSentry
                             // Displays the MessageBox.
                             MessageBox.Show(message, caption, buttons);
                             checkBoxDailyTotals.Checked = false;
+                        }
+                        else if (densityOfFood == -1.0) // blank input press {Enter} key or just press {Escape} or {Delete} keys to do nothing!
+                        {
+                            ;//do nothing
                         }
                         else // proceed to create copy of food item in Solid form
                         {

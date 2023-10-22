@@ -47,6 +47,11 @@ namespace DietSentry
                 amount = 0F;
             }
 
+            if (textBoxDensity.Text == "")
+            {
+                amount = -1;
+            }
+
             // collects the input, processes it and assignes it to a variable accessible in the MainForm
             // 0 indicates error with input
             mainForm!.densityOfFood = amount;
@@ -61,7 +66,45 @@ namespace DietSentry
                 e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
                 ActOnEnterKeyPress();
             }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                // closes form without doing anything
+                textBoxDensity.Text = "";
+                ActOnEnterKeyPress();
+            }
+            else if (e.KeyCode == Keys.Delete)
+            {
+                // closes form without doing anything
+                textBoxDensity.Text = "";
+                ActOnEnterKeyPress();
+            }
+
         }
 
+        /*
+         * Hovering with mouse over any [?] button brings up the help form
+         * with the rtf text positioned at the appropriate topic.
+         */
+        private static void HelpCore(int ix, int iy)
+        {
+            // sets position and opens help form
+            Help frm = new()
+            {
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(ix, iy)
+            };
+            frm.Show();
+        }
+
+
+        private void labelHelpFoodDensityDialog_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Eaten food dialog";
+            int iw = 10; // fudge
+            int ih = 18; // fudge
+            int ix = this.PointToScreen(labelHelpFoodDensityDialog.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpFoodDensityDialog.Location).Y + ih;
+            HelpCore(ix, iy);
+        }
     }
 }

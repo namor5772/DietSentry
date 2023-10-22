@@ -31,7 +31,7 @@
             textBoxDensity = new TextBox();
             labelDescription = new Label();
             labelDensity = new Label();
-            labelHelpFoodEatenDialog = new Label();
+            labelHelpFoodDensityDialog = new Label();
             SuspendLayout();
             // 
             // textBoxDensity
@@ -62,17 +62,18 @@
             labelDensity.TabIndex = 8;
             labelDensity.Text = "density in g/mL";
             // 
-            // labelHelpFoodEatenDialog
+            // labelHelpFoodDensityDialog
             // 
-            labelHelpFoodEatenDialog.AutoSize = true;
-            labelHelpFoodEatenDialog.BackColor = Color.YellowGreen;
-            labelHelpFoodEatenDialog.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelHelpFoodEatenDialog.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpFoodEatenDialog.Location = new Point(5, 9);
-            labelHelpFoodEatenDialog.Name = "labelHelpFoodEatenDialog";
-            labelHelpFoodEatenDialog.Size = new Size(14, 15);
-            labelHelpFoodEatenDialog.TabIndex = 16;
-            labelHelpFoodEatenDialog.Text = "?";
+            labelHelpFoodDensityDialog.AutoSize = true;
+            labelHelpFoodDensityDialog.BackColor = Color.YellowGreen;
+            labelHelpFoodDensityDialog.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelHelpFoodDensityDialog.ForeColor = SystemColors.ButtonHighlight;
+            labelHelpFoodDensityDialog.Location = new Point(5, 9);
+            labelHelpFoodDensityDialog.Name = "labelHelpFoodDensityDialog";
+            labelHelpFoodDensityDialog.Size = new Size(14, 15);
+            labelHelpFoodDensityDialog.TabIndex = 16;
+            labelHelpFoodDensityDialog.Text = "?";
+            labelHelpFoodDensityDialog.MouseHover += labelHelpFoodDensityDialog_MouseHover;
             // 
             // InputDensity
             // 
@@ -81,7 +82,7 @@
             BackColor = SystemColors.Highlight;
             ClientSize = new Size(382, 96);
             ControlBox = false;
-            Controls.Add(labelHelpFoodEatenDialog);
+            Controls.Add(labelHelpFoodDensityDialog);
             Controls.Add(labelDensity);
             Controls.Add(labelDescription);
             Controls.Add(textBoxDensity);
@@ -100,6 +101,6 @@
         private TextBox textBoxDensity;
         private Label labelDescription;
         private Label labelDensity;
-        private Label labelHelpFoodEatenDialog;
+        private Label labelHelpFoodDensityDialog;
     }
 }
