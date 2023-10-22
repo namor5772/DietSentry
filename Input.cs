@@ -53,6 +53,7 @@ namespace DietSentry
             Close();
         }
 
+
         private void TextBoxAmount_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -60,13 +61,38 @@ namespace DietSentry
                 e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
                 ActOnEnterKeyPress();
             }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                // closes form without doing anything
+                textBoxAmount.Text = "";
+                ActOnEnterKeyPress();
+            }
+            else if (e.KeyCode == Keys.Delete)
+            {
+                // closes form without doing anything
+                textBoxAmount.Text = "";
+                ActOnEnterKeyPress();
+            }
         }
+
 
         private void DateTimePickerEaten_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
+                ActOnEnterKeyPress();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                // closes form without doing anything
+                textBoxAmount.Text = "";
+                ActOnEnterKeyPress();
+            }
+            else if (e.KeyCode == Keys.Delete)
+            {
+                // closes form without doing anything
+                textBoxAmount.Text = "";
                 ActOnEnterKeyPress();
             }
         }

@@ -63,7 +63,7 @@
             labelDescription.ForeColor = SystemColors.HighlightText;
             labelDescription.Location = new Point(23, 9);
             labelDescription.Name = "labelDescription";
-            labelDescription.Size = new Size(347, 15);
+            labelDescription.Size = new Size(368, 15);
             labelDescription.TabIndex = 3;
             labelDescription.Text = "description";
             // 
