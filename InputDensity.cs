@@ -99,7 +99,7 @@ namespace DietSentry
 
         private void labelHelpFoodDensityDialog_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Eaten food dialog";
+            UtilitiesRMG.SHelpFind = "#Liquid density dialog";
             int iw = 10; // fudge
             int ih = 18; // fudge
             int ix = this.PointToScreen(labelHelpFoodDensityDialog.Location).X + iw;

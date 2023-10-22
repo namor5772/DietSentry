@@ -39,24 +39,23 @@ namespace DietSentry
             // 
             // richTextBoxHelp
             // 
-            richTextBoxHelp.AccessibleRole = AccessibleRole.None;
             richTextBoxHelp.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            richTextBoxHelp.BackColor = SystemColors.Window;
-            richTextBoxHelp.BorderStyle = BorderStyle.None;
-            richTextBoxHelp.Location = new Point(2, 3);
+            richTextBoxHelp.BorderStyle = BorderStyle.FixedSingle;
+            richTextBoxHelp.Location = new Point(0, 0);
             richTextBoxHelp.Name = "richTextBoxHelp";
-            richTextBoxHelp.ScrollBars = RichTextBoxScrollBars.None;
-            richTextBoxHelp.Size = new Size(688, 630);
-            richTextBoxHelp.TabIndex = 0;
+            richTextBoxHelp.ScrollBars = RichTextBoxScrollBars.Vertical;
+            richTextBoxHelp.Size = new Size(657, 634);
+            richTextBoxHelp.TabIndex = 1;
             richTextBoxHelp.Text = "";
-            richTextBoxHelp.KeyDown += RichTextBoxHelp_KeyDown;
+            richTextBoxHelp.KeyDown += richTextBoxHelp_KeyDown;
             // 
             // Help
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(733, 637);
+            ClientSize = new Size(659, 637);
             Controls.Add(richTextBoxHelp);
             MaximizeBox = false;
             MinimizeBox = false;
@@ -69,7 +68,6 @@ namespace DietSentry
         }
 
         #endregion
-
         private RichTextBox richTextBoxHelp;
     }
 }

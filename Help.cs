@@ -26,8 +26,12 @@ namespace DietSentry
 
         private void Help_Load(object sender, EventArgs e)
         {
+          //  richTextBoxHelp.RightMargin = richTextBoxHelp.Size.Width - 60;
+
             // load rtf file into richTextBox
+            richTextBoxHelp.ReadOnly = false;
             richTextBoxHelp.LoadFile(@"C:\Users\grobl\source\repos\DietSentry\DietSentry.rtf");
+            richTextBoxHelp.ReadOnly = true;
 
             // using "global" context dependent search string, find its position in rtf help file and make it top row
             int rci = this.richTextBoxHelp.Find(UtilitiesRMG.SHelpFind);
@@ -44,13 +48,14 @@ namespace DietSentry
             richTextBoxHelp.DeselectAll();
         }
 
-        private void RichTextBoxHelp_KeyDown(object sender, KeyEventArgs e)
+        private void richTextBoxHelp_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((e.KeyCode == Keys.Enter)|(e.KeyCode == Keys.Escape))
+            if ((e.KeyCode == Keys.Enter) | (e.KeyCode == Keys.Escape))
             {
                 e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
                 this.Close();
             }
+
         }
     }
 }
