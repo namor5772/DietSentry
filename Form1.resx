@@ -132,11 +132,6 @@
   <metadata name="openFileDialogHelp.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>571, 19</value>
   </metadata>
-  <data name="richTextBoxHelpEaten.Text" xml:space="preserve">
-    <value>HELP   On selected food item row :
-{Delete} or {Del} Key:          Deletes eaten food from (below) Eaten table
-{F2} Key:                               Edits selected eaten food item's time stamp &amp; amount</value>
-  </data>
   <metadata name="EatenId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

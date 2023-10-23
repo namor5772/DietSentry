@@ -1071,6 +1071,8 @@ namespace DietSentry
             frm.Show();
         }
 
+        // Foods tab help ********************************************
+
         private void ButtonHelp_Click(object sender, EventArgs e)
         {
             int iw = buttonHelp.Size.Width;
@@ -1080,9 +1082,6 @@ namespace DietSentry
             UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
             HelpCore(ix, iy);
         }
-
-
-        // Help via hovering over [?] button
 
         private void LabelHelpFoodTab_MouseHover(object sender, EventArgs e)
         {
@@ -1116,7 +1115,7 @@ namespace DietSentry
 
         private void LabelHelpShowCols_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Food CheckBox";
+            UtilitiesRMG.SHelpFind = "#Food fields CheckBox";
             int iw = labelHelpShowCols.Size.Width;
             int ih = 40; // fudge
             int ix = this.PointToScreen(labelHelpShowCols.Location).X + iw;
@@ -1134,55 +1133,55 @@ namespace DietSentry
             HelpCore(ix, iy);
         }
 
-        // complete Eaten tab help ********************************************
+        // Eaten tab help ********************************************
 
-        private void labelHelpShowCols2_MouseHover(object sender, EventArgs e)
+        private void LabelHelpShowCols2_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
-            int iw = labelHelpFoodTab.Size.Width;
+            UtilitiesRMG.SHelpFind = "#Eaten fields CheckBox";
+            int iw = labelHelpShowCols2.Size.Width;
             int ih = 40; // fudge
-            int ix = this.PointToScreen(labelHelpFoodTab.Location).X + iw;
-            int iy = this.PointToScreen(labelHelpFoodTab.Location).Y + ih;
+            int ix = this.PointToScreen(labelHelpShowCols2.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpShowCols2.Location).Y + ih;
             HelpCore(ix, iy);
         }
 
-        private void labelHelpShowTotals_MouseHover(object sender, EventArgs e)
+        private void LabelHelpShowTotals_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
-            int iw = labelHelpFoodTab.Size.Width;
+            UtilitiesRMG.SHelpFind = "#Eaten daily totals CheckBox";
+            int iw = labelHelpShowTotals.Size.Width;
             int ih = 40; // fudge
-            int ix = this.PointToScreen(labelHelpFoodTab.Location).X + iw;
-            int iy = this.PointToScreen(labelHelpFoodTab.Location).Y + ih;
+            int ix = this.PointToScreen(labelHelpShowTotals.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpShowTotals.Location).Y + ih;
             HelpCore(ix, iy);
         }
 
-        private void labelHelpShowFilter_MouseHover(object sender, EventArgs e)
+        private void LabelHelpShowFilter_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
-            int iw = labelHelpFoodTab.Size.Width;
+            UtilitiesRMG.SHelpFind = "#Eaten day filter CheckBox";
+            int iw = labelHelpShowFilter.Size.Width;
             int ih = 40; // fudge
-            int ix = this.PointToScreen(labelHelpFoodTab.Location).X + iw;
-            int iy = this.PointToScreen(labelHelpFoodTab.Location).Y + ih;
+            int ix = this.PointToScreen(labelHelpShowFilter.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpShowFilter.Location).Y + ih;
             HelpCore(ix, iy);
         }
 
-        private void labelHelpEatenDataGrid_MouseHover(object sender, EventArgs e)
+        private void LabelHelpEatenDataGrid_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
-            int iw = labelHelpFoodTab.Size.Width;
+            UtilitiesRMG.SHelpFind = "#Eaten DataGrid";
+            int iw = labelHelpEatenDataGrid.Size.Width;
             int ih = 40; // fudge
-            int ix = this.PointToScreen(labelHelpFoodTab.Location).X + iw;
-            int iy = this.PointToScreen(labelHelpFoodTab.Location).Y + ih;
+            int ix = this.PointToScreen(labelHelpEatenDataGrid.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpEatenDataGrid.Location).Y + ih;
             HelpCore(ix, iy);
         }
 
-        private void labelHelpEatenInfo_MouseHover(object sender, EventArgs e)
+        private void LabelHelpEatenInfo_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
-            int iw = labelHelpFoodTab.Size.Width;
+            UtilitiesRMG.SHelpFind = "#Eaten info Label";
+            int iw = labelHelpEatenInfo.Size.Width;
             int ih = 40; // fudge
-            int ix = this.PointToScreen(labelHelpFoodTab.Location).X + iw;
-            int iy = this.PointToScreen(labelHelpFoodTab.Location).Y + ih;
+            int ix = this.PointToScreen(labelHelpEatenInfo.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpEatenInfo.Location).Y + ih;
             HelpCore(ix, iy);
         }
     }
