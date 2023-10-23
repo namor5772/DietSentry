@@ -26,7 +26,7 @@ namespace DietSentry
 
         private void Help_Load(object sender, EventArgs e)
         {
-          //  richTextBoxHelp.RightMargin = richTextBoxHelp.Size.Width - 60;
+            richTextBoxHelp.RightMargin = richTextBoxHelp.Size.Width - 60;
 
             // load rtf file into richTextBox
             richTextBoxHelp.ReadOnly = false;
@@ -50,7 +50,7 @@ namespace DietSentry
 
         private void richTextBoxHelp_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((e.KeyCode == Keys.Enter) | (e.KeyCode == Keys.Escape))
+            if ((e.KeyCode == Keys.Enter) | (e.KeyCode == Keys.Escape) | (e.KeyCode == Keys.Delete))
             {
                 e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
                 this.Close();

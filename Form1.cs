@@ -1134,5 +1134,56 @@ namespace DietSentry
             HelpCore(ix, iy);
         }
 
+        // complete Eaten tab help ********************************************
+
+        private void labelHelpShowCols2_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
+            int iw = labelHelpFoodTab.Size.Width;
+            int ih = 40; // fudge
+            int ix = this.PointToScreen(labelHelpFoodTab.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpFoodTab.Location).Y + ih;
+            HelpCore(ix, iy);
+        }
+
+        private void labelHelpShowTotals_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
+            int iw = labelHelpFoodTab.Size.Width;
+            int ih = 40; // fudge
+            int ix = this.PointToScreen(labelHelpFoodTab.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpFoodTab.Location).Y + ih;
+            HelpCore(ix, iy);
+        }
+
+        private void labelHelpShowFilter_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
+            int iw = labelHelpFoodTab.Size.Width;
+            int ih = 40; // fudge
+            int ix = this.PointToScreen(labelHelpFoodTab.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpFoodTab.Location).Y + ih;
+            HelpCore(ix, iy);
+        }
+
+        private void labelHelpEatenDataGrid_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
+            int iw = labelHelpFoodTab.Size.Width;
+            int ih = 40; // fudge
+            int ix = this.PointToScreen(labelHelpFoodTab.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpFoodTab.Location).Y + ih;
+            HelpCore(ix, iy);
+        }
+
+        private void labelHelpEatenInfo_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
+            int iw = labelHelpFoodTab.Size.Width;
+            int ih = 40; // fudge
+            int ix = this.PointToScreen(labelHelpFoodTab.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpFoodTab.Location).Y + ih;
+            HelpCore(ix, iy);
+        }
     }
 }
