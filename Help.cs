@@ -21,7 +21,6 @@ namespace DietSentry
         public Help()
         {
             InitializeComponent();
-
         }
 
         private void Help_Load(object sender, EventArgs e)
@@ -34,18 +33,23 @@ namespace DietSentry
             richTextBoxHelp.ReadOnly = true;
 
             // using "global" context dependent search string, find its position in rtf help file and make it top row
-            int rci = this.richTextBoxHelp.Find(UtilitiesRMG.SHelpFind);
+            string sHelp = UtilitiesRMG.SHelpFind;
+            int rci = this.richTextBoxHelp.Find(sHelp);
             if (rci == -1)
             {
                 // this occurs if couldn't find search string
                 rci = this.richTextBoxHelp.Find("Help system error");
             }
-
             richTextBoxHelp.SelectionStart = rci;
             richTextBoxHelp.ScrollToCaret();
 
             // clear selection view (maintaining position)
             richTextBoxHelp.DeselectAll();
+
+            sHelp = sHelp.Substring(1); // get rid of initial "#" character
+            int shi = comboBoxHelp.Items.IndexOf(sHelp); // find position in ComboBox
+            comboBoxHelp.SelectedIndex = shi;
+            ;
         }
 
         private void richTextBoxHelp_KeyDown(object sender, KeyEventArgs e)
@@ -56,6 +60,26 @@ namespace DietSentry
                 this.Close();
             }
 
+        }
+
+        private void comboBoxHelp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            /*
+            //int si = comboBoxHelp.SelectedIndex;
+            string st = "#"+comboBoxHelp.SelectedText;
+
+            int rci = this.richTextBoxHelp.Find(st);
+            if (rci == -1)
+            {
+                // this occurs if couldn't find search string
+                rci = this.richTextBoxHelp.Find("Help system error");
+            }
+            richTextBoxHelp.SelectionStart = rci;
+            richTextBoxHelp.ScrollToCaret();
+
+            // clear selection view (maintaining position)
+            richTextBoxHelp.DeselectAll();
+            */
         }
     }
 }

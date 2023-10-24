@@ -1095,7 +1095,7 @@ namespace DietSentry
 
         private void LabelHelpFoodFilter_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Food filter";
+            UtilitiesRMG.SHelpFind = "#Food filter TextBox";
             int iw = labelHelpFoodFilter.Size.Width;
             int ih = 40; // fudge
             int ix = PointToScreen(labelHelpFoodFilter.Location).X + iw;
@@ -1125,7 +1125,7 @@ namespace DietSentry
 
         private void LabelHelpFoodInfo_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Food info label";
+            UtilitiesRMG.SHelpFind = "#Food info Label";
             int iw = labelHelpFoodInfo.Size.Width;
             int ih = 40; // fudge
             int ix = this.PointToScreen(labelHelpFoodInfo.Location).X + iw;

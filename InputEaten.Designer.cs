@@ -32,6 +32,7 @@
             labelAmount = new Label();
             dateTimePickerEaten = new DateTimePicker();
             labelDescription = new Label();
+            labelHelpEatenEditDialog = new Label();
             SuspendLayout();
             // 
             // textBoxAmount
@@ -68,11 +69,23 @@
             // 
             labelDescription.AutoEllipsis = true;
             labelDescription.ForeColor = SystemColors.HighlightText;
-            labelDescription.Location = new Point(12, 9);
+            labelDescription.Location = new Point(23, 9);
             labelDescription.Name = "labelDescription";
-            labelDescription.Size = new Size(358, 15);
+            labelDescription.Size = new Size(368, 15);
             labelDescription.TabIndex = 6;
             labelDescription.Text = "description";
+            // 
+            // labelHelpEatenEditDialog
+            // 
+            labelHelpEatenEditDialog.BackColor = Color.YellowGreen;
+            labelHelpEatenEditDialog.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelHelpEatenEditDialog.ForeColor = SystemColors.ButtonHighlight;
+            labelHelpEatenEditDialog.Location = new Point(5, 9);
+            labelHelpEatenEditDialog.Name = "labelHelpEatenEditDialog";
+            labelHelpEatenEditDialog.Size = new Size(14, 15);
+            labelHelpEatenEditDialog.TabIndex = 17;
+            labelHelpEatenEditDialog.Text = "?";
+            labelHelpEatenEditDialog.MouseHover += labelHelpEatenEditDialog_MouseHover;
             // 
             // InputEaten
             // 
@@ -81,6 +94,7 @@
             BackColor = SystemColors.Highlight;
             ClientSize = new Size(403, 96);
             ControlBox = false;
+            Controls.Add(labelHelpEatenEditDialog);
             Controls.Add(labelDescription);
             Controls.Add(dateTimePickerEaten);
             Controls.Add(labelAmount);
@@ -102,5 +116,6 @@
         private Label labelAmount;
         private DateTimePicker dateTimePickerEaten;
         private Label labelDescription;
+        private Label labelHelpEatenEditDialog;
     }
 }

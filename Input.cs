@@ -67,12 +67,6 @@ namespace DietSentry
                 textBoxAmount.Text = "";
                 ActOnEnterKeyPress();
             }
-            else if (e.KeyCode == Keys.Delete)
-            {
-                // closes form without doing anything
-                textBoxAmount.Text = "";
-                ActOnEnterKeyPress();
-            }
         }
 
 
@@ -84,12 +78,6 @@ namespace DietSentry
                 ActOnEnterKeyPress();
             }
             else if (e.KeyCode == Keys.Escape)
-            {
-                // closes form without doing anything
-                textBoxAmount.Text = "";
-                ActOnEnterKeyPress();
-            }
-            else if (e.KeyCode == Keys.Delete)
             {
                 // closes form without doing anything
                 textBoxAmount.Text = "";
@@ -115,7 +103,7 @@ namespace DietSentry
 
         private void LabelHelpFoodEatenDialog_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Eaten food dialog";
+            UtilitiesRMG.SHelpFind = "#Food eaten dialog";
             int iw = 10; // fudge
             int ih = 18; // fudge
             int ix = this.PointToScreen(labelHelpFoodEatenDialog.Location).X + iw;

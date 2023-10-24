@@ -4272,9 +4272,9 @@ d52bb2177adb635c7debe660bfcf0a886644331bd047dbf7f4e85e34bce6e0b531d7ad958e7a45
 Eg. the above shows the message after food item 17 had been edited.\par
 \par
 
-\pard\nowidctlpar\sa200\cf1\b\f0\fs36 #\cf0\fs32 Eaten food dialog\fs36\par
+\pard\nowidctlpar\sa200\cf1\b\f0\fs36 #\cf0\fs32 Food eaten dialog\fs36\par
 
-\pard\nowidctlpar\li511\sa200\qj\b0\f1\fs22 When a food is selected from the \ul Food DataGrid\ulnone  and the \{Enter\} key pressed (or the mouse double clicked) the following dialog (with blue background) appears:\par
+\pard\nowidctlpar\li511\sa200\qj\b0\f1\fs22 When a food is selected from the \ul Food DataGrid\ulnone  (in the <Food> tab) and the \{Enter\} key pressed (or the mouse double clicked) the following dialog (with blue background) appears:\par
 \f2{\pict{\*\picprop{\sp{\sn wzDescription}{\sv Image}}{\sp{\sn posv}{\sv 1}}
 }\pngblip\picw13227\pich9364\picwgoal7499\pichgoal5309 
 89504e470d0a1a0a0000000d49484452000001f40000016208020000008f8bbd83000000017352
@@ -4721,8 +4721,8 @@ ed95815e82bd3b21678a148fc06aaaeff9a603a06558e2e20e0000de04e20e00001e04e20e0000
 000080a604963b00007810883b00007810883b00007810883b00007810883b0000780e4dfbfffc
 ac67aaceb0ff0d0000000049454e44ae426082
 }\f1\par
-At the top it displays the desciption of the food you selected. Type the amount of food you have consumed into the TextBox. This will be in grams (g) if the food is a solid or millilitres (mL) if a liquid. If necessary adjust the time stamp in the DateTimePicker, by default it will display "now". When satisfied with the inputs press the \{Enter\} Key. This will close the dialog and add the eaten food's details to the Eaten table. Focus is then transferred to the Eaten DataGrid in the <Eaten> tab.\par
-If you input an invalid amount eg. the string "e1..2" or just leave it blank then this dialog form closes and nothing is processed when you press the \{Enter\} Key.  Pressing the \{Escape\} or \{Delete\} Key also just closes this form, returning focus to the food  previously selected in the DataGrid.\par
+At the top it displays the desciption of the food you selected. Type the amount of food you have consumed into the TextBox. This will be in grams (g) if the food is a solid or millilitres (mL) if a liquid. If necessary adjust the time stamp in the DateTimePicker, by default it will display "now". When satisfied with the inputs press the \{Enter\} Key. This will close the dialog and add the eaten food's details to the Eaten table. Focus is then transferred to the \ul Eaten DataGrid\ulnone  in the <Eaten> tab.\par
+If you input an invalid amount eg. the string "e1..2" or just leave it blank then when you press the \{Enter\} Key this dialog form closes and nothing is processed. Pressing the \{Escape\} Key also just closes this form, returning focus to the food  previously selected in the DataGrid.\par
 \par
 
 \pard\nowidctlpar\sa200\cf1\b\f0\fs32 #\cf0 Liquid density dialog\fs36\par
@@ -4747,16 +4747,19 @@ If you input an invalid amount eg. the string "e1..2" or just leave it blank the
 
 \pard\nowidctlpar\li721\qj\kerning2\f1\lang3081\par
 
-\pard\nowidctlpar\li720\sa200\qj\kerning0\lang9 By default all records from the \ul Eaten table\ulnone  are displayed in the DataGrid, however the \ul Eaten daily totals CheckBox\ulnone  aggregates data by days while the \ul Eaten day filter CheckBox\ulnone  only show data for a selected day.\par
+\pard\nowidctlpar\li720\sa200\qj\kerning0\lang9 By default all records from the \ul Eaten table\ulnone  are displayed in the DataGrid, however the \ul Eaten daily totals CheckBox\ulnone  aggregates data by days while the \ul Eaten day filter CheckBox\ulnone  only shows data for a selected day.\par
 The fields displayed are controlled by the \ul Eaten fields CheckBox\ulnone .\par
 \par
 
-\pard\nowidctlpar\sa200\par
-\cf1\b\f2\fs32 #\cf0 Eaten fields CheckBox\par
+\pard\nowidctlpar\sa200\cf1\b\f2\fs32 #\cf0 Eaten fields CheckBox\par
 \cf1 #\cf0 Eaten daily totals CheckBox\par
 \cf1 #\cf0 Eaten day filter CheckBox\par
 \cf1 #\cf0 Eaten info Label\par
-\cf2\b0\f4\fs19\par
+\cf1\f0 #\cf0 Eaten edit dialog\fs36\par
+
+\pard\nowidctlpar\li511\sa200\qj\b0\f1\fs22 When a liquid is selected in the \ul Eaten DataGrid\ulnone  and the \{F2\} key pressed the following dialog (with blue background) appears:\par
+
+\pard\nowidctlpar\sa200\cf2\f4\fs19\par
 \cf0\f1\fs22\par
 \cf1\b\f0\fs36 #\cf3 Help system error\cf0\par
 
