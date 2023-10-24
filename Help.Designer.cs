@@ -41,11 +41,11 @@ namespace DietSentry
             // richTextBoxHelp
             // 
             richTextBoxHelp.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            richTextBoxHelp.BorderStyle = BorderStyle.FixedSingle;
+            richTextBoxHelp.BorderStyle = BorderStyle.None;
             richTextBoxHelp.Location = new Point(0, 29);
             richTextBoxHelp.Name = "richTextBoxHelp";
             richTextBoxHelp.ScrollBars = RichTextBoxScrollBars.Vertical;
-            richTextBoxHelp.Size = new Size(657, 675);
+            richTextBoxHelp.Size = new Size(657, 673);
             richTextBoxHelp.TabIndex = 1;
             richTextBoxHelp.Text = "";
             richTextBoxHelp.KeyDown += richTextBoxHelp_KeyDown;
@@ -56,9 +56,9 @@ namespace DietSentry
             comboBoxHelp.FlatStyle = FlatStyle.Flat;
             comboBoxHelp.FormattingEnabled = true;
             comboBoxHelp.Items.AddRange(new object[] { "Diet Sentry overview", "Foods table", "Food DataGrid", "Food filter TextBox", "Food fields CheckBox", "Food info Label", "Food eaten dialog", "Liquid density dialog", "Eaten table", "Eaten DataGrid", "Eaten fields CheckBox", "Eaten daily totals CheckBox", "Eaten day filter CheckBox", "Eaten info Label", "Eaten edit dialog" });
-            comboBoxHelp.Location = new Point(0, 0);
+            comboBoxHelp.Location = new Point(0, 2);
             comboBoxHelp.Name = "comboBoxHelp";
-            comboBoxHelp.Size = new Size(309, 23);
+            comboBoxHelp.Size = new Size(235, 23);
             comboBoxHelp.TabIndex = 2;
             comboBoxHelp.SelectedIndexChanged += comboBoxHelp_SelectedIndexChanged;
             // 
@@ -68,7 +68,7 @@ namespace DietSentry
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(659, 707);
+            ClientSize = new Size(659, 702);
             Controls.Add(comboBoxHelp);
             Controls.Add(richTextBoxHelp);
             FormBorderStyle = FormBorderStyle.FixedSingle;
