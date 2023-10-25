@@ -35,12 +35,12 @@ namespace DietSentry
             // select the releva help topic in the ComboBox which will 
             // then display upon comboBoxHelp_SelectedIndexChanged firing 
             string sh = UtilitiesRMG.SHelpFind;
-            sh = sh.Substring(1); // get rid of initial "#" character
+            sh = sh[1..]; // get rid of initial "#" character
             int shi = comboBoxHelp.Items.IndexOf(sh); // find position in ComboBox
             comboBoxHelp.SelectedIndex = shi;
         }
 
-        private void richTextBoxHelp_KeyDown(object sender, KeyEventArgs e)
+        private void RichTextBoxHelp_KeyDown(object sender, KeyEventArgs e)
         {
             if ((e.KeyCode == Keys.Enter) | (e.KeyCode == Keys.Escape) | (e.KeyCode == Keys.Delete))
             {
@@ -49,7 +49,7 @@ namespace DietSentry
             }
         }
 
-        private void comboBoxHelp_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxHelp_SelectedIndexChanged(object sender, EventArgs e)
         {
             string st = "#" + (string)comboBoxHelp.SelectedItem;
 
@@ -63,7 +63,18 @@ namespace DietSentry
             richTextBoxHelp.ScrollToCaret();
 
             // clear selection view (maintaining position)
+            richTextBoxHelp.Focus();
             richTextBoxHelp.DeselectAll();
+        }
+
+        private void ComboBoxHelp_Leave(object sender, EventArgs e)
+        {
+            comboBoxHelp.ForeColor = Color.White;
+        }
+
+        private void ComboBoxHelp_Enter(object sender, EventArgs e)
+        {
+            comboBoxHelp.ForeColor = Color.Black;
         }
     }
 }

@@ -48,19 +48,22 @@ namespace DietSentry
             richTextBoxHelp.Size = new Size(657, 673);
             richTextBoxHelp.TabIndex = 1;
             richTextBoxHelp.Text = "";
-            richTextBoxHelp.KeyDown += richTextBoxHelp_KeyDown;
+            richTextBoxHelp.KeyDown += RichTextBoxHelp_KeyDown;
             // 
             // comboBoxHelp
             // 
             comboBoxHelp.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             comboBoxHelp.FlatStyle = FlatStyle.Flat;
+            comboBoxHelp.ForeColor = Color.White;
             comboBoxHelp.FormattingEnabled = true;
             comboBoxHelp.Items.AddRange(new object[] { "Diet Sentry overview", "Foods table", "Food DataGrid", "Food filter TextBox", "Food fields CheckBox", "Food info Label", "Food eaten dialog", "Liquid density dialog", "Eaten table", "Eaten DataGrid", "Eaten fields CheckBox", "Eaten daily totals CheckBox", "Eaten day filter CheckBox", "Eaten info Label", "Eaten edit dialog" });
             comboBoxHelp.Location = new Point(0, 2);
             comboBoxHelp.Name = "comboBoxHelp";
             comboBoxHelp.Size = new Size(235, 23);
             comboBoxHelp.TabIndex = 2;
-            comboBoxHelp.SelectedIndexChanged += comboBoxHelp_SelectedIndexChanged;
+            comboBoxHelp.SelectedIndexChanged += ComboBoxHelp_SelectedIndexChanged;
+            comboBoxHelp.Enter += ComboBoxHelp_Enter;
+            comboBoxHelp.Leave += ComboBoxHelp_Leave;
             // 
             // Help
             // 

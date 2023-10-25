@@ -73,7 +73,7 @@
             labelHelpFoodDensityDialog.Size = new Size(14, 15);
             labelHelpFoodDensityDialog.TabIndex = 16;
             labelHelpFoodDensityDialog.Text = "?";
-            labelHelpFoodDensityDialog.MouseHover += labelHelpFoodDensityDialog_MouseHover;
+            labelHelpFoodDensityDialog.MouseHover += LabelHelpFoodDensityDialog_MouseHover;
             // 
             // InputDensity
             // 

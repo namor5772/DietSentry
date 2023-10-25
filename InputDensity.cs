@@ -97,7 +97,7 @@ namespace DietSentry
         }
 
 
-        private void labelHelpFoodDensityDialog_MouseHover(object sender, EventArgs e)
+        private void LabelHelpFoodDensityDialog_MouseHover(object sender, EventArgs e)
         {
             UtilitiesRMG.SHelpFind = "#Liquid density dialog";
             int iw = 10; // fudge
