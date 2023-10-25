@@ -2554,7 +2554,7 @@ The foods database and units are unashamedly based on Australian standards with 
 This table is stored in the SQLiite foods.db database distributed with this application. It can be directly examined or edited with many available applications. Eg. DB Browser for SQLite. The table is visible via a DataGrid component in the <Food> tab of the applications main form, with the assumed units visible in the headers.\par
 Below are the self explanatory internal names and details of a records fields.\par
 
-\pard\nowidctlpar\li720 CREATE TABLE "Foods" (\par
+\pard\nowidctlpar\li720\fs20 CREATE TABLE "Foods" (\par
 \tab "FoodId"\tab INTEGER NOT NULL,\par
 \tab "FoodDescription"\tab TEXT NOT NULL,\par
 \tab "Energy"\tab REAL NOT NULL,\par
@@ -2583,7 +2583,18 @@ Below are the self explanatory internal names and details of a records fields.\p
 \tab CONSTRAINT "FoodId" PRIMARY KEY("FoodId" AUTOINCREMENT)\par
 
 \pard\nowidctlpar\li721\sa200 );\par
-\tab\par
+
+\pard\nowidctlpar\sa200\cf1\b\f0\fs36 #\cf0\fs32 Recipe table\par
+
+\pard\nowidctlpar\li721\sa200\qj\b0\f1\fs22 Each record (table row) stores details of a particular recipe's ingredient food.\par
+The Foods and Recipe tables have a one-to-many relationship. If a Foods table record represents a recipe type food it is linked to many recipe table records which are its ingredients. A Solid or Liquid food is thus not linked to any records in the Recipe table. For the purposes of recording the consumption of a recipe food only its details stored in the Foods table are needed, the linked records in the Recipe table are only used in creating it.\par
+\par
+
+\pard\nowidctlpar\sa200\sl276\slmult1\qj\cf1\b\f0\fs36 #\cf0\fs32 Eaten table\fs36\par
+
+\pard\nowidctlpar\li720\sa200\sl276\slmult1\qj\b0\f1\fs22 Each record (table row) stores details of a particular amount of food consumed. In particular a time stamp of when consumption occured (or was recorded), the amount eaten in grams or millilitres, the foods text description and then the actual amounts of Energy, nutrients and ingredients consumed.\par
+
+\pard\nowidctlpar\li721\sa200\tab\par
 
 \pard\nowidctlpar\sa200\cf1\b\f0\fs32 #\cf0 Food DataGrid\fs40\par
 
@@ -4728,13 +4739,6 @@ If you input an invalid amount eg. the string "e1..2" or just leave it blank the
 \pard\nowidctlpar\sa200\cf1\b\f0\fs32 #\cf0 Liquid density dialog\fs36\par
 
 \pard\nowidctlpar\li511\sa200\qj\b0\f1\fs22 When a liquid is selected in the \ul Food DataGrid\ulnone  and the \{F4\} key pressed the following dialog (with blue background) appears:\par
-\par
-
-\pard\nowidctlpar\sa200\sl276\slmult1\qj\cf1\b\f0\fs36 #\cf0\fs32 Eaten table\fs36\par
-
-\pard\nowidctlpar\li720\sa200\sl276\slmult1\qj\b0\f1\fs22 Each record (table row) stores details of a particular amount of food consumed. In particular a time stamp of when consumption occured (or was recorded), the amount eaten in grams or millilitres, the foods text description and then the actual amounts of Energy, nutrients and ingredients consumed.\par
-
-\pard\nowidctlpar\par
 \par
 
 \pard\nowidctlpar\sa200\cf1\b\f0\fs32 #\cf0 Eaten DataGrid\fs40\par

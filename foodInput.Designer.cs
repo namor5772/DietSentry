@@ -200,7 +200,7 @@
             buttonAddFood.Location = new Point(208, 741);
             buttonAddFood.Name = "buttonAddFood";
             buttonAddFood.Size = new Size(75, 34);
-            buttonAddFood.TabIndex = 5;
+            buttonAddFood.TabIndex = 26;
             buttonAddFood.Text = "Add food";
             buttonAddFood.UseVisualStyleBackColor = true;
             buttonAddFood.Click += ButtonAddFood_Click;
@@ -211,7 +211,7 @@
             buttonCancelAddFood.Location = new Point(306, 741);
             buttonCancelAddFood.Name = "buttonCancelAddFood";
             buttonCancelAddFood.Size = new Size(75, 34);
-            buttonCancelAddFood.TabIndex = 6;
+            buttonCancelAddFood.TabIndex = 25;
             buttonCancelAddFood.Text = "Cancel";
             buttonCancelAddFood.UseVisualStyleBackColor = true;
             buttonCancelAddFood.Click += ButtonCancelAddFood_Click;
@@ -554,10 +554,10 @@
             // 
             // textBoxAlcohol
             // 
-            textBoxAlcohol.Location = new Point(201, 638);
+            textBoxAlcohol.Location = new Point(300, 638);
             textBoxAlcohol.Name = "textBoxAlcohol";
             textBoxAlcohol.Size = new Size(78, 23);
-            textBoxAlcohol.TabIndex = 47;
+            textBoxAlcohol.TabIndex = 24;
             textBoxAlcohol.TextAlign = HorizontalAlignment.Right;
             textBoxAlcohol.KeyDown += TextBoxAlcohol_KeyDown;
             textBoxAlcohol.Leave += TextBoxAlcohol_Leave;
@@ -565,7 +565,7 @@
             // labelAlcohol
             // 
             labelAlcohol.AutoSize = true;
-            labelAlcohol.Location = new Point(26, 641);
+            labelAlcohol.Location = new Point(413, 641);
             labelAlcohol.Name = "labelAlcohol";
             labelAlcohol.Size = new Size(66, 15);
             labelAlcohol.TabIndex = 46;
@@ -573,10 +573,10 @@
             // 
             // textBoxCholesterol
             // 
-            textBoxCholesterol.Location = new Point(201, 611);
+            textBoxCholesterol.Location = new Point(300, 611);
             textBoxCholesterol.Name = "textBoxCholesterol";
             textBoxCholesterol.Size = new Size(78, 23);
-            textBoxCholesterol.TabIndex = 45;
+            textBoxCholesterol.TabIndex = 23;
             textBoxCholesterol.TextAlign = HorizontalAlignment.Right;
             textBoxCholesterol.KeyDown += TextBoxCholesterol_KeyDown;
             textBoxCholesterol.Leave += TextBoxCholesterol_Leave;
@@ -584,7 +584,7 @@
             // labelCholesterol
             // 
             labelCholesterol.AutoSize = true;
-            labelCholesterol.Location = new Point(26, 614);
+            labelCholesterol.Location = new Point(413, 614);
             labelCholesterol.Name = "labelCholesterol";
             labelCholesterol.Size = new Size(96, 15);
             labelCholesterol.TabIndex = 44;
@@ -592,10 +592,10 @@
             // 
             // textBoxCaffeine
             // 
-            textBoxCaffeine.Location = new Point(201, 584);
+            textBoxCaffeine.Location = new Point(300, 584);
             textBoxCaffeine.Name = "textBoxCaffeine";
             textBoxCaffeine.Size = new Size(78, 23);
-            textBoxCaffeine.TabIndex = 43;
+            textBoxCaffeine.TabIndex = 22;
             textBoxCaffeine.TextAlign = HorizontalAlignment.Right;
             textBoxCaffeine.KeyDown += TextBoxCaffeine_KeyDown;
             textBoxCaffeine.Leave += TextBoxCaffeine_Leave;
@@ -603,7 +603,7 @@
             // labelCaffeine
             // 
             labelCaffeine.AutoSize = true;
-            labelCaffeine.Location = new Point(26, 587);
+            labelCaffeine.Location = new Point(413, 587);
             labelCaffeine.Name = "labelCaffeine";
             labelCaffeine.Size = new Size(80, 15);
             labelCaffeine.TabIndex = 42;
@@ -611,10 +611,10 @@
             // 
             // textBoxVitaminC
             // 
-            textBoxVitaminC.Location = new Point(201, 557);
+            textBoxVitaminC.Location = new Point(300, 557);
             textBoxVitaminC.Name = "textBoxVitaminC";
             textBoxVitaminC.Size = new Size(78, 23);
-            textBoxVitaminC.TabIndex = 41;
+            textBoxVitaminC.TabIndex = 21;
             textBoxVitaminC.TextAlign = HorizontalAlignment.Right;
             textBoxVitaminC.KeyDown += TextBoxVitaminC_KeyDown;
             textBoxVitaminC.Leave += TextBoxVitaminC_Leave;
@@ -622,7 +622,7 @@
             // labelVitaminC
             // 
             labelVitaminC.AutoSize = true;
-            labelVitaminC.Location = new Point(26, 560);
+            labelVitaminC.Location = new Point(413, 560);
             labelVitaminC.Name = "labelVitaminC";
             labelVitaminC.Size = new Size(88, 15);
             labelVitaminC.TabIndex = 40;
@@ -630,10 +630,10 @@
             // 
             // textBoxMagnesiumMg
             // 
-            textBoxMagnesiumMg.Location = new Point(201, 530);
+            textBoxMagnesiumMg.Location = new Point(300, 530);
             textBoxMagnesiumMg.Name = "textBoxMagnesiumMg";
             textBoxMagnesiumMg.Size = new Size(78, 23);
-            textBoxMagnesiumMg.TabIndex = 39;
+            textBoxMagnesiumMg.TabIndex = 20;
             textBoxMagnesiumMg.TextAlign = HorizontalAlignment.Right;
             textBoxMagnesiumMg.KeyDown += TextBoxMagnesiumMg_KeyDown;
             textBoxMagnesiumMg.Leave += TextBoxMagnesiumMg_Leave;
@@ -641,7 +641,7 @@
             // labelMagnesiumMg
             // 
             labelMagnesiumMg.AutoSize = true;
-            labelMagnesiumMg.Location = new Point(26, 533);
+            labelMagnesiumMg.Location = new Point(413, 533);
             labelMagnesiumMg.Name = "labelMagnesiumMg";
             labelMagnesiumMg.Size = new Size(120, 15);
             labelMagnesiumMg.TabIndex = 38;
@@ -649,10 +649,10 @@
             // 
             // textBoxIronFe
             // 
-            textBoxIronFe.Location = new Point(201, 503);
+            textBoxIronFe.Location = new Point(300, 503);
             textBoxIronFe.Name = "textBoxIronFe";
             textBoxIronFe.Size = new Size(78, 23);
-            textBoxIronFe.TabIndex = 37;
+            textBoxIronFe.TabIndex = 19;
             textBoxIronFe.TextAlign = HorizontalAlignment.Right;
             textBoxIronFe.KeyDown += TextBoxIronFe_KeyDown;
             textBoxIronFe.Leave += TextBoxIronFe_Leave;
@@ -660,7 +660,7 @@
             // labelIronFe
             // 
             labelIronFe.AutoSize = true;
-            labelIronFe.Location = new Point(26, 506);
+            labelIronFe.Location = new Point(413, 506);
             labelIronFe.Name = "labelIronFe";
             labelIronFe.Size = new Size(72, 15);
             labelIronFe.TabIndex = 36;
@@ -668,10 +668,10 @@
             // 
             // textBoxFolate
             // 
-            textBoxFolate.Location = new Point(201, 476);
+            textBoxFolate.Location = new Point(300, 476);
             textBoxFolate.Name = "textBoxFolate";
             textBoxFolate.Size = new Size(78, 23);
-            textBoxFolate.TabIndex = 35;
+            textBoxFolate.TabIndex = 18;
             textBoxFolate.TextAlign = HorizontalAlignment.Right;
             textBoxFolate.KeyDown += TextBoxFolate_KeyDown;
             textBoxFolate.Leave += TextBoxFolate_Leave;
@@ -679,7 +679,7 @@
             // labelFolate
             // 
             labelFolate.AutoSize = true;
-            labelFolate.Location = new Point(26, 479);
+            labelFolate.Location = new Point(413, 479);
             labelFolate.Name = "labelFolate";
             labelFolate.Size = new Size(64, 15);
             labelFolate.TabIndex = 34;
@@ -687,10 +687,10 @@
             // 
             // textBoxNiacinB3
             // 
-            textBoxNiacinB3.Location = new Point(201, 449);
+            textBoxNiacinB3.Location = new Point(300, 449);
             textBoxNiacinB3.Name = "textBoxNiacinB3";
             textBoxNiacinB3.Size = new Size(78, 23);
-            textBoxNiacinB3.TabIndex = 33;
+            textBoxNiacinB3.TabIndex = 17;
             textBoxNiacinB3.TextAlign = HorizontalAlignment.Right;
             textBoxNiacinB3.KeyDown += TextBoxNiacinB3_KeyDown;
             textBoxNiacinB3.Leave += TextBoxNiacinB3_Leave;
@@ -698,7 +698,7 @@
             // labelNiacinB3
             // 
             labelNiacinB3.AutoSize = true;
-            labelNiacinB3.Location = new Point(26, 452);
+            labelNiacinB3.Location = new Point(413, 452);
             labelNiacinB3.Name = "labelNiacinB3";
             labelNiacinB3.Size = new Size(86, 15);
             labelNiacinB3.TabIndex = 32;
@@ -706,10 +706,10 @@
             // 
             // textBoxRiboflavinB2
             // 
-            textBoxRiboflavinB2.Location = new Point(201, 422);
+            textBoxRiboflavinB2.Location = new Point(300, 422);
             textBoxRiboflavinB2.Name = "textBoxRiboflavinB2";
             textBoxRiboflavinB2.Size = new Size(78, 23);
-            textBoxRiboflavinB2.TabIndex = 31;
+            textBoxRiboflavinB2.TabIndex = 16;
             textBoxRiboflavinB2.TextAlign = HorizontalAlignment.Right;
             textBoxRiboflavinB2.KeyDown += TextBoxRiboflavinB2_KeyDown;
             textBoxRiboflavinB2.Leave += TextBoxRiboflavinB2_Leave;
@@ -717,7 +717,7 @@
             // labelRiboflavinB2
             // 
             labelRiboflavinB2.AutoSize = true;
-            labelRiboflavinB2.Location = new Point(26, 425);
+            labelRiboflavinB2.Location = new Point(413, 425);
             labelRiboflavinB2.Name = "labelRiboflavinB2";
             labelRiboflavinB2.Size = new Size(105, 15);
             labelRiboflavinB2.TabIndex = 30;
@@ -725,10 +725,10 @@
             // 
             // textBoxThiaminB1
             // 
-            textBoxThiaminB1.Location = new Point(201, 395);
+            textBoxThiaminB1.Location = new Point(300, 395);
             textBoxThiaminB1.Name = "textBoxThiaminB1";
             textBoxThiaminB1.Size = new Size(78, 23);
-            textBoxThiaminB1.TabIndex = 29;
+            textBoxThiaminB1.TabIndex = 15;
             textBoxThiaminB1.TextAlign = HorizontalAlignment.Right;
             textBoxThiaminB1.KeyDown += TextBoxThiaminB1_KeyDown;
             textBoxThiaminB1.Leave += TextBoxThiaminB1_Leave;
@@ -736,7 +736,7 @@
             // labelThiaminB1
             // 
             labelThiaminB1.AutoSize = true;
-            labelThiaminB1.Location = new Point(26, 398);
+            labelThiaminB1.Location = new Point(413, 398);
             labelThiaminB1.Name = "labelThiaminB1";
             labelThiaminB1.Size = new Size(95, 15);
             labelThiaminB1.TabIndex = 28;
@@ -744,10 +744,10 @@
             // 
             // textBoxPotassiumK
             // 
-            textBoxPotassiumK.Location = new Point(201, 368);
+            textBoxPotassiumK.Location = new Point(300, 368);
             textBoxPotassiumK.Name = "textBoxPotassiumK";
             textBoxPotassiumK.Size = new Size(78, 23);
-            textBoxPotassiumK.TabIndex = 27;
+            textBoxPotassiumK.TabIndex = 14;
             textBoxPotassiumK.TextAlign = HorizontalAlignment.Right;
             textBoxPotassiumK.KeyDown += TextBoxPotassiumK_KeyDown;
             textBoxPotassiumK.Leave += TextBoxPotassiumK_Leave;
@@ -755,7 +755,7 @@
             // labelPotassiumK
             // 
             labelPotassiumK.AutoSize = true;
-            labelPotassiumK.Location = new Point(26, 371);
+            labelPotassiumK.Location = new Point(413, 371);
             labelPotassiumK.Name = "labelPotassiumK";
             labelPotassiumK.Size = new Size(101, 15);
             labelPotassiumK.TabIndex = 26;
@@ -763,10 +763,10 @@
             // 
             // textBoxCalciumCa
             // 
-            textBoxCalciumCa.Location = new Point(201, 341);
+            textBoxCalciumCa.Location = new Point(300, 341);
             textBoxCalciumCa.Name = "textBoxCalciumCa";
             textBoxCalciumCa.Size = new Size(78, 23);
-            textBoxCalciumCa.TabIndex = 25;
+            textBoxCalciumCa.TabIndex = 13;
             textBoxCalciumCa.TextAlign = HorizontalAlignment.Right;
             textBoxCalciumCa.KeyDown += TextBoxCalciumCa_KeyDown;
             textBoxCalciumCa.Leave += TextBoxCalciumCa_Leave;
@@ -774,7 +774,7 @@
             // labelCalciumCa
             // 
             labelCalciumCa.AutoSize = true;
-            labelCalciumCa.Location = new Point(26, 344);
+            labelCalciumCa.Location = new Point(413, 344);
             labelCalciumCa.Name = "labelCalciumCa";
             labelCalciumCa.Size = new Size(97, 15);
             labelCalciumCa.TabIndex = 24;
@@ -782,10 +782,10 @@
             // 
             // textBoxSodiumNa
             // 
-            textBoxSodiumNa.Location = new Point(201, 314);
+            textBoxSodiumNa.Location = new Point(201, 206);
             textBoxSodiumNa.Name = "textBoxSodiumNa";
             textBoxSodiumNa.Size = new Size(78, 23);
-            textBoxSodiumNa.TabIndex = 23;
+            textBoxSodiumNa.TabIndex = 8;
             textBoxSodiumNa.TextAlign = HorizontalAlignment.Right;
             textBoxSodiumNa.KeyDown += TextBoxSodiumNa_KeyDown;
             textBoxSodiumNa.Leave += TextBoxSodiumNa_Leave;
@@ -793,18 +793,19 @@
             // labelSodiumNa
             // 
             labelSodiumNa.AutoSize = true;
-            labelSodiumNa.Location = new Point(26, 317);
+            labelSodiumNa.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            labelSodiumNa.Location = new Point(26, 206);
             labelSodiumNa.Name = "labelSodiumNa";
-            labelSodiumNa.Size = new Size(95, 15);
-            labelSodiumNa.TabIndex = 22;
+            labelSodiumNa.Size = new Size(121, 20);
+            labelSodiumNa.TabIndex = 0;
             labelSodiumNa.Text = "Sodium Na (mg)";
             // 
             // textBoxDietaryFibre
             // 
-            textBoxDietaryFibre.Location = new Point(201, 287);
+            textBoxDietaryFibre.Location = new Point(300, 314);
             textBoxDietaryFibre.Name = "textBoxDietaryFibre";
             textBoxDietaryFibre.Size = new Size(78, 23);
-            textBoxDietaryFibre.TabIndex = 21;
+            textBoxDietaryFibre.TabIndex = 12;
             textBoxDietaryFibre.TextAlign = HorizontalAlignment.Right;
             textBoxDietaryFibre.KeyDown += TextBoxDietaryFibre_KeyDown;
             textBoxDietaryFibre.Leave += TextBoxDietaryFibre_Leave;
@@ -812,7 +813,7 @@
             // labelDietaryFibre
             // 
             labelDietaryFibre.AutoSize = true;
-            labelDietaryFibre.Location = new Point(26, 290);
+            labelDietaryFibre.Location = new Point(413, 317);
             labelDietaryFibre.Name = "labelDietaryFibre";
             labelDietaryFibre.Size = new Size(91, 15);
             labelDietaryFibre.TabIndex = 20;
@@ -820,10 +821,10 @@
             // 
             // textBoxSugars
             // 
-            textBoxSugars.Location = new Point(201, 260);
+            textBoxSugars.Location = new Point(201, 179);
             textBoxSugars.Name = "textBoxSugars";
             textBoxSugars.Size = new Size(78, 23);
-            textBoxSugars.TabIndex = 19;
+            textBoxSugars.TabIndex = 7;
             textBoxSugars.TextAlign = HorizontalAlignment.Right;
             textBoxSugars.KeyDown += TextBoxSugars_KeyDown;
             textBoxSugars.Leave += TextBoxSugars_Leave;
@@ -831,18 +832,19 @@
             // labelSugars
             // 
             labelSugars.AutoSize = true;
-            labelSugars.Location = new Point(26, 263);
+            labelSugars.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            labelSugars.Location = new Point(26, 179);
             labelSugars.Name = "labelSugars";
-            labelSugars.Size = new Size(77, 15);
-            labelSugars.TabIndex = 18;
+            labelSugars.Size = new Size(100, 20);
+            labelSugars.TabIndex = 0;
             labelSugars.Text = "   - Sugars (g)";
             // 
             // textBoxCarbohydrate
             // 
-            textBoxCarbohydrate.Location = new Point(201, 233);
+            textBoxCarbohydrate.Location = new Point(201, 152);
             textBoxCarbohydrate.Name = "textBoxCarbohydrate";
             textBoxCarbohydrate.Size = new Size(78, 23);
-            textBoxCarbohydrate.TabIndex = 17;
+            textBoxCarbohydrate.TabIndex = 6;
             textBoxCarbohydrate.TextAlign = HorizontalAlignment.Right;
             textBoxCarbohydrate.KeyDown += TextBoxCarbohydrate_KeyDown;
             textBoxCarbohydrate.Leave += TextBoxCarbohydrate_Leave;
@@ -850,18 +852,19 @@
             // labelCarbohydrate
             // 
             labelCarbohydrate.AutoSize = true;
-            labelCarbohydrate.Location = new Point(26, 236);
+            labelCarbohydrate.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            labelCarbohydrate.Location = new Point(26, 152);
             labelCarbohydrate.Name = "labelCarbohydrate";
-            labelCarbohydrate.Size = new Size(97, 15);
-            labelCarbohydrate.TabIndex = 16;
+            labelCarbohydrate.Size = new Size(126, 20);
+            labelCarbohydrate.TabIndex = 0;
             labelCarbohydrate.Text = "Carbohydrate (g)";
             // 
             // textBoxMonounsaturatedFat
             // 
-            textBoxMonounsaturatedFat.Location = new Point(201, 206);
+            textBoxMonounsaturatedFat.Location = new Point(300, 287);
             textBoxMonounsaturatedFat.Name = "textBoxMonounsaturatedFat";
             textBoxMonounsaturatedFat.Size = new Size(78, 23);
-            textBoxMonounsaturatedFat.TabIndex = 15;
+            textBoxMonounsaturatedFat.TabIndex = 11;
             textBoxMonounsaturatedFat.TextAlign = HorizontalAlignment.Right;
             textBoxMonounsaturatedFat.KeyDown += TextBoxMonounsaturatedFat_KeyDown;
             textBoxMonounsaturatedFat.Leave += TextBoxMonounsaturatedFat_Leave;
@@ -869,7 +872,7 @@
             // labelMonounsaturatedFat
             // 
             labelMonounsaturatedFat.AutoSize = true;
-            labelMonounsaturatedFat.Location = new Point(26, 209);
+            labelMonounsaturatedFat.Location = new Point(410, 290);
             labelMonounsaturatedFat.Name = "labelMonounsaturatedFat";
             labelMonounsaturatedFat.Size = new Size(156, 15);
             labelMonounsaturatedFat.TabIndex = 14;
@@ -877,10 +880,10 @@
             // 
             // textBoxPolyunsaturatedFat
             // 
-            textBoxPolyunsaturatedFat.Location = new Point(201, 179);
+            textBoxPolyunsaturatedFat.Location = new Point(300, 260);
             textBoxPolyunsaturatedFat.Name = "textBoxPolyunsaturatedFat";
             textBoxPolyunsaturatedFat.Size = new Size(78, 23);
-            textBoxPolyunsaturatedFat.TabIndex = 13;
+            textBoxPolyunsaturatedFat.TabIndex = 10;
             textBoxPolyunsaturatedFat.TextAlign = HorizontalAlignment.Right;
             textBoxPolyunsaturatedFat.KeyDown += TextBoxPolyunsaturatedFat_KeyDown;
             textBoxPolyunsaturatedFat.Leave += TextBoxPolyunsaturatedFat_Leave;
@@ -888,7 +891,7 @@
             // labelPolyunsaturatedFat
             // 
             labelPolyunsaturatedFat.AutoSize = true;
-            labelPolyunsaturatedFat.Location = new Point(26, 182);
+            labelPolyunsaturatedFat.Location = new Point(410, 263);
             labelPolyunsaturatedFat.Name = "labelPolyunsaturatedFat";
             labelPolyunsaturatedFat.Size = new Size(147, 15);
             labelPolyunsaturatedFat.TabIndex = 12;
@@ -896,10 +899,10 @@
             // 
             // textBoxTransFat
             // 
-            textBoxTransFat.Location = new Point(201, 152);
+            textBoxTransFat.Location = new Point(300, 233);
             textBoxTransFat.Name = "textBoxTransFat";
             textBoxTransFat.Size = new Size(78, 23);
-            textBoxTransFat.TabIndex = 11;
+            textBoxTransFat.TabIndex = 9;
             textBoxTransFat.TextAlign = HorizontalAlignment.Right;
             textBoxTransFat.KeyDown += TextBoxTransFat_KeyDown;
             textBoxTransFat.Leave += TextBoxTransFat_Leave;
@@ -907,7 +910,7 @@
             // labelTransFat
             // 
             labelTransFat.AutoSize = true;
-            labelTransFat.Location = new Point(26, 155);
+            labelTransFat.Location = new Point(410, 236);
             labelTransFat.Name = "labelTransFat";
             labelTransFat.Size = new Size(99, 15);
             labelTransFat.TabIndex = 10;
@@ -918,7 +921,7 @@
             textBoxSaturatedFat.Location = new Point(201, 125);
             textBoxSaturatedFat.Name = "textBoxSaturatedFat";
             textBoxSaturatedFat.Size = new Size(78, 23);
-            textBoxSaturatedFat.TabIndex = 9;
+            textBoxSaturatedFat.TabIndex = 5;
             textBoxSaturatedFat.TextAlign = HorizontalAlignment.Right;
             textBoxSaturatedFat.KeyDown += TextBoxSaturatedFat_KeyDown;
             textBoxSaturatedFat.Leave += TextBoxSaturatedFat_Leave;
@@ -926,10 +929,11 @@
             // labelSaturatedFat
             // 
             labelSaturatedFat.AutoSize = true;
-            labelSaturatedFat.Location = new Point(26, 128);
+            labelSaturatedFat.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            labelSaturatedFat.Location = new Point(26, 127);
             labelSaturatedFat.Name = "labelSaturatedFat";
-            labelSaturatedFat.Size = new Size(111, 15);
-            labelSaturatedFat.TabIndex = 8;
+            labelSaturatedFat.Size = new Size(144, 20);
+            labelSaturatedFat.TabIndex = 0;
             labelSaturatedFat.Text = "   - Saturated Fat (g)";
             // 
             // textBoxFatTotal
@@ -937,7 +941,7 @@
             textBoxFatTotal.Location = new Point(201, 98);
             textBoxFatTotal.Name = "textBoxFatTotal";
             textBoxFatTotal.Size = new Size(78, 23);
-            textBoxFatTotal.TabIndex = 7;
+            textBoxFatTotal.TabIndex = 4;
             textBoxFatTotal.TextAlign = HorizontalAlignment.Right;
             textBoxFatTotal.KeyDown += TextBoxFatTotal_KeyDown;
             textBoxFatTotal.Leave += TextBoxFatTotal_Leave;
@@ -945,10 +949,11 @@
             // labelFatTotal
             // 
             labelFatTotal.AutoSize = true;
-            labelFatTotal.Location = new Point(26, 101);
+            labelFatTotal.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            labelFatTotal.Location = new Point(26, 100);
             labelFatTotal.Name = "labelFatTotal";
-            labelFatTotal.Size = new Size(69, 15);
-            labelFatTotal.TabIndex = 6;
+            labelFatTotal.Size = new Size(89, 20);
+            labelFatTotal.TabIndex = 0;
             labelFatTotal.Text = "Fat Total (g)";
             // 
             // textBoxProtein
@@ -956,7 +961,7 @@
             textBoxProtein.Location = new Point(201, 71);
             textBoxProtein.Name = "textBoxProtein";
             textBoxProtein.Size = new Size(78, 23);
-            textBoxProtein.TabIndex = 5;
+            textBoxProtein.TabIndex = 3;
             textBoxProtein.TextAlign = HorizontalAlignment.Right;
             textBoxProtein.KeyDown += TextBoxProtein_KeyDown;
             textBoxProtein.Leave += TextBoxProtein_Leave;
@@ -966,7 +971,7 @@
             textBoxEnergy.Location = new Point(201, 44);
             textBoxEnergy.Name = "textBoxEnergy";
             textBoxEnergy.Size = new Size(78, 23);
-            textBoxEnergy.TabIndex = 4;
+            textBoxEnergy.TabIndex = 2;
             textBoxEnergy.TextAlign = HorizontalAlignment.Right;
             textBoxEnergy.KeyDown += TextBoxEnergy_KeyDown;
             textBoxEnergy.Leave += TextBoxEnergy_Leave;
@@ -976,35 +981,38 @@
             textBoxFoodDescription.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             textBoxFoodDescription.Location = new Point(201, 17);
             textBoxFoodDescription.Name = "textBoxFoodDescription";
-            textBoxFoodDescription.Size = new Size(1203, 23);
-            textBoxFoodDescription.TabIndex = 3;
+            textBoxFoodDescription.Size = new Size(1182, 23);
+            textBoxFoodDescription.TabIndex = 1;
             textBoxFoodDescription.KeyDown += TextBoxFoodDescription_KeyDown;
             textBoxFoodDescription.Leave += TextBoxFoodDescription_Leave;
             // 
             // labelProtein
             // 
             labelProtein.AutoSize = true;
-            labelProtein.Location = new Point(26, 74);
+            labelProtein.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            labelProtein.Location = new Point(26, 73);
             labelProtein.Name = "labelProtein";
-            labelProtein.Size = new Size(63, 15);
-            labelProtein.TabIndex = 2;
+            labelProtein.Size = new Size(82, 20);
+            labelProtein.TabIndex = 0;
             labelProtein.Text = "Protein (g)";
             // 
             // labelEnergy
             // 
             labelEnergy.AutoSize = true;
-            labelEnergy.Location = new Point(26, 47);
+            labelEnergy.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            labelEnergy.Location = new Point(26, 46);
             labelEnergy.Name = "labelEnergy";
-            labelEnergy.Size = new Size(64, 15);
-            labelEnergy.TabIndex = 1;
+            labelEnergy.Size = new Size(85, 20);
+            labelEnergy.TabIndex = 0;
             labelEnergy.Text = "Energy (kJ)";
             // 
             // labelFoodDescription
             // 
             labelFoodDescription.AutoSize = true;
-            labelFoodDescription.Location = new Point(26, 20);
+            labelFoodDescription.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            labelFoodDescription.Location = new Point(26, 19);
             labelFoodDescription.Name = "labelFoodDescription";
-            labelFoodDescription.Size = new Size(96, 15);
+            labelFoodDescription.Size = new Size(124, 20);
             labelFoodDescription.TabIndex = 0;
             labelFoodDescription.Text = "Food description";
             // 

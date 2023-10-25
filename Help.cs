@@ -77,7 +77,7 @@ namespace DietSentry
             comboBoxHelp.ForeColor = Color.Black;
         }
 
-        private void comboBoxHelp_KeyDown(object sender, KeyEventArgs e)
+        private void ComboBoxHelp_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
