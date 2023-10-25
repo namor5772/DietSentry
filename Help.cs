@@ -63,7 +63,7 @@ namespace DietSentry
             richTextBoxHelp.ScrollToCaret();
 
             // clear selection view (maintaining position)
-            richTextBoxHelp.Focus();
+            //            richTextBoxHelp.Focus();
             richTextBoxHelp.DeselectAll();
         }
 
@@ -75,6 +75,15 @@ namespace DietSentry
         private void ComboBoxHelp_Enter(object sender, EventArgs e)
         {
             comboBoxHelp.ForeColor = Color.Black;
+        }
+
+        private void comboBoxHelp_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
+                richTextBoxHelp.Focus();
+            }
         }
     }
 }

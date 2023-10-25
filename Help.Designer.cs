@@ -41,11 +41,13 @@ namespace DietSentry
             // richTextBoxHelp
             // 
             richTextBoxHelp.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            richTextBoxHelp.BackColor = SystemColors.Window;
             richTextBoxHelp.BorderStyle = BorderStyle.None;
-            richTextBoxHelp.Location = new Point(0, 29);
+            richTextBoxHelp.Location = new Point(0, 31);
             richTextBoxHelp.Name = "richTextBoxHelp";
+            richTextBoxHelp.ReadOnly = true;
             richTextBoxHelp.ScrollBars = RichTextBoxScrollBars.Vertical;
-            richTextBoxHelp.Size = new Size(657, 673);
+            richTextBoxHelp.Size = new Size(713, 671);
             richTextBoxHelp.TabIndex = 1;
             richTextBoxHelp.Text = "";
             richTextBoxHelp.KeyDown += RichTextBoxHelp_KeyDown;
@@ -53,16 +55,17 @@ namespace DietSentry
             // comboBoxHelp
             // 
             comboBoxHelp.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            comboBoxHelp.FlatStyle = FlatStyle.Flat;
             comboBoxHelp.ForeColor = Color.White;
             comboBoxHelp.FormattingEnabled = true;
             comboBoxHelp.Items.AddRange(new object[] { "Diet Sentry overview", "Foods table", "Food DataGrid", "Food filter TextBox", "Food fields CheckBox", "Food info Label", "Food eaten dialog", "Liquid density dialog", "Eaten table", "Eaten DataGrid", "Eaten fields CheckBox", "Eaten daily totals CheckBox", "Eaten day filter CheckBox", "Eaten info Label", "Eaten edit dialog" });
-            comboBoxHelp.Location = new Point(0, 2);
+            comboBoxHelp.Location = new Point(507, 2);
+            comboBoxHelp.MaxDropDownItems = 32;
             comboBoxHelp.Name = "comboBoxHelp";
-            comboBoxHelp.Size = new Size(235, 23);
+            comboBoxHelp.Size = new Size(206, 23);
             comboBoxHelp.TabIndex = 2;
             comboBoxHelp.SelectedIndexChanged += ComboBoxHelp_SelectedIndexChanged;
             comboBoxHelp.Enter += ComboBoxHelp_Enter;
+            comboBoxHelp.KeyDown += comboBoxHelp_KeyDown;
             comboBoxHelp.Leave += ComboBoxHelp_Leave;
             // 
             // Help
@@ -71,7 +74,7 @@ namespace DietSentry
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(659, 702);
+            ClientSize = new Size(715, 702);
             Controls.Add(comboBoxHelp);
             Controls.Add(richTextBoxHelp);
             FormBorderStyle = FormBorderStyle.FixedSingle;
