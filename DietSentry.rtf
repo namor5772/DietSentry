@@ -2588,6 +2588,8 @@ Below are the self explanatory internal names and details of a records fields.\p
 
 \pard\nowidctlpar\li721\sa200\qj\b0\f1\fs22 Each record (table row) stores details of a particular recipe's ingredient food.\par
 The Foods and Recipe tables have a one-to-many relationship. If a Foods table record represents a recipe type food it is linked to many recipe table records which are its ingredients. A Solid or Liquid food is thus not linked to any records in the Recipe table. For the purposes of recording the consumption of a recipe food only its details stored in the Foods table are needed, the linked records in the Recipe table are only used in creating it.\par
+This table is stored in the SQLiite foods.db database distributed with this application. It can be directly examined or edited with many available applications. Eg. DB Browser for SQLite. Selected records in this table are visible via a DataGrid component of the in the <Food> tab of the applications main form, with the assumed units visible in the headers.\par
+Below are the self explanatory internal names and details of a records fields.\par
 \par
 
 \pard\nowidctlpar\sa200\sl276\slmult1\qj\cf1\b\f0\fs36 #\cf0\fs32 Eaten table\fs36\par
