@@ -53,21 +53,22 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
             groupBoxFoodTypes = new GroupBox();
             radioButtonRecipie = new RadioButton();
             radioButtonLiquid = new RadioButton();
             radioButtonSolid = new RadioButton();
+            labelHelpAddEditFood = new Label();
             buttonAddFood = new Button();
             buttonCancelAddFood = new Button();
             labelState = new Label();
@@ -152,7 +153,7 @@
             groupBoxFoodTypes.Controls.Add(radioButtonRecipie);
             groupBoxFoodTypes.Controls.Add(radioButtonLiquid);
             groupBoxFoodTypes.Controls.Add(radioButtonSolid);
-            groupBoxFoodTypes.Location = new Point(1, 3);
+            groupBoxFoodTypes.Location = new Point(21, 3);
             groupBoxFoodTypes.Name = "groupBoxFoodTypes";
             groupBoxFoodTypes.Size = new Size(215, 55);
             groupBoxFoodTypes.TabIndex = 0;
@@ -194,6 +195,18 @@
             radioButtonSolid.UseVisualStyleBackColor = true;
             radioButtonSolid.CheckedChanged += RadioButtonSolid_CheckedChanged;
             // 
+            // labelHelpAddEditFood
+            // 
+            labelHelpAddEditFood.BackColor = Color.YellowGreen;
+            labelHelpAddEditFood.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelHelpAddEditFood.ForeColor = SystemColors.ButtonHighlight;
+            labelHelpAddEditFood.Location = new Point(4, 3);
+            labelHelpAddEditFood.Name = "labelHelpAddEditFood";
+            labelHelpAddEditFood.Size = new Size(14, 15);
+            labelHelpAddEditFood.TabIndex = 18;
+            labelHelpAddEditFood.Text = "?";
+            labelHelpAddEditFood.MouseHover += labelHelpAddEditFood_MouseHover;
+            // 
             // buttonAddFood
             // 
             buttonAddFood.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -219,7 +232,7 @@
             // labelState
             // 
             labelState.AutoSize = true;
-            labelState.Location = new Point(222, 28);
+            labelState.Location = new Point(267, 28);
             labelState.Name = "labelState";
             labelState.Size = new Size(216, 15);
             labelState.TabIndex = 4;
@@ -277,40 +290,40 @@
             dataGridViewRecipe.AutoGenerateColumns = false;
             dataGridViewRecipe.BorderStyle = BorderStyle.None;
             dataGridViewRecipe.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.Azure;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = Color.Azure;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridViewRecipe.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = Color.Azure;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle12.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = Color.Azure;
+            dataGridViewCellStyle12.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
+            dataGridViewRecipe.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             dataGridViewRecipe.ColumnHeadersHeight = 28;
             dataGridViewRecipe.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewRecipe.Columns.AddRange(new DataGridViewColumn[] { amountDataGridViewTextBoxColumn, Energy, FatTotal, DietaryFibre, foodDescriptionDataGridViewTextBoxColumn1 });
             dataGridViewRecipe.DataSource = recipeBindingSource;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = SystemColors.Window;
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle7.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
-            dataGridViewRecipe.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = SystemColors.Window;
+            dataGridViewCellStyle18.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle18.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle18.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = DataGridViewTriState.False;
+            dataGridViewRecipe.DefaultCellStyle = dataGridViewCellStyle18;
             dataGridViewRecipe.EditMode = DataGridViewEditMode.EditOnF2;
             dataGridViewRecipe.EnableHeadersVisualStyles = false;
             dataGridViewRecipe.Location = new Point(478, 78);
             dataGridViewRecipe.MultiSelect = false;
             dataGridViewRecipe.Name = "dataGridViewRecipe";
             dataGridViewRecipe.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = SystemColors.Control;
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle8.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Control;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
-            dataGridViewRecipe.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = SystemColors.Control;
+            dataGridViewCellStyle19.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle19.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = SystemColors.Control;
+            dataGridViewCellStyle19.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle19.WrapMode = DataGridViewTriState.True;
+            dataGridViewRecipe.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
             dataGridViewRecipe.RowHeadersVisible = false;
             dataGridViewRecipe.RowHeadersWidth = 62;
             dataGridViewRecipe.RowTemplate.Height = 25;
@@ -323,9 +336,9 @@
             // 
             amountDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = "0";
-            amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle13.Format = "N0";
+            dataGridViewCellStyle13.NullValue = "0";
+            amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle13;
             amountDataGridViewTextBoxColumn.HeaderText = "Amount (g)";
             amountDataGridViewTextBoxColumn.MinimumWidth = 8;
             amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
@@ -337,9 +350,9 @@
             // 
             Energy.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             Energy.DataPropertyName = "Energy";
-            dataGridViewCellStyle3.Format = "N0";
-            dataGridViewCellStyle3.NullValue = "0";
-            Energy.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle14.Format = "N0";
+            dataGridViewCellStyle14.NullValue = "0";
+            Energy.DefaultCellStyle = dataGridViewCellStyle14;
             Energy.HeaderText = "Energy (kJ)";
             Energy.Name = "Energy";
             Energy.ReadOnly = true;
@@ -349,9 +362,9 @@
             // 
             FatTotal.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             FatTotal.DataPropertyName = "FatTotal";
-            dataGridViewCellStyle4.Format = "N1";
-            dataGridViewCellStyle4.NullValue = "0";
-            FatTotal.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle15.Format = "N1";
+            dataGridViewCellStyle15.NullValue = "0";
+            FatTotal.DefaultCellStyle = dataGridViewCellStyle15;
             FatTotal.HeaderText = "Fat (g)";
             FatTotal.Name = "FatTotal";
             FatTotal.ReadOnly = true;
@@ -361,9 +374,9 @@
             // 
             DietaryFibre.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             DietaryFibre.DataPropertyName = "DietaryFibre";
-            dataGridViewCellStyle5.Format = "N1";
-            dataGridViewCellStyle5.NullValue = "0";
-            DietaryFibre.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle16.Format = "N1";
+            dataGridViewCellStyle16.NullValue = "0";
+            DietaryFibre.DefaultCellStyle = dataGridViewCellStyle16;
             DietaryFibre.HeaderText = "Fibre (g)";
             DietaryFibre.Name = "DietaryFibre";
             DietaryFibre.ReadOnly = true;
@@ -373,8 +386,8 @@
             // 
             foodDescriptionDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             foodDescriptionDataGridViewTextBoxColumn1.DataPropertyName = "FoodDescription";
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            foodDescriptionDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.False;
+            foodDescriptionDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle17;
             foodDescriptionDataGridViewTextBoxColumn1.HeaderText = "Food description";
             foodDescriptionDataGridViewTextBoxColumn1.MinimumWidth = 8;
             foodDescriptionDataGridViewTextBoxColumn1.Name = "foodDescriptionDataGridViewTextBoxColumn1";
@@ -417,39 +430,39 @@
             dataGridViewAddToRecipe.AutoGenerateColumns = false;
             dataGridViewAddToRecipe.BorderStyle = BorderStyle.None;
             dataGridViewAddToRecipe.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = Color.Azure;
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
-            dataGridViewAddToRecipe.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = Color.Azure;
+            dataGridViewCellStyle20.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle20.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle20.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle20.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = DataGridViewTriState.True;
+            dataGridViewAddToRecipe.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
             dataGridViewAddToRecipe.ColumnHeadersHeight = 28;
             dataGridViewAddToRecipe.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewAddToRecipe.Columns.AddRange(new DataGridViewColumn[] { foodDescriptionDataGridViewTextBoxColumn });
             dataGridViewAddToRecipe.DataSource = foodBindingSource;
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = SystemColors.Info;
-            dataGridViewCellStyle10.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle10.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
-            dataGridViewAddToRecipe.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle21.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = SystemColors.Info;
+            dataGridViewCellStyle21.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle21.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle21.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = DataGridViewTriState.False;
+            dataGridViewAddToRecipe.DefaultCellStyle = dataGridViewCellStyle21;
             dataGridViewAddToRecipe.EnableHeadersVisualStyles = false;
             dataGridViewAddToRecipe.Location = new Point(8, 78);
             dataGridViewAddToRecipe.Margin = new Padding(0);
             dataGridViewAddToRecipe.MultiSelect = false;
             dataGridViewAddToRecipe.Name = "dataGridViewAddToRecipe";
             dataGridViewAddToRecipe.ReadOnly = true;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = Color.White;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            dataGridViewAddToRecipe.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle22.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle22.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle22.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle22.SelectionForeColor = Color.White;
+            dataGridViewCellStyle22.WrapMode = DataGridViewTriState.True;
+            dataGridViewAddToRecipe.RowHeadersDefaultCellStyle = dataGridViewCellStyle22;
             dataGridViewAddToRecipe.RowHeadersVisible = false;
             dataGridViewAddToRecipe.RowHeadersWidth = 62;
             dataGridViewAddToRecipe.RowTemplate.Height = 25;
@@ -1023,6 +1036,7 @@
             AutoSize = true;
             CancelButton = buttonCancelAddFood;
             ClientSize = new Size(1420, 787);
+            Controls.Add(labelHelpAddEditFood);
             Controls.Add(tabControlAddType);
             Controls.Add(labelState);
             Controls.Add(buttonCancelAddFood);
@@ -1125,5 +1139,6 @@
         private DataGridViewTextBoxColumn FatTotal;
         private DataGridViewTextBoxColumn DietaryFibre;
         private DataGridViewTextBoxColumn foodDescriptionDataGridViewTextBoxColumn1;
+        private Label labelHelpAddEditFood;
     }
 }

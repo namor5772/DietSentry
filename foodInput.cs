@@ -32,11 +32,11 @@ namespace DietSentry
             InitializeComponent();
             if (mainForm!.inputType == 0)
             {
-                this.Text = "Form for ADDING new food item";
+                this.Text = "Form for ADDING food";
             }
             else // if (mainForm.inputType == 1)
             {
-                this.Text = "Form for EDITING selected food item";
+                this.Text = "Form for EDITING food";
             }
         }
         protected override void OnLoad(EventArgs e)
@@ -1641,6 +1641,31 @@ namespace DietSentry
             }
         }
 
+
+        /*
+          * Hovering with mouse over any [?] button brings up the help form
+          * with the rtf text positioned at the appropriate topic.
+          */
+        private static void HelpCore(int ix, int iy)
+        {
+            // sets position and opens help form
+            Help frm = new()
+            {
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(ix, iy)
+            };
+            frm.Show();
+        }
+
+        private void labelHelpAddEditFood_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Liquid density dialog";
+            int iw = 10; // fudge
+            int ih = 18; // fudge
+            int ix = this.PointToScreen(labelHelpAddEditFood.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpAddEditFood.Location).Y + ih;
+            HelpCore(ix, iy);
+        }
     }
 }
 
