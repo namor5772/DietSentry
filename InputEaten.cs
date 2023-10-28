@@ -88,20 +88,6 @@ namespace DietSentry
             }
         }
 
-        /*
-         * Hovering with mouse over any [?] button brings up the help form
-        * with the rtf text positioned at the appropriate topic.
-        */
-        private static void HelpCore(int ix, int iy)
-        {
-            // sets position and opens help form
-            Help frm = new()
-            {
-                StartPosition = FormStartPosition.Manual,
-                Location = new Point(ix, iy)
-            };
-            frm.Show();
-        }
 
         private void labelHelpEatenEditDialog_MouseHover(object sender, EventArgs e)
         {
@@ -110,7 +96,7 @@ namespace DietSentry
             int ih = 18; // fudge
             int ix = this.PointToScreen(labelHelpEatenEditDialog.Location).X + iw;
             int iy = this.PointToScreen(labelHelpEatenEditDialog.Location).Y + ih;
-            HelpCore(ix, iy);
+            UtilitiesRMG.HelpCore(ix, iy);
 
         }
     }

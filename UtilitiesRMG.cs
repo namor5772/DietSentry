@@ -144,6 +144,22 @@ namespace DietSentry
 
             return Ts;
         }
+
+
+        /*
+        * Hovering with mouse over any [?] button brings up the help form
+        * with the rtf text positioned at the appropriate topic.
+        */
+        public static void HelpCore(int ix, int iy)
+        {
+            // sets position and opens help form
+            Help frm = new()
+            {
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(ix, iy)
+            };
+            frm.Show();
+        }
     }
 
 }

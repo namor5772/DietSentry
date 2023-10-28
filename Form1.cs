@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using static DietSentry.UtilitiesRMG; // so can use the isRecipe function
+using static DietSentry.UtilitiesRMG; // so can use the isRecipe & HelpCore functions
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
@@ -273,10 +273,10 @@ namespace DietSentry
                     if ((foodType == 0) | (foodType == 1) | (foodType == 3) | (foodType == 4))
                     {
                         using var context = new FoodsContext();
+
                         // we can now add the appropriate entry to the Food table, this is done in the mainForm but could have been
                         // done more logically in the foodInput form.
-                        var NewFood = context.Foods;
-                        NewFood.Add(new Food
+                        var newFood = new Food()
                         {
                             FoodDescription = addedFoodItem.FoodDescription,
                             Energy = addedFoodItem.Energy,
@@ -302,16 +302,18 @@ namespace DietSentry
                             Caffeine = addedFoodItem.Caffeine,
                             Cholesterol = addedFoodItem.Cholesterol,
                             Alcohol = addedFoodItem.Alcohol
-                        });
+                        };
+                        context.Foods.Add(newFood);
+                        context.SaveChanges();
+                        recordID = newFood.FoodId; // obtain automatically created Key of new food
                         context.SaveChanges();
 
-                        labelInfoFood.Text = "Added new food item : " + addedFoodItem.FoodDescription;
+                        labelInfoFood.Text = "Added new food item " + recordID.ToString() + " :  " + addedFoodItem.FoodDescription;
                     }
                     else if (foodType == 2)
                     {
                         ; // DO RECIPE STUFF HERE
                         // but actually all has already been done in the FoodInputForm form
-
                     }
                     else
                     {
@@ -460,10 +462,10 @@ namespace DietSentry
                         };
                         frm.ShowDialog();
 
-                        labelInfoFood.Text = "{F4} Key pressed:   " + fT.ToString() + "  " + densityOfFood.ToString();
-
                         if (densityOfFood == 0.0) // invalid input, so error message
                         {
+                            labelInfoFood.Text = "{F4} Key pressed: Nothing happened";
+
                             // Initializes the variables to pass to the MessageBox.Show method
                             string message = "Try again!";
                             string caption = "INVALID DENSITY";
@@ -476,6 +478,7 @@ namespace DietSentry
                         else if (densityOfFood == -1.0) // blank input press {Enter} key or just press {Escape} or {Delete} keys to do nothing!
                         {
                             ;//do nothing
+                            labelInfoFood.Text = "{F4} Key pressed: Nothing happened";
                         }
                         else // proceed to create copy of food item in Solid form
                         {
@@ -521,11 +524,14 @@ namespace DietSentry
 
                             context.SaveChanges();
                             ActOnFoodFilteringStates(1);
-                        }
 
+                            labelInfoFood.Text = "{F4} Key pressed, created new solid food:   " + sDescriptionDensity;
+                        }
                     }
                     else // no further processing possible so display "Error" message box
                     {
+                        labelInfoFood.Text = "{F4} Key pressed: Nothing happened";
+
                         // Initializes the variables to pass to the MessageBox.Show method
                         string message = "Only possible when Liquid food selected";
                         string caption = "CANNOT CREATE SOLID FOOD";
@@ -1054,22 +1060,6 @@ namespace DietSentry
         }
 
 
-        /*
-         * Hovering with mouse over any [?] button brings up the help form
-         * with the rtf text positioned at the appropriate topic.
-         */
-
-        private static void HelpCore(int ix, int iy)
-        {
-            // sets position and opens help form
-            Help frm = new()
-            {
-                StartPosition = FormStartPosition.Manual,
-                Location = new Point(ix, iy)
-            };
-            frm.Show();
-        }
-
         // Foods tab help ********************************************
 
         private void ButtonHelp_Click(object sender, EventArgs e)
@@ -1079,7 +1069,7 @@ namespace DietSentry
             int ix = this.PointToScreen(buttonHelp.Location).X + iw;
             int iy = this.PointToScreen(buttonHelp.Location).Y + ih;
             UtilitiesRMG.SHelpFind = "#Diet Sentry overview";
-            HelpCore(ix, iy);
+            UtilitiesRMG.HelpCore(ix, iy);
         }
 
         private void LabelHelpFoodTab_MouseHover(object sender, EventArgs e)
@@ -1089,7 +1079,7 @@ namespace DietSentry
             int ih = 40; // fudge
             int ix = this.PointToScreen(labelHelpFoodTab.Location).X + iw;
             int iy = this.PointToScreen(labelHelpFoodTab.Location).Y + ih;
-            HelpCore(ix, iy);
+            UtilitiesRMG.HelpCore(ix, iy);
         }
 
         private void LabelHelpFoodFilter_MouseHover(object sender, EventArgs e)
@@ -1099,7 +1089,7 @@ namespace DietSentry
             int ih = 40; // fudge
             int ix = PointToScreen(labelHelpFoodFilter.Location).X + iw;
             int iy = PointToScreen(labelHelpFoodFilter.Location).Y + ih;
-            HelpCore(ix, iy);
+            UtilitiesRMG.HelpCore(ix, iy);
         }
 
         private void LabelHelpFoodDataGrid_MouseHover(object sender, EventArgs e)
@@ -1109,7 +1099,7 @@ namespace DietSentry
             int ih = 40; // fudge
             int ix = this.PointToScreen(dataGridViewFoods.Location).X + iw;
             int iy = this.PointToScreen(dataGridViewFoods.Location).Y + ih;
-            HelpCore(ix, iy);
+            UtilitiesRMG.HelpCore(ix, iy);
         }
 
         private void LabelHelpShowCols_MouseHover(object sender, EventArgs e)
@@ -1119,7 +1109,7 @@ namespace DietSentry
             int ih = 40; // fudge
             int ix = this.PointToScreen(labelHelpShowCols.Location).X + iw;
             int iy = this.PointToScreen(labelHelpShowCols.Location).Y + ih;
-            HelpCore(ix, iy);
+            UtilitiesRMG.HelpCore(ix, iy);
         }
 
         private void LabelHelpFoodInfo_MouseHover(object sender, EventArgs e)
@@ -1129,7 +1119,7 @@ namespace DietSentry
             int ih = 40; // fudge
             int ix = this.PointToScreen(labelHelpFoodInfo.Location).X + iw;
             int iy = this.PointToScreen(labelHelpFoodInfo.Location).Y + ih;
-            HelpCore(ix, iy);
+            UtilitiesRMG.HelpCore(ix, iy);
         }
 
         // Eaten tab help ********************************************
@@ -1141,7 +1131,7 @@ namespace DietSentry
             int ih = 40; // fudge
             int ix = this.PointToScreen(labelHelpShowCols2.Location).X + iw;
             int iy = this.PointToScreen(labelHelpShowCols2.Location).Y + ih;
-            HelpCore(ix, iy);
+            UtilitiesRMG.HelpCore(ix, iy);
         }
 
         private void LabelHelpShowTotals_MouseHover(object sender, EventArgs e)
@@ -1151,7 +1141,7 @@ namespace DietSentry
             int ih = 40; // fudge
             int ix = this.PointToScreen(labelHelpShowTotals.Location).X + iw;
             int iy = this.PointToScreen(labelHelpShowTotals.Location).Y + ih;
-            HelpCore(ix, iy);
+            UtilitiesRMG.HelpCore(ix, iy);
         }
 
         private void LabelHelpShowFilter_MouseHover(object sender, EventArgs e)
@@ -1161,7 +1151,7 @@ namespace DietSentry
             int ih = 40; // fudge
             int ix = this.PointToScreen(labelHelpShowFilter.Location).X + iw;
             int iy = this.PointToScreen(labelHelpShowFilter.Location).Y + ih;
-            HelpCore(ix, iy);
+            UtilitiesRMG.HelpCore(ix, iy);
         }
 
         private void LabelHelpEatenDataGrid_MouseHover(object sender, EventArgs e)
@@ -1171,7 +1161,7 @@ namespace DietSentry
             int ih = 40; // fudge
             int ix = this.PointToScreen(labelHelpEatenDataGrid.Location).X + iw;
             int iy = this.PointToScreen(labelHelpEatenDataGrid.Location).Y + ih;
-            HelpCore(ix, iy);
+            UtilitiesRMG.HelpCore(ix, iy);
         }
 
         private void LabelHelpEatenInfo_MouseHover(object sender, EventArgs e)
@@ -1181,7 +1171,7 @@ namespace DietSentry
             int ih = 40; // fudge
             int ix = this.PointToScreen(labelHelpEatenInfo.Location).X + iw;
             int iy = this.PointToScreen(labelHelpEatenInfo.Location).Y + ih;
-            HelpCore(ix, iy);
+            UtilitiesRMG.HelpCore(ix, iy);
         }
     }
 }

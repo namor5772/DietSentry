@@ -205,7 +205,7 @@
             labelHelpAddEditFood.Size = new Size(14, 15);
             labelHelpAddEditFood.TabIndex = 18;
             labelHelpAddEditFood.Text = "?";
-            labelHelpAddEditFood.MouseHover += labelHelpAddEditFood_MouseHover;
+            labelHelpAddEditFood.MouseHover += LabelHelpAddEditFood_MouseHover;
             // 
             // buttonAddFood
             // 
