@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,13 +27,21 @@ namespace DietSentry
         private void Help_Load(object sender, EventArgs e)
         {
             richTextBoxHelp.RightMargin = richTextBoxHelp.Size.Width - 60;
-
-            // load rtf file into richTextBox
             richTextBoxHelp.ReadOnly = false;
-            richTextBoxHelp.LoadFile(@"C:\Users\grobl\source\repos\DietSentry\DietSentry.rtf");
+
+            // This is the SNEAKY WAY of getting a raw text file and making it
+            // display as an rtf formatted file in this rich Text Box
+            string rtfText = Properties.Resources.DietSentry;
+            byte[] rtfBytes = Encoding.ASCII.GetBytes(rtfText);
+            MemoryStream stream = new(rtfBytes);
+            richTextBoxHelp.LoadFile(stream, RichTextBoxStreamType.RichText);
+
+            // **** THE DIRECTORY SPECIFIC WAY OF POPULATING THE richTextBox
+            // ****richTextBoxHelp.LoadFile(@"C:\Users\roman\source\repos\namor5772\DietSentry\DietSentry.rtf");
+
             richTextBoxHelp.ReadOnly = true;
 
-            // select the releva help topic in the ComboBox which will 
+            // select the relevat help topic in the ComboBox which will 
             // then display upon comboBoxHelp_SelectedIndexChanged firing 
             string sh = UtilitiesRMG.SHelpFind;
             sh = sh[1..]; // get rid of initial "#" character

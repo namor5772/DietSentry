@@ -59,5 +59,19 @@ namespace DietSentry.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang3081\deflangfe3081{\fonttbl{\f0\fswiss\fprq2\fcharset0 Calibri;}{\f1\fswiss\fprq2\fcharset0 Calibri Light;}{\f2\fnil\fcharset0 Calibri;}{\f3\fnil\fcharset0 Calibri Light;}{\f4\fnil Cascadia Mono;}}
+        ///{\colortbl ;\red255\green255\blue255;\red163\green21\blue21;\red255\green0\blue0;}
+        ///{\*\generator Riched20 10.0.22621}{\*\mmathPr\mdispDef1\mwrapIndent1440 }\viewkind4\uc1 
+        ///\pard\nowidctlpar\sa200\cf1\b\f0\fs40\lang9 #\cf0 Diet Sentry overview\par
+        ///
+        ///\pard\nowidct [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string DietSentry {
+            get {
+                return ResourceManager.GetString("DietSentry", resourceCulture);
+            }
+        }
     }
 }

@@ -652,7 +652,7 @@ namespace DietSentry
                     dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
                     dataGridViewEaten.Columns[2].Visible = false; // hide TimeEaten column
                     dataGridViewEaten.Columns[3].Visible = false; // hide EatenTs column *****
-                    dataGridViewEaten.Columns[4].Visible = false; // hide AmountEaten column
+                    dataGridViewEaten.Columns[4].Visible = true; // hide AmountEaten column
                     dataGridViewEaten.Columns[5].Visible = false; // hide FoodDescription column
 
                     // the queried data table result should only contain one record/row.
@@ -713,7 +713,7 @@ namespace DietSentry
                     dataGridViewEaten.Columns[0].Visible = false; // hide EatenId column
                     dataGridViewEaten.Columns[2].Visible = false; // hide TimeEaten column
                     dataGridViewEaten.Columns[3].Visible = false; // hide EatenTs column *****
-                    dataGridViewEaten.Columns[4].Visible = false; // hide AmountEaten column
+                    dataGridViewEaten.Columns[4].Visible = true; // hide AmountEaten column
                     dataGridViewEaten.Columns[5].Visible = false; // hide FoodDescription column
 
                     // the queried data table result should only contain one record/row.
@@ -772,7 +772,6 @@ namespace DietSentry
             if (checkBoxMainCols.Checked)
             {
                 // hide non-main columns 
-                //dataGridViewEaten.Columns[3].Visible = false; // hide AmountEaten column
                 dataGridViewEaten.Columns[10].Visible = false; // hide TransFat column
                 dataGridViewEaten.Columns[11].Visible = false; // hide PolyunsaturatedFat column
                 dataGridViewEaten.Columns[12].Visible = false; // hide MonounsaturatedFat column
