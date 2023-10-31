@@ -36,20 +36,28 @@ namespace DietSentry
 
         private void ActOnEnterKeyPress()
         {
-            // if any problems with parsing return 0 and just ignore attempt at adding food to Eaten table
+            // if any problems with parsing return 0 
             float amount;
             try
             {
                 amount = float.Parse(textBoxAmount.Text);
+                if (amount < 0.0)
+                {
+                    amount = 0F;
+                }
             }
             catch // any exception
             {
                 amount = 0F;
             }
 
-            // collects the input, processes it and assignes it to a variable accessible in the MainForm     
-            DateTime dt = dateTimePickerEaten.Value;
-            mainForm!.dateTimeEaten = dt;
+            if (textBoxAmount.Text == "")
+            {
+                amount = -1F;
+            }
+
+            // collects the input, processes it and assignes it to variables accessible in the MainForm     
+            mainForm!.dateTimeEaten = dateTimePickerEaten.Value;
             mainForm!.amountOfFoodEaten = amount;
 
             Close();
@@ -89,7 +97,7 @@ namespace DietSentry
         }
 
 
-        private void labelHelpEatenEditDialog_MouseHover(object sender, EventArgs e)
+        private void LabelHelpEatenEditDialog_MouseHover(object sender, EventArgs e)
         {
             UtilitiesRMG.SHelpFind = "#Eaten edit dialog";
             int iw = 10; // fudge

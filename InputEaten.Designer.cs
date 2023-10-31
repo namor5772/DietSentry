@@ -85,7 +85,7 @@
             labelHelpEatenEditDialog.Size = new Size(14, 15);
             labelHelpEatenEditDialog.TabIndex = 17;
             labelHelpEatenEditDialog.Text = "?";
-            labelHelpEatenEditDialog.MouseHover += labelHelpEatenEditDialog_MouseHover;
+            labelHelpEatenEditDialog.MouseHover += LabelHelpEatenEditDialog_MouseHover;
             // 
             // InputEaten
             // 

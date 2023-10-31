@@ -72,15 +72,15 @@ namespace DietSentry
                 textBoxDensity.Text = "";
                 ActOnEnterKeyPress();
             }
+/*
             else if (e.KeyCode == Keys.Delete)
             {
                 // closes form without doing anything
                 textBoxDensity.Text = "";
                 ActOnEnterKeyPress();
             }
-
+*/
         }
-
  
         private void LabelHelpFoodDensityDialog_MouseHover(object sender, EventArgs e)
         {
