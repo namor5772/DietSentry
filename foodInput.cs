@@ -22,10 +22,10 @@ namespace DietSentry
 {
     public partial class FoodInputForm : Form
     {
-
         private FoodsContext? dbContext;
 
         private readonly MainForm? mainForm;
+
         public FoodInputForm(Form callingform)
         {
             mainForm = callingform as MainForm;
@@ -39,6 +39,7 @@ namespace DietSentry
                 this.Text = "Form for EDITING food";
             }
         }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -53,23 +54,6 @@ namespace DietSentry
             this.foodBindingSource.DataSource = dbContext.Foods.Local.ToBindingList();
             this.recipeBindingSource.DataSource = dbContext.Recipe.Local.ToBindingList();
         }
-
-
-        /*
-                // 0= when dealing with non-recipe foods, 1= when dealing with recipe food
-                public void ChangeFormSize(int sizeType)
-                {
-                    if (sizeType == 0)
-                    {
-                        this.Size = new Size(783, 847);
-                    }
-                    else // if (sizeType ==1)
-                    {
-                        this.Size = new Size(1175, 847);
-                    }
-                }
-        */
-
 
         // deletes any provisionally created recipe or reverts to original if editing was being done
         private void CancelAdditionOfRecipe()
@@ -385,8 +369,6 @@ namespace DietSentry
             }
         }
 
-
-
         /***** Events/functions related to cancelling a foods input *****/
 
         // What needs to be done when the {Cancel} button is pressed
@@ -422,8 +404,6 @@ namespace DietSentry
             }
         }
 
-
-
         // toggles between food input forms/layouts
         private void RadioButtonSolid_CheckedChanged(object sender, EventArgs e)
         {
@@ -458,8 +438,6 @@ namespace DietSentry
             }
         }
 
-
-
         /* Enables the completion of inputting a food or recipie description string by pressing the Enter key
          * No error checking necessary since input is an arbitrary string */
         private void TextBoxFoodDescription_KeyDown(object sender, KeyEventArgs e)
@@ -470,6 +448,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxRecipeFoodDescription_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -485,6 +464,7 @@ namespace DietSentry
         {
             mainForm!.addedFoodItem.FoodDescription = textBoxFoodDescription.Text;
         }
+
         private void TextBoxRecipeFoodDescription_Leave(object sender, EventArgs e)
         {
             if (!recordExists)
@@ -545,8 +525,6 @@ namespace DietSentry
             }
         }
 
-
-
         /***** START BLOCK OF EVENT FUNCTIONS *****
          * The following EVENT FUNCTIONS are related to accepting & error managing all number accepting text boxes for Food table fields */
 
@@ -599,6 +577,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxProtein_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -620,6 +599,7 @@ namespace DietSentry
                 textBoxProtein.Text = "";
             }
         }
+
         private void TextBoxFatTotal_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -628,6 +608,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxFatTotal_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -649,6 +630,7 @@ namespace DietSentry
                 textBoxFatTotal.Text = "";
             }
         }
+
         private void TextBoxSaturatedFat_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -657,6 +639,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxSaturatedFat_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -678,6 +661,7 @@ namespace DietSentry
                 textBoxSaturatedFat.Text = "";
             }
         }
+
         private void TextBoxTransFat_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -686,6 +670,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxTransFat_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -707,6 +692,7 @@ namespace DietSentry
                 textBoxTransFat.Text = "";
             }
         }
+
         private void TextBoxPolyunsaturatedFat_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -715,6 +701,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxPolyunsaturatedFat_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -736,6 +723,7 @@ namespace DietSentry
                 textBoxPolyunsaturatedFat.Text = "";
             }
         }
+
         private void TextBoxMonounsaturatedFat_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -744,6 +732,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxMonounsaturatedFat_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -765,6 +754,7 @@ namespace DietSentry
                 textBoxMonounsaturatedFat.Text = "";
             }
         }
+
         private void TextBoxCarbohydrate_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -773,6 +763,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxCarbohydrate_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -794,6 +785,7 @@ namespace DietSentry
                 textBoxCarbohydrate.Text = "";
             }
         }
+
         private void TextBoxSugars_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -802,6 +794,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxSugars_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -823,6 +816,7 @@ namespace DietSentry
                 textBoxSugars.Text = "";
             }
         }
+
         private void TextBoxDietaryFibre_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -831,6 +825,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxDietaryFibre_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -852,6 +847,7 @@ namespace DietSentry
                 textBoxDietaryFibre.Text = "";
             }
         }
+
         private void TextBoxSodiumNa_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -860,6 +856,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxSodiumNa_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -881,6 +878,7 @@ namespace DietSentry
                 textBoxSodiumNa.Text = "";
             }
         }
+
         private void TextBoxCalciumCa_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -889,6 +887,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxCalciumCa_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -910,6 +909,7 @@ namespace DietSentry
                 textBoxCalciumCa.Text = "";
             }
         }
+
         private void TextBoxPotassiumK_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -918,6 +918,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxPotassiumK_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -939,6 +940,7 @@ namespace DietSentry
                 textBoxPotassiumK.Text = "";
             }
         }
+
         private void TextBoxThiaminB1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -947,6 +949,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxThiaminB1_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -968,6 +971,7 @@ namespace DietSentry
                 textBoxThiaminB1.Text = "";
             }
         }
+
         private void TextBoxRiboflavinB2_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -976,6 +980,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxRiboflavinB2_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -997,6 +1002,7 @@ namespace DietSentry
                 textBoxRiboflavinB2.Text = "";
             }
         }
+
         private void TextBoxNiacinB3_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -1005,6 +1011,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxNiacinB3_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -1026,6 +1033,7 @@ namespace DietSentry
                 textBoxNiacinB3.Text = "";
             }
         }
+
         private void TextBoxFolate_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -1034,6 +1042,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxFolate_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -1055,6 +1064,7 @@ namespace DietSentry
                 textBoxFolate.Text = "";
             }
         }
+
         private void TextBoxIronFe_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -1063,6 +1073,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxIronFe_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -1084,6 +1095,7 @@ namespace DietSentry
                 textBoxIronFe.Text = "";
             }
         }
+
         private void TextBoxMagnesiumMg_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -1092,6 +1104,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxMagnesiumMg_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -1113,6 +1126,7 @@ namespace DietSentry
                 textBoxMagnesiumMg.Text = "";
             }
         }
+
         private void TextBoxVitaminC_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -1121,6 +1135,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxVitaminC_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -1142,6 +1157,7 @@ namespace DietSentry
                 textBoxVitaminC.Text = "";
             }
         }
+
         private void TextBoxCaffeine_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -1150,6 +1166,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxCaffeine_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -1172,6 +1189,7 @@ namespace DietSentry
             }
             //labelState.Text = (textBoxCaffeine.Text);
         }
+
         private void TextBoxCholesterol_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -1180,6 +1198,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxCholesterol_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -1202,6 +1221,7 @@ namespace DietSentry
             }
             //labelState.Text = (textBoxCholesterol.Text);
         }
+
         private void TextBoxAlcohol_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -1210,6 +1230,7 @@ namespace DietSentry
                 SendKeys.Send("{TAB}");
             }
         }
+
         private void TextBoxAlcohol_Leave(object sender, EventArgs e)
         {
             // if any problems with parsing return 0 for this field
@@ -1234,8 +1255,6 @@ namespace DietSentry
 
         /* The above EVENT FUNCTIONS are related to accepting & error managing all numeric accepting text boxed for Food table fields
          ***** END BLOCK OF EVENT FUNCTIONS *****/
-
-
 
         // Prepares this form depending on what food type will be processed and whether adding or editing
         // This information is obtained from public variables in the parent form.
@@ -1424,8 +1443,6 @@ namespace DietSentry
                 }
             }
         }
-
-
 
         private void RefreshRecipeDataGrid(int rID)
         {
@@ -1640,11 +1657,21 @@ namespace DietSentry
                 RefreshRecipeDataGrid(recordID);
             }
         }
-
         
         private void LabelHelpAddEditFood_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Liquid density dialog";
+            /*
+                        if (this.Text == "Form for ADDING food")
+                        {
+                            UtilitiesRMG.SHelpFind = "#Liquid density dialog";
+                        }
+                        else // if (this.Text == "Form for EDITING food") 
+                        {
+
+                        }
+            */
+            string sh = "#" + this.Text;
+            UtilitiesRMG.SHelpFind = "#" + this.Text;
             int iw = 10; // fudge
             int ih = 18; // fudge
             int ix = this.PointToScreen(labelHelpAddEditFood.Location).X + iw;

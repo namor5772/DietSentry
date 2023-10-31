@@ -474,7 +474,7 @@ namespace DietSentry
                         else // proceed to create copy of food item in Solid form
                         {
                             // Creating new FoodDescription, with the same trucated base but extension varying depending on original food type
-                            string sDescriptionDensity = editedFoodDescription + " {density=" + string.Format("{0:N3}", densityOfFood) + "g/ml}";
+                            string sDescriptionDensity = editedFoodDescription + " {density=" + string.Format("{0:N3}", densityOfFood) + "g/mL}";
                             if (fT == 1) // dealing with "public" liquid
                             {
                                 editedFoodDescription = sDescriptionDensity;
