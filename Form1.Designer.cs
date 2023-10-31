@@ -82,9 +82,6 @@ namespace DietSentry
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle30 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle31 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle32 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle58 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle59 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
@@ -113,6 +110,9 @@ namespace DietSentry
             DataGridViewCellStyle dataGridViewCellStyle27 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle28 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle29 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle32 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle58 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle59 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle33 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle34 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle35 = new DataGridViewCellStyle();
@@ -158,19 +158,6 @@ namespace DietSentry
             checkBoxDailyTotals = new CheckBox();
             checkBoxDateFilter = new CheckBox();
             dataGridViewEaten = new DataGridView();
-            tabPageFood = new TabPage();
-            labelHelpFoodInfo = new Label();
-            labelHelpShowCols = new Label();
-            labelHelpFoodDataGrid = new Label();
-            labelHelpFoodFilter = new Label();
-            labelHelpFoodTab = new Label();
-            buttonHelp = new Button();
-            textBoxFilter = new TextBox();
-            labelInfoFood = new Label();
-            checkBoxMainFoodCols = new CheckBox();
-            labelFilter = new Label();
-            dataGridViewFoods = new DataGridView();
-            tabControlMain = new TabControl();
             EatenId = new DataGridViewTextBoxColumn();
             DateEaten = new DataGridViewTextBoxColumn();
             TimeEaten = new DataGridViewTextBoxColumn();
@@ -200,6 +187,18 @@ namespace DietSentry
             caffeineDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             cholesterolDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             alcoholDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            tabPageFood = new TabPage();
+            labelHelpFoodInfo = new Label();
+            labelHelpShowCols = new Label();
+            labelHelpFoodDataGrid = new Label();
+            labelHelpFoodFilter = new Label();
+            labelHelpFoodTab = new Label();
+            buttonHelp = new Button();
+            textBoxFilter = new TextBox();
+            labelInfoFood = new Label();
+            checkBoxMainFoodCols = new CheckBox();
+            labelFilter = new Label();
+            dataGridViewFoods = new DataGridView();
             FoodIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             foodDescriptionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             energyDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -225,6 +224,7 @@ namespace DietSentry
             caffeineDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             cholesterolDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             alcoholDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            tabControlMain = new TabControl();
             tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)foodBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)eatenBindingSource).BeginInit();
@@ -483,214 +483,6 @@ namespace DietSentry
             dataGridViewEaten.UserDeletingRow += DataGridViewEaten_UserDeletingRow;
             dataGridViewEaten.KeyDown += DataGridViewEaten_KeyDown;
             // 
-            // tabPageFood
-            // 
-            tabPageFood.AutoScroll = true;
-            tabPageFood.BackColor = Color.Transparent;
-            tabPageFood.BorderStyle = BorderStyle.FixedSingle;
-            tabPageFood.Controls.Add(labelHelpFoodInfo);
-            tabPageFood.Controls.Add(labelHelpShowCols);
-            tabPageFood.Controls.Add(labelHelpFoodDataGrid);
-            tabPageFood.Controls.Add(labelHelpFoodFilter);
-            tabPageFood.Controls.Add(labelHelpFoodTab);
-            tabPageFood.Controls.Add(buttonHelp);
-            tabPageFood.Controls.Add(textBoxFilter);
-            tabPageFood.Controls.Add(labelInfoFood);
-            tabPageFood.Controls.Add(checkBoxMainFoodCols);
-            tabPageFood.Controls.Add(labelFilter);
-            tabPageFood.Controls.Add(dataGridViewFoods);
-            tabPageFood.Location = new Point(4, 24);
-            tabPageFood.Name = "tabPageFood";
-            tabPageFood.Padding = new Padding(3);
-            tabPageFood.Size = new Size(1388, 691);
-            tabPageFood.TabIndex = 0;
-            tabPageFood.Text = "Food";
-            // 
-            // labelHelpFoodInfo
-            // 
-            labelHelpFoodInfo.BackColor = Color.YellowGreen;
-            labelHelpFoodInfo.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelHelpFoodInfo.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpFoodInfo.Location = new Point(312, 19);
-            labelHelpFoodInfo.Name = "labelHelpFoodInfo";
-            labelHelpFoodInfo.Size = new Size(14, 15);
-            labelHelpFoodInfo.TabIndex = 17;
-            labelHelpFoodInfo.Text = "?";
-            labelHelpFoodInfo.MouseHover += LabelHelpFoodInfo_MouseHover;
-            // 
-            // labelHelpShowCols
-            // 
-            labelHelpShowCols.BackColor = Color.YellowGreen;
-            labelHelpShowCols.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelHelpShowCols.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpShowCols.Location = new Point(95, 19);
-            labelHelpShowCols.Name = "labelHelpShowCols";
-            labelHelpShowCols.Size = new Size(14, 15);
-            labelHelpShowCols.TabIndex = 16;
-            labelHelpShowCols.Text = "?";
-            labelHelpShowCols.MouseHover += LabelHelpShowCols_MouseHover;
-            // 
-            // labelHelpFoodDataGrid
-            // 
-            labelHelpFoodDataGrid.AutoSize = true;
-            labelHelpFoodDataGrid.BackColor = Color.YellowGreen;
-            labelHelpFoodDataGrid.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelHelpFoodDataGrid.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpFoodDataGrid.Location = new Point(7, 99);
-            labelHelpFoodDataGrid.Name = "labelHelpFoodDataGrid";
-            labelHelpFoodDataGrid.Size = new Size(14, 15);
-            labelHelpFoodDataGrid.TabIndex = 15;
-            labelHelpFoodDataGrid.Text = "?";
-            labelHelpFoodDataGrid.MouseHover += LabelHelpFoodDataGrid_MouseHover;
-            // 
-            // labelHelpFoodFilter
-            // 
-            labelHelpFoodFilter.AutoSize = true;
-            labelHelpFoodFilter.BackColor = Color.YellowGreen;
-            labelHelpFoodFilter.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelHelpFoodFilter.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpFoodFilter.Location = new Point(6, 60);
-            labelHelpFoodFilter.Name = "labelHelpFoodFilter";
-            labelHelpFoodFilter.Size = new Size(14, 15);
-            labelHelpFoodFilter.TabIndex = 14;
-            labelHelpFoodFilter.Text = "?";
-            labelHelpFoodFilter.MouseHover += LabelHelpFoodFilter_MouseHover;
-            // 
-            // labelHelpFoodTab
-            // 
-            labelHelpFoodTab.BackColor = Color.YellowGreen;
-            labelHelpFoodTab.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelHelpFoodTab.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpFoodTab.Location = new Point(7, 9);
-            labelHelpFoodTab.Name = "labelHelpFoodTab";
-            labelHelpFoodTab.Size = new Size(14, 15);
-            labelHelpFoodTab.TabIndex = 12;
-            labelHelpFoodTab.Text = "?";
-            labelHelpFoodTab.MouseHover += LabelHelpFoodTab_MouseHover;
-            // 
-            // buttonHelp
-            // 
-            buttonHelp.Location = new Point(27, 2);
-            buttonHelp.Name = "buttonHelp";
-            buttonHelp.Size = new Size(43, 28);
-            buttonHelp.TabIndex = 11;
-            buttonHelp.Text = "HELP";
-            buttonHelp.UseVisualStyleBackColor = true;
-            buttonHelp.Click += ButtonHelp_Click;
-            // 
-            // textBoxFilter
-            // 
-            textBoxFilter.AutoCompleteMode = AutoCompleteMode.Suggest;
-            textBoxFilter.AutoCompleteSource = AutoCompleteSource.HistoryList;
-            textBoxFilter.Location = new Point(23, 55);
-            textBoxFilter.Name = "textBoxFilter";
-            textBoxFilter.PlaceholderText = "Enter food filter text";
-            textBoxFilter.Size = new Size(135, 23);
-            textBoxFilter.TabIndex = 2;
-            textBoxFilter.WordWrap = false;
-            textBoxFilter.Enter += TextBoxFilter_Enter;
-            textBoxFilter.KeyDown += TextBoxFilter_KeyDown;
-            // 
-            // labelInfoFood
-            // 
-            labelInfoFood.AutoSize = true;
-            labelInfoFood.BackColor = SystemColors.ControlLight;
-            labelInfoFood.Location = new Point(332, 19);
-            labelInfoFood.Name = "labelInfoFood";
-            labelInfoFood.Size = new Size(13, 15);
-            labelInfoFood.TabIndex = 9;
-            labelInfoFood.Text = "  ";
-            // 
-            // checkBoxMainFoodCols
-            // 
-            checkBoxMainFoodCols.AutoSize = true;
-            checkBoxMainFoodCols.Checked = true;
-            checkBoxMainFoodCols.CheckState = CheckState.Checked;
-            checkBoxMainFoodCols.Location = new Point(116, 18);
-            checkBoxMainFoodCols.Name = "checkBoxMainFoodCols";
-            checkBoxMainFoodCols.Size = new Size(161, 19);
-            checkBoxMainFoodCols.TabIndex = 8;
-            checkBoxMainFoodCols.Text = "Only show main columns";
-            checkBoxMainFoodCols.UseVisualStyleBackColor = true;
-            checkBoxMainFoodCols.CheckedChanged += CheckBoxMainFoodCols_CheckedChanged;
-            // 
-            // labelFilter
-            // 
-            labelFilter.AutoSize = true;
-            labelFilter.BackColor = Color.LightCyan;
-            labelFilter.Location = new Point(164, 58);
-            labelFilter.Name = "labelFilter";
-            labelFilter.Size = new Size(59, 15);
-            labelFilter.TabIndex = 3;
-            labelFilter.Text = "Unfiltered";
-            // 
-            // dataGridViewFoods
-            // 
-            dataGridViewFoods.AllowUserToAddRows = false;
-            dataGridViewFoods.AllowUserToResizeColumns = false;
-            dataGridViewFoods.AllowUserToResizeRows = false;
-            dataGridViewFoods.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridViewFoods.AutoGenerateColumns = false;
-            dataGridViewFoods.BorderStyle = BorderStyle.None;
-            dataGridViewFoods.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle32.Alignment = DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle32.BackColor = Color.Azure;
-            dataGridViewCellStyle32.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle32.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle32.SelectionBackColor = Color.Azure;
-            dataGridViewCellStyle32.SelectionForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle32.WrapMode = DataGridViewTriState.True;
-            dataGridViewFoods.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle32;
-            dataGridViewFoods.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewFoods.Columns.AddRange(new DataGridViewColumn[] { FoodIdDataGridViewTextBoxColumn, foodDescriptionDataGridViewTextBoxColumn, energyDataGridViewTextBoxColumn, proteinDataGridViewTextBoxColumn, fatTotalDataGridViewTextBoxColumn, saturatedFatDataGridViewTextBoxColumn, transFatDataGridViewTextBoxColumn, polyunsaturatedFatDataGridViewTextBoxColumn, monounsaturatedFatDataGridViewTextBoxColumn, carbohydrateDataGridViewTextBoxColumn, sugarsDataGridViewTextBoxColumn, sodiumNaDataGridViewTextBoxColumn, dietaryFibreDataGridViewTextBoxColumn, calciumCaDataGridViewTextBoxColumn, potassiumKDataGridViewTextBoxColumn, thiaminB1DataGridViewTextBoxColumn, riboflavinB2DataGridViewTextBoxColumn, niacinB3DataGridViewTextBoxColumn, folateDataGridViewTextBoxColumn, ironFeDataGridViewTextBoxColumn, magnesiumMgDataGridViewTextBoxColumn, vitaminCDataGridViewTextBoxColumn, caffeineDataGridViewTextBoxColumn, cholesterolDataGridViewTextBoxColumn, alcoholDataGridViewTextBoxColumn });
-            dataGridViewFoods.DataSource = foodBindingSource;
-            dataGridViewCellStyle58.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle58.BackColor = SystemColors.Info;
-            dataGridViewCellStyle58.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle58.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle58.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle58.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle58.WrapMode = DataGridViewTriState.False;
-            dataGridViewFoods.DefaultCellStyle = dataGridViewCellStyle58;
-            dataGridViewFoods.EditMode = DataGridViewEditMode.EditOnF2;
-            dataGridViewFoods.EnableHeadersVisualStyles = false;
-            dataGridViewFoods.Location = new Point(6, 99);
-            dataGridViewFoods.MultiSelect = false;
-            dataGridViewFoods.Name = "dataGridViewFoods";
-            dataGridViewFoods.ReadOnly = true;
-            dataGridViewFoods.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle59.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle59.BackColor = SystemColors.Control;
-            dataGridViewCellStyle59.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle59.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle59.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle59.SelectionForeColor = Color.White;
-            dataGridViewCellStyle59.WrapMode = DataGridViewTriState.True;
-            dataGridViewFoods.RowHeadersDefaultCellStyle = dataGridViewCellStyle59;
-            dataGridViewFoods.RowHeadersVisible = false;
-            dataGridViewFoods.RowHeadersWidth = 40;
-            dataGridViewFoods.RowTemplate.Height = 25;
-            dataGridViewFoods.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewFoods.ShowCellToolTips = false;
-            dataGridViewFoods.Size = new Size(1372, 581);
-            dataGridViewFoods.TabIndex = 4;
-            dataGridViewFoods.CellDoubleClick += DataGridViewFoods_CellDoubleClick;
-            dataGridViewFoods.UserDeletingRow += DataGridViewFoods_UserDeletingRow;
-            dataGridViewFoods.KeyDown += DataGridViewFoods_KeyDown;
-            // 
-            // tabControlMain
-            // 
-            tabControlMain.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tabControlMain.Controls.Add(tabPageFood);
-            tabControlMain.Controls.Add(tabPageEaten);
-            tabControlMain.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            tabControlMain.Location = new Point(0, 0);
-            tabControlMain.Multiline = true;
-            tabControlMain.Name = "tabControlMain";
-            tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new Size(1396, 719);
-            tabControlMain.TabIndex = 1;
-            // 
             // EatenId
             // 
             EatenId.DataPropertyName = "EatenId";
@@ -715,7 +507,7 @@ namespace DietSentry
             DateEaten.Name = "DateEaten";
             DateEaten.ReadOnly = true;
             DateEaten.SortMode = DataGridViewColumnSortMode.NotSortable;
-            DateEaten.Width = 57;
+            DateEaten.Width = 51;
             // 
             // TimeEaten
             // 
@@ -1113,6 +905,201 @@ namespace DietSentry
             alcoholDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
             alcoholDataGridViewTextBoxColumn1.Width = 83;
             // 
+            // tabPageFood
+            // 
+            tabPageFood.AutoScroll = true;
+            tabPageFood.BackColor = Color.Transparent;
+            tabPageFood.BorderStyle = BorderStyle.FixedSingle;
+            tabPageFood.Controls.Add(labelHelpFoodInfo);
+            tabPageFood.Controls.Add(labelHelpShowCols);
+            tabPageFood.Controls.Add(labelHelpFoodDataGrid);
+            tabPageFood.Controls.Add(labelHelpFoodFilter);
+            tabPageFood.Controls.Add(labelHelpFoodTab);
+            tabPageFood.Controls.Add(buttonHelp);
+            tabPageFood.Controls.Add(textBoxFilter);
+            tabPageFood.Controls.Add(labelInfoFood);
+            tabPageFood.Controls.Add(checkBoxMainFoodCols);
+            tabPageFood.Controls.Add(labelFilter);
+            tabPageFood.Controls.Add(dataGridViewFoods);
+            tabPageFood.Location = new Point(4, 24);
+            tabPageFood.Name = "tabPageFood";
+            tabPageFood.Padding = new Padding(3);
+            tabPageFood.Size = new Size(1388, 691);
+            tabPageFood.TabIndex = 0;
+            tabPageFood.Text = "Food";
+            // 
+            // labelHelpFoodInfo
+            // 
+            labelHelpFoodInfo.BackColor = Color.YellowGreen;
+            labelHelpFoodInfo.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelHelpFoodInfo.ForeColor = SystemColors.ButtonHighlight;
+            labelHelpFoodInfo.Location = new Point(312, 19);
+            labelHelpFoodInfo.Name = "labelHelpFoodInfo";
+            labelHelpFoodInfo.Size = new Size(14, 15);
+            labelHelpFoodInfo.TabIndex = 17;
+            labelHelpFoodInfo.Text = "?";
+            labelHelpFoodInfo.MouseHover += LabelHelpFoodInfo_MouseHover;
+            // 
+            // labelHelpShowCols
+            // 
+            labelHelpShowCols.BackColor = Color.YellowGreen;
+            labelHelpShowCols.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelHelpShowCols.ForeColor = SystemColors.ButtonHighlight;
+            labelHelpShowCols.Location = new Point(95, 19);
+            labelHelpShowCols.Name = "labelHelpShowCols";
+            labelHelpShowCols.Size = new Size(14, 15);
+            labelHelpShowCols.TabIndex = 16;
+            labelHelpShowCols.Text = "?";
+            labelHelpShowCols.MouseHover += LabelHelpShowCols_MouseHover;
+            // 
+            // labelHelpFoodDataGrid
+            // 
+            labelHelpFoodDataGrid.AutoSize = true;
+            labelHelpFoodDataGrid.BackColor = Color.YellowGreen;
+            labelHelpFoodDataGrid.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelHelpFoodDataGrid.ForeColor = SystemColors.ButtonHighlight;
+            labelHelpFoodDataGrid.Location = new Point(7, 99);
+            labelHelpFoodDataGrid.Name = "labelHelpFoodDataGrid";
+            labelHelpFoodDataGrid.Size = new Size(14, 15);
+            labelHelpFoodDataGrid.TabIndex = 15;
+            labelHelpFoodDataGrid.Text = "?";
+            labelHelpFoodDataGrid.MouseHover += LabelHelpFoodDataGrid_MouseHover;
+            // 
+            // labelHelpFoodFilter
+            // 
+            labelHelpFoodFilter.AutoSize = true;
+            labelHelpFoodFilter.BackColor = Color.YellowGreen;
+            labelHelpFoodFilter.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelHelpFoodFilter.ForeColor = SystemColors.ButtonHighlight;
+            labelHelpFoodFilter.Location = new Point(6, 60);
+            labelHelpFoodFilter.Name = "labelHelpFoodFilter";
+            labelHelpFoodFilter.Size = new Size(14, 15);
+            labelHelpFoodFilter.TabIndex = 14;
+            labelHelpFoodFilter.Text = "?";
+            labelHelpFoodFilter.MouseHover += LabelHelpFoodFilter_MouseHover;
+            // 
+            // labelHelpFoodTab
+            // 
+            labelHelpFoodTab.BackColor = Color.YellowGreen;
+            labelHelpFoodTab.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelHelpFoodTab.ForeColor = SystemColors.ButtonHighlight;
+            labelHelpFoodTab.Location = new Point(7, 9);
+            labelHelpFoodTab.Name = "labelHelpFoodTab";
+            labelHelpFoodTab.Size = new Size(14, 15);
+            labelHelpFoodTab.TabIndex = 12;
+            labelHelpFoodTab.Text = "?";
+            labelHelpFoodTab.MouseHover += LabelHelpFoodTab_MouseHover;
+            // 
+            // buttonHelp
+            // 
+            buttonHelp.Location = new Point(27, 2);
+            buttonHelp.Name = "buttonHelp";
+            buttonHelp.Size = new Size(51, 28);
+            buttonHelp.TabIndex = 11;
+            buttonHelp.Text = "HELP";
+            buttonHelp.UseVisualStyleBackColor = true;
+            buttonHelp.Click += ButtonHelp_Click;
+            // 
+            // textBoxFilter
+            // 
+            textBoxFilter.AutoCompleteMode = AutoCompleteMode.Suggest;
+            textBoxFilter.AutoCompleteSource = AutoCompleteSource.HistoryList;
+            textBoxFilter.Location = new Point(23, 55);
+            textBoxFilter.Name = "textBoxFilter";
+            textBoxFilter.PlaceholderText = "Enter food filter text";
+            textBoxFilter.Size = new Size(135, 23);
+            textBoxFilter.TabIndex = 2;
+            textBoxFilter.WordWrap = false;
+            textBoxFilter.Enter += TextBoxFilter_Enter;
+            textBoxFilter.KeyDown += TextBoxFilter_KeyDown;
+            // 
+            // labelInfoFood
+            // 
+            labelInfoFood.AutoSize = true;
+            labelInfoFood.BackColor = SystemColors.ControlLight;
+            labelInfoFood.Location = new Point(332, 19);
+            labelInfoFood.Name = "labelInfoFood";
+            labelInfoFood.Size = new Size(13, 15);
+            labelInfoFood.TabIndex = 9;
+            labelInfoFood.Text = "  ";
+            // 
+            // checkBoxMainFoodCols
+            // 
+            checkBoxMainFoodCols.AutoSize = true;
+            checkBoxMainFoodCols.Checked = true;
+            checkBoxMainFoodCols.CheckState = CheckState.Checked;
+            checkBoxMainFoodCols.Location = new Point(116, 18);
+            checkBoxMainFoodCols.Name = "checkBoxMainFoodCols";
+            checkBoxMainFoodCols.Size = new Size(161, 19);
+            checkBoxMainFoodCols.TabIndex = 8;
+            checkBoxMainFoodCols.Text = "Only show main columns";
+            checkBoxMainFoodCols.UseVisualStyleBackColor = true;
+            checkBoxMainFoodCols.CheckedChanged += CheckBoxMainFoodCols_CheckedChanged;
+            // 
+            // labelFilter
+            // 
+            labelFilter.AutoSize = true;
+            labelFilter.BackColor = Color.LightCyan;
+            labelFilter.Location = new Point(164, 58);
+            labelFilter.Name = "labelFilter";
+            labelFilter.Size = new Size(59, 15);
+            labelFilter.TabIndex = 3;
+            labelFilter.Text = "Unfiltered";
+            // 
+            // dataGridViewFoods
+            // 
+            dataGridViewFoods.AllowUserToAddRows = false;
+            dataGridViewFoods.AllowUserToResizeColumns = false;
+            dataGridViewFoods.AllowUserToResizeRows = false;
+            dataGridViewFoods.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridViewFoods.AutoGenerateColumns = false;
+            dataGridViewFoods.BorderStyle = BorderStyle.None;
+            dataGridViewFoods.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle32.Alignment = DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle32.BackColor = Color.Azure;
+            dataGridViewCellStyle32.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle32.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle32.SelectionBackColor = Color.Azure;
+            dataGridViewCellStyle32.SelectionForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle32.WrapMode = DataGridViewTriState.True;
+            dataGridViewFoods.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewFoods.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewFoods.Columns.AddRange(new DataGridViewColumn[] { FoodIdDataGridViewTextBoxColumn, foodDescriptionDataGridViewTextBoxColumn, energyDataGridViewTextBoxColumn, proteinDataGridViewTextBoxColumn, fatTotalDataGridViewTextBoxColumn, saturatedFatDataGridViewTextBoxColumn, transFatDataGridViewTextBoxColumn, polyunsaturatedFatDataGridViewTextBoxColumn, monounsaturatedFatDataGridViewTextBoxColumn, carbohydrateDataGridViewTextBoxColumn, sugarsDataGridViewTextBoxColumn, sodiumNaDataGridViewTextBoxColumn, dietaryFibreDataGridViewTextBoxColumn, calciumCaDataGridViewTextBoxColumn, potassiumKDataGridViewTextBoxColumn, thiaminB1DataGridViewTextBoxColumn, riboflavinB2DataGridViewTextBoxColumn, niacinB3DataGridViewTextBoxColumn, folateDataGridViewTextBoxColumn, ironFeDataGridViewTextBoxColumn, magnesiumMgDataGridViewTextBoxColumn, vitaminCDataGridViewTextBoxColumn, caffeineDataGridViewTextBoxColumn, cholesterolDataGridViewTextBoxColumn, alcoholDataGridViewTextBoxColumn });
+            dataGridViewFoods.DataSource = foodBindingSource;
+            dataGridViewCellStyle58.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle58.BackColor = SystemColors.Info;
+            dataGridViewCellStyle58.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle58.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle58.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle58.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle58.WrapMode = DataGridViewTriState.False;
+            dataGridViewFoods.DefaultCellStyle = dataGridViewCellStyle58;
+            dataGridViewFoods.EditMode = DataGridViewEditMode.EditOnF2;
+            dataGridViewFoods.EnableHeadersVisualStyles = false;
+            dataGridViewFoods.Location = new Point(6, 99);
+            dataGridViewFoods.MultiSelect = false;
+            dataGridViewFoods.Name = "dataGridViewFoods";
+            dataGridViewFoods.ReadOnly = true;
+            dataGridViewFoods.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle59.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle59.BackColor = SystemColors.Control;
+            dataGridViewCellStyle59.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle59.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle59.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle59.SelectionForeColor = Color.White;
+            dataGridViewCellStyle59.WrapMode = DataGridViewTriState.True;
+            dataGridViewFoods.RowHeadersDefaultCellStyle = dataGridViewCellStyle59;
+            dataGridViewFoods.RowHeadersVisible = false;
+            dataGridViewFoods.RowHeadersWidth = 40;
+            dataGridViewFoods.RowTemplate.Height = 25;
+            dataGridViewFoods.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewFoods.ShowCellToolTips = false;
+            dataGridViewFoods.Size = new Size(1372, 581);
+            dataGridViewFoods.TabIndex = 4;
+            dataGridViewFoods.CellDoubleClick += DataGridViewFoods_CellDoubleClick;
+            dataGridViewFoods.UserDeletingRow += DataGridViewFoods_UserDeletingRow;
+            dataGridViewFoods.KeyDown += DataGridViewFoods_KeyDown;
+            // 
             // FoodIdDataGridViewTextBoxColumn
             // 
             FoodIdDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
@@ -1486,6 +1473,19 @@ namespace DietSentry
             alcoholDataGridViewTextBoxColumn.Resizable = DataGridViewTriState.False;
             alcoholDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             alcoholDataGridViewTextBoxColumn.Width = 83;
+            // 
+            // tabControlMain
+            // 
+            tabControlMain.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tabControlMain.Controls.Add(tabPageFood);
+            tabControlMain.Controls.Add(tabPageEaten);
+            tabControlMain.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tabControlMain.Location = new Point(0, 0);
+            tabControlMain.Multiline = true;
+            tabControlMain.Name = "tabControlMain";
+            tabControlMain.SelectedIndex = 0;
+            tabControlMain.Size = new Size(1396, 719);
+            tabControlMain.TabIndex = 1;
             // 
             // MainForm
             // 
