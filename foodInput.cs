@@ -1657,7 +1657,7 @@ namespace DietSentry
                 RefreshRecipeDataGrid(recordID);
             }
         }
-        
+
         private void LabelHelpAddEditFood_MouseHover(object sender, EventArgs e)
         {
             /*
@@ -1670,12 +1670,71 @@ namespace DietSentry
 
                         }
             */
-            string sh = "#" + this.Text;
             UtilitiesRMG.SHelpFind = "#" + this.Text;
             int iw = 10; // fudge
             int ih = 18; // fudge
             int ix = this.PointToScreen(labelHelpAddEditFood.Location).X + iw;
             int iy = this.PointToScreen(labelHelpAddEditFood.Location).Y + ih;
+            UtilitiesRMG.HelpCore(ix, iy);
+        }
+
+        private void LabelHelpAddEditRecipe_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Adding/Editing a Recipe food";
+            int iw = 10; // fudge
+            int ih = 18; // fudge
+            int ix = this.PointToScreen(labelHelpAddEditRecipe.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpAddEditRecipe.Location).Y + ih;
+            UtilitiesRMG.HelpCore(ix, iy);
+        }
+
+        private void LabelHelpAddEditFilter_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Help system error";
+            int iw = 10; // fudge
+            int ih = 18; // fudge
+            int ix = this.PointToScreen(labelHelpAddEditFilter.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpAddEditFilter.Location).Y + ih;
+            UtilitiesRMG.HelpCore(ix, iy);
+        }
+
+        private void LabelHelpAddEditIngredient_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Help system error";
+            int iw = 10; // fudge
+            int ih = 18; // fudge
+            int ix = this.PointToScreen(labelHelpAddEditIngredient.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpAddEditIngredient.Location).Y + ih;
+            UtilitiesRMG.HelpCore(ix, iy);
+        }
+
+        private void LabelHelpAddEditDescription_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Help system error";
+            int iw = 10; // fudge
+            int ih = 18; // fudge
+            int ix = this.PointToScreen(labelHelpAddEditDescription.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpAddEditDescription.Location).Y + ih;
+            UtilitiesRMG.HelpCore(ix, iy);
+        }
+
+        private void LabelHelpAddEditIngredients_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Help system error";
+            int iw = 10; // fudge
+            int ih = 18; // fudge
+            int ix = this.PointToScreen(labelHelpAddEditIngredients.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpAddEditIngredients.Location).Y + ih;
+            UtilitiesRMG.HelpCore(ix, iy);
+        }
+
+        private void LabelHelpAddEditNonRecipe_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Adding/Editing a non Recipe food";
+            int iw = 10; // fudge
+            int ih = 18; // fudge
+            int ix = this.PointToScreen(labelHelpAddEditNonRecipe.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpAddEditNonRecipe.Location).Y + ih;
             UtilitiesRMG.HelpCore(ix, iy);
         }
     }
