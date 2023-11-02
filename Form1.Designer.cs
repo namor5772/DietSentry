@@ -924,7 +924,7 @@ namespace DietSentry
             tabPageFood.Location = new Point(4, 24);
             tabPageFood.Name = "tabPageFood";
             tabPageFood.Padding = new Padding(3);
-            tabPageFood.Size = new Size(1388, 691);
+            tabPageFood.Size = new Size(1167, 691);
             tabPageFood.TabIndex = 0;
             tabPageFood.Text = "Food";
             // 
@@ -1094,7 +1094,7 @@ namespace DietSentry
             dataGridViewFoods.RowTemplate.Height = 25;
             dataGridViewFoods.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewFoods.ShowCellToolTips = false;
-            dataGridViewFoods.Size = new Size(1372, 581);
+            dataGridViewFoods.Size = new Size(1151, 581);
             dataGridViewFoods.TabIndex = 4;
             dataGridViewFoods.CellDoubleClick += DataGridViewFoods_CellDoubleClick;
             dataGridViewFoods.UserDeletingRow += DataGridViewFoods_UserDeletingRow;
@@ -1484,14 +1484,14 @@ namespace DietSentry
             tabControlMain.Multiline = true;
             tabControlMain.Name = "tabControlMain";
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new Size(1396, 719);
+            tabControlMain.Size = new Size(1175, 719);
             tabControlMain.TabIndex = 1;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1395, 717);
+            ClientSize = new Size(1174, 717);
             Controls.Add(tabControlMain);
             Controls.Add(tabControl1);
             Name = "MainForm";
