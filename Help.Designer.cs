@@ -56,7 +56,7 @@ namespace DietSentry
             comboBoxHelp.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             comboBoxHelp.ForeColor = Color.White;
             comboBoxHelp.FormattingEnabled = true;
-            comboBoxHelp.Items.AddRange(new object[] { "Diet Sentry overview", "Foods table", "Recipe table", "Eaten table", "Food DataGrid", "Food filter TextBox", "Food fields CheckBox", "Food info Label", "Food eaten dialog", "Liquid density dialog", "Eaten DataGrid", "Eaten fields CheckBox", "Eaten daily totals CheckBox", "Eaten day filter CheckBox", "Eaten info Label", "Eaten edit dialog", "Form for ADDING food", "Form for EDITING food", "Adding/Editing a non Recipe food", "Adding/Editing a Recipe food", "Help system error" });
+            comboBoxHelp.Items.AddRange(new object[] { "Diet Sentry overview", "Foods table", "Recipe table", "Eaten table", "Food DataGrid", "Food filter TextBox", "Food fields CheckBox", "Food info Label", "Food eaten dialog", "Liquid density dialog", "Eaten DataGrid", "Eaten fields CheckBox", "Eaten daily totals CheckBox", "Eaten day filter CheckBox", "Eaten info Label", "Eaten edit dialog", "Form for ADDING food", "Form for EDITING food", "Adding/Editing a non Recipe food", "Adding/Editing a Recipe food", "Recipe Ingredient filter TextBox", "Recipe Ingredient selection DataGrid", "Recipe Ingredient amount TextBox", "Recipe Description TextBox", "Recipe Ingredients DataGrid", "Help system error" });
             comboBoxHelp.Location = new Point(569, 2);
             comboBoxHelp.MaxDropDownItems = 32;
             comboBoxHelp.Name = "comboBoxHelp";

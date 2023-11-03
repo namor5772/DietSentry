@@ -1690,7 +1690,7 @@ namespace DietSentry
 
         private void LabelHelpAddEditFilter_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Help system error";
+            UtilitiesRMG.SHelpFind = "#Recipe Ingredient filter TextBox";
             int iw = 10; // fudge
             int ih = 18; // fudge
             int ix = this.PointToScreen(labelHelpAddEditFilter.Location).X + iw;
@@ -1700,7 +1700,7 @@ namespace DietSentry
 
         private void LabelHelpAddEditIngredient_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Help system error";
+            UtilitiesRMG.SHelpFind = "#Recipe Ingredient selection DataGrid";
             int iw = 10; // fudge
             int ih = 18; // fudge
             int ix = this.PointToScreen(labelHelpAddEditIngredient.Location).X + iw;
@@ -1710,7 +1710,7 @@ namespace DietSentry
 
         private void LabelHelpAddEditDescription_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Help system error";
+            UtilitiesRMG.SHelpFind = "#Recipe Description TextBox";
             int iw = 10; // fudge
             int ih = 18; // fudge
             int ix = this.PointToScreen(labelHelpAddEditDescription.Location).X + iw;
@@ -1720,7 +1720,7 @@ namespace DietSentry
 
         private void LabelHelpAddEditIngredients_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Help system error";
+            UtilitiesRMG.SHelpFind = "#Recipe Ingredients DataGrid";
             int iw = 10; // fudge
             int ih = 18; // fudge
             int ix = this.PointToScreen(labelHelpAddEditIngredients.Location).X + iw;
