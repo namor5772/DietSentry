@@ -31,15 +31,16 @@
             labelDescription = new Label();
             textBoxAmount = new TextBox();
             labelAmount = new Label();
+            labelHelpRecipeDialog = new Label();
             SuspendLayout();
             // 
             // labelDescription
             // 
             labelDescription.AutoEllipsis = true;
             labelDescription.ForeColor = SystemColors.HighlightText;
-            labelDescription.Location = new Point(12, 9);
+            labelDescription.Location = new Point(23, 9);
             labelDescription.Name = "labelDescription";
-            labelDescription.Size = new Size(358, 15);
+            labelDescription.Size = new Size(347, 15);
             labelDescription.TabIndex = 4;
             labelDescription.Text = "description";
             // 
@@ -61,6 +62,18 @@
             labelAmount.TabIndex = 6;
             labelAmount.Text = "units";
             // 
+            // labelHelpRecipeDialog
+            // 
+            labelHelpRecipeDialog.BackColor = Color.YellowGreen;
+            labelHelpRecipeDialog.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelHelpRecipeDialog.ForeColor = SystemColors.ButtonHighlight;
+            labelHelpRecipeDialog.Location = new Point(3, 9);
+            labelHelpRecipeDialog.Name = "labelHelpRecipeDialog";
+            labelHelpRecipeDialog.Size = new Size(14, 15);
+            labelHelpRecipeDialog.TabIndex = 18;
+            labelHelpRecipeDialog.Text = "?";
+            labelHelpRecipeDialog.MouseHover += labelHelpRecipeDialog_MouseHover;
+            // 
             // InputRecipeComponent
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -68,6 +81,7 @@
             BackColor = SystemColors.Highlight;
             ClientSize = new Size(382, 78);
             ControlBox = false;
+            Controls.Add(labelHelpRecipeDialog);
             Controls.Add(labelAmount);
             Controls.Add(textBoxAmount);
             Controls.Add(labelDescription);
@@ -86,5 +100,6 @@
         private Label labelDescription;
         private TextBox textBoxAmount;
         private Label labelAmount;
+        private Label labelHelpRecipeDialog;
     }
 }

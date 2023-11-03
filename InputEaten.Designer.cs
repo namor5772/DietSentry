@@ -32,7 +32,7 @@
             labelAmount = new Label();
             dateTimePickerEaten = new DateTimePicker();
             labelDescription = new Label();
-            labelHelpEatenEditDialog = new Label();
+            labelHelpRecipeDialog = new Label();
             SuspendLayout();
             // 
             // textBoxAmount
@@ -75,17 +75,17 @@
             labelDescription.TabIndex = 6;
             labelDescription.Text = "description";
             // 
-            // labelHelpEatenEditDialog
+            // labelHelpRecipeDialog
             // 
-            labelHelpEatenEditDialog.BackColor = Color.YellowGreen;
-            labelHelpEatenEditDialog.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelHelpEatenEditDialog.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpEatenEditDialog.Location = new Point(5, 9);
-            labelHelpEatenEditDialog.Name = "labelHelpEatenEditDialog";
-            labelHelpEatenEditDialog.Size = new Size(14, 15);
-            labelHelpEatenEditDialog.TabIndex = 17;
-            labelHelpEatenEditDialog.Text = "?";
-            labelHelpEatenEditDialog.MouseHover += LabelHelpEatenEditDialog_MouseHover;
+            labelHelpRecipeDialog.BackColor = Color.YellowGreen;
+            labelHelpRecipeDialog.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelHelpRecipeDialog.ForeColor = SystemColors.ButtonHighlight;
+            labelHelpRecipeDialog.Location = new Point(5, 9);
+            labelHelpRecipeDialog.Name = "labelHelpRecipeDialog";
+            labelHelpRecipeDialog.Size = new Size(14, 15);
+            labelHelpRecipeDialog.TabIndex = 17;
+            labelHelpRecipeDialog.Text = "?";
+            labelHelpRecipeDialog.MouseHover += LabelHelpEatenEditDialog_MouseHover;
             // 
             // InputEaten
             // 
@@ -94,7 +94,7 @@
             BackColor = SystemColors.Highlight;
             ClientSize = new Size(403, 96);
             ControlBox = false;
-            Controls.Add(labelHelpEatenEditDialog);
+            Controls.Add(labelHelpRecipeDialog);
             Controls.Add(labelDescription);
             Controls.Add(dateTimePickerEaten);
             Controls.Add(labelAmount);
@@ -116,6 +116,6 @@
         private Label labelAmount;
         private DateTimePicker dateTimePickerEaten;
         private Label labelDescription;
-        private Label labelHelpEatenEditDialog;
+        private Label labelHelpRecipeDialog;
     }
 }

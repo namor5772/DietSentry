@@ -77,7 +77,6 @@ namespace DietSentry
                 textBoxAmount.Text = "";
                 ActOnEnterKeyPress();
             }
-
         }
 
 
@@ -102,10 +101,9 @@ namespace DietSentry
             UtilitiesRMG.SHelpFind = "#Eaten edit dialog";
             int iw = 10; // fudge
             int ih = 18; // fudge
-            int ix = this.PointToScreen(labelHelpEatenEditDialog.Location).X + iw;
-            int iy = this.PointToScreen(labelHelpEatenEditDialog.Location).Y + ih;
+            int ix = this.PointToScreen(labelHelpRecipeDialog.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpRecipeDialog.Location).Y + ih;
             UtilitiesRMG.HelpCore(ix, iy);
-
         }
     }
 }

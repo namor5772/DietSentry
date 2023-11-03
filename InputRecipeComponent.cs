@@ -24,7 +24,6 @@ namespace DietSentry
             InitializeComponent();
         }
 
-
         private void InputRecipeComponent_Shown(object sender, EventArgs e)
         {
             // Call textbox's focus method and make sure initial value is ""
@@ -34,29 +33,56 @@ namespace DietSentry
             this.labelDescription.Text = foodInputFormX.FoodDescriptionRecipe;
         }
 
+        private void ActOnEnterKeyPress()
+        {
+            // if any problems with parsing return 0 
+            float amount;
+            try
+            {
+                amount = float.Parse(textBoxAmount.Text);
+                if (amount < 0.0)
+                {
+                    amount = 0F;
+                }
+            }
+            catch // any exception
+            {
+                amount = 0F;
+            }
+
+            if (textBoxAmount.Text == "")
+            {
+                amount = -1F;
+            }
+
+            // collects the input, processes it and assignes it to a variable accessible in the MainForm     
+            foodInputFormX!.amountOfFoodInRecipe = amount;
+            Close();
+        }
 
         private void TextBoxAmount_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
-
-                // if any problems with parsing return 0 and just ignore attempt at adding food to Eaten table
-                float amount;
-                try
-                {
-                    amount = float.Parse(textBoxAmount.Text);
-                }
-                catch // any exception
-                {
-                    amount = 0F;
-                }
-
-                // collects the input, processes it and assignes it to a variable accessible in the MainForm     
-                foodInputFormX!.amountOfFoodInRecipe = amount;
-                Close();
+                ActOnEnterKeyPress();
             }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                // closes form without doing anything
+                textBoxAmount.Text = "";
+                ActOnEnterKeyPress();
+            }
+        }
 
+        private void labelHelpRecipeDialog_MouseHover(object sender, EventArgs e)
+        {
+            UtilitiesRMG.SHelpFind = "#Recipe Ingredient amount dialog";
+            int iw = 10; // fudge
+            int ih = 18; // fudge
+            int ix = this.PointToScreen(labelHelpRecipeDialog.Location).X + iw;
+            int iy = this.PointToScreen(labelHelpRecipeDialog.Location).Y + ih;
+            UtilitiesRMG.HelpCore(ix, iy);
         }
     }
 
