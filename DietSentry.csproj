@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <None Remove="DietSentry.rtf" />
+    <None Remove="IconDietSentry.ico" />
     <None Remove="Properties\DietSentry - Copy.rtf" />
     <None Remove="Properties\DietSentry.rtf" />
     <None Remove="Splash.bmp" />
@@ -24,6 +25,7 @@
 
   <ItemGroup>
     <Resource Include="DietSentry.rtf" />
+    <Resource Include="IconDietSentry.ico" />
   </ItemGroup>
 
   <ItemGroup>

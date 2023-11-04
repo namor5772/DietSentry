@@ -317,7 +317,7 @@ namespace DietSentry
             labelHelpEatenInfo.Location = new Point(312, 19);
             labelHelpEatenInfo.Name = "labelHelpEatenInfo";
             labelHelpEatenInfo.Size = new Size(14, 15);
-            labelHelpEatenInfo.TabIndex = 22;
+            labelHelpEatenInfo.TabIndex = 0;
             labelHelpEatenInfo.Text = "?";
             labelHelpEatenInfo.MouseHover += LabelHelpEatenInfo_MouseHover;
             // 
@@ -329,7 +329,7 @@ namespace DietSentry
             labelHelpEatenDataGrid.Location = new Point(7, 99);
             labelHelpEatenDataGrid.Name = "labelHelpEatenDataGrid";
             labelHelpEatenDataGrid.Size = new Size(14, 15);
-            labelHelpEatenDataGrid.TabIndex = 21;
+            labelHelpEatenDataGrid.TabIndex = 0;
             labelHelpEatenDataGrid.Text = "?";
             labelHelpEatenDataGrid.MouseHover += LabelHelpEatenDataGrid_MouseHover;
             // 
@@ -341,7 +341,7 @@ namespace DietSentry
             labelHelpShowFilter.Location = new Point(7, 69);
             labelHelpShowFilter.Name = "labelHelpShowFilter";
             labelHelpShowFilter.Size = new Size(14, 15);
-            labelHelpShowFilter.TabIndex = 20;
+            labelHelpShowFilter.TabIndex = 0;
             labelHelpShowFilter.Text = "?";
             labelHelpShowFilter.MouseHover += LabelHelpShowFilter_MouseHover;
             // 
@@ -353,7 +353,7 @@ namespace DietSentry
             labelHelpShowTotals.Location = new Point(7, 44);
             labelHelpShowTotals.Name = "labelHelpShowTotals";
             labelHelpShowTotals.Size = new Size(14, 15);
-            labelHelpShowTotals.TabIndex = 19;
+            labelHelpShowTotals.TabIndex = 0;
             labelHelpShowTotals.Text = "?";
             labelHelpShowTotals.MouseHover += LabelHelpShowTotals_MouseHover;
             // 
@@ -365,7 +365,7 @@ namespace DietSentry
             labelHelpShowCols2.Location = new Point(7, 19);
             labelHelpShowCols2.Name = "labelHelpShowCols2";
             labelHelpShowCols2.Size = new Size(14, 15);
-            labelHelpShowCols2.TabIndex = 18;
+            labelHelpShowCols2.TabIndex = 0;
             labelHelpShowCols2.Text = "?";
             labelHelpShowCols2.MouseHover += LabelHelpShowCols2_MouseHover;
             // 
@@ -376,7 +376,7 @@ namespace DietSentry
             labelInfoEaten.Location = new Point(332, 19);
             labelInfoEaten.Name = "labelInfoEaten";
             labelInfoEaten.Size = new Size(13, 15);
-            labelInfoEaten.TabIndex = 9;
+            labelInfoEaten.TabIndex = 0;
             labelInfoEaten.Text = "  ";
             // 
             // dateTimePickerEaten
@@ -388,7 +388,7 @@ namespace DietSentry
             dateTimePickerEaten.MinDate = new DateTime(2023, 1, 1, 0, 0, 0, 0);
             dateTimePickerEaten.Name = "dateTimePickerEaten";
             dateTimePickerEaten.Size = new Size(128, 23);
-            dateTimePickerEaten.TabIndex = 8;
+            dateTimePickerEaten.TabIndex = 6;
             dateTimePickerEaten.KeyDown += DateTimePickerEaten_KeyDown;
             dateTimePickerEaten.Leave += DateTimePickerEaten_Leave;
             // 
@@ -400,7 +400,7 @@ namespace DietSentry
             checkBoxMainCols.Location = new Point(28, 18);
             checkBoxMainCols.Name = "checkBoxMainCols";
             checkBoxMainCols.Size = new Size(161, 19);
-            checkBoxMainCols.TabIndex = 7;
+            checkBoxMainCols.TabIndex = 3;
             checkBoxMainCols.Text = "Only show main columns";
             checkBoxMainCols.UseVisualStyleBackColor = true;
             checkBoxMainCols.CheckedChanged += CheckBoxMainCols_CheckedChanged;
@@ -411,7 +411,7 @@ namespace DietSentry
             checkBoxDailyTotals.Location = new Point(28, 43);
             checkBoxDailyTotals.Name = "checkBoxDailyTotals";
             checkBoxDailyTotals.Size = new Size(124, 19);
-            checkBoxDailyTotals.TabIndex = 6;
+            checkBoxDailyTotals.TabIndex = 4;
             checkBoxDailyTotals.Text = "Display daily totals";
             checkBoxDailyTotals.UseVisualStyleBackColor = true;
             checkBoxDailyTotals.CheckedChanged += CheckBoxDailyTotals_CheckedChanged;
@@ -478,8 +478,9 @@ namespace DietSentry
             dataGridViewEaten.RowTemplate.ReadOnly = true;
             dataGridViewEaten.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewEaten.ShowCellToolTips = false;
-            dataGridViewEaten.Size = new Size(1372, 581);
-            dataGridViewEaten.TabIndex = 0;
+            dataGridViewEaten.Size = new Size(1160, 581);
+            dataGridViewEaten.StandardTab = true;
+            dataGridViewEaten.TabIndex = 7;
             dataGridViewEaten.UserDeletingRow += DataGridViewEaten_UserDeletingRow;
             dataGridViewEaten.KeyDown += DataGridViewEaten_KeyDown;
             // 
@@ -936,7 +937,7 @@ namespace DietSentry
             labelHelpFoodInfo.Location = new Point(312, 19);
             labelHelpFoodInfo.Name = "labelHelpFoodInfo";
             labelHelpFoodInfo.Size = new Size(14, 15);
-            labelHelpFoodInfo.TabIndex = 17;
+            labelHelpFoodInfo.TabIndex = 0;
             labelHelpFoodInfo.Text = "?";
             labelHelpFoodInfo.MouseHover += LabelHelpFoodInfo_MouseHover;
             // 
@@ -948,7 +949,7 @@ namespace DietSentry
             labelHelpShowCols.Location = new Point(95, 19);
             labelHelpShowCols.Name = "labelHelpShowCols";
             labelHelpShowCols.Size = new Size(14, 15);
-            labelHelpShowCols.TabIndex = 16;
+            labelHelpShowCols.TabIndex = 0;
             labelHelpShowCols.Text = "?";
             labelHelpShowCols.MouseHover += LabelHelpShowCols_MouseHover;
             // 
@@ -961,7 +962,7 @@ namespace DietSentry
             labelHelpFoodDataGrid.Location = new Point(7, 99);
             labelHelpFoodDataGrid.Name = "labelHelpFoodDataGrid";
             labelHelpFoodDataGrid.Size = new Size(14, 15);
-            labelHelpFoodDataGrid.TabIndex = 15;
+            labelHelpFoodDataGrid.TabIndex = 0;
             labelHelpFoodDataGrid.Text = "?";
             labelHelpFoodDataGrid.MouseHover += LabelHelpFoodDataGrid_MouseHover;
             // 
@@ -974,7 +975,7 @@ namespace DietSentry
             labelHelpFoodFilter.Location = new Point(6, 59);
             labelHelpFoodFilter.Name = "labelHelpFoodFilter";
             labelHelpFoodFilter.Size = new Size(14, 15);
-            labelHelpFoodFilter.TabIndex = 14;
+            labelHelpFoodFilter.TabIndex = 0;
             labelHelpFoodFilter.Text = "?";
             labelHelpFoodFilter.MouseHover += LabelHelpFoodFilter_MouseHover;
             // 
@@ -986,7 +987,7 @@ namespace DietSentry
             labelHelpFoodTab.Location = new Point(7, 9);
             labelHelpFoodTab.Name = "labelHelpFoodTab";
             labelHelpFoodTab.Size = new Size(14, 15);
-            labelHelpFoodTab.TabIndex = 12;
+            labelHelpFoodTab.TabIndex = 0;
             labelHelpFoodTab.Text = "?";
             labelHelpFoodTab.MouseHover += LabelHelpFoodTab_MouseHover;
             // 
@@ -995,7 +996,7 @@ namespace DietSentry
             buttonHelp.Location = new Point(27, 2);
             buttonHelp.Name = "buttonHelp";
             buttonHelp.Size = new Size(51, 28);
-            buttonHelp.TabIndex = 11;
+            buttonHelp.TabIndex = 3;
             buttonHelp.Text = "HELP";
             buttonHelp.UseVisualStyleBackColor = true;
             buttonHelp.Click += ButtonHelp_Click;
@@ -1008,7 +1009,7 @@ namespace DietSentry
             textBoxFilter.Name = "textBoxFilter";
             textBoxFilter.PlaceholderText = "Enter food filter text";
             textBoxFilter.Size = new Size(135, 23);
-            textBoxFilter.TabIndex = 2;
+            textBoxFilter.TabIndex = 5;
             textBoxFilter.WordWrap = false;
             textBoxFilter.Enter += TextBoxFilter_Enter;
             textBoxFilter.KeyDown += TextBoxFilter_KeyDown;
@@ -1020,7 +1021,7 @@ namespace DietSentry
             labelInfoFood.Location = new Point(332, 19);
             labelInfoFood.Name = "labelInfoFood";
             labelInfoFood.Size = new Size(13, 15);
-            labelInfoFood.TabIndex = 9;
+            labelInfoFood.TabIndex = 0;
             labelInfoFood.Text = "  ";
             // 
             // checkBoxMainFoodCols
@@ -1031,7 +1032,7 @@ namespace DietSentry
             checkBoxMainFoodCols.Location = new Point(116, 18);
             checkBoxMainFoodCols.Name = "checkBoxMainFoodCols";
             checkBoxMainFoodCols.Size = new Size(161, 19);
-            checkBoxMainFoodCols.TabIndex = 8;
+            checkBoxMainFoodCols.TabIndex = 4;
             checkBoxMainFoodCols.Text = "Only show main columns";
             checkBoxMainFoodCols.UseVisualStyleBackColor = true;
             checkBoxMainFoodCols.CheckedChanged += CheckBoxMainFoodCols_CheckedChanged;
@@ -1043,7 +1044,7 @@ namespace DietSentry
             labelFilter.Location = new Point(169, 59);
             labelFilter.Name = "labelFilter";
             labelFilter.Size = new Size(59, 15);
-            labelFilter.TabIndex = 3;
+            labelFilter.TabIndex = 0;
             labelFilter.Text = "Unfiltered";
             // 
             // dataGridViewFoods
@@ -1095,7 +1096,8 @@ namespace DietSentry
             dataGridViewFoods.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewFoods.ShowCellToolTips = false;
             dataGridViewFoods.Size = new Size(1151, 581);
-            dataGridViewFoods.TabIndex = 4;
+            dataGridViewFoods.StandardTab = true;
+            dataGridViewFoods.TabIndex = 6;
             dataGridViewFoods.CellDoubleClick += DataGridViewFoods_CellDoubleClick;
             dataGridViewFoods.UserDeletingRow += DataGridViewFoods_UserDeletingRow;
             dataGridViewFoods.KeyDown += DataGridViewFoods_KeyDown;
