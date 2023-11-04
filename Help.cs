@@ -94,5 +94,11 @@ namespace DietSentry
                 richTextBoxHelp.Focus();
             }
         }
+
+        private void Help_ResizeEnd(object sender, EventArgs e)
+        {
+            richTextBoxHelp.RightMargin = richTextBoxHelp.Size.Width - 60;
+
+        }
     }
 }

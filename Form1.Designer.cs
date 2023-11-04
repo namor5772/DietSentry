@@ -304,7 +304,7 @@ namespace DietSentry
             tabPageEaten.Location = new Point(4, 24);
             tabPageEaten.Name = "tabPageEaten";
             tabPageEaten.Padding = new Padding(3);
-            tabPageEaten.Size = new Size(1388, 691);
+            tabPageEaten.Size = new Size(1167, 691);
             tabPageEaten.TabIndex = 1;
             tabPageEaten.Text = "Eaten";
             tabPageEaten.UseVisualStyleBackColor = true;
@@ -971,7 +971,7 @@ namespace DietSentry
             labelHelpFoodFilter.BackColor = Color.YellowGreen;
             labelHelpFoodFilter.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelHelpFoodFilter.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpFoodFilter.Location = new Point(6, 60);
+            labelHelpFoodFilter.Location = new Point(6, 59);
             labelHelpFoodFilter.Name = "labelHelpFoodFilter";
             labelHelpFoodFilter.Size = new Size(14, 15);
             labelHelpFoodFilter.TabIndex = 14;
@@ -1004,7 +1004,7 @@ namespace DietSentry
             // 
             textBoxFilter.AutoCompleteMode = AutoCompleteMode.Suggest;
             textBoxFilter.AutoCompleteSource = AutoCompleteSource.HistoryList;
-            textBoxFilter.Location = new Point(23, 55);
+            textBoxFilter.Location = new Point(28, 55);
             textBoxFilter.Name = "textBoxFilter";
             textBoxFilter.PlaceholderText = "Enter food filter text";
             textBoxFilter.Size = new Size(135, 23);
@@ -1040,7 +1040,7 @@ namespace DietSentry
             // 
             labelFilter.AutoSize = true;
             labelFilter.BackColor = Color.LightCyan;
-            labelFilter.Location = new Point(164, 58);
+            labelFilter.Location = new Point(169, 59);
             labelFilter.Name = "labelFilter";
             labelFilter.Size = new Size(59, 15);
             labelFilter.TabIndex = 3;
