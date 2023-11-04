@@ -100,5 +100,10 @@ namespace DietSentry
             richTextBoxHelp.RightMargin = richTextBoxHelp.Size.Width - 60;
 
         }
+
+        private void richTextBoxHelp_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

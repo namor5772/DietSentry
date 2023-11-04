@@ -1496,6 +1496,7 @@ namespace DietSentry
             Controls.Add(tabControl1);
             Name = "MainForm";
             Opacity = 0D;
+            ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Diet Sentry 2.0";
             TransparencyKey = Color.Lime;
