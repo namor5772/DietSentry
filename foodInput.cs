@@ -1265,9 +1265,10 @@ namespace DietSentry
             {
                 // text on this multipurpose button tells us we will be adding food item to tables 
                 buttonAddFood.Text = "Add food";
-
                 // reset in case changed by edit state
-                tabControlAddType.SelectedTab = tabPageNonRecipie;
+                // tabControlAddType.SelectedTab = tabPageNonRecipie;
+                // amazingly this code caused a blank solid to be created it default tab is tabPageRecipe
+                // so had to make sure tabPageNonRecipe was set as default in the designer!
                 groupBoxFoodTypes.Enabled = true;
                 radioButtonSolid.Checked = true;
 
@@ -1736,11 +1737,6 @@ namespace DietSentry
             int ix = this.PointToScreen(labelHelpAddEditNonRecipe.Location).X + iw;
             int iy = this.PointToScreen(labelHelpAddEditNonRecipe.Location).Y + ih;
             UtilitiesRMG.HelpCore(ix, iy);
-        }
-
-        private void tabPageNonRecipie_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

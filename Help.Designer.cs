@@ -50,7 +50,6 @@ namespace DietSentry
             richTextBoxHelp.Size = new Size(935, 834);
             richTextBoxHelp.TabIndex = 1;
             richTextBoxHelp.Text = "";
-            richTextBoxHelp.TextChanged += richTextBoxHelp_TextChanged;
             richTextBoxHelp.KeyDown += RichTextBoxHelp_KeyDown;
             // 
             // comboBoxHelp
@@ -65,7 +64,6 @@ namespace DietSentry
             comboBoxHelp.Name = "comboBoxHelp";
             comboBoxHelp.Size = new Size(262, 23);
             comboBoxHelp.TabIndex = 2;
-            comboBoxHelp.TabStop = false;
             comboBoxHelp.SelectedIndexChanged += ComboBoxHelp_SelectedIndexChanged;
             comboBoxHelp.Enter += ComboBoxHelp_Enter;
             comboBoxHelp.KeyDown += ComboBoxHelp_KeyDown;

@@ -61,7 +61,6 @@ namespace DietSentry
         private void ComboBoxHelp_SelectedIndexChanged(object sender, EventArgs e)
         {
             string st = "#" + (string)comboBoxHelp.SelectedItem;
-
             int rci = this.richTextBoxHelp.Find(st);
             if (rci == -1)
             {
@@ -98,11 +97,6 @@ namespace DietSentry
         private void Help_ResizeEnd(object sender, EventArgs e)
         {
             richTextBoxHelp.RightMargin = richTextBoxHelp.Size.Width - 60;
-
-        }
-
-        private void richTextBoxHelp_TextChanged(object sender, EventArgs e)
-        {
 
         }
     }
