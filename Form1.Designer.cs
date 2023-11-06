@@ -478,9 +478,10 @@ namespace DietSentry
             dataGridViewEaten.RowTemplate.ReadOnly = true;
             dataGridViewEaten.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewEaten.ShowCellToolTips = false;
-            dataGridViewEaten.Size = new Size(1160, 581);
+            dataGridViewEaten.Size = new Size(1150, 581);
             dataGridViewEaten.StandardTab = true;
             dataGridViewEaten.TabIndex = 7;
+            dataGridViewEaten.CellContentClick += DataGridViewEaten_CellContentClick;
             dataGridViewEaten.UserDeletingRow += DataGridViewEaten_UserDeletingRow;
             dataGridViewEaten.KeyDown += DataGridViewEaten_KeyDown;
             // 
@@ -1095,7 +1096,7 @@ namespace DietSentry
             dataGridViewFoods.RowTemplate.Height = 25;
             dataGridViewFoods.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewFoods.ShowCellToolTips = false;
-            dataGridViewFoods.Size = new Size(1151, 581);
+            dataGridViewFoods.Size = new Size(1150, 581);
             dataGridViewFoods.StandardTab = true;
             dataGridViewFoods.TabIndex = 6;
             dataGridViewFoods.CellDoubleClick += DataGridViewFoods_CellDoubleClick;

@@ -1661,16 +1661,6 @@ namespace DietSentry
 
         private void LabelHelpAddEditFood_MouseHover(object sender, EventArgs e)
         {
-            /*
-                        if (this.Text == "Form for ADDING food")
-                        {
-                            UtilitiesRMG.SHelpFind = "#Liquid density dialog";
-                        }
-                        else // if (this.Text == "Form for EDITING food") 
-                        {
-
-                        }
-            */
             UtilitiesRMG.SHelpFind = "#" + this.Text;
             int iw = 10; // fudge
             int ih = 18; // fudge

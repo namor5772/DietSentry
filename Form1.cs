@@ -1160,5 +1160,10 @@ namespace DietSentry
             int iy = this.PointToScreen(labelHelpEatenInfo.Location).Y + ih;
             UtilitiesRMG.HelpCore(ix, iy);
         }
+
+        private void DataGridViewEaten_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
