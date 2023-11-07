@@ -64,6 +64,7 @@
             DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FoodInputForm));
             groupBoxFoodTypes = new GroupBox();
             radioButtonRecipie = new RadioButton();
             radioButtonLiquid = new RadioButton();
@@ -810,10 +811,10 @@
             tabPageRecipie.Controls.Add(dataGridViewAddToRecipe);
             tabPageRecipie.Controls.Add(textBoxRecipeFoodDescription);
             tabPageRecipie.Controls.Add(labelRecipeFoodDescription);
-            tabPageRecipie.Location = new Point(4, 14);
+            tabPageRecipie.Location = new Point(4, 5);
             tabPageRecipie.Margin = new Padding(0);
             tabPageRecipie.Name = "tabPageRecipie";
-            tabPageRecipie.Size = new Size(1412, 670);
+            tabPageRecipie.Size = new Size(1412, 679);
             tabPageRecipie.TabIndex = 1;
             tabPageRecipie.Text = "Add Recipie";
             tabPageRecipie.Enter += TabPageRecipie_Enter;
@@ -1129,10 +1130,10 @@
             Controls.Add(buttonAddFood);
             Controls.Add(groupBoxFoodTypes);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FoodInputForm";
-            ShowIcon = false;
             Text = "Form for adding a food to the database";
             FormClosing += FoodInputForm_FormClosing;
             Shown += FoodInputForm_Shown;

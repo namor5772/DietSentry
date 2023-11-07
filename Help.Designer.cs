@@ -34,6 +34,7 @@ namespace DietSentry
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Help));
             richTextBoxHelp = new RichTextBox();
             comboBoxHelp = new ComboBox();
             SuspendLayout();
@@ -78,10 +79,10 @@ namespace DietSentry
             ClientSize = new Size(937, 866);
             Controls.Add(comboBoxHelp);
             Controls.Add(richTextBoxHelp);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "Help";
-            ShowIcon = false;
             SizeGripStyle = SizeGripStyle.Show;
             Text = "HELP form";
             TopMost = true;

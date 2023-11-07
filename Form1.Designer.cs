@@ -138,6 +138,7 @@ namespace DietSentry
             DataGridViewCellStyle dataGridViewCellStyle55 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle56 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle57 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
@@ -188,6 +189,7 @@ namespace DietSentry
             cholesterolDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             alcoholDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             tabPageFood = new TabPage();
+            buttonClose = new Button();
             labelHelpFoodInfo = new Label();
             labelHelpShowCols = new Label();
             labelHelpFoodDataGrid = new Label();
@@ -912,6 +914,7 @@ namespace DietSentry
             tabPageFood.AutoScroll = true;
             tabPageFood.BackColor = Color.Transparent;
             tabPageFood.BorderStyle = BorderStyle.FixedSingle;
+            tabPageFood.Controls.Add(buttonClose);
             tabPageFood.Controls.Add(labelHelpFoodInfo);
             tabPageFood.Controls.Add(labelHelpShowCols);
             tabPageFood.Controls.Add(labelHelpFoodDataGrid);
@@ -929,6 +932,16 @@ namespace DietSentry
             tabPageFood.Size = new Size(1167, 691);
             tabPageFood.TabIndex = 0;
             tabPageFood.Text = "Food";
+            // 
+            // buttonClose
+            // 
+            buttonClose.Location = new Point(1030, 51);
+            buttonClose.Name = "buttonClose";
+            buttonClose.Size = new Size(75, 23);
+            buttonClose.TabIndex = 7;
+            buttonClose.Text = "button1";
+            buttonClose.UseVisualStyleBackColor = true;
+            buttonClose.Click += buttonClose_Click;
             // 
             // labelHelpFoodInfo
             // 
@@ -1497,9 +1510,9 @@ namespace DietSentry
             ClientSize = new Size(1174, 717);
             Controls.Add(tabControlMain);
             Controls.Add(tabControl1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";
             Opacity = 0D;
-            ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Diet Sentry 2.0";
             TransparencyKey = Color.Lime;
@@ -1606,5 +1619,6 @@ namespace DietSentry
         private DataGridViewTextBoxColumn caffeineDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn cholesterolDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn alcoholDataGridViewTextBoxColumn;
+        private Button buttonClose;
     }
 }
