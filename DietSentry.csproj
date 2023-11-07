@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <None Remove="DietSentry.rtf" />
+    <None Remove="DS3.ico" />
     <None Remove="IconDietSentry.ico" />
     <None Remove="IconDS2.ico" />
     <None Remove="Properties\DietSentry - Copy.rtf" />
@@ -26,6 +27,7 @@
 
   <ItemGroup>
     <Resource Include="DietSentry.rtf" />
+    <Resource Include="DS3.ico" />
     <Resource Include="IconDietSentry.ico" />
     <Content Include="IconDS2.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
