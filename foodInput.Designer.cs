@@ -1135,6 +1135,7 @@
             MinimizeBox = false;
             Name = "FoodInputForm";
             Text = "Form for adding a food to the database";
+            TransparencyKey = Color.DarkMagenta;
             FormClosing += FoodInputForm_FormClosing;
             Shown += FoodInputForm_Shown;
             groupBoxFoodTypes.ResumeLayout(false);
