@@ -1161,14 +1161,12 @@ namespace DietSentry
             UtilitiesRMG.HelpCore(ix, iy);
         }
 
-        private void DataGridViewEaten_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-
-        }
-
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
         }
     }
 }
