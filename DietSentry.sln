@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DietSentry", "DietSentry.csproj", "{595BF0B8-9674-4B9C-92FA-B0353D60C41C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{11C5CE85-55D4-4670-94A2-88291BA3B8ED}"
-	ProjectSection(SolutionItems) = preProject
-		Bitmap1.bmp = Bitmap1.bmp
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
