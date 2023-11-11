@@ -1134,7 +1134,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FoodInputForm";
-            Text = "Form for adding a food to the database";
+            Text = "NOT DISPLAYED";
             TransparencyKey = Color.DarkMagenta;
             FormClosing += FoodInputForm_FormClosing;
             Shown += FoodInputForm_Shown;

@@ -87,10 +87,10 @@ namespace DietSentry
 
         private void ComboBoxHelp_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if ((e.KeyCode == Keys.Enter) | (e.KeyCode == Keys.Escape) | (e.KeyCode == Keys.Delete))
             {
                 e.SuppressKeyPress = true; // stops that annoying ding when Enter Key pressed 
-                richTextBoxHelp.Focus();
+                this.Close();
             }
         }
 
