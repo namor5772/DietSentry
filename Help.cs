@@ -37,11 +37,11 @@ namespace DietSentry
             richTextBoxHelp.LoadFile(stream, RichTextBoxStreamType.RichText);
 
             // **** THE DIRECTORY SPECIFIC WAY OF POPULATING THE richTextBox
-            // ****richTextBoxHelp.LoadFile(@"C:\Users\roman\source\repos\namor5772\DietSentry\DietSentry.rtf");
+            // richTextBoxHelp.LoadFile(@"C:\Users\grobl\source\repos\DietSentry\DietSentry.rtf");
 
             richTextBoxHelp.ReadOnly = true;
 
-            // select the relevat help topic in the ComboBox which will 
+            // select the relevant help topic in the ComboBox which will 
             // then display upon comboBoxHelp_SelectedIndexChanged firing 
             string sh = UtilitiesRMG.SHelpFind;
             sh = sh[1..]; // get rid of initial "#" character

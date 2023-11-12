@@ -31,7 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="DietSentry.rtf" />
+    <Resource Include="DietSentry.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="DScarrot.ico" />
     <Resource Include="IconDietSentry.ico" />
   </ItemGroup>
