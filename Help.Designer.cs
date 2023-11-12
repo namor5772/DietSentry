@@ -56,10 +56,12 @@ namespace DietSentry
             // comboBoxHelp
             // 
             comboBoxHelp.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            comboBoxHelp.FlatStyle = FlatStyle.System;
+            comboBoxHelp.BackColor = Color.WhiteSmoke;
+            comboBoxHelp.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxHelp.FlatStyle = FlatStyle.Popup;
             comboBoxHelp.ForeColor = Color.White;
             comboBoxHelp.FormattingEnabled = true;
-            comboBoxHelp.Items.AddRange(new object[] { "Diet Sentry overview", "Foods table", "Recipe table", "Eaten table", "Food DataGrid", "Food filter TextBox", "Food fields CheckBox", "Food info Label", "Food eaten dialog", "Liquid density dialog", "Eaten DataGrid", "Eaten fields CheckBox", "Eaten daily totals CheckBox", "Eaten day filter CheckBox", "Eaten info Label", "Eaten edit dialog", "Form for ADDING food", "Form for EDITING food", "Adding/Editing a non Recipe food", "Adding/Editing a Recipe food", "Recipe Ingredient filter TextBox", "Recipe Ingredient selection DataGrid", "Recipe Ingredient amount dialog", "Recipe Description TextBox", "Recipe Ingredients DataGrid" });
+            comboBoxHelp.Items.AddRange(new object[] { "Diet Sentry overview", "Foods table", "Recipe table", "Eaten table", "Food DataGrid", "Food filter TextBox", "Food fields CheckBox", "Food info Label", "Food eaten dialog", "Liquid density dialog", "Eaten DataGrid", "Eaten fields CheckBox", "Eaten daily totals CheckBox", "Eaten day filter CheckBox", "Eaten info Label", "Eaten edit dialog", "Form for ADDING food", "Form for EDITING food", "Adding/Editing a non Recipe food", "Adding/Editing a Recipe food", "Recipe Ingredient filter TextBox", "Recipe Ingredient selection DataGrid", "Recipe Ingredient amount dialog", "Recipe Description TextBox", "Recipe Ingredients DataGrid", "Recipe Ingredients amount dialog" });
             comboBoxHelp.Location = new Point(673, 2);
             comboBoxHelp.MaxDropDownItems = 32;
             comboBoxHelp.Name = "comboBoxHelp";
