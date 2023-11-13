@@ -10,9 +10,11 @@
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <StartupObject>DietSentry.Program</StartupObject>
     <ApplicationIcon>DScarrot.ico</ApplicationIcon>
-    <Title>DietSentry</Title>
+    <Title>Diet Sentry 2.0</Title>
     <Copyright>All Free</Copyright>
     <Description>A standalone native Windows Form app for for monitoring your daily energy and nutrient intake</Description>
+    <PackageReleaseNotes>TEST RELEASE NOTES TEXT</PackageReleaseNotes>
+    <PackageIcon></PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,8 +25,8 @@
 
   <ItemGroup>
     <None Remove="DietSentry.rtf" />
-    <None Remove="DScarrot.ico" />
     <None Remove="DScarrot4.ico" />
+    <None Remove="foods.db" />
     <None Remove="IconDietSentry.ico" />
     <None Remove="Properties\DietSentry - Copy.rtf" />
     <None Remove="Properties\DietSentry.rtf" />
@@ -35,6 +37,9 @@
     <Content Include="bin\Release\net7.0-windows\DietSentry.deps.json" />
     <Content Include="bin\Release\net7.0-windows\DietSentry.runtimeconfig.json" />
     <Content Include="DScarrot.ico" />
+    <Content Include="foods.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -111,6 +116,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DScarrot.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
