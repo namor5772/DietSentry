@@ -7,6 +7,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>preview</LangVersion>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +20,7 @@
     <None Remove="DietSentry.rtf" />
     <None Remove="DScarrot.ico" />
     <None Remove="DScarrot4.ico" />
+    <None Remove="foods.db" />
     <None Remove="IconDietSentry.ico" />
     <None Remove="Properties\DietSentry - Copy.rtf" />
     <None Remove="Properties\DietSentry.rtf" />
@@ -43,6 +45,7 @@
     <None Include="bin\Release\net7.0-windows\DietSentry.dll" />
     <None Include="bin\Release\net7.0-windows\DietSentry.exe" />
     <None Include="bin\Release\net7.0-windows\DietSentry.pdb" />
+    <None Include="bin\Release\net7.0-windows\foods.db" />
     <None Include="bin\Release\net7.0-windows\Microsoft.Data.Sqlite.dll" />
     <None Include="bin\Release\net7.0-windows\Microsoft.EntityFrameworkCore.Abstractions.dll" />
     <None Include="bin\Release\net7.0-windows\Microsoft.EntityFrameworkCore.dll" />
@@ -88,6 +91,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="foods.db" />
   </ItemGroup>
 
   <ItemGroup>
