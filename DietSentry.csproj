@@ -26,6 +26,7 @@
   <ItemGroup>
     <None Remove="DietSentry.rtf" />
     <None Remove="DScarrot4.ico" />
+    <None Remove="foods.db" />
     <None Remove="IconDietSentry.ico" />
     <None Remove="Properties\DietSentry - Copy.rtf" />
     <None Remove="Properties\DietSentry.rtf" />
@@ -51,7 +52,9 @@
     <None Include="bin\Release\net7.0-windows\DietSentry.dll" />
     <None Include="bin\Release\net7.0-windows\DietSentry.exe" />
     <None Include="bin\Release\net7.0-windows\DietSentry.pdb" />
-    <None Include="bin\Release\net7.0-windows\foods.db" />
+    <None Include="bin\Release\net7.0-windows\foods.db">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Include="bin\Release\net7.0-windows\Microsoft.Data.Sqlite.dll" />
     <None Include="bin\Release\net7.0-windows\Microsoft.EntityFrameworkCore.Abstractions.dll" />
     <None Include="bin\Release\net7.0-windows\Microsoft.EntityFrameworkCore.dll" />
@@ -118,9 +121,6 @@
     <None Update="DScarrot.ico">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
-    </None>
-    <None Update="foods.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
