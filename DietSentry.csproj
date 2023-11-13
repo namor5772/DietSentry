@@ -20,7 +20,6 @@
     <None Remove="DietSentry.rtf" />
     <None Remove="DScarrot.ico" />
     <None Remove="DScarrot4.ico" />
-    <None Remove="foods.db" />
     <None Remove="IconDietSentry.ico" />
     <None Remove="Properties\DietSentry - Copy.rtf" />
     <None Remove="Properties\DietSentry.rtf" />
@@ -91,10 +90,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.10" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="foods.db" />
   </ItemGroup>
 
   <ItemGroup>
