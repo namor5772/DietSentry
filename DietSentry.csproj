@@ -8,6 +8,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>preview</LangVersion>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <StartupObject>DietSentry.Program</StartupObject>
+    <ApplicationIcon>DScarrot.ico</ApplicationIcon>
+    <Title>DietSentry</Title>
+    <Copyright>All Free</Copyright>
+    <Description>A standalone native Windows Form app for for monitoring your daily energy and nutrient intake</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,6 +34,7 @@
   <ItemGroup>
     <Content Include="bin\Release\net7.0-windows\DietSentry.deps.json" />
     <Content Include="bin\Release\net7.0-windows\DietSentry.runtimeconfig.json" />
+    <Content Include="DScarrot.ico" />
   </ItemGroup>
 
   <ItemGroup>
