@@ -26,7 +26,6 @@
   <ItemGroup>
     <None Remove="DietSentry.rtf" />
     <None Remove="DScarrot4.ico" />
-    <None Remove="foods.db" />
     <None Remove="IconDietSentry.ico" />
     <None Remove="Properties\DietSentry - Copy.rtf" />
     <None Remove="Properties\DietSentry.rtf" />
@@ -37,9 +36,6 @@
     <Content Include="bin\Release\net7.0-windows\DietSentry.deps.json" />
     <Content Include="bin\Release\net7.0-windows\DietSentry.runtimeconfig.json" />
     <Content Include="DScarrot.ico" />
-    <Content Include="foods.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
