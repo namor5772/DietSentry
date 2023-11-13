@@ -26,7 +26,6 @@
   <ItemGroup>
     <None Remove="DietSentry.rtf" />
     <None Remove="DScarrot4.ico" />
-    <None Remove="foods.db" />
     <None Remove="IconDietSentry.ico" />
     <None Remove="Properties\DietSentry - Copy.rtf" />
     <None Remove="Properties\DietSentry.rtf" />
@@ -121,6 +120,9 @@
     <None Update="DScarrot.ico">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
+    </None>
+    <None Update="foods.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
