@@ -16,6 +16,7 @@
     <PackageReleaseNotes>TEST RELEASE NOTES TEXT</PackageReleaseNotes>
     <PackageIcon>DietSentry.jpg</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -127,7 +128,7 @@
       <PackagePath>\</PackagePath>
     </None>
     <None Update="foods.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="README.md">
       <Pack>True</Pack>
