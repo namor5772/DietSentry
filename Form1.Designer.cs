@@ -200,7 +200,6 @@ namespace DietSentry
             checkBoxMainFoodCols = new CheckBox();
             labelFilter = new Label();
             dataGridViewFoods = new DataGridView();
-            tabControlMain = new TabControl();
             FoodIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             foodDescriptionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             energyDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -226,6 +225,7 @@ namespace DietSentry
             caffeineDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             cholesterolDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             alcoholDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            tabControlMain = new TabControl();
             tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)foodBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)eatenBindingSource).BeginInit();
@@ -305,7 +305,7 @@ namespace DietSentry
             tabPageEaten.Location = new Point(4, 24);
             tabPageEaten.Name = "tabPageEaten";
             tabPageEaten.Padding = new Padding(3);
-            tabPageEaten.Size = new Size(1167, 691);
+            tabPageEaten.Size = new Size(833, 436);
             tabPageEaten.TabIndex = 1;
             tabPageEaten.Text = "Eaten";
             tabPageEaten.UseVisualStyleBackColor = true;
@@ -925,7 +925,7 @@ namespace DietSentry
             tabPageFood.Location = new Point(4, 24);
             tabPageFood.Name = "tabPageFood";
             tabPageFood.Padding = new Padding(3);
-            tabPageFood.Size = new Size(1167, 691);
+            tabPageFood.Size = new Size(892, 477);
             tabPageFood.TabIndex = 0;
             tabPageFood.Text = "Food";
             // 
@@ -1095,26 +1095,12 @@ namespace DietSentry
             dataGridViewFoods.RowTemplate.Height = 25;
             dataGridViewFoods.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewFoods.ShowCellToolTips = false;
-            dataGridViewFoods.Size = new Size(1150, 581);
+            dataGridViewFoods.Size = new Size(875, 367);
             dataGridViewFoods.StandardTab = true;
             dataGridViewFoods.TabIndex = 6;
             dataGridViewFoods.CellDoubleClick += DataGridViewFoods_CellDoubleClick;
             dataGridViewFoods.UserDeletingRow += DataGridViewFoods_UserDeletingRow;
             dataGridViewFoods.KeyDown += DataGridViewFoods_KeyDown;
-            // 
-            // tabControlMain
-            // 
-            tabControlMain.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tabControlMain.Controls.Add(tabPageFood);
-            tabControlMain.Controls.Add(tabPageEaten);
-            tabControlMain.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            tabControlMain.HotTrack = true;
-            tabControlMain.Location = new Point(0, 0);
-            tabControlMain.Multiline = true;
-            tabControlMain.Name = "tabControlMain";
-            tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new Size(1175, 719);
-            tabControlMain.TabIndex = 1;
             // 
             // FoodIdDataGridViewTextBoxColumn
             // 
@@ -1482,11 +1468,25 @@ namespace DietSentry
             alcoholDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             alcoholDataGridViewTextBoxColumn.Width = 83;
             // 
+            // tabControlMain
+            // 
+            tabControlMain.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tabControlMain.Controls.Add(tabPageFood);
+            tabControlMain.Controls.Add(tabPageEaten);
+            tabControlMain.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tabControlMain.HotTrack = true;
+            tabControlMain.Location = new Point(0, 0);
+            tabControlMain.Multiline = true;
+            tabControlMain.Name = "tabControlMain";
+            tabControlMain.SelectedIndex = 0;
+            tabControlMain.Size = new Size(900, 505);
+            tabControlMain.TabIndex = 1;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1174, 717);
+            ClientSize = new Size(899, 503);
             Controls.Add(tabControlMain);
             Controls.Add(tabControl1);
             Icon = (Icon)resources.GetObject("$this.Icon");
