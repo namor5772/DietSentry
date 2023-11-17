@@ -125,6 +125,8 @@
             labelEnergy = new Label();
             labelFoodDescription = new Label();
             tabPageRecipie = new TabPage();
+            labelHelpRecipeAmount = new Label();
+            textBoxRecipeAmount = new TextBox();
             labelHelpAddEditIngredients = new Label();
             labelHelpAddEditDescription = new Label();
             labelHelpAddEditIngredient = new Label();
@@ -250,7 +252,7 @@
             tabControlAddType.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tabControlAddType.Controls.Add(tabPageNonRecipie);
             tabControlAddType.Controls.Add(tabPageRecipie);
-            tabControlAddType.ItemSize = new Size(0, 1);
+            tabControlAddType.ItemSize = new Size(100, 5);
             tabControlAddType.Location = new Point(0, 50);
             tabControlAddType.Margin = new Padding(0);
             tabControlAddType.Name = "tabControlAddType";
@@ -313,10 +315,10 @@
             tabPageNonRecipie.Controls.Add(labelProtein);
             tabPageNonRecipie.Controls.Add(labelEnergy);
             tabPageNonRecipie.Controls.Add(labelFoodDescription);
-            tabPageNonRecipie.Location = new Point(4, 5);
+            tabPageNonRecipie.Location = new Point(4, 9);
             tabPageNonRecipie.Margin = new Padding(0);
             tabPageNonRecipie.Name = "tabPageNonRecipie";
-            tabPageNonRecipie.Size = new Size(1412, 679);
+            tabPageNonRecipie.Size = new Size(1412, 675);
             tabPageNonRecipie.TabIndex = 0;
             tabPageNonRecipie.Text = "Add Non Recipie";
             // 
@@ -799,6 +801,8 @@
             // tabPageRecipie
             // 
             tabPageRecipie.BackColor = SystemColors.ControlLight;
+            tabPageRecipie.Controls.Add(labelHelpRecipeAmount);
+            tabPageRecipie.Controls.Add(textBoxRecipeAmount);
             tabPageRecipie.Controls.Add(labelHelpAddEditIngredients);
             tabPageRecipie.Controls.Add(labelHelpAddEditDescription);
             tabPageRecipie.Controls.Add(labelHelpAddEditIngredient);
@@ -811,13 +815,33 @@
             tabPageRecipie.Controls.Add(dataGridViewAddToRecipe);
             tabPageRecipie.Controls.Add(textBoxRecipeFoodDescription);
             tabPageRecipie.Controls.Add(labelRecipeFoodDescription);
-            tabPageRecipie.Location = new Point(4, 5);
+            tabPageRecipie.Location = new Point(4, 9);
             tabPageRecipie.Margin = new Padding(0);
             tabPageRecipie.Name = "tabPageRecipie";
-            tabPageRecipie.Size = new Size(1412, 679);
+            tabPageRecipie.Size = new Size(1412, 675);
             tabPageRecipie.TabIndex = 1;
             tabPageRecipie.Text = "Add Recipie";
             tabPageRecipie.Enter += TabPageRecipie_Enter;
+            // 
+            // labelHelpRecipeAmount
+            // 
+            labelHelpRecipeAmount.BackColor = Color.YellowGreen;
+            labelHelpRecipeAmount.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelHelpRecipeAmount.ForeColor = SystemColors.ButtonHighlight;
+            labelHelpRecipeAmount.Location = new Point(461, 55);
+            labelHelpRecipeAmount.Name = "labelHelpRecipeAmount";
+            labelHelpRecipeAmount.Size = new Size(14, 15);
+            labelHelpRecipeAmount.TabIndex = 6;
+            labelHelpRecipeAmount.Text = "?";
+            // 
+            // textBoxRecipeAmount
+            // 
+            textBoxRecipeAmount.Location = new Point(482, 52);
+            textBoxRecipeAmount.Name = "textBoxRecipeAmount";
+            textBoxRecipeAmount.ReadOnly = true;
+            textBoxRecipeAmount.Size = new Size(71, 23);
+            textBoxRecipeAmount.TabIndex = 0;
+            textBoxRecipeAmount.TabStop = false;
             // 
             // labelHelpAddEditIngredients
             // 
@@ -882,7 +906,7 @@
             // labelIngredients
             // 
             labelIngredients.AutoSize = true;
-            labelIngredients.Location = new Point(478, 60);
+            labelIngredients.Location = new Point(559, 55);
             labelIngredients.Name = "labelIngredients";
             labelIngredients.Size = new Size(66, 15);
             labelIngredients.TabIndex = 0;
@@ -935,7 +959,7 @@
             dataGridViewRecipe.RowHeadersWidth = 62;
             dataGridViewRecipe.RowTemplate.Height = 25;
             dataGridViewRecipe.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewRecipe.Size = new Size(926, 581);
+            dataGridViewRecipe.Size = new Size(926, 577);
             dataGridViewRecipe.StandardTab = true;
             dataGridViewRecipe.TabIndex = 4;
             dataGridViewRecipe.UserDeletingRow += DataGridViewRecipe_UserDeletingRow;
@@ -1078,7 +1102,7 @@
             dataGridViewAddToRecipe.ShowCellErrors = false;
             dataGridViewAddToRecipe.ShowEditingIcon = false;
             dataGridViewAddToRecipe.ShowRowErrors = false;
-            dataGridViewAddToRecipe.Size = new Size(444, 581);
+            dataGridViewAddToRecipe.Size = new Size(444, 577);
             dataGridViewAddToRecipe.StandardTab = true;
             dataGridViewAddToRecipe.TabIndex = 3;
             dataGridViewAddToRecipe.CellDoubleClick += DataGridViewAddToRecipe_CellDoubleClick;
@@ -1235,5 +1259,7 @@
         private DataGridViewTextBoxColumn foodDescriptionDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn foodDescriptionDataGridViewTextBoxColumn;
         private Label labelHelpAddEditNonRecipe;
+        private Label labelHelpRecipeAmount;
+        private TextBox textBoxRecipeAmount;
     }
 }
