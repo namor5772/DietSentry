@@ -140,7 +140,7 @@
       <PackagePath>\</PackagePath>
     </None>
     <None Update="foods.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="README.md">
       <Pack>True</Pack>
