@@ -826,7 +826,7 @@
             // labelTotal
             // 
             labelTotal.AutoSize = true;
-            labelTotal.Location = new Point(633, 55);
+            labelTotal.Location = new Point(605, 55);
             labelTotal.Name = "labelTotal";
             labelTotal.Size = new Size(50, 15);
             labelTotal.TabIndex = 7;
@@ -837,7 +837,7 @@
             textBoxRecipeAmount.Location = new Point(559, 51);
             textBoxRecipeAmount.Name = "textBoxRecipeAmount";
             textBoxRecipeAmount.ReadOnly = true;
-            textBoxRecipeAmount.Size = new Size(71, 23);
+            textBoxRecipeAmount.Size = new Size(44, 23);
             textBoxRecipeAmount.TabIndex = 0;
             textBoxRecipeAmount.TabStop = false;
             textBoxRecipeAmount.TextAlign = HorizontalAlignment.Right;

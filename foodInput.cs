@@ -1463,38 +1463,41 @@ namespace DietSentry
                 dataGridViewRecipe.Focus();
 
                 // summing the component foods making up the recipe 
-                var queriedData = context.Recipe.Local.ToBindingList().GroupBy(o => o.FoodId).Select(g => new
-                {
-                    FoodId = g.Key,
-                    CopyFg = g.Sum(i => i.CopyFg),
-                    Amount = g.Sum(i => i.Amount),
-                    Energy = g.Sum(i => i.Energy),
-                    Protein = g.Sum(i => i.Protein),
-                    FatTotal = g.Sum(i => i.FatTotal),
-                    SaturatedFat = g.Sum(i => i.SaturatedFat),
-                    TransFat = g.Sum(i => i.TransFat),
-                    PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
-                    MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
-                    Carbohydrate = g.Sum(i => i.Carbohydrate),
-                    Sugars = g.Sum(i => i.Sugars),
-                    DietaryFibre = g.Sum(i => i.DietaryFibre),
-                    SodiumNa = g.Sum(i => i.SodiumNa),
-                    CalciumCa = g.Sum(i => i.CalciumCa),
-                    PotassiumK = g.Sum(i => i.PotassiumK),
-                    ThiaminB1 = g.Sum(i => i.ThiaminB1),
-                    RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
-                    NiacinB3 = g.Sum(i => i.NiacinB3),
-                    Folate = g.Sum(i => i.Folate),
-                    IronFe = g.Sum(i => i.IronFe),
-                    MagnesiumMg = g.Sum(i => i.MagnesiumMg),
-                    VitaminC = g.Sum(i => i.VitaminC),
-                    Caffeine = g.Sum(i => i.Caffeine),
-                    Cholesterol = g.Sum(i => i.Cholesterol),
-                    Alcohol = g.Sum(i => i.Alcohol)
-                }).Where(x => x.FoodId == rID).Last();
+                var qData = context.Recipe.Local.ToList().
+                    Where(x => ((x.FoodId == recordID) & (x.CopyFg == 0))).
+                    GroupBy(o => o.FoodId).
+                    Select(g => new
+                    {
+                        FoodId = g.Key,
+                        Amount = g.Sum(i => i.Amount),
+                        Energy = g.Sum(i => i.Energy),
+                        Protein = g.Sum(i => i.Protein),
+                        FatTotal = g.Sum(i => i.FatTotal),
+                        SaturatedFat = g.Sum(i => i.SaturatedFat),
+                        TransFat = g.Sum(i => i.TransFat),
+                        PolyunsaturatedFat = g.Sum(i => i.PolyunsaturatedFat),
+                        MonounsaturatedFat = g.Sum(i => i.MonounsaturatedFat),
+                        Carbohydrate = g.Sum(i => i.Carbohydrate),
+                        Sugars = g.Sum(i => i.Sugars),
+                        DietaryFibre = g.Sum(i => i.DietaryFibre),
+                        SodiumNa = g.Sum(i => i.SodiumNa),
+                        CalciumCa = g.Sum(i => i.CalciumCa),
+                        PotassiumK = g.Sum(i => i.PotassiumK),
+                        ThiaminB1 = g.Sum(i => i.ThiaminB1),
+                        RiboflavinB2 = g.Sum(i => i.RiboflavinB2),
+                        NiacinB3 = g.Sum(i => i.NiacinB3),
+                        Folate = g.Sum(i => i.Folate),
+                        IronFe = g.Sum(i => i.IronFe),
+                        MagnesiumMg = g.Sum(i => i.MagnesiumMg),
+                        VitaminC = g.Sum(i => i.VitaminC),
+                        Caffeine = g.Sum(i => i.Caffeine),
+                        Cholesterol = g.Sum(i => i.Cholesterol),
+                        Alcohol = g.Sum(i => i.Alcohol)
+                    }).
+                    Last();
 
                 // populate textbox with latest weight of recipe in grams
-                textBoxRecipeAmount.Text = string.Format("{0:N0}", queriedData.Amount);
+                textBoxRecipeAmount.Text = string.Format("{0:N0}", qData.Amount);
             }
             catch
             {
