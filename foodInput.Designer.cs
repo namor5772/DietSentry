@@ -125,7 +125,7 @@
             labelEnergy = new Label();
             labelFoodDescription = new Label();
             tabPageRecipie = new TabPage();
-            labelHelpRecipeAmount = new Label();
+            labelTotal = new Label();
             textBoxRecipeAmount = new TextBox();
             labelHelpAddEditIngredients = new Label();
             labelHelpAddEditDescription = new Label();
@@ -801,7 +801,7 @@
             // tabPageRecipie
             // 
             tabPageRecipie.BackColor = SystemColors.ControlLight;
-            tabPageRecipie.Controls.Add(labelHelpRecipeAmount);
+            tabPageRecipie.Controls.Add(labelTotal);
             tabPageRecipie.Controls.Add(textBoxRecipeAmount);
             tabPageRecipie.Controls.Add(labelHelpAddEditIngredients);
             tabPageRecipie.Controls.Add(labelHelpAddEditDescription);
@@ -823,25 +823,24 @@
             tabPageRecipie.Text = "Add Recipie";
             tabPageRecipie.Enter += TabPageRecipie_Enter;
             // 
-            // labelHelpRecipeAmount
+            // labelTotal
             // 
-            labelHelpRecipeAmount.BackColor = Color.YellowGreen;
-            labelHelpRecipeAmount.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelHelpRecipeAmount.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpRecipeAmount.Location = new Point(461, 55);
-            labelHelpRecipeAmount.Name = "labelHelpRecipeAmount";
-            labelHelpRecipeAmount.Size = new Size(14, 15);
-            labelHelpRecipeAmount.TabIndex = 6;
-            labelHelpRecipeAmount.Text = "?";
+            labelTotal.AutoSize = true;
+            labelTotal.Location = new Point(633, 55);
+            labelTotal.Name = "labelTotal";
+            labelTotal.Size = new Size(50, 15);
+            labelTotal.TabIndex = 7;
+            labelTotal.Text = "(g) Total";
             // 
             // textBoxRecipeAmount
             // 
-            textBoxRecipeAmount.Location = new Point(482, 52);
+            textBoxRecipeAmount.Location = new Point(559, 51);
             textBoxRecipeAmount.Name = "textBoxRecipeAmount";
             textBoxRecipeAmount.ReadOnly = true;
             textBoxRecipeAmount.Size = new Size(71, 23);
             textBoxRecipeAmount.TabIndex = 0;
             textBoxRecipeAmount.TabStop = false;
+            textBoxRecipeAmount.TextAlign = HorizontalAlignment.Right;
             // 
             // labelHelpAddEditIngredients
             // 
@@ -906,7 +905,7 @@
             // labelIngredients
             // 
             labelIngredients.AutoSize = true;
-            labelIngredients.Location = new Point(559, 55);
+            labelIngredients.Location = new Point(478, 55);
             labelIngredients.Name = "labelIngredients";
             labelIngredients.Size = new Size(66, 15);
             labelIngredients.TabIndex = 0;
@@ -1259,7 +1258,7 @@
         private DataGridViewTextBoxColumn foodDescriptionDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn foodDescriptionDataGridViewTextBoxColumn;
         private Label labelHelpAddEditNonRecipe;
-        private Label labelHelpRecipeAmount;
         private TextBox textBoxRecipeAmount;
+        private Label labelTotal;
     }
 }
