@@ -75,7 +75,7 @@ namespace DietSentry
             }
         }
 
-        private void labelHelpRecipeDialog_MouseHover(object sender, EventArgs e)
+        private void LabelHelpRecipeDialog_MouseHover(object sender, EventArgs e)
         {
             UtilitiesRMG.SHelpFind = "#Recipe Ingredient amount dialog";
             int iw = 10; // fudge

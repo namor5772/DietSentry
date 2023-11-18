@@ -72,7 +72,7 @@
             labelHelpRecipeDialog.Size = new Size(14, 15);
             labelHelpRecipeDialog.TabIndex = 18;
             labelHelpRecipeDialog.Text = "?";
-            labelHelpRecipeDialog.MouseHover += labelHelpRecipeDialog_MouseHover;
+            labelHelpRecipeDialog.MouseHover += LabelHelpRecipeDialog_MouseHover;
             // 
             // InputRecipeComponent
             // 
