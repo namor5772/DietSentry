@@ -1765,6 +1765,11 @@ namespace DietSentry
             int iy = this.PointToScreen(labelHelpAddEditNonRecipe.Location).Y + ih;
             UtilitiesRMG.HelpCore(ix, iy);
         }
+
+        private void tabPageNonRecipie_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

@@ -315,12 +315,13 @@
             tabPageNonRecipie.Controls.Add(labelProtein);
             tabPageNonRecipie.Controls.Add(labelEnergy);
             tabPageNonRecipie.Controls.Add(labelFoodDescription);
-            tabPageNonRecipie.Location = new Point(4, 5);
+            tabPageNonRecipie.Location = new Point(4, 14);
             tabPageNonRecipie.Margin = new Padding(0);
             tabPageNonRecipie.Name = "tabPageNonRecipie";
-            tabPageNonRecipie.Size = new Size(1412, 679);
+            tabPageNonRecipie.Size = new Size(1412, 670);
             tabPageNonRecipie.TabIndex = 0;
             tabPageNonRecipie.Text = "Add Non Recipie";
+            tabPageNonRecipie.Click += tabPageNonRecipie_Click;
             // 
             // labelHelpAddEditNonRecipe
             // 
@@ -815,10 +816,10 @@
             tabPageRecipie.Controls.Add(dataGridViewAddToRecipe);
             tabPageRecipie.Controls.Add(textBoxRecipeFoodDescription);
             tabPageRecipie.Controls.Add(labelRecipeFoodDescription);
-            tabPageRecipie.Location = new Point(4, 9);
+            tabPageRecipie.Location = new Point(4, 5);
             tabPageRecipie.Margin = new Padding(0);
             tabPageRecipie.Name = "tabPageRecipie";
-            tabPageRecipie.Size = new Size(1412, 675);
+            tabPageRecipie.Size = new Size(1412, 679);
             tabPageRecipie.TabIndex = 1;
             tabPageRecipie.Text = "Add Recipie";
             tabPageRecipie.Enter += TabPageRecipie_Enter;
@@ -836,7 +837,7 @@
             // 
             textBoxRecipeAmount.BackColor = SystemColors.ControlLight;
             textBoxRecipeAmount.BorderStyle = BorderStyle.None;
-            textBoxRecipeAmount.Location = new Point(560, 56);
+            textBoxRecipeAmount.Location = new Point(560, 55);
             textBoxRecipeAmount.Name = "textBoxRecipeAmount";
             textBoxRecipeAmount.ReadOnly = true;
             textBoxRecipeAmount.Size = new Size(44, 16);
@@ -960,7 +961,7 @@
             dataGridViewRecipe.RowHeadersWidth = 62;
             dataGridViewRecipe.RowTemplate.Height = 25;
             dataGridViewRecipe.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewRecipe.Size = new Size(926, 577);
+            dataGridViewRecipe.Size = new Size(926, 589);
             dataGridViewRecipe.StandardTab = true;
             dataGridViewRecipe.TabIndex = 5;
             dataGridViewRecipe.UserDeletingRow += DataGridViewRecipe_UserDeletingRow;
@@ -1103,7 +1104,7 @@
             dataGridViewAddToRecipe.ShowCellErrors = false;
             dataGridViewAddToRecipe.ShowEditingIcon = false;
             dataGridViewAddToRecipe.ShowRowErrors = false;
-            dataGridViewAddToRecipe.Size = new Size(444, 577);
+            dataGridViewAddToRecipe.Size = new Size(444, 589);
             dataGridViewAddToRecipe.StandardTab = true;
             dataGridViewAddToRecipe.TabIndex = 4;
             dataGridViewAddToRecipe.CellDoubleClick += DataGridViewAddToRecipe_CellDoubleClick;
