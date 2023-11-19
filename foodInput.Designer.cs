@@ -252,7 +252,7 @@
             tabControlAddType.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tabControlAddType.Controls.Add(tabPageNonRecipie);
             tabControlAddType.Controls.Add(tabPageRecipie);
-            tabControlAddType.ItemSize = new Size(100, 5);
+            tabControlAddType.ItemSize = new Size(0, 1);
             tabControlAddType.Location = new Point(0, 50);
             tabControlAddType.Margin = new Padding(0);
             tabControlAddType.Name = "tabControlAddType";
@@ -315,10 +315,10 @@
             tabPageNonRecipie.Controls.Add(labelProtein);
             tabPageNonRecipie.Controls.Add(labelEnergy);
             tabPageNonRecipie.Controls.Add(labelFoodDescription);
-            tabPageNonRecipie.Location = new Point(4, 9);
+            tabPageNonRecipie.Location = new Point(4, 5);
             tabPageNonRecipie.Margin = new Padding(0);
             tabPageNonRecipie.Name = "tabPageNonRecipie";
-            tabPageNonRecipie.Size = new Size(1412, 675);
+            tabPageNonRecipie.Size = new Size(1412, 679);
             tabPageNonRecipie.TabIndex = 0;
             tabPageNonRecipie.Text = "Add Non Recipie";
             // 
@@ -826,7 +826,7 @@
             // labelTotal
             // 
             labelTotal.AutoSize = true;
-            labelTotal.Location = new Point(605, 55);
+            labelTotal.Location = new Point(606, 55);
             labelTotal.Name = "labelTotal";
             labelTotal.Size = new Size(50, 15);
             labelTotal.TabIndex = 7;
@@ -834,10 +834,12 @@
             // 
             // textBoxRecipeAmount
             // 
-            textBoxRecipeAmount.Location = new Point(559, 51);
+            textBoxRecipeAmount.BackColor = SystemColors.ControlLight;
+            textBoxRecipeAmount.BorderStyle = BorderStyle.None;
+            textBoxRecipeAmount.Location = new Point(560, 56);
             textBoxRecipeAmount.Name = "textBoxRecipeAmount";
             textBoxRecipeAmount.ReadOnly = true;
-            textBoxRecipeAmount.Size = new Size(44, 23);
+            textBoxRecipeAmount.Size = new Size(44, 16);
             textBoxRecipeAmount.TabIndex = 0;
             textBoxRecipeAmount.TabStop = false;
             textBoxRecipeAmount.TextAlign = HorizontalAlignment.Right;
@@ -960,7 +962,7 @@
             dataGridViewRecipe.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewRecipe.Size = new Size(926, 577);
             dataGridViewRecipe.StandardTab = true;
-            dataGridViewRecipe.TabIndex = 4;
+            dataGridViewRecipe.TabIndex = 5;
             dataGridViewRecipe.UserDeletingRow += DataGridViewRecipe_UserDeletingRow;
             // 
             // amountDataGridViewTextBoxColumn
@@ -1047,7 +1049,7 @@
             textBoxFilterRecipe.Name = "textBoxFilterRecipe";
             textBoxFilterRecipe.PlaceholderText = "Enter food filter text";
             textBoxFilterRecipe.Size = new Size(135, 23);
-            textBoxFilterRecipe.TabIndex = 2;
+            textBoxFilterRecipe.TabIndex = 3;
             textBoxFilterRecipe.WordWrap = false;
             textBoxFilterRecipe.KeyDown += TextBoxFilterRecipe_KeyDown;
             // 
@@ -1103,7 +1105,7 @@
             dataGridViewAddToRecipe.ShowRowErrors = false;
             dataGridViewAddToRecipe.Size = new Size(444, 577);
             dataGridViewAddToRecipe.StandardTab = true;
-            dataGridViewAddToRecipe.TabIndex = 3;
+            dataGridViewAddToRecipe.TabIndex = 4;
             dataGridViewAddToRecipe.CellDoubleClick += DataGridViewAddToRecipe_CellDoubleClick;
             dataGridViewAddToRecipe.KeyDown += DataGridViewAddToRecipe_KeyDown;
             // 
@@ -1126,7 +1128,7 @@
             textBoxRecipeFoodDescription.Location = new Point(559, 23);
             textBoxRecipeFoodDescription.Name = "textBoxRecipeFoodDescription";
             textBoxRecipeFoodDescription.Size = new Size(845, 23);
-            textBoxRecipeFoodDescription.TabIndex = 1;
+            textBoxRecipeFoodDescription.TabIndex = 2;
             textBoxRecipeFoodDescription.KeyDown += TextBoxRecipeFoodDescription_KeyDown;
             textBoxRecipeFoodDescription.Leave += TextBoxRecipeFoodDescription_Leave;
             // 
