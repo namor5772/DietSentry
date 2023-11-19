@@ -241,28 +241,31 @@ namespace DietSentry
             // 
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
-            tabControl1.Location = new Point(522, 343);
+            tabControl1.Location = new Point(746, 572);
+            tabControl1.Margin = new Padding(4, 5, 4, 5);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(13, 8);
+            tabControl1.Size = new Size(19, 13);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
-            tabPage1.Location = new Point(4, 24);
+            tabPage1.Location = new Point(4, 34);
+            tabPage1.Margin = new Padding(4, 5, 4, 5);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(5, 0);
+            tabPage1.Padding = new Padding(4, 5, 4, 5);
+            tabPage1.Size = new Size(11, 0);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            tabPage2.Location = new Point(4, 24);
+            tabPage2.Location = new Point(4, 34);
+            tabPage2.Margin = new Padding(4, 5, 4, 5);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(5, 0);
+            tabPage2.Padding = new Padding(4, 5, 4, 5);
+            tabPage2.Size = new Size(11, 0);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
@@ -302,10 +305,11 @@ namespace DietSentry
             tabPageEaten.Controls.Add(checkBoxDailyTotals);
             tabPageEaten.Controls.Add(checkBoxDateFilter);
             tabPageEaten.Controls.Add(dataGridViewEaten);
-            tabPageEaten.Location = new Point(4, 24);
+            tabPageEaten.Location = new Point(4, 34);
+            tabPageEaten.Margin = new Padding(4, 5, 4, 5);
             tabPageEaten.Name = "tabPageEaten";
-            tabPageEaten.Padding = new Padding(3);
-            tabPageEaten.Size = new Size(1053, 609);
+            tabPageEaten.Padding = new Padding(4, 5, 4, 5);
+            tabPageEaten.Size = new Size(1508, 1024);
             tabPageEaten.TabIndex = 1;
             tabPageEaten.Text = "Eaten";
             tabPageEaten.UseVisualStyleBackColor = true;
@@ -315,9 +319,10 @@ namespace DietSentry
             labelHelpEatenInfo.BackColor = Color.YellowGreen;
             labelHelpEatenInfo.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelHelpEatenInfo.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpEatenInfo.Location = new Point(312, 19);
+            labelHelpEatenInfo.Location = new Point(446, 32);
+            labelHelpEatenInfo.Margin = new Padding(4, 0, 4, 0);
             labelHelpEatenInfo.Name = "labelHelpEatenInfo";
-            labelHelpEatenInfo.Size = new Size(14, 15);
+            labelHelpEatenInfo.Size = new Size(20, 25);
             labelHelpEatenInfo.TabIndex = 0;
             labelHelpEatenInfo.Text = "?";
             labelHelpEatenInfo.MouseHover += LabelHelpEatenInfo_MouseHover;
@@ -327,9 +332,10 @@ namespace DietSentry
             labelHelpEatenDataGrid.BackColor = Color.YellowGreen;
             labelHelpEatenDataGrid.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelHelpEatenDataGrid.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpEatenDataGrid.Location = new Point(7, 100);
+            labelHelpEatenDataGrid.Location = new Point(10, 167);
+            labelHelpEatenDataGrid.Margin = new Padding(4, 0, 4, 0);
             labelHelpEatenDataGrid.Name = "labelHelpEatenDataGrid";
-            labelHelpEatenDataGrid.Size = new Size(14, 15);
+            labelHelpEatenDataGrid.Size = new Size(20, 25);
             labelHelpEatenDataGrid.TabIndex = 0;
             labelHelpEatenDataGrid.Text = "?";
             labelHelpEatenDataGrid.MouseHover += LabelHelpEatenDataGrid_MouseHover;
@@ -339,9 +345,10 @@ namespace DietSentry
             labelHelpShowFilter.BackColor = Color.YellowGreen;
             labelHelpShowFilter.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelHelpShowFilter.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpShowFilter.Location = new Point(7, 69);
+            labelHelpShowFilter.Location = new Point(10, 115);
+            labelHelpShowFilter.Margin = new Padding(4, 0, 4, 0);
             labelHelpShowFilter.Name = "labelHelpShowFilter";
-            labelHelpShowFilter.Size = new Size(14, 15);
+            labelHelpShowFilter.Size = new Size(20, 25);
             labelHelpShowFilter.TabIndex = 0;
             labelHelpShowFilter.Text = "?";
             labelHelpShowFilter.MouseHover += LabelHelpShowFilter_MouseHover;
@@ -351,9 +358,10 @@ namespace DietSentry
             labelHelpShowTotals.BackColor = Color.YellowGreen;
             labelHelpShowTotals.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelHelpShowTotals.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpShowTotals.Location = new Point(7, 44);
+            labelHelpShowTotals.Location = new Point(10, 73);
+            labelHelpShowTotals.Margin = new Padding(4, 0, 4, 0);
             labelHelpShowTotals.Name = "labelHelpShowTotals";
-            labelHelpShowTotals.Size = new Size(14, 15);
+            labelHelpShowTotals.Size = new Size(20, 25);
             labelHelpShowTotals.TabIndex = 0;
             labelHelpShowTotals.Text = "?";
             labelHelpShowTotals.MouseHover += LabelHelpShowTotals_MouseHover;
@@ -363,9 +371,10 @@ namespace DietSentry
             labelHelpShowCols2.BackColor = Color.YellowGreen;
             labelHelpShowCols2.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelHelpShowCols2.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpShowCols2.Location = new Point(7, 19);
+            labelHelpShowCols2.Location = new Point(10, 32);
+            labelHelpShowCols2.Margin = new Padding(4, 0, 4, 0);
             labelHelpShowCols2.Name = "labelHelpShowCols2";
-            labelHelpShowCols2.Size = new Size(14, 15);
+            labelHelpShowCols2.Size = new Size(20, 25);
             labelHelpShowCols2.TabIndex = 0;
             labelHelpShowCols2.Text = "?";
             labelHelpShowCols2.MouseHover += LabelHelpShowCols2_MouseHover;
@@ -374,9 +383,10 @@ namespace DietSentry
             // 
             labelInfoEaten.AutoSize = true;
             labelInfoEaten.BackColor = SystemColors.ControlLight;
-            labelInfoEaten.Location = new Point(332, 19);
+            labelInfoEaten.Location = new Point(474, 32);
+            labelInfoEaten.Margin = new Padding(4, 0, 4, 0);
             labelInfoEaten.Name = "labelInfoEaten";
-            labelInfoEaten.Size = new Size(13, 15);
+            labelInfoEaten.Size = new Size(22, 25);
             labelInfoEaten.TabIndex = 0;
             labelInfoEaten.Text = "  ";
             // 
@@ -384,11 +394,12 @@ namespace DietSentry
             // 
             dateTimePickerEaten.CustomFormat = "  dd-MMM-yyyy";
             dateTimePickerEaten.Format = DateTimePickerFormat.Custom;
-            dateTimePickerEaten.Location = new Point(100, 66);
+            dateTimePickerEaten.Location = new Point(143, 110);
+            dateTimePickerEaten.Margin = new Padding(4, 5, 4, 5);
             dateTimePickerEaten.MaxDate = new DateTime(2123, 1, 1, 0, 0, 0, 0);
             dateTimePickerEaten.MinDate = new DateTime(2023, 1, 1, 0, 0, 0, 0);
             dateTimePickerEaten.Name = "dateTimePickerEaten";
-            dateTimePickerEaten.Size = new Size(128, 23);
+            dateTimePickerEaten.Size = new Size(181, 31);
             dateTimePickerEaten.TabIndex = 6;
             dateTimePickerEaten.KeyDown += DateTimePickerEaten_KeyDown;
             dateTimePickerEaten.Leave += DateTimePickerEaten_Leave;
@@ -398,9 +409,10 @@ namespace DietSentry
             checkBoxMainCols.AutoSize = true;
             checkBoxMainCols.Checked = true;
             checkBoxMainCols.CheckState = CheckState.Checked;
-            checkBoxMainCols.Location = new Point(28, 18);
+            checkBoxMainCols.Location = new Point(40, 30);
+            checkBoxMainCols.Margin = new Padding(4, 5, 4, 5);
             checkBoxMainCols.Name = "checkBoxMainCols";
-            checkBoxMainCols.Size = new Size(161, 19);
+            checkBoxMainCols.Size = new Size(238, 29);
             checkBoxMainCols.TabIndex = 3;
             checkBoxMainCols.Text = "Only show main columns";
             checkBoxMainCols.UseVisualStyleBackColor = true;
@@ -409,9 +421,10 @@ namespace DietSentry
             // checkBoxDailyTotals
             // 
             checkBoxDailyTotals.AutoSize = true;
-            checkBoxDailyTotals.Location = new Point(28, 43);
+            checkBoxDailyTotals.Location = new Point(40, 72);
+            checkBoxDailyTotals.Margin = new Padding(4, 5, 4, 5);
             checkBoxDailyTotals.Name = "checkBoxDailyTotals";
-            checkBoxDailyTotals.Size = new Size(124, 19);
+            checkBoxDailyTotals.Size = new Size(187, 29);
             checkBoxDailyTotals.TabIndex = 4;
             checkBoxDailyTotals.Text = "Display daily totals";
             checkBoxDailyTotals.UseVisualStyleBackColor = true;
@@ -422,9 +435,10 @@ namespace DietSentry
             checkBoxDateFilter.AutoSize = true;
             checkBoxDateFilter.Checked = true;
             checkBoxDateFilter.CheckState = CheckState.Checked;
-            checkBoxDateFilter.Location = new Point(28, 68);
+            checkBoxDateFilter.Location = new Point(40, 113);
+            checkBoxDateFilter.Margin = new Padding(4, 5, 4, 5);
             checkBoxDateFilter.Name = "checkBoxDateFilter";
-            checkBoxDateFilter.Size = new Size(68, 19);
+            checkBoxDateFilter.Size = new Size(101, 29);
             checkBoxDateFilter.TabIndex = 5;
             checkBoxDateFilter.Text = "Filter by";
             checkBoxDateFilter.UseVisualStyleBackColor = true;
@@ -460,7 +474,8 @@ namespace DietSentry
             dataGridViewEaten.DefaultCellStyle = dataGridViewCellStyle30;
             dataGridViewEaten.EditMode = DataGridViewEditMode.EditOnF2;
             dataGridViewEaten.EnableHeadersVisualStyles = false;
-            dataGridViewEaten.Location = new Point(6, 99);
+            dataGridViewEaten.Location = new Point(9, 165);
+            dataGridViewEaten.Margin = new Padding(4, 5, 4, 5);
             dataGridViewEaten.MultiSelect = false;
             dataGridViewEaten.Name = "dataGridViewEaten";
             dataGridViewEaten.ReadOnly = true;
@@ -479,7 +494,7 @@ namespace DietSentry
             dataGridViewEaten.RowTemplate.ReadOnly = true;
             dataGridViewEaten.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewEaten.ShowCellToolTips = false;
-            dataGridViewEaten.Size = new Size(1036, 499);
+            dataGridViewEaten.Size = new Size(1480, 832);
             dataGridViewEaten.StandardTab = true;
             dataGridViewEaten.TabIndex = 7;
             dataGridViewEaten.UserDeletingRow += DataGridViewEaten_UserDeletingRow;
@@ -501,10 +516,11 @@ namespace DietSentry
             tabPageFood.Controls.Add(checkBoxMainFoodCols);
             tabPageFood.Controls.Add(labelFilter);
             tabPageFood.Controls.Add(dataGridViewFoods);
-            tabPageFood.Location = new Point(4, 24);
+            tabPageFood.Location = new Point(4, 34);
+            tabPageFood.Margin = new Padding(4, 5, 4, 5);
             tabPageFood.Name = "tabPageFood";
-            tabPageFood.Padding = new Padding(3);
-            tabPageFood.Size = new Size(1053, 609);
+            tabPageFood.Padding = new Padding(4, 5, 4, 5);
+            tabPageFood.Size = new Size(1508, 1024);
             tabPageFood.TabIndex = 0;
             tabPageFood.Text = "Food";
             // 
@@ -513,9 +529,10 @@ namespace DietSentry
             labelHelpFoodInfo.BackColor = Color.YellowGreen;
             labelHelpFoodInfo.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelHelpFoodInfo.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpFoodInfo.Location = new Point(312, 19);
+            labelHelpFoodInfo.Location = new Point(446, 32);
+            labelHelpFoodInfo.Margin = new Padding(4, 0, 4, 0);
             labelHelpFoodInfo.Name = "labelHelpFoodInfo";
-            labelHelpFoodInfo.Size = new Size(14, 15);
+            labelHelpFoodInfo.Size = new Size(20, 25);
             labelHelpFoodInfo.TabIndex = 0;
             labelHelpFoodInfo.Text = "?";
             labelHelpFoodInfo.MouseHover += LabelHelpFoodInfo_MouseHover;
@@ -525,9 +542,10 @@ namespace DietSentry
             labelHelpShowCols.BackColor = Color.YellowGreen;
             labelHelpShowCols.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelHelpShowCols.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpShowCols.Location = new Point(95, 19);
+            labelHelpShowCols.Location = new Point(136, 32);
+            labelHelpShowCols.Margin = new Padding(4, 0, 4, 0);
             labelHelpShowCols.Name = "labelHelpShowCols";
-            labelHelpShowCols.Size = new Size(14, 15);
+            labelHelpShowCols.Size = new Size(20, 25);
             labelHelpShowCols.TabIndex = 0;
             labelHelpShowCols.Text = "?";
             labelHelpShowCols.MouseHover += LabelHelpShowCols_MouseHover;
@@ -538,9 +556,10 @@ namespace DietSentry
             labelHelpFoodDataGrid.BackColor = Color.YellowGreen;
             labelHelpFoodDataGrid.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelHelpFoodDataGrid.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpFoodDataGrid.Location = new Point(7, 100);
+            labelHelpFoodDataGrid.Location = new Point(10, 167);
+            labelHelpFoodDataGrid.Margin = new Padding(4, 0, 4, 0);
             labelHelpFoodDataGrid.Name = "labelHelpFoodDataGrid";
-            labelHelpFoodDataGrid.Size = new Size(14, 15);
+            labelHelpFoodDataGrid.Size = new Size(21, 23);
             labelHelpFoodDataGrid.TabIndex = 0;
             labelHelpFoodDataGrid.Text = "?";
             labelHelpFoodDataGrid.MouseHover += LabelHelpFoodDataGrid_MouseHover;
@@ -551,9 +570,10 @@ namespace DietSentry
             labelHelpFoodFilter.BackColor = Color.YellowGreen;
             labelHelpFoodFilter.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelHelpFoodFilter.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpFoodFilter.Location = new Point(6, 59);
+            labelHelpFoodFilter.Location = new Point(9, 98);
+            labelHelpFoodFilter.Margin = new Padding(4, 0, 4, 0);
             labelHelpFoodFilter.Name = "labelHelpFoodFilter";
-            labelHelpFoodFilter.Size = new Size(14, 15);
+            labelHelpFoodFilter.Size = new Size(21, 23);
             labelHelpFoodFilter.TabIndex = 0;
             labelHelpFoodFilter.Text = "?";
             labelHelpFoodFilter.MouseHover += LabelHelpFoodFilter_MouseHover;
@@ -563,18 +583,20 @@ namespace DietSentry
             labelHelpFoodTab.BackColor = Color.YellowGreen;
             labelHelpFoodTab.Font = new Font("Consolas", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelHelpFoodTab.ForeColor = SystemColors.ButtonHighlight;
-            labelHelpFoodTab.Location = new Point(7, 9);
+            labelHelpFoodTab.Location = new Point(10, 15);
+            labelHelpFoodTab.Margin = new Padding(4, 0, 4, 0);
             labelHelpFoodTab.Name = "labelHelpFoodTab";
-            labelHelpFoodTab.Size = new Size(14, 15);
+            labelHelpFoodTab.Size = new Size(20, 25);
             labelHelpFoodTab.TabIndex = 0;
             labelHelpFoodTab.Text = "?";
             labelHelpFoodTab.MouseHover += LabelHelpFoodTab_MouseHover;
             // 
             // buttonHelp
             // 
-            buttonHelp.Location = new Point(27, 2);
+            buttonHelp.Location = new Point(39, 3);
+            buttonHelp.Margin = new Padding(4, 5, 4, 5);
             buttonHelp.Name = "buttonHelp";
-            buttonHelp.Size = new Size(51, 28);
+            buttonHelp.Size = new Size(73, 47);
             buttonHelp.TabIndex = 3;
             buttonHelp.Text = "HELP";
             buttonHelp.UseVisualStyleBackColor = true;
@@ -584,10 +606,11 @@ namespace DietSentry
             // 
             textBoxFilter.AutoCompleteMode = AutoCompleteMode.Suggest;
             textBoxFilter.AutoCompleteSource = AutoCompleteSource.HistoryList;
-            textBoxFilter.Location = new Point(28, 55);
+            textBoxFilter.Location = new Point(40, 92);
+            textBoxFilter.Margin = new Padding(4, 5, 4, 5);
             textBoxFilter.Name = "textBoxFilter";
             textBoxFilter.PlaceholderText = "Enter food filter text";
-            textBoxFilter.Size = new Size(135, 23);
+            textBoxFilter.Size = new Size(191, 31);
             textBoxFilter.TabIndex = 5;
             textBoxFilter.WordWrap = false;
             textBoxFilter.Enter += TextBoxFilter_Enter;
@@ -597,9 +620,10 @@ namespace DietSentry
             // 
             labelInfoFood.AutoSize = true;
             labelInfoFood.BackColor = SystemColors.ControlLight;
-            labelInfoFood.Location = new Point(332, 19);
+            labelInfoFood.Location = new Point(474, 32);
+            labelInfoFood.Margin = new Padding(4, 0, 4, 0);
             labelInfoFood.Name = "labelInfoFood";
-            labelInfoFood.Size = new Size(13, 15);
+            labelInfoFood.Size = new Size(22, 25);
             labelInfoFood.TabIndex = 0;
             labelInfoFood.Text = "  ";
             // 
@@ -608,9 +632,10 @@ namespace DietSentry
             checkBoxMainFoodCols.AutoSize = true;
             checkBoxMainFoodCols.Checked = true;
             checkBoxMainFoodCols.CheckState = CheckState.Checked;
-            checkBoxMainFoodCols.Location = new Point(116, 18);
+            checkBoxMainFoodCols.Location = new Point(166, 30);
+            checkBoxMainFoodCols.Margin = new Padding(4, 5, 4, 5);
             checkBoxMainFoodCols.Name = "checkBoxMainFoodCols";
-            checkBoxMainFoodCols.Size = new Size(161, 19);
+            checkBoxMainFoodCols.Size = new Size(238, 29);
             checkBoxMainFoodCols.TabIndex = 4;
             checkBoxMainFoodCols.Text = "Only show main columns";
             checkBoxMainFoodCols.UseVisualStyleBackColor = true;
@@ -620,9 +645,10 @@ namespace DietSentry
             // 
             labelFilter.AutoSize = true;
             labelFilter.BackColor = Color.LightCyan;
-            labelFilter.Location = new Point(169, 59);
+            labelFilter.Location = new Point(241, 98);
+            labelFilter.Margin = new Padding(4, 0, 4, 0);
             labelFilter.Name = "labelFilter";
-            labelFilter.Size = new Size(59, 15);
+            labelFilter.Size = new Size(89, 25);
             labelFilter.TabIndex = 0;
             labelFilter.Text = "Unfiltered";
             // 
@@ -656,7 +682,8 @@ namespace DietSentry
             dataGridViewFoods.DefaultCellStyle = dataGridViewCellStyle58;
             dataGridViewFoods.EditMode = DataGridViewEditMode.EditOnF2;
             dataGridViewFoods.EnableHeadersVisualStyles = false;
-            dataGridViewFoods.Location = new Point(6, 99);
+            dataGridViewFoods.Location = new Point(9, 165);
+            dataGridViewFoods.Margin = new Padding(4, 5, 4, 5);
             dataGridViewFoods.MultiSelect = false;
             dataGridViewFoods.Name = "dataGridViewFoods";
             dataGridViewFoods.ReadOnly = true;
@@ -674,7 +701,7 @@ namespace DietSentry
             dataGridViewFoods.RowTemplate.Height = 25;
             dataGridViewFoods.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewFoods.ShowCellToolTips = false;
-            dataGridViewFoods.Size = new Size(1036, 499);
+            dataGridViewFoods.Size = new Size(1480, 832);
             dataGridViewFoods.StandardTab = true;
             dataGridViewFoods.TabIndex = 6;
             dataGridViewFoods.CellDoubleClick += DataGridViewFoods_CellDoubleClick;
@@ -706,7 +733,7 @@ namespace DietSentry
             foodDescriptionDataGridViewTextBoxColumn.MinimumWidth = 6;
             foodDescriptionDataGridViewTextBoxColumn.Name = "foodDescriptionDataGridViewTextBoxColumn";
             foodDescriptionDataGridViewTextBoxColumn.ReadOnly = true;
-            foodDescriptionDataGridViewTextBoxColumn.Width = 110;
+            foodDescriptionDataGridViewTextBoxColumn.Width = 167;
             // 
             // energyDataGridViewTextBoxColumn
             // 
@@ -1055,10 +1082,11 @@ namespace DietSentry
             tabControlMain.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             tabControlMain.HotTrack = true;
             tabControlMain.Location = new Point(0, 0);
+            tabControlMain.Margin = new Padding(4, 5, 4, 5);
             tabControlMain.Multiline = true;
             tabControlMain.Name = "tabControlMain";
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new Size(1061, 637);
+            tabControlMain.Size = new Size(1516, 1062);
             tabControlMain.TabIndex = 1;
             // 
             // EatenId
@@ -1085,7 +1113,7 @@ namespace DietSentry
             DateEaten.Name = "DateEaten";
             DateEaten.ReadOnly = true;
             DateEaten.SortMode = DataGridViewColumnSortMode.NotSortable;
-            DateEaten.Width = 57;
+            DateEaten.Width = 80;
             // 
             // TimeEaten
             // 
@@ -1098,7 +1126,7 @@ namespace DietSentry
             TimeEaten.Name = "TimeEaten";
             TimeEaten.ReadOnly = true;
             TimeEaten.SortMode = DataGridViewColumnSortMode.NotSortable;
-            TimeEaten.Width = 38;
+            TimeEaten.Width = 55;
             // 
             // EatenTs
             // 
@@ -1118,12 +1146,12 @@ namespace DietSentry
             dataGridViewCellStyle5.NullValue = "0";
             amountEatenDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
             amountEatenDataGridViewTextBoxColumn.HeaderText = "Amount (g or mL)";
-            amountEatenDataGridViewTextBoxColumn.MinimumWidth = 65;
+            amountEatenDataGridViewTextBoxColumn.MinimumWidth = 70;
             amountEatenDataGridViewTextBoxColumn.Name = "amountEatenDataGridViewTextBoxColumn";
             amountEatenDataGridViewTextBoxColumn.ReadOnly = true;
             amountEatenDataGridViewTextBoxColumn.Resizable = DataGridViewTriState.False;
             amountEatenDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-            amountEatenDataGridViewTextBoxColumn.Width = 65;
+            amountEatenDataGridViewTextBoxColumn.Width = 70;
             // 
             // foodDescriptionDataGridViewTextBoxColumn1
             // 
@@ -1136,7 +1164,7 @@ namespace DietSentry
             foodDescriptionDataGridViewTextBoxColumn1.Name = "foodDescriptionDataGridViewTextBoxColumn1";
             foodDescriptionDataGridViewTextBoxColumn1.ReadOnly = true;
             foodDescriptionDataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
-            foodDescriptionDataGridViewTextBoxColumn1.Width = 91;
+            foodDescriptionDataGridViewTextBoxColumn1.Width = 137;
             // 
             // energyDataGridViewTextBoxColumn1
             // 
@@ -1485,12 +1513,13 @@ namespace DietSentry
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1060, 635);
+            ClientSize = new Size(1514, 1058);
             Controls.Add(tabControlMain);
             Controls.Add(tabControl1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4, 5, 4, 5);
             Name = "MainForm";
             Opacity = 0D;
             StartPosition = FormStartPosition.CenterScreen;
