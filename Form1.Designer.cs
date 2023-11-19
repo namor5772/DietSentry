@@ -1139,19 +1139,19 @@ namespace DietSentry
             // 
             // amountEatenDataGridViewTextBoxColumn
             // 
-            amountEatenDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            amountEatenDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             amountEatenDataGridViewTextBoxColumn.DataPropertyName = "AmountEaten";
             dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle5.Format = "N1";
             dataGridViewCellStyle5.NullValue = "0";
             amountEatenDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
             amountEatenDataGridViewTextBoxColumn.HeaderText = "Amount (g or mL)";
-            amountEatenDataGridViewTextBoxColumn.MinimumWidth = 70;
+            amountEatenDataGridViewTextBoxColumn.MinimumWidth = 85;
             amountEatenDataGridViewTextBoxColumn.Name = "amountEatenDataGridViewTextBoxColumn";
             amountEatenDataGridViewTextBoxColumn.ReadOnly = true;
             amountEatenDataGridViewTextBoxColumn.Resizable = DataGridViewTriState.False;
             amountEatenDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-            amountEatenDataGridViewTextBoxColumn.Width = 70;
+            amountEatenDataGridViewTextBoxColumn.Width = 97;
             // 
             // foodDescriptionDataGridViewTextBoxColumn1
             // 
