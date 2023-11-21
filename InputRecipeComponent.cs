@@ -26,11 +26,21 @@ namespace DietSentry
 
         private void InputRecipeComponent_Shown(object sender, EventArgs e)
         {
-            // Call textbox's focus method and make sure initial value is ""
-            this.textBoxAmount.Focus();
-            this.textBoxAmount.Text = "";
-            this.labelAmount.Text = UnitsString(foodInputFormX!.FoodDescriptionRecipe);
-            this.labelDescription.Text = foodInputFormX.FoodDescriptionRecipe;
+            // Call textbox's focus method and make sure initial values are setup
+            // contents of textBoxAmount are context dependant
+            textBoxAmount.Focus();
+            if (foodInputFormX!.whoOpen == 0)
+            {
+                textBoxAmount.Text = "";
+            }
+            else // if (foodInputFormX!.whoOpen == 1)
+            {
+                float afr = foodInputFormX!.amountOfFoodInRecipe; // doing this to avoid compiler warning CS1690
+                textBoxAmount.Text = afr.ToString("0.0");
+                labelAmount.Text = UnitsString(foodInputFormX!.FoodDescriptionRecipe);
+
+            }
+            labelDescription.Text = foodInputFormX.FoodDescriptionRecipe;
         }
 
         private void ActOnEnterKeyPress()
@@ -55,7 +65,7 @@ namespace DietSentry
                 amount = -1F;
             }
 
-            // collects the input, processes it and assignes it to a variable accessible in the MainForm     
+            // collects the input, processes it and assigns it to a variable accessible in the calling form     
             foodInputFormX!.amountOfFoodInRecipe = amount;
             Close();
         }

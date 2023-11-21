@@ -16,6 +16,7 @@ using static DietSentry.UtilitiesRMG; // so can use the UnitsString function
 using System.Security.Cryptography;
 using Microsoft.Extensions.Logging;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Globalization;
 
 
 namespace DietSentry
@@ -410,7 +411,7 @@ namespace DietSentry
             if (radioButtonSolid.Checked)
             {
                 //ChangeFormSize(0);
-                tabControlAddType.SelectedTab = tabPageNonRecipie;
+                tabControlAddType.SelectedTab = tabPageNonRecipe;
                 labelState.Text = "Nutrition information per 100 grams (g)";
                 textBoxFoodDescription.Focus();
             }
@@ -421,7 +422,7 @@ namespace DietSentry
             if (radioButtonLiquid.Checked)
             {
                 //ChangeFormSize(0);
-                tabControlAddType.SelectedTab = tabPageNonRecipie;
+                tabControlAddType.SelectedTab = tabPageNonRecipe;
                 labelState.Text = "Nutrition information per 100 millilitres (mL)";
                 textBoxFoodDescription.Focus();
             }
@@ -1309,13 +1310,13 @@ namespace DietSentry
                 if ((foodType == 0) | (foodType == 3))
                 {
                     radioButtonSolid.Checked = true;
-                    tabControlAddType.SelectedTab = tabPageNonRecipie;
+                    tabControlAddType.SelectedTab = tabPageNonRecipe;
                     labelState.Text = "Nutrition information per 100 grams (g)";
                 }
                 else if ((foodType == 1) | (foodType == 4))
                 {
                     radioButtonLiquid.Checked = true;
-                    tabControlAddType.SelectedTab = tabPageNonRecipie;
+                    tabControlAddType.SelectedTab = tabPageNonRecipe;
                     labelState.Text = "Nutrition information per 100 millilitres (mL)";
                 }
                 else // if (foodType == 2)
@@ -1531,6 +1532,7 @@ namespace DietSentry
                 else // selected food is a solid or recipe (ie. measured in g) so can continue processing it
                 {
                     // opens dialog used to input the quantity of that food in recipe, position is "locked" in relation to this form
+                    whoOpen = 0; // tells the dialog "who" opens it
                     InputRecipeComponent frm = new(this)
                     {
                         StartPosition = FormStartPosition.Manual
@@ -1586,7 +1588,7 @@ namespace DietSentry
             }
         }
 
-        private void TabPageRecipie_Enter(object sender, EventArgs e)
+        private void TabPageRecipe_Enter(object sender, EventArgs e)
         {
             RefreshRecipeDataGrid(recordID);
         }
@@ -1631,7 +1633,7 @@ namespace DietSentry
         }
 
         /* Code that acts on Food filtering states
-         * There are 2 states and this makes sure the foods datagrid always correctly displays the data
+         * There are 2 states and this makes sure the foods DataGrid always correctly displays the data
          * there is an argument which determines the sort order via the Id: 0=Asc, 1=Desc */
         private void ActOnFoodRecipeFilteringStates(int sortingType)
         {
@@ -1766,10 +1768,101 @@ namespace DietSentry
             UtilitiesRMG.HelpCore(ix, iy);
         }
 
-        private void tabPageNonRecipie_Click(object sender, EventArgs e)
+        private void DataGridViewRecipe_KeyDown(object sender, KeyEventArgs e)
         {
+            if ((e.KeyCode == Keys.Enter)|(e.KeyCode == Keys.F2)) 
+            {
+                e.Handled = true; // prevents Enter key press causing next lower cell getting focus 
+                ActWhenIngredientSelected();
+            }
+        }
 
+        private void ActWhenIngredientSelected()
+        {
+            // determine row to be edited in Recipe table by accessing it in its dataGrid
+            var ingredientItem = (Recipe)this.dataGridViewRecipe.CurrentRow.DataBoundItem;
+
+            using var context = new FoodsContext();
+
+            // gain direct access to selected entry in Recipe table
+            var IngredientSelected = context.Recipe.Single(b => b.RecipeId == ingredientItem.RecipeId);
+
+            // obtain information necessary to populate the InputRecipeComponent form
+            amountOfFoodInRecipe = IngredientSelected.Amount;
+            FoodDescriptionRecipe = IngredientSelected.FoodDescription;
+
+            // opens dialog used to edit the quantity of recipe ingredient, position is "locked" in relation to this form
+            whoOpen = 1;  // tells the dialog "who" opens it
+            InputRecipeComponent frm = new(this)
+            {
+                StartPosition = FormStartPosition.Manual
+            };
+            Point pf = new(482, 55);
+            frm.Location = this.PointToScreen(pf);
+            frm.ShowDialog();
+
+            // set focus back to recipe ingredient selected
+            dataGridViewRecipe.CurrentCell.Selected = true;
+
+            // only act on input if amount eaten >0, else we have an input error
+            if (amountOfFoodInRecipe > 0.0)
+            {
+                // calculate nutrition scaling factor
+                float sf = amountOfFoodInRecipe / IngredientSelected.Amount;
+
+                // scale all relevant fields
+                IngredientSelected.Amount *= sf;
+                IngredientSelected.Energy *= sf;
+                IngredientSelected.Protein *= sf;
+                IngredientSelected.FatTotal *= sf;
+                IngredientSelected.SaturatedFat *= sf;
+                IngredientSelected.TransFat *= sf;
+                IngredientSelected.PolyunsaturatedFat *= sf;
+                IngredientSelected.MonounsaturatedFat *= sf;
+                IngredientSelected.Carbohydrate *= sf;
+                IngredientSelected.Sugars *= sf;
+                IngredientSelected.DietaryFibre *= sf;
+                IngredientSelected.SodiumNa *= sf;
+                IngredientSelected.CalciumCa *= sf;
+                IngredientSelected.PotassiumK *= sf;
+                IngredientSelected.ThiaminB1 *= sf;
+                IngredientSelected.RiboflavinB2 *= sf;
+                IngredientSelected.NiacinB3 *= sf;
+                IngredientSelected.Folate *= sf;
+                IngredientSelected.IronFe *= sf;
+                IngredientSelected.MagnesiumMg *= sf;
+                IngredientSelected.VitaminC *= sf;
+                IngredientSelected.Caffeine *= sf;
+                IngredientSelected.Cholesterol *= sf;
+                IngredientSelected.Alcohol *= sf;
+
+                context.SaveChanges();
+
+                // refresh Recipe data grid view while maintaining filter status
+                RefreshRecipeDataGrid(recordID);
+//                labelInfoEaten.Text = "Selected eaten food successfully edited!";
+            }
+            else if (amountOfFoodInRecipe == -1.0)
+            {
+//                labelInfoEaten.Text = "{F2} Key pressed: Nothing happened";
+                ;
+            }
+            else // display error message box
+            {
+                // Initializes the variables to pass to the MessageBox.Show method.
+                string message = "There was an error in the amount entered!";
+                string caption = "COULD NOT EDIT ROW";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+
+                // Displays the MessageBox.
+                MessageBox.Show(message, caption, buttons);
+//                labelInfoEaten.Text = "Error in amount. Editing not performed";
+            }
+
+            // set focus back to recipe ingredient selected
+            dataGridViewRecipe.CurrentCell.Selected = true;
         }
     }
+
 }
 

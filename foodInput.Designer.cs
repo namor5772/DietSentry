@@ -1,4 +1,6 @@
-﻿namespace DietSentry
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace DietSentry
 {
     partial class FoodInputForm
     {
@@ -40,6 +42,11 @@
         // A string describing the eaten food selected
         public string FoodDescriptionRecipe = "BLANK";
 
+        // flag which identifies who opened the InputRecipeComponent dialog
+        // 0 => opened by dataGridViewAddToRecipe
+        // 1 => opened by dataGridViewRecipe
+        public int whoOpen;
+
         // *********************************************************
 
 
@@ -74,7 +81,7 @@
             buttonCancelAddFood = new Button();
             labelState = new Label();
             tabControlAddType = new TabControl();
-            tabPageNonRecipie = new TabPage();
+            tabPageNonRecipe = new TabPage();
             labelHelpAddEditNonRecipe = new Label();
             textBoxAlcohol = new TextBox();
             labelAlcohol = new Label();
@@ -149,7 +156,7 @@
             labelRecipeFoodDescription = new Label();
             groupBoxFoodTypes.SuspendLayout();
             tabControlAddType.SuspendLayout();
-            tabPageNonRecipie.SuspendLayout();
+            tabPageNonRecipe.SuspendLayout();
             tabPageRecipie.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewRecipe).BeginInit();
             ((System.ComponentModel.ISupportInitialize)recipeBindingSource).BeginInit();
@@ -250,7 +257,7 @@
             // tabControlAddType
             // 
             tabControlAddType.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            tabControlAddType.Controls.Add(tabPageNonRecipie);
+            tabControlAddType.Controls.Add(tabPageNonRecipe);
             tabControlAddType.Controls.Add(tabPageRecipie);
             tabControlAddType.ItemSize = new Size(0, 1);
             tabControlAddType.Location = new Point(0, 50);
@@ -263,65 +270,64 @@
             tabControlAddType.TabIndex = 5;
             tabControlAddType.TabStop = false;
             // 
-            // tabPageNonRecipie
+            // tabPageNonRecipe
             // 
-            tabPageNonRecipie.BackColor = SystemColors.ControlLight;
-            tabPageNonRecipie.Controls.Add(labelHelpAddEditNonRecipe);
-            tabPageNonRecipie.Controls.Add(textBoxAlcohol);
-            tabPageNonRecipie.Controls.Add(labelAlcohol);
-            tabPageNonRecipie.Controls.Add(textBoxCholesterol);
-            tabPageNonRecipie.Controls.Add(labelCholesterol);
-            tabPageNonRecipie.Controls.Add(textBoxCaffeine);
-            tabPageNonRecipie.Controls.Add(labelCaffeine);
-            tabPageNonRecipie.Controls.Add(textBoxVitaminC);
-            tabPageNonRecipie.Controls.Add(labelVitaminC);
-            tabPageNonRecipie.Controls.Add(textBoxMagnesiumMg);
-            tabPageNonRecipie.Controls.Add(labelMagnesiumMg);
-            tabPageNonRecipie.Controls.Add(textBoxIronFe);
-            tabPageNonRecipie.Controls.Add(labelIronFe);
-            tabPageNonRecipie.Controls.Add(textBoxFolate);
-            tabPageNonRecipie.Controls.Add(labelFolate);
-            tabPageNonRecipie.Controls.Add(textBoxNiacinB3);
-            tabPageNonRecipie.Controls.Add(labelNiacinB3);
-            tabPageNonRecipie.Controls.Add(textBoxRiboflavinB2);
-            tabPageNonRecipie.Controls.Add(labelRiboflavinB2);
-            tabPageNonRecipie.Controls.Add(textBoxThiaminB1);
-            tabPageNonRecipie.Controls.Add(labelThiaminB1);
-            tabPageNonRecipie.Controls.Add(textBoxPotassiumK);
-            tabPageNonRecipie.Controls.Add(labelPotassiumK);
-            tabPageNonRecipie.Controls.Add(textBoxCalciumCa);
-            tabPageNonRecipie.Controls.Add(labelCalciumCa);
-            tabPageNonRecipie.Controls.Add(textBoxSodiumNa);
-            tabPageNonRecipie.Controls.Add(labelSodiumNa);
-            tabPageNonRecipie.Controls.Add(textBoxDietaryFibre);
-            tabPageNonRecipie.Controls.Add(labelDietaryFibre);
-            tabPageNonRecipie.Controls.Add(textBoxSugars);
-            tabPageNonRecipie.Controls.Add(labelSugars);
-            tabPageNonRecipie.Controls.Add(textBoxCarbohydrate);
-            tabPageNonRecipie.Controls.Add(labelCarbohydrate);
-            tabPageNonRecipie.Controls.Add(textBoxMonounsaturatedFat);
-            tabPageNonRecipie.Controls.Add(labelMonounsaturatedFat);
-            tabPageNonRecipie.Controls.Add(textBoxPolyunsaturatedFat);
-            tabPageNonRecipie.Controls.Add(labelPolyunsaturatedFat);
-            tabPageNonRecipie.Controls.Add(textBoxTransFat);
-            tabPageNonRecipie.Controls.Add(labelTransFat);
-            tabPageNonRecipie.Controls.Add(textBoxSaturatedFat);
-            tabPageNonRecipie.Controls.Add(labelSaturatedFat);
-            tabPageNonRecipie.Controls.Add(textBoxFatTotal);
-            tabPageNonRecipie.Controls.Add(labelFatTotal);
-            tabPageNonRecipie.Controls.Add(textBoxProtein);
-            tabPageNonRecipie.Controls.Add(textBoxEnergy);
-            tabPageNonRecipie.Controls.Add(textBoxFoodDescription);
-            tabPageNonRecipie.Controls.Add(labelProtein);
-            tabPageNonRecipie.Controls.Add(labelEnergy);
-            tabPageNonRecipie.Controls.Add(labelFoodDescription);
-            tabPageNonRecipie.Location = new Point(4, 14);
-            tabPageNonRecipie.Margin = new Padding(0);
-            tabPageNonRecipie.Name = "tabPageNonRecipie";
-            tabPageNonRecipie.Size = new Size(1412, 670);
-            tabPageNonRecipie.TabIndex = 0;
-            tabPageNonRecipie.Text = "Add Non Recipie";
-            tabPageNonRecipie.Click += tabPageNonRecipie_Click;
+            tabPageNonRecipe.BackColor = SystemColors.ControlLight;
+            tabPageNonRecipe.Controls.Add(labelHelpAddEditNonRecipe);
+            tabPageNonRecipe.Controls.Add(textBoxAlcohol);
+            tabPageNonRecipe.Controls.Add(labelAlcohol);
+            tabPageNonRecipe.Controls.Add(textBoxCholesterol);
+            tabPageNonRecipe.Controls.Add(labelCholesterol);
+            tabPageNonRecipe.Controls.Add(textBoxCaffeine);
+            tabPageNonRecipe.Controls.Add(labelCaffeine);
+            tabPageNonRecipe.Controls.Add(textBoxVitaminC);
+            tabPageNonRecipe.Controls.Add(labelVitaminC);
+            tabPageNonRecipe.Controls.Add(textBoxMagnesiumMg);
+            tabPageNonRecipe.Controls.Add(labelMagnesiumMg);
+            tabPageNonRecipe.Controls.Add(textBoxIronFe);
+            tabPageNonRecipe.Controls.Add(labelIronFe);
+            tabPageNonRecipe.Controls.Add(textBoxFolate);
+            tabPageNonRecipe.Controls.Add(labelFolate);
+            tabPageNonRecipe.Controls.Add(textBoxNiacinB3);
+            tabPageNonRecipe.Controls.Add(labelNiacinB3);
+            tabPageNonRecipe.Controls.Add(textBoxRiboflavinB2);
+            tabPageNonRecipe.Controls.Add(labelRiboflavinB2);
+            tabPageNonRecipe.Controls.Add(textBoxThiaminB1);
+            tabPageNonRecipe.Controls.Add(labelThiaminB1);
+            tabPageNonRecipe.Controls.Add(textBoxPotassiumK);
+            tabPageNonRecipe.Controls.Add(labelPotassiumK);
+            tabPageNonRecipe.Controls.Add(textBoxCalciumCa);
+            tabPageNonRecipe.Controls.Add(labelCalciumCa);
+            tabPageNonRecipe.Controls.Add(textBoxSodiumNa);
+            tabPageNonRecipe.Controls.Add(labelSodiumNa);
+            tabPageNonRecipe.Controls.Add(textBoxDietaryFibre);
+            tabPageNonRecipe.Controls.Add(labelDietaryFibre);
+            tabPageNonRecipe.Controls.Add(textBoxSugars);
+            tabPageNonRecipe.Controls.Add(labelSugars);
+            tabPageNonRecipe.Controls.Add(textBoxCarbohydrate);
+            tabPageNonRecipe.Controls.Add(labelCarbohydrate);
+            tabPageNonRecipe.Controls.Add(textBoxMonounsaturatedFat);
+            tabPageNonRecipe.Controls.Add(labelMonounsaturatedFat);
+            tabPageNonRecipe.Controls.Add(textBoxPolyunsaturatedFat);
+            tabPageNonRecipe.Controls.Add(labelPolyunsaturatedFat);
+            tabPageNonRecipe.Controls.Add(textBoxTransFat);
+            tabPageNonRecipe.Controls.Add(labelTransFat);
+            tabPageNonRecipe.Controls.Add(textBoxSaturatedFat);
+            tabPageNonRecipe.Controls.Add(labelSaturatedFat);
+            tabPageNonRecipe.Controls.Add(textBoxFatTotal);
+            tabPageNonRecipe.Controls.Add(labelFatTotal);
+            tabPageNonRecipe.Controls.Add(textBoxProtein);
+            tabPageNonRecipe.Controls.Add(textBoxEnergy);
+            tabPageNonRecipe.Controls.Add(textBoxFoodDescription);
+            tabPageNonRecipe.Controls.Add(labelProtein);
+            tabPageNonRecipe.Controls.Add(labelEnergy);
+            tabPageNonRecipe.Controls.Add(labelFoodDescription);
+            tabPageNonRecipe.Location = new Point(4, 14);
+            tabPageNonRecipe.Margin = new Padding(0);
+            tabPageNonRecipe.Name = "tabPageNonRecipe";
+            tabPageNonRecipe.Size = new Size(1412, 670);
+            tabPageNonRecipe.TabIndex = 0;
+            tabPageNonRecipe.Text = "Add Non Recipe";
             // 
             // labelHelpAddEditNonRecipe
             // 
@@ -821,8 +827,8 @@
             tabPageRecipie.Name = "tabPageRecipie";
             tabPageRecipie.Size = new Size(1412, 679);
             tabPageRecipie.TabIndex = 1;
-            tabPageRecipie.Text = "Add Recipie";
-            tabPageRecipie.Enter += TabPageRecipie_Enter;
+            tabPageRecipie.Text = "Add Recipe";
+            tabPageRecipie.Enter += TabPageRecipe_Enter;
             // 
             // labelTotal
             // 
@@ -961,10 +967,11 @@
             dataGridViewRecipe.RowHeadersWidth = 62;
             dataGridViewRecipe.RowTemplate.Height = 25;
             dataGridViewRecipe.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewRecipe.Size = new Size(926, 589);
+            dataGridViewRecipe.Size = new Size(926, 580);
             dataGridViewRecipe.StandardTab = true;
             dataGridViewRecipe.TabIndex = 5;
             dataGridViewRecipe.UserDeletingRow += DataGridViewRecipe_UserDeletingRow;
+            dataGridViewRecipe.KeyDown += DataGridViewRecipe_KeyDown;
             // 
             // amountDataGridViewTextBoxColumn
             // 
@@ -1104,7 +1111,7 @@
             dataGridViewAddToRecipe.ShowCellErrors = false;
             dataGridViewAddToRecipe.ShowEditingIcon = false;
             dataGridViewAddToRecipe.ShowRowErrors = false;
-            dataGridViewAddToRecipe.Size = new Size(444, 589);
+            dataGridViewAddToRecipe.Size = new Size(444, 580);
             dataGridViewAddToRecipe.StandardTab = true;
             dataGridViewAddToRecipe.TabIndex = 4;
             dataGridViewAddToRecipe.CellDoubleClick += DataGridViewAddToRecipe_CellDoubleClick;
@@ -1167,8 +1174,8 @@
             groupBoxFoodTypes.ResumeLayout(false);
             groupBoxFoodTypes.PerformLayout();
             tabControlAddType.ResumeLayout(false);
-            tabPageNonRecipie.ResumeLayout(false);
-            tabPageNonRecipie.PerformLayout();
+            tabPageNonRecipe.ResumeLayout(false);
+            tabPageNonRecipe.PerformLayout();
             tabPageRecipie.ResumeLayout(false);
             tabPageRecipie.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewRecipe).EndInit();
@@ -1189,7 +1196,7 @@
         private Button buttonCancelAddFood;
         private Label labelState;
         private TabControl tabControlAddType;
-        private TabPage tabPageNonRecipie;
+        private TabPage tabPageNonRecipe;
         private TabPage tabPageRecipie;
         private Label labelFoodDescription;
         private Label labelProtein;
