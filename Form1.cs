@@ -946,8 +946,10 @@ namespace DietSentry
 
         private void DataGridViewEaten_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F2) // Selecting eaten food item
+            if ((e.KeyCode == Keys.Enter) | (e.KeyCode == Keys.F2)) // Selecting eaten food item
             {
+                e.Handled = true; // prevents Enter key press causing next lower cell getting focus 
+
                 // can edit row only if the totals filter check boxed is unchecked
                 if ((!checkBoxDailyTotals.Checked))
                 {

@@ -38,7 +38,6 @@ namespace DietSentry
                 float afr = foodInputFormX!.amountOfFoodInRecipe; // doing this to avoid compiler warning CS1690
                 textBoxAmount.Text = afr.ToString("0.0");
                 labelAmount.Text = UnitsString(foodInputFormX!.FoodDescriptionRecipe);
-
             }
             labelDescription.Text = foodInputFormX.FoodDescriptionRecipe;
         }
@@ -87,7 +86,16 @@ namespace DietSentry
 
         private void LabelHelpRecipeDialog_MouseHover(object sender, EventArgs e)
         {
-            UtilitiesRMG.SHelpFind = "#Recipe Ingredient amount dialog";
+            if (foodInputFormX!.whoOpen == 0)
+            {
+                UtilitiesRMG.SHelpFind = "#Recipe Ingredient amount dialog";
+
+            }
+            else // if (foodInputFormX!.whoOpen == 1)
+            {
+                UtilitiesRMG.SHelpFind = "#Recipe Ingredients amount dialog";
+            }
+
             int iw = 10; // fudge
             int ih = 18; // fudge
             int ix = this.PointToScreen(labelHelpRecipeDialog.Location).X + iw;

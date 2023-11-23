@@ -967,7 +967,8 @@ namespace DietSentry
             dataGridViewRecipe.RowHeadersWidth = 62;
             dataGridViewRecipe.RowTemplate.Height = 25;
             dataGridViewRecipe.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewRecipe.Size = new Size(926, 580);
+            dataGridViewRecipe.ShowCellToolTips = false;
+            dataGridViewRecipe.Size = new Size(926, 589);
             dataGridViewRecipe.StandardTab = true;
             dataGridViewRecipe.TabIndex = 5;
             dataGridViewRecipe.UserDeletingRow += DataGridViewRecipe_UserDeletingRow;
@@ -1111,7 +1112,7 @@ namespace DietSentry
             dataGridViewAddToRecipe.ShowCellErrors = false;
             dataGridViewAddToRecipe.ShowEditingIcon = false;
             dataGridViewAddToRecipe.ShowRowErrors = false;
-            dataGridViewAddToRecipe.Size = new Size(444, 580);
+            dataGridViewAddToRecipe.Size = new Size(444, 589);
             dataGridViewAddToRecipe.StandardTab = true;
             dataGridViewAddToRecipe.TabIndex = 4;
             dataGridViewAddToRecipe.CellDoubleClick += DataGridViewAddToRecipe_CellDoubleClick;

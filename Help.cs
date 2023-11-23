@@ -17,8 +17,6 @@ namespace DietSentry
 {
     public partial class Help : Form
     {
-        //        private readonly MainForm? mainForm;
-
         public Help()
         {
             InitializeComponent();
@@ -71,7 +69,6 @@ namespace DietSentry
             richTextBoxHelp.ScrollToCaret();
 
             // clear selection view (maintaining position)
-            //            richTextBoxHelp.Focus();
             richTextBoxHelp.DeselectAll();
         }
 
@@ -97,7 +94,6 @@ namespace DietSentry
         private void Help_ResizeEnd(object sender, EventArgs e)
         {
             richTextBoxHelp.RightMargin = richTextBoxHelp.Size.Width - 60;
-
         }
     }
 }
