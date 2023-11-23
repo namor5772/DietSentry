@@ -23,6 +23,7 @@ namespace DietSentry
             splash.Show();
 
             InitializeComponent();
+            this.KeyPreview = true;
         }
 
         private void ATimer_Tick(object sender, EventArgs e)
@@ -1165,7 +1166,8 @@ namespace DietSentry
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
+            // closes main application form if {Esc} or {Ctl}-X pressed (or [x] button of course)
+            if ((e.Control && e.KeyCode == Keys.X) | (e.KeyCode == Keys.Escape))
             {
                 this.Close();
             }
