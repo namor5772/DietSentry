@@ -58,9 +58,9 @@
             labelAmount.ForeColor = SystemColors.HighlightText;
             labelAmount.Location = new Point(125, 40);
             labelAmount.Name = "labelAmount";
-            labelAmount.Size = new Size(36, 15);
+            labelAmount.Size = new Size(14, 15);
             labelAmount.TabIndex = 6;
-            labelAmount.Text = "units ";
+            labelAmount.Text = "g";
             // 
             // labelHelpRecipeDialog
             // 
