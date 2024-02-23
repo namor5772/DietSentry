@@ -70,7 +70,7 @@
     <None Include="bin\Release\net7.0-windows\DietSentry.exe" />
     <None Include="bin\Release\net7.0-windows\DietSentry.pdb" />
     <None Include="bin\Release\net7.0-windows\foods.db">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="bin\Release\net7.0-windows\Microsoft.Data.Sqlite.dll" />
     <None Include="bin\Release\net7.0-windows\Microsoft.EntityFrameworkCore.Abstractions.dll" />
