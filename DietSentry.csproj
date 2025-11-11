@@ -2,23 +2,21 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <LangVersion>preview</LangVersion>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <StartupObject>DietSentry.Program</StartupObject>
     <ApplicationIcon>DScarrot.ico</ApplicationIcon>
     <Title>Diet Sentry 2.0</Title>
     <Copyright>All Free</Copyright>
-    <Description>A standalone native Windows Form app for for monitoring your daily energy and nutrient intake</Description>
+    <Description>A standalone native Windows Form app for monitoring your daily energy and nutrient intake</Description>
     <PackageReleaseNotes>TEST RELEASE NOTES TEXT</PackageReleaseNotes>
     <PackageIcon>DietSentry.jpg</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <SignAssembly>False</SignAssembly>
-    <SupportedOSPlatformVersion>8.0</SupportedOSPlatformVersion>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
   </PropertyGroup>
 
@@ -38,12 +36,6 @@
     <WarningLevel>9999</WarningLevel>
     <DebugType>none</DebugType>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="bin\NewFolder\**" />
-    <EmbeddedResource Remove="bin\NewFolder\**" />
-    <None Remove="bin\NewFolder\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Remove="DietSentry.rtf" />
@@ -121,6 +113,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.22" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
