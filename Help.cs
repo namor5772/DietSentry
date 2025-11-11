@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,7 +43,7 @@ namespace DietSentry
             // select the relevant help topic in the ComboBox which will 
             // then display upon comboBoxHelp_SelectedIndexChanged firing 
             string sh = UtilitiesRMG.SHelpFind;
-            sh = sh[1..]; // get rid of initial "#" character
+            sh = sh.Length > 1 ? sh[1..] : string.Empty; // get rid of initial "#" character if present
             int shi = comboBoxHelp.Items.IndexOf(sh); // find position in ComboBox
             comboBoxHelp.SelectedIndex = shi;
         }
@@ -58,18 +59,25 @@ namespace DietSentry
 
         private void ComboBoxHelp_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string st = "#" + (string)comboBoxHelp.SelectedItem;
+            // Safely handle possible null SelectedItem
+            string st = "#" + (comboBoxHelp.SelectedItem?.ToString() ?? string.Empty);
+            if (string.IsNullOrEmpty(st) || st == "#")
+            {
+                return; // nothing to search
+            }
             int rci = this.richTextBoxHelp.Find(st);
             if (rci == -1)
             {
                 // this occurs if couldn't find search string
                 rci = this.richTextBoxHelp.Find("Help system error");
             }
-            richTextBoxHelp.SelectionStart = rci;
-            richTextBoxHelp.ScrollToCaret();
-
-            // clear selection view (maintaining position)
-            richTextBoxHelp.DeselectAll();
+            if (rci >= 0)
+            {
+                richTextBoxHelp.SelectionStart = rci;
+                richTextBoxHelp.ScrollToCaret();
+                // clear selection view (maintaining position)
+                richTextBoxHelp.DeselectAll();
+            }
         }
 
         private void ComboBoxHelp_Leave(object sender, EventArgs e)

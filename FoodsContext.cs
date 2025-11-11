@@ -4,9 +4,9 @@ namespace DietSentry;
 
 public class FoodsContext : DbContext
 {
-    public DbSet<Food> Foods { get; set; }
-    public DbSet<Eaten> Eaten { get; set; }
-    public DbSet<Recipe> Recipe { get; set; }
+    public DbSet<Food> Foods { get; set; } = null!;
+    public DbSet<Eaten> Eaten { get; set; } = null!;
+    public DbSet<Recipe> Recipe { get; set; } = null!;
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlite("Data Source=foods.db");
     protected override void OnModelCreating(ModelBuilder modelBuilder)
