@@ -1,6 +1,7 @@
 ﻿using System.Data.SqlTypes;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms;
 
 namespace DietSentry
 {
