@@ -1,5 +1,7 @@
 # Diet Sentry2.0
 
+TEST CHANGE
+
 Diet Sentry is a Windows Forms (.NET7) desktop application for tracking foods, recipes and what was eaten. It ships with an Australian-based foods database and provides a simple interface to record consumption events and monitor daily nutrient totals (energy, protein, fats, carbohydrates, vitamins, minerals, etc.).
 
 This repository contains the full source for the Windows Forms UI, the EF Core data model and SQLite persistence used by the application.
