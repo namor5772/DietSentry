@@ -6,7 +6,7 @@
 
 ![File](file.png)
 
-Diet Sentry is a Windows Forms (.NET7) desktop application for tracking foods, recipes and what was eaten. It ships with an Australian-based foods database and provides a simple interface to record consumption events and monitor daily nutrient totals (energy, protein, fats, carbohydrates, vitamins, minerals, etc.).
+Diet Sentry is a Windows Forms (.NET 8) desktop application for tracking foods, recipes and what was eaten. It ships with an Australian-based foods database and provides a simple interface to record consumption events and monitor daily nutrient totals (energy, protein, fats, carbohydrates, vitamins, minerals, etc.).
 
 This repository contains the full source for the Windows Forms UI, the EF Core data model and SQLite persistence used by the application.
 
@@ -20,11 +20,24 @@ This repository contains the full source for the Windows Forms UI, the EF Core d
 
 ## Toolchain and requirements
 
-- .NET SDK:7.x (target framework for the project)
-- C#:13.0 language version is used in the codebase
-- Entity Framework Core (SQLite provider)
+- .NET SDK: 8.x (target framework: `net8.0-windows`)
+- C# language version: default for .NET 8 (C# 12) unless overridden
 - Windows Forms (WinForms) - desktop UI
 - Development environment: Visual Studio (recommended) or `dotnet` CLI
+
+### Versions
+
+| Component | Version | Notes |
+| --- | --- | --- |
+| .NET SDK | 8.x | Build with `net8.0-windows` |
+| Target framework | net8.0-windows | WinForms desktop app |
+| EF Core SQLite | 8.0.22 | `Microsoft.EntityFrameworkCore.Sqlite` |
+| ConfigurationManager | 8.0.0 | `System.Configuration.ConfigurationManager` |
+
+## Dependencies
+
+- `Microsoft.EntityFrameworkCore.Sqlite` (8.0.22) for SQLite persistence.
+- `System.Configuration.ConfigurationManager` (8.0.0) for configuration access.
 
 Recommended commands
 
@@ -35,7 +48,7 @@ Note: The application stores data in `foods.db` (SQLite). The project configures
 
 ## Project layout and important files
 
-- `DietSentry.csproj` - project file (targets .NET7)
+- `DietSentry.csproj` - project file (targets .NET 8)
 - `Program.cs` / `Form1.cs` / `Form1.Designer.cs` - main WinForms entry point and primary form UI
 - `FoodsContext.cs` - EF Core `DbContext` configuring SQLite and seeding test data
 - `Food.cs`, `Eaten.cs`, `Recipe.cs` - EF Core entity classes representing tables
@@ -82,7 +95,7 @@ UI responsibilities
 
 ## Building and running locally
 
-1. Ensure you have .NET SDK7 installed.
+1. Ensure you have .NET SDK 8 installed.
 2. Open the solution in Visual Studio or use the command line.
 3. From the repository root, run `dotnet build` to build.
 4. Run the app with Visual Studio or `dotnet run --project DietSentry.csproj`.
